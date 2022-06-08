@@ -1,0 +1,23 @@
+{
+  "name": "products",
+  "version": "1.0.0",
+  "description": "A microservice to serve everything about products",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oTsili/eshop.git#master"
+  },
+  "keywords": [
+    "microservice",
+    "products"
+  ],
+  "author": "otsili",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oTsili/eshop/issues"
+  },
+  "homepage": "https://github.com/oTsili/eshop/tree/master#readme"
+}

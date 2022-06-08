@@ -22,11 +22,11 @@ spec:
         number: 80
   tls:
     - hosts:
-        - milms.tech
-        # - www.milms.tech
-      secretName: milms-tech
+        - eshop.esite.gr
+        # - www.eshop.esite.gr
+      secretName: eshop-esite-gr
   rules:
-    - host: milms.tech
+    - host: eshop.esite.gr
       http:
         paths:
           - path: /api/users/?(.*)
@@ -36,11 +36,11 @@ spec:
                 name: auth-srv
                 port:
                   number: 3000
-          - path: /api/courses/?(.*)
+          - path: /api/products/?(.*)
             pathType: Prefix
             backend:
               service:
-                name: courses-srv
+                name: products-srv
                 port:
                   number: 3000
           - path: /?(.*)
@@ -51,7 +51,7 @@ spec:
                 port:
                   # number: 80
                   number: 4200
-    # - host: www.milms.tech
+    # - host: www.eshop.esite.gr
     #   http:
     #     paths:
     #       - path: /api/users/?(.*)
@@ -61,11 +61,11 @@ spec:
     #             name: auth-srv
     #             port:
     #               number: 3000
-    #       - path: /api/courses/?(.*)
+    #       - path: /api/products/?(.*)
     #         pathType: Prefix
     #         backend:
     #           service:
-    #             name: courses-srv
+    #             name: products-srv
     #             port:
     #               number: 3000
     #       - path: /?(.*)
@@ -104,11 +104,11 @@ spec:
         number: 80
   tls:
     - hosts:
-        - dsb.milms.tech
-        # - www.dsb.milms.tech
-      secretName: dsb-milms-tech
+        - dsb.eshop.esite.gr
+        # - www.dsb.eshop.esite.gr
+      secretName: dsb-eshop-esite-gr
   rules:
-    - host: dsb.milms.tech
+    - host: dsb.eshop.esite.gr
       http:
         paths:
           - path: /
@@ -118,7 +118,7 @@ spec:
                 name: kubernetes-dashboard
                 port:
                   number: 443
-    # - host: www.dsb.milms.tech
+    # - host: www.dsb.eshop.esite.gr
     #   http:
     #     paths:
     #       - path: /
@@ -141,11 +141,11 @@ spec:
 # spec:
 #   tls:
 #     - hosts:
-#         - prometheus.milms.tech
-#         - www.prometheus.milms.tech
-#       secretName: prometheus-milms-tech
+#         - prometheus.eshop.esite.gr
+#         - www.prometheus.eshop.esite.gr
+#       secretName: prometheus-eshop-esite-gr
 #   rules:
-#     - host: prometheus.milms.tech
+#     - host: prometheus.eshop.esite.gr
 #       http:
 #         paths:
 #           - path: /
@@ -155,7 +155,7 @@ spec:
 #                 name: web
 #                 port:
 #                   number: 80
-#     - host: www.prometheus.milms.tech
+#     - host: www.prometheus.eshop.esite.gr
 #       http:
 #         paths:
 #           - path: /

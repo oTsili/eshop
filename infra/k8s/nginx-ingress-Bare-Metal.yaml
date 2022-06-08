@@ -270,7 +270,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: controller
     # service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: 'true'
-    # service.beta.kubernetes.io/do-loadbalancer-hostname: 'milms.tech'
+    # service.beta.kubernetes.io/do-loadbalancer-hostname: 'eshop.esite.gr'
   name: ingress-nginx-controller
   namespace: ingress-nginx
 spec:
@@ -278,8 +278,8 @@ spec:
   # type: NodePort
   type: LoadBalancer
   externalIPs:
-    - 65.108.88.0
-    - 65.108.152.16
+    - 95.217.12.19
+    # - 65.108.152.16
   ipFamilyPolicy: SingleStack
   ipFamilies:
     - IPv4
@@ -313,7 +313,7 @@ spec:
 #     app.kubernetes.io/version: 1.1.0
 #     app.kubernetes.io/managed-by: Helm
 #     app.kubernetes.io/component: controller
-#     service.beta.kubernetes.io/do-loadbalancer-hostname: 'dsb.milms.tech'
+#     service.beta.kubernetes.io/do-loadbalancer-hostname: 'dsb.eshop.esite.gr'
 #   name: ingress-nginx-controller
 #   namespace: ingress-nginx
 # spec:

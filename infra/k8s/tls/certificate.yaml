@@ -2,59 +2,29 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: milms-tech-tls
+  name: eshop-esite-gr-tls
 spec:
-  secretName: milms-tech
+  secretName: eshop-esite-gr
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
-  commonName: milms.tech
+  commonName: eshop.esite.gr
   dnsNames:
-    - milms.tech
-    # - www.milms.tech
----
-# jitsi page certificate
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: meet-milms-tech-tls
-spec:
-  secretName: meet-milms-tech
-  issuerRef:
-    name: letsencrypt-prod
-    kind: ClusterIssuer
-  commonName: meet.milms.tech
-  dnsNames:
-    - meet.milms.tech
-    # - www.meet.milms.tech
----
-# dashboard page certificate
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: dsb-milms-tech-tls
-spec:
-  secretName: dsb-milms-tech
-  issuerRef:
-    name: letsencrypt-prod
-    kind: ClusterIssuer
-  commonName: dsb.milms.tech
-  dnsNames:
-    - dsb.milms.tech
-    # - www.dsb.milms.tech
+    - eshop.esite.gr
+    # - www.eshop-esite-gr
 
 ---
 # # prometheus page certificate
 # apiVersion: cert-manager.io/v1
 # kind: Certificate
 # metadata:
-#   name: prometheus-milms-tech-tls
+#   name: prometheus-eshop-esite-gr-tls
 # spec:
-#   secretName: prometheus-milms-tech
+#   secretName: prometheus-eshop-esite-gr
 #   issuerRef:
 #     name: letsencrypt-prod
 #     kind: ClusterIssuer
-#   commonName: prometheus.milms.tech
+#   commonName: prometheus.eshop.esite.gr
 #   dnsNames:
-#     - prometheus.milms.tech
-#     - www.prometheus.milms.tech
+#     - prometheus.eshop-esite-gr
+#     - www.prometheus.eshop.esite.gr

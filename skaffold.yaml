@@ -10,7 +10,7 @@ build:
   # local:
   #   push: false
   artifacts:
-    - image: otsili/auth
+    - image: otsili/eshop_auth
       context: backend/auth
       docker:
         dockerfile: Dockerfile
@@ -18,22 +18,22 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: otsili/courses
-      context: backend/courses
+    - image: otsili/products
+      context: backend/products
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: otsili/frontend_dev
+    - image: otsili/eshop_frontend_dev
       context: frontend
       docker:
         dockerfile: Dockerfile.dev
       sync:
         infer:
           - src/**/*
-    # - image: otsili/frontend_prod
+    # - image: otsili/eshop_frontend_prod
     #   context: frontend
     #   docker:
     #     dockerfile: Dockerfile.prod
@@ -53,16 +53,16 @@ build:
     #     manual:
     #       - src: 'src/**/*.ts'
     #         dest: .
-    - image: otsili/jitsi-meet
-      context: backend/jitsi-meet
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        infer:
-          - src/**/*
-        # manual:
-        #   # - src: 'src/**/*.ts'
-        #   #   dest: .
+    # - image: otsili/jitsi-meet
+    #   context: backend/jitsi-meet
+    #   docker:
+    #     dockerfile: Dockerfile
+    #   sync:
+    #     infer:
+    #       - src/**/*
+    #     # manual:
+    #     #   # - src: 'src/**/*.ts'
+    #     #   #   dest: .
 ---
 apiVersion: skaffold/v2beta11
 kind: Config
@@ -73,15 +73,15 @@ deploy:
     manifests:
       - ./infra/k8s/persistent-volumes/*
 
-# ---
-# apiVersion: skaffold/v2beta11
-# kind: Config
-# metadata:
-#   name: tls
-# deploy:
-#   kubectl:
-#     manifests:
-#       - ./infra/k8s/tls/*
+---
+apiVersion: skaffold/v2beta11
+kind: Config
+metadata:
+  name: tls
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/tls/*
 
 ---
 apiVersion: skaffold/v2beta11
@@ -93,12 +93,12 @@ deploy:
     manifests:
       - ./infra/k8s/namespaces/*
 
----
-apiVersion: skaffold/v2beta11
-kind: Config
-metadata:
-  name: kms
-deploy:
-  kubectl:
-    manifests:
-      - ./infra/k8s/kms/*
+# ---
+# apiVersion: skaffold/v2beta11
+# kind: Config
+# metadata:
+#   name: kms
+# deploy:
+#   kubectl:
+#     manifests:
+#       - ./infra/k8s/kms/*

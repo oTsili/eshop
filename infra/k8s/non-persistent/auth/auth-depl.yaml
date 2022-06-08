@@ -21,7 +21,7 @@ spec:
           ### for sync with pvc on the local machine ###
           persistentVolumeClaim:
             claimName: auth-depl-pvc
-        - name: test-aut-nfs
+        - name: test-auth-nfs
           persistentVolumeClaim:
             claimName: auth-depl-pvc
       containers:

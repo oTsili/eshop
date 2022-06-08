@@ -1,0 +1,58 @@
+##### products Mongo #####
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: products-mongo-pv
+  labels:
+    app: products-mongo-pv
+spec:
+  # persistentVolumeReclaimPolicy: Delete
+  # persistentVolumeReclaimPolicy: Retain
+  storageClassName: products-mongo-class
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/milms/products/mongo
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: products-mongo-pvc
+spec:
+  storageClassName: products-mongo-class
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+#### products Depl #####
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: products-depl-pv
+spec:
+  # persistentVolumeReclaimPolicy: Retain
+  storageClassName: products-depl-class
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /mnt/milms/products/files
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: products-depl-pvc
+  labels:
+    app: products-depl-pvc
+spec:
+  storageClassName: products-depl-class
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
