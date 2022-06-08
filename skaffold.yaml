@@ -18,14 +18,14 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: otsili/products
-      context: backend/products
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .
+    # - image: otsili/products
+    #   context: backend/products
+    #   docker:
+    #     dockerfile: Dockerfile
+    #   sync:
+    #     manual:
+    #       - src: 'src/**/*.ts'
+    #         dest: .
     - image: otsili/eshop_frontend_dev
       context: frontend
       docker:

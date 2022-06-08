@@ -26,7 +26,7 @@ spec:
             claimName: auth-depl-pvc
       containers:
         - name: auth
-          image: otsili/auth
+          image: otsili/eshop_auth
           volumeMounts:
           - name: auth-depl-storage
             mountPath: /app/src/public/img/users
