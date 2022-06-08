@@ -1,0 +1,37 @@
+version: '3.7' # specify docker-compose version
+ 
+services:
+###### FRONTEND #######
+ frontend:
+  container_name: frontend
+  restart: always
+  build:  # specify the directory of the Dockerfile
+    context: ./frontend
+    dockerfile: Dockerfile.dev
+    # dockerfile: Dockerfile.prod
+  ports:
+  - "4200:4200" # specify port mapping
+  volumes:
+      - "./frontend:/app"
+  # working_dir: /app
+
+
+# ###### BACKEND #######
+#  backend:
+#   container_name: backend
+#   build:  # specify the directory of the Dockerfile
+#     context: ./backend
+#     dockerfile: Dockerfile
+#   ports:
+#   - "3000:3000" #specify ports mapping
+#   links:
+#   - database # link this service to the database service
+ 
+
+
+# ###### DATABASE #######
+#  database:
+#   image: mongo # specify image to build container from
+#   container_name: mongo
+#   ports:
+#   - "27017:27017" # specify port forwarding
