@@ -9,9 +9,10 @@ import { AngularMaterialModule } from './modules/angular-material.module';
 // import { BootstrapModule } from './modules/bootstrap.module';
 import { NgbdCarouselPauseModule } from './modules/carousel-pause.module';
 import { ConceptSentenceComponent } from './shared/concept-sentence/concept-sentence.component';
+import { CarSliderComponent } from './shared/car-slider/car-slider.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ConceptSentenceComponent],
+  declarations: [AppComponent, HeaderComponent, ConceptSentenceComponent, CarSliderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
