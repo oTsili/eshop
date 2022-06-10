@@ -32,29 +32,34 @@ export class SlideCardsComponent implements OnInit {
 
   ngOnInit() {
     this.cardsPerPage = this.getCardsPerPage();
+    console.log({cardsPerPage:this.cardsPerPage});
     this.initializeSlider();
   }
 
   initializeSlider() {
     this.totalPages = Math.ceil(this.totalCards / this.cardsPerPage);
-    this.overflowWidth = `calc(${this.totalPages * 100}% + ${this.totalPages *
-      10}px)`;
-    this.cardWidth = `calc((${100 / this.totalPages}% - ${this.cardsPerPage *
-      10}px) / ${this.cardsPerPage})`;
+    console.log({totalPages:this.totalPages});
+
+    this.overflowWidth = `calc(${this.totalPages * 100}% + ${this.totalPages * 10}px)`;
+    console.log({overflowWidth: `${this.totalPages * 50}% + ${this.totalPages * 10}px`});
+
+    this.cardWidth = `calc((${90 / this.totalPages}% - ${this.cardsPerPage * 10}px) / ${this.cardsPerPage})`;
+    console.log({cardsPerPage:this.cardsPerPage});
   }
 
   getCardsPerPage() {
-    return Math.floor(this.container.nativeElement.offsetWidth / 200);
+    return Math.floor(this.container.nativeElement.offsetWidth / 250);
   }
 
   changePage(incrementor) {
     this.currentPage += incrementor;
+    console.log({currentPage: this.currentPage})
     this.populatePagePosition();
   }
 
   populatePagePosition() {
-    this.pagePosition = `calc(${-100 * (this.currentPage - 1)}% - ${10 *
-      (this.currentPage - 1)}px)`;
+    this.pagePosition = `calc(${-100 * (this.currentPage - 1)}% - ${10 * (this.currentPage - 1)}px)`;
+    console.log({pagePosition: this.pagePosition})
   }
 
 }
