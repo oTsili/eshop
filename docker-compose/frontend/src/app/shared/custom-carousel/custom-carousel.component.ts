@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Slide } from './custom-carousel.interface';
 import {
   animate,
@@ -21,6 +21,8 @@ import {
   jackOut,
   easein,
 } from './custom-carousel.animations';
+import { interval, Subscription } from 'rxjs';
+import { CustomCarouselService } from './custom-carousel.service';
 
 @Component({
   selector: 'carousel',
@@ -77,10 +79,13 @@ import {
     ]),
   ],
 })
-export class CustomCarouselComponent implements OnInit {
+export class CustomCarouselComponent implements OnInit, OnDestroy {
   // @Input() slides: Slide[];
   // @Input() animationType = AnimationType.Scale;
   animationType = 'easein';
+  imagesLengthSubscription: Subscription;
+  intervalSubscription: Subscription;
+  intervalId: NodeJS.Timer | null;
 
   slides: Slide[] = [
     {
@@ -103,7 +108,7 @@ export class CustomCarouselComponent implements OnInit {
 
   currentSlide = 0;
 
-  constructor() {}
+  constructor(private customCarouselService: CustomCarouselService) {}
 
   onPreviousClick() {
     const previous = this.currentSlide - 1;
@@ -111,23 +116,50 @@ export class CustomCarouselComponent implements OnInit {
     console.log('previous clicked, new current slide is: ', this.currentSlide);
   }
 
-  onNextClick() {
+  onNextClick(len: number) {
+    console.log(len);
     const next = this.currentSlide + 1;
-    this.currentSlide = next === this.slides.length ? 0 : next;
+    // this.currentSlide = next === this.slides.length  ? 0 : next;
+    this.currentSlide = next === len ? 0 : next;
     console.log('next clicked, new current slide is: ', this.currentSlide);
   }
 
-  slideShow = async () => {
-    setTimeout(() => {
-      this.onNextClick();
-      this.slideShow();
+  slideShow() {
+    console.log('start');
+
+    // setTimeout(() => {
+    //   this.customCarouselService.onImagesLengthUpdate(this.slides.length);
+    //   this.slideShow();
+    // }, 5000);
+    this.intervalId = setInterval(() => {
+      this.customCarouselService.onImagesLengthUpdate(this.slides.length);
+      // this.slideShow();
     }, 5000);
-  };
+  }
+
+  stopSlideShow() {
+    console.log('stop');
+    console.log(this.intervalId);
+    clearInterval(this.intervalId!);
+    this.intervalId = null;
+    // this.intervalSubscription.unsubscribe();
+    // this.imagesLengthSubscription.unsubscribe();
+  }
 
   ngOnInit() {
     this.preloadImages(); // for the demo
+    this.imagesLengthSubscription = this.customCarouselService
+      .getImagesLengthListener()
+      .subscribe((response) => {
+        this.onNextClick(response.imagesLength);
+      });
 
     this.slideShow();
+  }
+
+  ngOnDestroy(): void {
+    // this.intervalSubscription.unsubscribe();
+    this.imagesLengthSubscription.unsubscribe();
   }
 
   preloadImages() {
