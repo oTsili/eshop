@@ -1,9 +1,9 @@
 <div class="carousel-container--2cols">
   <div class="carousel-wrapper--2cols">
     <div
-      class="carousel"
-      (mouseleave)="slideShow()"
-      (mouseenter)="stopSlideShow()"
+      class="carousel--custom"
+      (mouseout)="slideShow()"
+      (mouseover)="stopSlideShow()"
     >
       <!-- carousel -->
 
@@ -17,7 +17,7 @@
       </ng-container>
       <!-- controls -->
     </div>
-    <div class="carousel">
+    <div class="carousel--custom">
       <!-- carousel -->
       <ng-container *ngFor="let slide of slides; let i = index">
         <img
@@ -29,11 +29,16 @@
       </ng-container>
       <!-- controls -->
     </div>
-    <button class="control prev" (click)="onPreviousClick()">
-      <span class="arrow left"></span>
-    </button>
-    <button class="control next" (click)="onNextClick(slides.length)">
-      <span class="arrow right"></span>
-    </button>
   </div>
+  <div class="nav-list">
+    <ng-container *ngFor="let slide of slides; let i = index">
+      <a (click)="currentSlide = i"></a>
+    </ng-container>
+  </div>
+  <!-- <button class="control prev" (click)="onPreviousClick()">
+    <span class="arrow left"></span>
+  </button>
+  <button class="control next" (click)="onNextClick(slides.length)">
+    <span class="arrow right"></span>
+  </button> -->
 </div>

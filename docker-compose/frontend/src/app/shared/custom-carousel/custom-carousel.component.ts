@@ -25,7 +25,7 @@ import { interval, Subscription } from 'rxjs';
 import { CustomCarouselService } from './custom-carousel.service';
 
 @Component({
-  selector: 'carousel',
+  selector: 'app-custom-carousel',
   templateUrl: './custom-carousel.component.html',
   styleUrls: ['./custom-carousel.component.scss'],
   animations: [
