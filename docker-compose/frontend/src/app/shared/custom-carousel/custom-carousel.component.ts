@@ -113,19 +113,19 @@ export class CustomCarouselComponent implements OnInit, OnDestroy {
   onPreviousClick() {
     const previous = this.currentSlide - 1;
     this.currentSlide = previous < 0 ? this.slides.length - 1 : previous;
-    console.log('previous clicked, new current slide is: ', this.currentSlide);
+    // console.log('previous clicked, new current slide is: ', this.currentSlide);
   }
 
   onNextClick(len: number) {
-    console.log(len);
+    // console.log(len);
     const next = this.currentSlide + 1;
     // this.currentSlide = next === this.slides.length  ? 0 : next;
     this.currentSlide = next === len ? 0 : next;
-    console.log('next clicked, new current slide is: ', this.currentSlide);
+    // console.log('next clicked, new current slide is: ', this.currentSlide);
   }
 
   slideShow() {
-    console.log('start');
+    // console.log('start');
 
     // setTimeout(() => {
     //   this.customCarouselService.onImagesLengthUpdate(this.slides.length);
@@ -138,8 +138,8 @@ export class CustomCarouselComponent implements OnInit, OnDestroy {
   }
 
   stopSlideShow() {
-    console.log('stop');
-    console.log(this.intervalId);
+    // console.log('stop');
+    // console.log(this.intervalId);
     clearInterval(this.intervalId!);
     this.intervalId = null;
     // this.intervalSubscription.unsubscribe();

@@ -1,10 +1,18 @@
 <drag-scroll #nav [scrollbar-hidden]="true" class="hide-scrollbar">
   <div class="container--slider">
-    <img drag-scroll-item src="/assets/images/1.jpeg" />
+    <img
+      *ngFor="let porduct of products; let i = index"
+      drag-scroll-item
+      appActivate
+      [source]="products[i].src"
+      [src]="products[i].src"
+    />
+
+    <!-- <img drag-scroll-item src="/assets/images/1.jpeg" />
     <img drag-scroll-item src="/assets/images/2.jpeg" />
     <img drag-scroll-item src="/assets/images/3.jpeg" />
     <img drag-scroll-item src="/assets/images/4.jpeg" />
     <img drag-scroll-item src="/assets/images/5.jpeg" />
-    <img drag-scroll-item src="/assets/images/6.jpeg" />
+    <img drag-scroll-item src="/assets/images/6.jpeg" /> -->
   </div>
 </drag-scroll>

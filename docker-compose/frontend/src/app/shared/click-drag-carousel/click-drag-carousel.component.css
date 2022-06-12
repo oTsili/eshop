@@ -1,24 +1,13 @@
-@keyframes slide {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-
-  100% {
-    transform: translate3d(-140rem, 0, 0);
-  }
-}
-
 .container--slider {
   width: 40rem;
   height: auto !important;
 }
 
-.container--slider img {
+.container--slider > img {
   cursor: pointer;
   height: 40rem;
   min-width: 30rem;
   margin-left: 10rem;
-  animation: slide 55s linear forwards;
 }
 
 .hide-scrollbar .drag-scroll-content {
