@@ -11,29 +11,52 @@ export class ClickDragCarouselComponent implements OnInit {
     {
       src: './assets/images/1.jpeg',
       altSrc: '/assets/images/1-1.jpeg',
+      name: 'Πέδιλο μπλε',
+      price: '65,00',
+      special_price: '35,00',
+      sales: '25',
     },
     {
       src: './assets/images/2.jpeg',
       altSrc: '/assets/images/2-1.jpeg',
+      name: 'Πέδιλο μπλε',
+      price: '65,00',
+      special_price: '35,00',
+      sales: '25',
     },
     {
       src: './assets/images/3.jpeg',
       altSrc: '/assets/images/3-1.jpeg',
+      name: 'Πέδιλο μπλε',
+      price: '65,00',
+      special_price: '35,00',
+      sales: '25',
     },
     {
       src: './assets/images/4.jpeg',
       altSrc: '/assets/images/4-1.jpeg',
+      name: 'Πέδιλο μπλε',
+      price: '65,00',
+      special_price: '35,00',
+      sales: '25',
     },
     {
       src: './assets/images/5.jpeg',
       altSrc: '/assets/images/5-1.jpeg',
+      name: 'Πέδιλο μπλε',
+      price: '65,00',
+      special_price: '35,00',
+      sales: '25',
     },
     {
       src: './assets/images/6.jpeg',
       altSrc: '/assets/images/6-1.jpeg',
+      name: 'Πέδιλο μπλε',
+      price: '65,00',
+      special_price: '35,00',
+      sales: '25',
     },
   ];
-
 
   constructor() {}
 

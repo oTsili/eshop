@@ -8,7 +8,10 @@ import {
 @Component({
   selector: 'app-ngdb-carousel-pause',
   templateUrl: './ngdb-carousel-pause.component.html',
-  styleUrls: ['./ngdb-carousel-pause.component.css'],
+  styleUrls: [
+    './ngdb-carousel-pause.component.css',
+    '../../../assets/css/bootstrap.min.css',
+  ],
 })
 export class NgbdCarouselPause {
   images = [62, 83, 466, 965, 982, 1043, 738].map(

@@ -1,12 +1,35 @@
 <drag-scroll #nav [scrollbar-hidden]="true" class="hide-scrollbar">
   <div class="container--slider">
-    <img
-      *ngFor="let porduct of products; let i = index"
-      drag-scroll-item
-      appActivate
-      [source]="products[i].src"
-      [src]="products[i].src"
-    />
+    <div class="slider" *ngFor="let porduct of products; let i = index">
+      <img
+        drag-scroll-item
+        appActivate
+        [source]="products[i].src"
+        [src]="products[i].src"
+      />
+      <div class="sales-text--wrapper">
+        <div class="sales-text">-{{ products[i].sales }}%</div>
+        <hr />
+      </div>
+      <div class="product-details">
+        <div class="product product-actions">
+          <a href="#" class="icon--medium">
+            <i class="ph-heart"></i>
+          </a>
+          <a href="#" class="icon--medium">
+            <i class="ph-shopping-bag"></i>
+          </a>
+        </div>
+        <div class="product product-price--wrapper">
+          <span class="product-price product-price-old">
+            {{ products[i].price }}
+          </span>
+          <span class="product-price product-price-new">
+            {{ products[i].special_price }}
+          </span>
+        </div>
+      </div>
+    </div>
 
     <!-- <img drag-scroll-item src="/assets/images/1.jpeg" />
     <img drag-scroll-item src="/assets/images/2.jpeg" />
