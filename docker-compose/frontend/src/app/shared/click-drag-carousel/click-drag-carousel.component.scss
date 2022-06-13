@@ -1,0 +1,52 @@
+.control {
+  border: none;
+  background-color: transparent;
+  outline: 0; // remove blue outline border, but make sure they are still focussable for accessibility
+  //   position: absolute;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0.5rem 3% 0.5rem;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  //   font-size: 3em;
+  user-select: none;
+  height: 100%;
+  opacity: 50%;
+  //   top: 0;
+  font-size: 3rem;
+  // transition: opacity 150ms cubic-bezier(0.25, 0.46, 0.45, 0.84);
+  // opacity effect on hover
+
+  &:hover,
+  &:focus {
+    opacity: 70%;
+  }
+
+  transform: translateY(-5%);
+
+  /* Position the buttons */
+  &.next {
+    right: 0;
+  }
+  &.prev {
+    left: 0;
+  }
+}
+
+/* style the arrows */
+.arrow {
+  display: block;
+  border-left: 0.15rem solid rgb(0, 0, 0);
+  border-bottom: 0.15rem solid rgb(0, 0, 0);
+  width: 2rem;
+  height: 2rem;
+
+  &.left {
+    transform: rotate(45deg);
+  }
+  &.right {
+    transform: rotate(225deg);
+  }
+}
