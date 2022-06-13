@@ -28,9 +28,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   imports: [
     MatToolbarModule,
     MatIconModule,
+    MatButtonModule,
     // MatInputModule,
     // MatCardModule,
-    // MatButtonModule,
     // MatExpansionModule,
     // MatProgressSpinnerModule,
     // MatPaginatorModule,
@@ -54,9 +54,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   exports: [
     MatToolbarModule,
     MatIconModule,
+    MatButtonModule,
     // MatInputModule,
     // MatCardModule,
-    // MatButtonModule,
     // MatExpansionModule,
     // MatProgressSpinnerModule,
     // MatPaginatorModule,

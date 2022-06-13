@@ -9,8 +9,8 @@ import { DragScrollModule } from 'ngx-drag-scroll';
 import { ConceptSentenceComponent } from 'src/app/shared/concept-sentence/concept-sentence.component';
 import { ClickDragCarouselComponent } from './click-drag-carousel/click-drag-carousel.component';
 import { CustomCarouselComponent } from './custom-carousel/custom-carousel.component';
-import { CustomClickDdragCarouselComponent } from './custom-click-ddrag-carousel/custom-click-ddrag-carousel.component';
 import { ActivateDirective } from './click-drag-carousel/activate.directive';
+import { GridLinkImgsComponent } from './grid-link-imgs/grid-link-imgs.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +18,8 @@ import { ActivateDirective } from './click-drag-carousel/activate.directive';
     ConceptSentenceComponent,
     ClickDragCarouselComponent,
     CustomCarouselComponent,
-    CustomClickDdragCarouselComponent,
     ActivateDirective,
+    GridLinkImgsComponent,
   ],
   imports: [
     CommonModule,
@@ -35,8 +35,8 @@ import { ActivateDirective } from './click-drag-carousel/activate.directive';
     SlideCardsComponent,
     ClickDragCarouselComponent,
     CustomCarouselComponent,
-    CustomClickDdragCarouselComponent,
     ActivateDirective,
+    GridLinkImgsComponent,
   ],
 })
 export class SharedModule {}

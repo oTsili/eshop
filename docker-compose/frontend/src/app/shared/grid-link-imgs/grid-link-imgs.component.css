@@ -1,0 +1,51 @@
+.container {
+  margin: 2%;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1%;
+  column-gap: 1%;
+}
+
+.category {
+  height: 50rem;
+  position: relative;
+  text-align: center;
+
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  /* background-attachment: fixed; */
+}
+
+.category > img {
+  width: 100%;
+  height: 100%;
+}
+
+.category-text-container {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  word-spacing: 0.4rem;
+  letter-spacing: 0.8rem;
+}
+
+.category-text {
+  margin: 6% 0;
+}
+
+.category-name {
+  color: aliceblue;
+}
+
+button {
+  background-color: aliceblue;
+  color: black;
+}

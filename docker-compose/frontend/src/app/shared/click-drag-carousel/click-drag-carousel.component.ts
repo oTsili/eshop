@@ -14,8 +14,8 @@ export class ClickDragCarouselComponent implements OnInit {
   current_slide: number;
   products = [
     {
-      src: './assets/images/1.jpeg',
-      altSrc: '/assets/images/1-1.jpeg',
+      src: './assets/images/clickAndDrag/1.jpeg',
+      altSrc: '/assets/images/clickAndDrag/1-1.jpeg',
       name: 'Πέδιλο μπλε',
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's ",
@@ -24,8 +24,8 @@ export class ClickDragCarouselComponent implements OnInit {
       sales: '25',
     },
     {
-      src: './assets/images/2.jpeg',
-      altSrc: '/assets/images/2-1.jpeg',
+      src: './assets/images/clickAndDrag/2.jpeg',
+      altSrc: '/assets/images/clickAndDrag/2-1.jpeg',
       name: 'Πέδιλο μπλε',
       description: 'Δερμάτινη Τσάντα Ώμου με Tassels',
       price: '65,00',
@@ -33,8 +33,8 @@ export class ClickDragCarouselComponent implements OnInit {
       sales: '25',
     },
     {
-      src: './assets/images/3.jpeg',
-      altSrc: '/assets/images/3-1.jpeg',
+      src: './assets/images/clickAndDrag/3.jpeg',
+      altSrc: '/assets/images/clickAndDrag/3-1.jpeg',
       name: 'Πέδιλο μπλε',
       description: 'Δερμάτινη Τσάντα Ώμου με Tassels',
       price: '65,00',
@@ -42,8 +42,8 @@ export class ClickDragCarouselComponent implements OnInit {
       sales: '25',
     },
     {
-      src: './assets/images/4.jpeg',
-      altSrc: '/assets/images/4-1.jpeg',
+      src: './assets/images/clickAndDrag/4.jpeg',
+      altSrc: '/assets/images/clickAndDrag/4-1.jpeg',
       name: 'Πέδιλο μπλε',
       price: '65,00',
       description: 'Δερμάτινη Τσάντα Ώμου με Tassels',
@@ -51,8 +51,8 @@ export class ClickDragCarouselComponent implements OnInit {
       sales: '25',
     },
     {
-      src: './assets/images/5.jpeg',
-      altSrc: '/assets/images/5-1.jpeg',
+      src: './assets/images/clickAndDrag/5.jpeg',
+      altSrc: '/assets/images/clickAndDrag/5-1.jpeg',
       name: 'Πέδιλο μπλε',
       description: 'Δερμάτινη Τσάντα Ώμου με Tassels',
       price: '65,00',
@@ -60,8 +60,8 @@ export class ClickDragCarouselComponent implements OnInit {
       sales: '25',
     },
     {
-      src: './assets/images/6.jpeg',
-      altSrc: '/assets/images/6-1.jpeg',
+      src: './assets/images/clickAndDrag/6.jpeg',
+      altSrc: '/assets/images/clickAndDrag/6-1.jpeg',
       name: 'Πέδιλο μπλε',
       description: 'Δερμάτινη Τσάντα Ώμου με Tassels',
       price: '65,00',
