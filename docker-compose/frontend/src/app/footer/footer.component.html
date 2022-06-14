@@ -1,0 +1,49 @@
+<footer class="container">
+  <mat-toolbar color="primary">
+    <div *ngIf="footer_content" class="footer-wrapper">
+      <div *ngIf="footer_content[0].links" class="header logo">
+        <div>My app</div>
+        <div class="social-media">
+          <i class="ph-instagram-logo"></i>
+          <i class="ph-facebook-logo"></i>
+        </div>
+        <div class="order">{{ footer_content[0].links[0].text }}</div>
+        <div class="order">
+          <b>
+            {{ footer_content[0].links[1].text }}
+          </b>
+        </div>
+      </div>
+      <div class="information">
+        <div class="header">
+          {{ footer_content[1].header }}
+        </div>
+        <div class="links">
+          <ul>
+            <li *ngFor="let link of footer_content[1].links; let i = index">
+              {{ link.text }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="contact">
+        <div class="header">
+          {{ footer_content[2].header }}
+        </div>
+        <div class="links">
+          <ul>
+            <li *ngFor="let link of footer_content[2].links; let i = index">
+              <a>{{ link.text }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="newsletter">
+        <div class="header">
+          {{ footer_content[3].header }}
+        </div>
+        <div class="links"></div>
+      </div>
+    </div>
+  </mat-toolbar>
+</footer>
