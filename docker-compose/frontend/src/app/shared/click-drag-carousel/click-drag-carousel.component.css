@@ -1,11 +1,10 @@
 .container {
   padding: 0 3%;
-  margin-top: 5%;
 }
 
 .title-wrapper {
   display: block;
-  padding: 3% 0 2% 0;
+  padding: 1% 0 2% 0;
   transform: translateY(-2rem);
 }
 

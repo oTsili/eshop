@@ -4,25 +4,29 @@
 
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 1%;
   column-gap: 1%;
 }
 
 .category {
-  height: 50rem;
+  /* height: 50rem; */
   position: relative;
   text-align: center;
-
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
-  height: 100vh;
+  height: 70vh;
+  /* width: 25vw; */
+  /* height: 100%; */
   /* background-attachment: fixed; */
 }
 
 .category > img {
-  width: 100%;
-  height: 100%;
+  /* width: 100%; */
+  width: auto;
+  /* height: 70vh; */
+  background-size: contain;
 }
 
 .category-text-container {
