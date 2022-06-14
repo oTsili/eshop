@@ -90,19 +90,31 @@ export class CustomCarouselComponent implements OnInit, OnDestroy {
   slides: Slide[] = [
     {
       headline: 'For Your Current Mood',
-      src: 'https://images.unsplash.com/photo-1567653418876-5bb0e566e1c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80',
+      src: './assets/images/hero/1.webp',
+      header: 'Lorem Ipsum is simply dummy text of the printing',
+      subheader:
+        'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages',
     },
     {
       headline: 'Miouw',
-      src: 'https://images.unsplash.com/photo-1559181567-c3190ca9959b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80',
+      src: './assets/images/hero/2.webp',
+      header: 'It is a long established fact that a reader will',
+      subheader:
+        'Be distracted by the readable content of a page when looking at its layout',
     },
     {
       headline: 'In The Wilderness',
-      src: 'https://images.unsplash.com/photo-1557800634-7bf3c7305596?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2001&q=80',
+      src: './assets/images/hero/3.webp',
+      header: 'Like readable English. Many desktop publishing packages ',
+      subheader:
+        'And web page editors now use Lorem Ipsum as their default model text',
     },
     {
       headline: 'Focus On The Writing',
-      src: 'https://images.unsplash.com/photo-1551410224-699683e15636?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80',
+      src: './assets/images/hero/4.webp',
+      header: 'Recently with desktop publishing',
+      subheader:
+        'Many desktop publishing packages and web page editors now use Lorem Ipsum',
     },
   ];
 

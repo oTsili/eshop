@@ -38,7 +38,7 @@
 
 .slider {
   position: relative;
-  padding-left: 3rem;
+  padding-right: 3rem;
   height: 100%;
   width: 100%;
 }
@@ -63,10 +63,11 @@
   position: absolute;
   display: grid;
   grid-template-rows: 1fr 1fr;
+  padding-right: 3rem;
 }
 
 .slider:last-child > .sales-text--wrapper {
-  padding-right: 5%;
+  padding-right: 13%;
 }
 
 .sales-text {

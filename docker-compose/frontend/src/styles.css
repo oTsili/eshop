@@ -75,14 +75,14 @@ body {
   font-size: 62.5%;
   height: 100%;
   overflow-x: hidden;
-  font-family: "Rubik", sans-serif;
+  font-family: "Source Serif Pro", "Roboto Serif", "Roboto", "Rubik", sans-serif;
   line-height: 1;
-  font-weight: 400;
+  font-weight: 300;
   color: #555;
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  /* font-family: Roboto, "Helvetica Neue", sans-serif; */
   /* overflow: hidden; */
 }
 

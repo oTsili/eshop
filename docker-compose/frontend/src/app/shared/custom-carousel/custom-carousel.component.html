@@ -17,15 +17,26 @@
       </ng-container>
       <!-- controls -->
     </div>
-    <div class="carousel--custom">
+    <div class="carousel--custom carousel-text">
       <!-- carousel -->
       <ng-container *ngFor="let slide of slides; let i = index">
-        <img
+        <!-- <img
           *ngIf="i === currentSlide"
           [src]="slide.src"
           class="slide"
           [@slideAnimation]="animationType"
-        />
+        /> -->
+        <div *ngIf="i === currentSlide" class="slide-text-container">
+          <div class="slide-text slide-header">
+            {{ slides[i].header }}
+          </div>
+          <div class="slide-text slide-subheader">
+            {{ slides[i].subheader }}
+          </div>
+          <div class="slide-button slide-text">
+            <button mat-button color="accent">SHOP</button>
+          </div>
+        </div>
       </ng-container>
       <!-- controls -->
     </div>
