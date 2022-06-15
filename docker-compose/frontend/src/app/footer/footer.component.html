@@ -15,7 +15,9 @@
           <div class="order">{{ footer_content[0].links[0].text }}</div>
           <div class="order">
             <b>
-              {{ footer_content[0].links[1].text }}
+              <a href="tel:+302310760187">{{
+                footer_content[0].links[1].text
+              }}</a>
             </b>
           </div>
         </div>
@@ -27,7 +29,7 @@
         <div class="links">
           <ul>
             <li *ngFor="let link of footer_content[1].links; let i = index">
-              {{ link.text }}
+              <a href="#">{{ link.text }}</a>
             </li>
           </ul>
         </div>
@@ -39,7 +41,7 @@
         <div class="links">
           <ul>
             <li *ngFor="let link of footer_content[2].links; let i = index">
-              <a>{{ link.text }}</a>
+              <a href="#">{{ link.text }}</a>
             </li>
           </ul>
         </div>
@@ -54,12 +56,12 @@
             [formGroup]="newsLetterForm"
             #emailForm
           >
-              <app-input
-                [control]="
-                  convertToFormControl(newsLetterForm.get('emailControl'))
-                "
-                [inputElement]="emailElement"
-              ></app-input>
+            <app-input
+              [control]="
+                convertToFormControl(newsLetterForm.get('emailControl'))
+              "
+              [inputElement]="emailElement"
+            ></app-input>
             <div class="button">
               <button mat-button type="submit">Register</button>
             </div>

@@ -42,12 +42,14 @@ li {
 .button {
   display: flex;
   justify-content: center;
+  margin-top: 3%;
 }
 
 button {
   display: block;
   background-color: rgb(85, 85, 85);
   color: white;
+  width: 100%;
 }
 
 ::ng-deep .mat-form-field {
