@@ -2,19 +2,25 @@
   <mat-toolbar color="primary">
     <div *ngIf="footer_content" class="footer-wrapper">
       <div *ngIf="footer_content[0].links" class="header logo">
-        <div>My app</div>
-        <div class="social-media">
-          <i class="ph-instagram-logo"></i>
-          <i class="ph-facebook-logo"></i>
-        </div>
-        <div class="order">{{ footer_content[0].links[0].text }}</div>
-        <div class="order">
-          <b>
-            {{ footer_content[0].links[1].text }}
-          </b>
+        <div class="logo-container">
+          <div>My app</div>
+          <div class="social-media">
+            <a href="#">
+              <i class="icon ph-instagram-logo"></i>
+            </a>
+            <a href="#">
+              <i class="icon ph-facebook-logo"></i>
+            </a>
+          </div>
+          <div class="order">{{ footer_content[0].links[0].text }}</div>
+          <div class="order">
+            <b>
+              {{ footer_content[0].links[1].text }}
+            </b>
+          </div>
         </div>
       </div>
-      <div class="information">
+      <div class="footer-col information">
         <div class="header">
           {{ footer_content[1].header }}
         </div>
@@ -26,7 +32,7 @@
           </ul>
         </div>
       </div>
-      <div class="contact">
+      <div class="footer-col contact">
         <div class="header">
           {{ footer_content[2].header }}
         </div>
@@ -38,11 +44,27 @@
           </ul>
         </div>
       </div>
-      <div class="newsletter">
+      <div class="footer-col newsletter">
         <div class="header">
           {{ footer_content[3].header }}
         </div>
-        <div class="links"></div>
+        <div class="links">
+          <form
+            (ngSubmit)="onRegister(newsLetterForm)"
+            [formGroup]="newsLetterForm"
+            #emailForm
+          >
+              <app-input
+                [control]="
+                  convertToFormControl(newsLetterForm.get('emailControl'))
+                "
+                [inputElement]="emailElement"
+              ></app-input>
+            <div class="button">
+              <button mat-button type="submit">Register</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </mat-toolbar>

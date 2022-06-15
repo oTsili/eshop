@@ -64,7 +64,7 @@ import { CustomCarouselService } from './custom-carousel.service';
       transition('flip => void', [
         useAnimation(flipOut, { params: { time: '500ms' } }),
       ]),
-      /* flip */
+      /* easein */
       transition('void => flip', [
         useAnimation(easein, { params: { time: '500ms' } }),
       ]),

@@ -1,11 +1,17 @@
+mat-toolbar {
+  height: fit-content;
+  margin-top: 2%;
+}
+
 .container {
-  margin: 9% 3% 6% 3%;
+  margin: 11% 3% 3% 3%;
 }
 .footer-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   font-weight: 400;
   column-gap: 2%;
+  flex: 1 1 auto;
 }
 
 .links,
@@ -14,8 +20,13 @@
   font-size: 1.5rem;
 }
 
+.icon {
+  padding: 3%;
+}
+
 .social-media {
   margin-bottom: 14%;
+  font-size: 3rem;
 }
 li {
   list-style: none;
@@ -25,6 +36,20 @@ li {
   font-size: 1.8rem;
 }
 
-/* .logo {
-  font-size: 1.4rem;
-} */
+.logo-container {
+  text-align: center;
+}
+.button {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  display: block;
+  background-color: rgb(85, 85, 85);
+  color: white;
+}
+
+::ng-deep .mat-form-field {
+  width: 100% !important;
+}

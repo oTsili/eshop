@@ -29,7 +29,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    // MatInputModule,
+    MatFormFieldModule,
+    MatInputModule,
     // MatCardModule,
     // MatExpansionModule,
     // MatProgressSpinnerModule,
@@ -49,13 +50,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     // MatRadioModule,
     // MatTabsModule,
     // MatTreeModule,
-    // MatFormFieldModule,
   ],
   exports: [
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    // MatInputModule,
+    MatFormFieldModule,
+    MatInputModule,
     // MatCardModule,
     // MatExpansionModule,
     // MatProgressSpinnerModule,
@@ -75,7 +76,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     // MatRadioModule,
     // MatTabsModule,
     // MatTreeModule,
-    // MatFormFieldModule,
   ],
 })
 export class AngularMaterialModule {}

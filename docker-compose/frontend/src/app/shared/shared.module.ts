@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SlideCardsComponent } from './slide-cards/slide-cards.component';
 import { AngularMaterialModule } from 'src/app/modules/angular-material.module';
@@ -11,6 +12,7 @@ import { ClickDragCarouselComponent } from './click-drag-carousel/click-drag-car
 import { CustomCarouselComponent } from './custom-carousel/custom-carousel.component';
 import { ActivateDirective } from './click-drag-carousel/activate.directive';
 import { GridLinkImgsComponent } from './grid-link-imgs/grid-link-imgs.component';
+import { InputComponent } from './input/input.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +22,15 @@ import { GridLinkImgsComponent } from './grid-link-imgs/grid-link-imgs.component
     CustomCarouselComponent,
     ActivateDirective,
     GridLinkImgsComponent,
+    InputComponent,
   ],
   imports: [
     CommonModule,
     AngularMaterialModule,
     NgbdCarouselPauseModule,
     DragScrollModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     AngularMaterialModule,
@@ -37,6 +42,7 @@ import { GridLinkImgsComponent } from './grid-link-imgs/grid-link-imgs.component
     CustomCarouselComponent,
     ActivateDirective,
     GridLinkImgsComponent,
+    InputComponent,
   ],
 })
 export class SharedModule {}

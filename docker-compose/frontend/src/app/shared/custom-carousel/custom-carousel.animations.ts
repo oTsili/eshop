@@ -108,8 +108,8 @@ export const easein = animation([
     '{{time}} ease-in',
     keyframes([
       style({
-        animationFillMode: 'linear',
-        transform: 'scale(1)',
+        animationFillMode: 'forwards',
+        transform: 'transformX(100%)',
         transformOrigin: 'center center',
         // offset: 0,
       }),

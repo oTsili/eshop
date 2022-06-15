@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-footer',
@@ -21,7 +27,7 @@ export class FooterComponent implements OnInit {
       ],
     },
     {
-      header: 'ΠΛΗΡΟΦΟΡΙΕΣ',
+      header: 'ΧΡΗΣΙΜΟΙ ΣΥΝΔΕΣΜΟΙ',
       links: [
         {
           text: 'Η Εταιρεία',
@@ -74,7 +80,33 @@ export class FooterComponent implements OnInit {
       header: 'ΕΓΓΡΑΦΗ ΣΤΟ NEWSLETTER',
     },
   ];
+
+  emailElement = {
+    label: 'Email',
+    type: 'email',
+    placeholder: 'Ex. pat@example.com',
+  };
   constructor() {}
 
   ngOnInit(): void {}
+
+  newsLetterForm = new FormGroup({
+    emailControl: new FormControl('', {
+      validators: [Validators.email],
+    }),
+  });
+
+  convertToFormControl(absCtrl: AbstractControl | null): FormControl {
+    const ctrl = absCtrl as FormControl;
+    return ctrl;
+  }
+
+  onRegister(form: FormGroup) {
+    console.log(this.newsLetterForm);
+    if (form.invalid) {
+      console.log('form invalid');
+      return;
+    }
+    console.log(form);
+  }
 }
