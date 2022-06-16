@@ -1,53 +1,52 @@
 <header>
-
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-    <a href="#" class="icon--medium">
-      <i class="ph-list"></i>
-    </a>
-    <a href="#" class="icon--medium left-spacer--mini">
-      <i class="ph-magnifying-glass"></i>
-    </a>
-    <span class="spacer"></span>
-    <span>My App</span>
-    <span class="spacer"></span>
-    <a href="#" class="icon--medium">
-      <!-- <mat-icon>share</mat-icon> -->
-      <i class="ph-user"></i>
-    </a>
-    <a href="#" class="icon--medium">
-      <i class="ph-heart"></i>
-    </a>
-    <a href="#" class="icon--medium">
-      <i class="ph-shopping-bag"></i>
-    </a>
-    <a href="#" class="text--medium"> ΕΛ </a> |
-    <a href="#" class="text--medium">EN </a>
-  </mat-toolbar-row>
-  <mat-toolbar-row>
-    <span class="spacer"></span>
-    <ul class="main-nav-list">
-      <li class="main-nav-link">
-        <a href="#" class="text--large"> ΝΕΕΣ ΠΑΡΑΛΑΒΕΣ</a>
-      </li>
-      <li class="main-nav-link">
-        <a href="#" class="text--large">ΠΑΠΟΥΤΣΙΑ</a>
-      </li>
-      <li class="main-nav-link">
-        <a href="#" class="text--large">ΑΞΕΣΟΥΑΡ</a>
-      </li>
-      <li class="main-nav-link">
-        <a href="#" class="text--large">ΠΡΟΣΦΟΡΕΣ</a>
-      </li>
-      <li class="main-nav-link">
-        <a href="#" class="text--large">ΕΠΙΚΟΙΝΩΝΙΑ</a>
-      </li>
-      <li class="main-nav-link">
-        <a href="#" class="text--large">ΕΝΔΥΣΗ</a>
-      </li>
-    </ul>
-    <span class="spacer"></span>
-  </mat-toolbar-row>
-</mat-toolbar>
+      <app-nav-bar [data]="initialData" [isRootNode]="true"></app-nav-bar>
+      <a href="#" class="icon--medium left-spacer--mini">
+        <i class="ph-magnifying-glass"></i>
+      </a>
+      <span class="spacer"></span>
+      <span>My App</span>
+      <span class="spacer"></span>
+      <a href="#" class="icon--medium">
+        <!-- <mat-icon>share</mat-icon> -->
+        <i class="ph-user"></i>
+      </a>
+      <a href="#" class="icon--medium">
+        <i class="ph-heart"></i>
+      </a>
+      <a href="#" class="icon--medium">
+        <i class="ph-shopping-bag"></i>
+      </a>
+      <a href="#" class="text--medium"> ΕΛ </a> |
+      <a href="#" class="text--medium">EN </a>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <span class="spacer"></span>
+      <ul class="main-nav-list">
+        <li
+          class="main-nav-link"
+          *ngFor="let navBarElement of initialData; let i = index"
+        >
+          <a
+            *ngIf="!initialData[i].subNavBarElements"
+            href="{{ initialData[i].href }}"
+            class="text--large"
+          >
+            {{ initialData[i].text }}</a
+          >
+          <!-- <a
+            *ngIf="initialData[i].subNavBarElements"
+            [matMenuTriggerFor]="initialData"
+            >{{ initialData[i].text }}</a
+          > -->
+        </li>
+      </ul>
+      <span class="spacer"></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
+  <mat-menu #navigationBar="matMenu">
+    <button mat-menu-item></button>
+  </mat-menu>
 </header>
