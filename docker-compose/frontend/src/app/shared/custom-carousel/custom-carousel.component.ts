@@ -65,7 +65,7 @@ import { CustomCarouselService } from './custom-carousel.service';
         useAnimation(flipOut, { params: { time: '500ms' } }),
       ]),
       /* easein */
-      transition('void => flip', [
+      transition('void => easein', [
         useAnimation(easein, { params: { time: '500ms' } }),
       ]),
 
@@ -82,7 +82,7 @@ import { CustomCarouselService } from './custom-carousel.service';
 export class CustomCarouselComponent implements OnInit, OnDestroy {
   // @Input() slides: Slide[];
   // @Input() animationType = AnimationType.Scale;
-  animationType = 'easein';
+  animationType = 'scaleIn';
   imagesLengthSubscription: Subscription;
   intervalSubscription: Subscription;
   intervalId: NodeJS.Timer | null;
