@@ -2,12 +2,12 @@
   margin: 2%;
 }
 
-.wrapper {
+/* .wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 1%;
   column-gap: 1%;
-}
+} */
 
 .category {
   /* height: 50rem; */

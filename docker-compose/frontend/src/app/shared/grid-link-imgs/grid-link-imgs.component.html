@@ -1,17 +1,18 @@
 <div class="container">
-  <div class="wrapper">
+  <div class="wrapper" gdAreas.lt-md="{{ getCategoriesAreas(2) }}">
     <div
-      class="category"
       *ngFor="let category of categories; let i = index"
+      gdArea="{{ i }}"
+      class="category"
       [style.background-image]="
         'linear-gradient(rgba(0, 0, 0, -0.3), rgba(0, 0, 0, 0.7)), url(' +
-        categories[i].imageSrc +
+        category.imageSrc +
         ')'
       "
     >
       <div class="category-text-container">
         <div class="category-text category-name">
-          {{ categories[i].name }}
+          {{ category.name }}
         </div>
         <button class="category-text" mat-button color="accent">SHOP</button>
       </div>
