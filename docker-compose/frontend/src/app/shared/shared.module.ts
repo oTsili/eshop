@@ -14,6 +14,7 @@ import { ActivateDirective } from './click-drag-carousel/activate.directive';
 import { GridLinkImgsComponent } from './grid-link-imgs/grid-link-imgs.component';
 import { InputComponent } from './input/input.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     DragScrollModule,
     FormsModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
   ],
   exports: [
     AngularMaterialModule,
@@ -46,6 +48,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     GridLinkImgsComponent,
     InputComponent,
     NavBarComponent,
+    FlexLayoutModule,
   ],
 })
 export class SharedModule {}

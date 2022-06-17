@@ -1,7 +1,22 @@
 <header>
   <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <app-nav-bar [data]="initialData" [isRootNode]="true"></app-nav-bar>
+    <mat-toolbar-row class="toolbar-container">
+      <app-nav-bar
+        fxHide
+        fxShow.gt-md="false"
+        fxShow.lt-md="true"
+        [data]="initialData"
+        [isRootNode]="true"
+      ></app-nav-bar>
+
+      <div
+        clas="language-selector"
+        fxFlexOrder.gt-md="-1"
+        fxFlexOrder.lt-md="1"
+      >
+        <a href="#" class="text--medium"> ΕΛ </a> &#124;
+        <a href="#" class="text--medium">EN </a>
+      </div>
       <a href="#" class="icon--medium left-spacer--mini">
         <i class="ph-magnifying-glass"></i>
       </a>
@@ -18,10 +33,8 @@
       <a href="#" class="icon--medium">
         <i class="ph-shopping-bag"></i>
       </a>
-      <a href="#" class="text--medium"> ΕΛ </a> |
-      <a href="#" class="text--medium">EN </a>
     </mat-toolbar-row>
-    <mat-toolbar-row>
+    <mat-toolbar-row fxShow fxHide.lt-md="true" fxHide.gt-md="false">
       <span class="spacer"></span>
       <ul class="main-nav-list">
         <li
@@ -35,11 +48,6 @@
           >
             {{ initialData[i].text }}</a
           >
-          <!-- <a
-            *ngIf="initialData[i].subNavBarElements"
-            [matMenuTriggerFor]="initialData"
-            >{{ initialData[i].text }}</a
-          > -->
         </li>
       </ul>
       <span class="spacer"></span>

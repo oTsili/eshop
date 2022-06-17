@@ -25,3 +25,7 @@ header {
   font-size: 1.8rem;
   transition: all 0.3s;
 }
+
+.toolbar-container {
+  padding: 0 7rem;
+}

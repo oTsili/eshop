@@ -1,12 +1,18 @@
 <div class="carousel-container--2cols">
-  <div class="carousel-wrapper--2cols">
+  <div
+    gdAreas="img txt"
+    gdAreas.lt-md="img | txt"
+    gdColumns="1.5fr 1fr"
+    gdColumns.lt-md="1fr"
+    class="carousel-wrapper--2cols"
+  >
+    <!-- Image carousel -->
     <div
-      class="carousel--custom"
+      gdArea="img"
+      class="carousel--custom carousel-img"
       (mouseout)="slideShow()"
       (mouseover)="stopSlideShow()"
     >
-      <!-- carousel -->
-
       <ng-container *ngFor="let slide of slides; let i = index">
         <img
           *ngIf="i === currentSlide"
@@ -15,17 +21,10 @@
           [@slideAnimation]="animationType"
         />
       </ng-container>
-      <!-- controls -->
     </div>
-    <div class="carousel--custom carousel-text">
-      <!-- carousel -->
+    <!-- Text carousel -->
+    <div gdArea="txt" class="carousel--custom carousel-text">
       <ng-container *ngFor="let slide of slides; let i = index">
-        <!-- <img
-          *ngIf="i === currentSlide"
-          [src]="slide.src"
-          class="slide"
-          [@slideAnimation]="animationType"
-        /> -->
         <div *ngIf="i === currentSlide" class="slide-text-container">
           <div class="slide-text slide-header">
             {{ slides[i].header }}
@@ -34,14 +33,24 @@
             {{ slides[i].subheader }}
           </div>
           <div class="slide-button slide-text">
-            <button mat-button color="accent">SHOP</button>
+            <button
+              [ngStyle.lt-md]="{ 'margin-top': '1%', 'margin-bottom': '10%' }"
+              mat-button
+              color="accent"
+            >
+              SHOP
+            </button>
           </div>
         </div>
       </ng-container>
-      <!-- controls -->
     </div>
   </div>
-  <div class="nav-list">
+  <!-- controls -->
+  <div
+    [ngStyle.gt-md]="{ margin: '5% auto' }"
+    [ngStyle.lt-md]="{ margin: '0 auto 3% auto' }"
+    class="nav-list"
+  >
     <ng-container *ngFor="let slide of slides; let i = index">
       <a (click)="currentSlide = i"></a>
     </ng-container>
