@@ -1,10 +1,23 @@
 <footer class="container">
   <mat-toolbar color="primary">
-    <div *ngIf="footer_content" class="footer-wrapper">
-      <div *ngIf="footer_content[0].links" class="header logo">
-        <div class="logo-container">
+    <div
+      gdAreas.lt-md="{{ getFooterAreas(numberOfRows) }}"
+      gdAreas.lt-sm="{{ getFooterAreas(footer_content.length) }}"
+      gdAreas="{{ getFooterAreas(1) }}"
+      gdGap="2% 2%"
+      gdGap.lt-md="15% 15%"
+      gdGap.lt-sm="4% 4%"
+      *ngIf="footer_content"
+      class="footer-wrapper"
+    >
+      <div
+        [ngStyle.lt-md]="{ 'font-size': '1.5rem' }"
+        *ngIf="footer_content[0].links"
+        class="footer-col header logo"
+      >
+        <div [ngStyle.lt-md]="{ 'text-align': 'left' }" class="logo-container">
           <div>My app</div>
-          <div class="social-media">
+          <div [ngStyle.lt-md]="{ 'margin-bottom': '6%' }" class="social-media">
             <a href="#">
               <i class="icon ph-instagram-logo"></i>
             </a>
@@ -12,10 +25,12 @@
               <i class="icon ph-facebook-logo"></i>
             </a>
           </div>
-          <div class="order">{{ footer_content[0].links[0].text }}</div>
-          <div class="order">
+          <div [ngStyle.lt-md]="{ 'font-size': '1.2rem' }" class="order">
+            {{ footer_content[0].links[0].text }}
+          </div>
+          <div [ngStyle.lt-md]="{ 'font-size': '1.2rem' }" class="order">
             <b>
-              <a href="tel:+302310760187">{{
+              <a href="{{ footer_content[0].links[1].link }}">{{
                 footer_content[0].links[1].text
               }}</a>
             </b>
@@ -23,10 +38,10 @@
         </div>
       </div>
       <div class="footer-col information">
-        <div class="header">
+        <div [ngStyle.lt-md]="{ 'font-size': '1.5rem' }" class="header">
           {{ footer_content[1].header }}
         </div>
-        <div class="links">
+        <div [ngStyle.lt-md]="{ 'font-size': '1.2rem' }" class="links">
           <ul>
             <li *ngFor="let link of footer_content[1].links; let i = index">
               <a href="#">{{ link.text }}</a>
@@ -34,11 +49,16 @@
           </ul>
         </div>
       </div>
-      <div class="footer-col contact">
-        <div class="header">
+      <div
+        [ngStyle.lt-md]="{ 'margin-bottom': '15%' }"
+        [ngStyle.lt-sm]="{ 'margin-bottom': '0' }"
+        class="footer-col contact"
+      >
+        <div [ngStyle.lt-md]="{ 'font-size': '1.5rem' }" class="header">
           {{ footer_content[2].header }}
         </div>
-        <div class="links">
+
+        <div [ngStyle.lt-md]="{ 'font-size': '1.2rem' }" class="links">
           <ul>
             <li *ngFor="let link of footer_content[2].links; let i = index">
               <a href="#">{{ link.text }}</a>
@@ -46,11 +66,14 @@
           </ul>
         </div>
       </div>
-      <div class="footer-col newsletter">
-        <div class="header">
+      <div
+        [ngStyle.lt-sm]="{ 'padding-bottom': '15%' }"
+        class="footer-col newsletter"
+      >
+        <div [ngStyle.lt-md]="{ 'font-size': '1.5rem' }" class="header">
           {{ footer_content[3].header }}
         </div>
-        <div class="links">
+        <div [ngStyle.lt-md]="{ 'font-size': '1.2rem' }" class="links">
           <form
             (ngSubmit)="onRegister(newsLetterForm)"
             [formGroup]="newsLetterForm"
@@ -63,7 +86,13 @@
               [inputElement]="emailElement"
             ></app-input>
             <div class="button">
-              <button mat-button type="submit">Register</button>
+              <button
+                [ngStyle.lt-md]="{ 'font-size': '1.2rem' }"
+                mat-button
+                type="submit"
+              >
+                Register
+              </button>
             </div>
           </form>
         </div>

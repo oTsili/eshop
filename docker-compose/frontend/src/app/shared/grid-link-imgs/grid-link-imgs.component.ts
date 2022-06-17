@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../shared.service';
 import { ProductCategory } from './grid-link-imgs.interfaces';
 
 @Component({
@@ -31,28 +32,11 @@ export class GridLinkImgsComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(private sharedService: SharedService) {}
 
   ngOnInit(): void {}
 
-  getCategoriesAreas(colNum: number) {
-    // console.log(colNum);
-    let areas = '';
-    for (let [index, category] of this.categories.entries()) {
-      if (colNum === this.categories.length && index === 0) {
-        areas = areas + `area${index} |`;
-      } else if (index === 0) {
-        areas = areas + `area${index} `;
-      } else if (index === this.categories.length - 1) {
-        areas = areas + `area${index}`;
-      } else if (index % colNum !== 0) {
-        areas = areas + `area${index} |`;
-      } else {
-        areas = areas + ` area${index} `;
-      }
-    }
-
-    // console.log(areas);
-    return areas;
+  getCategoriesAreas(numOfCols: number) {
+    return this.sharedService.getGridAreas(numOfCols, this.categories);
   }
 }

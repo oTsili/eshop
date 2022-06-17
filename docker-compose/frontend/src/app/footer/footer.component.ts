@@ -5,6 +5,7 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-footer',
@@ -12,6 +13,8 @@ import {
   styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
+  numberOfRows = 2;
+
   footer_content = [
     {
       header: 'ΤΗΛΕΦΩΝΙΚΕΣ ΠΑΡΑΓΓΕΛΙΕΣ',
@@ -22,7 +25,7 @@ export class FooterComponent implements OnInit {
         },
         {
           text: '+30 2310 760 187',
-          link: '#',
+          link: 'tel:+302310760187',
         },
       ],
     },
@@ -86,7 +89,7 @@ export class FooterComponent implements OnInit {
     type: 'email',
     placeholder: 'Ex. pat@example.com',
   };
-  constructor() {}
+  constructor(private sharedService: SharedService) {}
 
   ngOnInit(): void {}
 
@@ -108,5 +111,9 @@ export class FooterComponent implements OnInit {
       return;
     }
     console.log(form);
+  }
+
+  getFooterAreas(numOfCols: number) {
+    return this.sharedService.getGridAreas(numOfCols, this.footer_content);
   }
 }
