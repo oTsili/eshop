@@ -7,6 +7,7 @@ import { ProductCategory } from './grid-link-imgs.interfaces';
   styleUrls: ['./grid-link-imgs.component.css'],
 })
 export class GridLinkImgsComponent implements OnInit {
+  numberOfRows = 2;
   categories: ProductCategory[] = [
     {
       id: '0',
@@ -32,26 +33,26 @@ export class GridLinkImgsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    // this.getCategoriesAreas(2);
-  }
+  ngOnInit(): void {}
 
   getCategoriesAreas(colNum: number) {
+    // console.log(colNum);
     let areas = '';
     for (let [index, category] of this.categories.entries()) {
-      // console.log(category, index);
-      if (index === 0) {
-        areas = areas + `${index} `;
+      if (colNum === this.categories.length && index === 0) {
+        areas = areas + `area${index} |`;
+      } else if (index === 0) {
+        areas = areas + `area${index} `;
       } else if (index === this.categories.length - 1) {
-        areas = areas + `${index}`;
+        areas = areas + `area${index}`;
       } else if (index % colNum !== 0) {
-        areas = areas + `${index} |`;
+        areas = areas + `area${index} |`;
       } else {
-        areas = areas + ` ${index} `;
+        areas = areas + ` area${index} `;
       }
     }
 
-    console.log(areas);
+    // console.log(areas);
     return areas;
   }
 }

@@ -1,8 +1,13 @@
-<div class="container">
-  <div class="wrapper" gdAreas.lt-md="{{ getCategoriesAreas(2) }}">
+<div class="container" [ngStyle.lt-sm]="{ 'margin-bottom': '23%' }">
+  <div
+    class="wrapper"
+    gdAreas.lt-md="{{ getCategoriesAreas(numberOfRows) }}"
+    gdAreas.lt-sm="{{ getCategoriesAreas(categories.length) }}"
+    gdAreas="{{ getCategoriesAreas(1) }}"
+  >
     <div
       *ngFor="let category of categories; let i = index"
-      gdArea="{{ i }}"
+      gdArea="{{ 'area' + i }}"
       class="category"
       [style.background-image]="
         'linear-gradient(rgba(0, 0, 0, -0.3), rgba(0, 0, 0, 0.7)), url(' +
@@ -10,6 +15,7 @@
         ')'
       "
     >
+      <!-- <img src="{{ category.imageSrc }}" /> -->
       <div class="category-text-container">
         <div class="category-text category-name">
           {{ category.name }}
