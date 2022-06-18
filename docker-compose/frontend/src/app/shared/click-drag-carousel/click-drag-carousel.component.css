@@ -43,10 +43,11 @@
   width: 100%;
 }
 
-.slider > img {
+.slide > img {
   cursor: pointer;
   height: 40rem;
   min-width: 30rem;
+  /* height: 57vh; */
 }
 
 .hide-scrollbar .drag-scroll-content {

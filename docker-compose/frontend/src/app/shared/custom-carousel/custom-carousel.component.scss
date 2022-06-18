@@ -68,7 +68,7 @@
 }
 
 .button {
-  background: #3f51b5;
+  // background: #3f51b5;
   cursor: pointer;
   border-radius: 0.3em;
 }
@@ -92,7 +92,7 @@
 }
 .button:hover,
 .active {
-  background: #2196f3;
+  // background: #2196f3;
 }
 
 // =========================
@@ -212,4 +212,17 @@
   margin-top: 5%;
   background-color: rgb(85, 85, 85);
   color: white;
+}
+
+.slide-item {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s;
+  z-index: -1;
+}
+
+.slide-item.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
 }

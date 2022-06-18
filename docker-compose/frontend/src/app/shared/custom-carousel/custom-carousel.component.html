@@ -7,27 +7,24 @@
     class="carousel-wrapper--2cols"
   >
     <!-- Image carousel -->
-    <div
-      gdArea="img"
-      class="carousel--custom carousel-img"
-      (mouseout)="slideShow()"
-      (mouseover)="stopSlideShow()"
-    >
-      <ng-container *ngFor="let slide of dynamicDatabase.slides; let i = index">
-        <img
-          *ngIf="i === currentSlide"
-          [src]="slide.src"
-          class="slide"
-          [@slideAnimation]="animationType"
-        />
-      </ng-container>
-    </div>
-    <!-- Text carousel -->
-    <div gdArea="txt" class="carousel--custom carousel-text">
-      <ng-container *ngFor="let slide of dynamicDatabase.slides; let i = index">
+    <ng-container *ngFor="let slide of dynamicDatabase.slides; let i = index">
+      <div
+        gdArea="img"
+        class="carousel--custom carousel-img slide-item"
+        [ngClass]="{ active: currentSlide === i }"
+        (mouseout)="slideShow()"
+        (mouseover)="stopSlideShow()"
+      >
+        <img [src]="slide.src" class="slide" />
+      </div>
+      <!-- Text carousel -->
+      <div
+        [ngClass]="{ active: currentSlide === i }"
+        gdArea="txt"
+        class="carousel--custom carousel-text slide-item"
+      >
         <div
           [ngStyle.lt-md]="{ margin: 'auto 5%' }"
-          *ngIf="i === currentSlide"
           class="slide-text-container"
         >
           <div class="slide-text slide-header">
@@ -46,8 +43,8 @@
             </button>
           </div>
         </div>
-      </ng-container>
-    </div>
+      </div>
+    </ng-container>
   </div>
   <!-- controls -->
   <div
