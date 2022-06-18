@@ -53,23 +53,29 @@
 
 .main-slide {
   opacity: 1;
-  transition: opacity 0.5s ease-in-out, visibility 1.2s;
+  // visibility: visible;
+  // transition: opacity 0.5s ease-in-out, visibility 1.2s;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .hover-slide {
   opacity: 0;
+  // visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
-  transition: opacity 0.5s ease-in-out, visibility 1.2s;
+  // transition: opacity 0.5s ease-in-out, visibility 1.2s;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .main-slide:hover {
   opacity: 0;
+  // visibility: hidden;
 }
 
 .hover-slide:hover {
   opacity: 1;
+  // visibility: visible;
 }
 
 // .slide-item {

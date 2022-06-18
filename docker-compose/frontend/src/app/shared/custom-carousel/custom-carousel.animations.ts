@@ -103,16 +103,8 @@ export const jackOut = animation([
 // =========================
 //Ease in
 // =========================
-export const easein = animation([
-  animate(
-    '{{time}} ease-in',
-    keyframes([
-      style({
-        animationFillMode: 'both',
-        transform: 'scale(1)',
-        transformOrigin: 'center center',
-        offset: 0,
-      }),
-    ])
-  ),
+export const easein = animation([animate('{{time}} ease-in-out')]);
+
+export const easeout = animation([
+  // just hide it
 ]);

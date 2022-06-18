@@ -20,6 +20,7 @@ import {
   jackIn,
   jackOut,
   easein,
+  easeout,
 } from './custom-carousel.animations';
 import { interval, Subscription } from 'rxjs';
 import { CustomCarouselService } from './custom-carousel.service';
@@ -68,6 +69,9 @@ import { CustomCarouselService } from './custom-carousel.service';
       transition('void => easein', [
         useAnimation(easein, { params: { time: '500ms' } }),
       ]),
+      transition('easein => void', [
+        useAnimation(easeout, { params: { time: '500ms' } }),
+      ]),
 
       /* JackInTheBox */
       transition('void => jackInTheBox', [
@@ -82,7 +86,7 @@ import { CustomCarouselService } from './custom-carousel.service';
 export class CustomCarouselComponent implements OnInit, OnDestroy {
   // @Input() slides: Slide[];
   // @Input() animationType = AnimationType.Scale;
-  animationType = 'scaleIn';
+  animationType = 'easein';
   imagesLengthSubscription: Subscription;
   intervalId: NodeJS.Timer | null;
 

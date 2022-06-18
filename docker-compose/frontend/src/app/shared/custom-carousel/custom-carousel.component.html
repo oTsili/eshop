@@ -51,9 +51,11 @@
   </div>
   <!-- controls -->
   <div
-    [ngStyle.gt-md]="{ margin: '5% auto' }"
+    [ngStyle.gt-md]="{ margin: '1% auto' }"
     [ngStyle.lt-md]="{ margin: '0 auto 3% auto' }"
     class="nav-list"
+    (mouseout)="slideShow()"
+    (mouseover)="stopSlideShow()"
   >
     <ng-container *ngFor="let slide of slides; let i = index">
       <a (click)="currentSlide = i"></a>
