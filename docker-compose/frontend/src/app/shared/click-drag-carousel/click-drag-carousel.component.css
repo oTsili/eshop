@@ -63,7 +63,6 @@
   position: absolute;
   display: grid;
   grid-template-rows: 1fr 1fr;
-  padding-right: 3rem;
 }
 
 /* .slider:last-child > .sales-text--wrapper {

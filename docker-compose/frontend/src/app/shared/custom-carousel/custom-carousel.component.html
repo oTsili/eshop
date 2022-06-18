@@ -13,7 +13,7 @@
       (mouseout)="slideShow()"
       (mouseover)="stopSlideShow()"
     >
-      <ng-container *ngFor="let slide of slides; let i = index">
+      <ng-container *ngFor="let slide of dynamicDatabase.slides; let i = index">
         <img
           *ngIf="i === currentSlide"
           [src]="slide.src"
@@ -24,17 +24,17 @@
     </div>
     <!-- Text carousel -->
     <div gdArea="txt" class="carousel--custom carousel-text">
-      <ng-container *ngFor="let slide of slides; let i = index">
+      <ng-container *ngFor="let slide of dynamicDatabase.slides; let i = index">
         <div
           [ngStyle.lt-md]="{ margin: 'auto 5%' }"
           *ngIf="i === currentSlide"
           class="slide-text-container"
         >
           <div class="slide-text slide-header">
-            {{ slides[i].header }}
+            {{ slide.header }}
           </div>
           <div class="slide-text slide-subheader">
-            {{ slides[i].subheader }}
+            {{ slide.subheader }}
           </div>
           <div class="slide-button slide-text">
             <button
@@ -57,14 +57,14 @@
     (mouseout)="slideShow()"
     (mouseover)="stopSlideShow()"
   >
-    <ng-container *ngFor="let slide of slides; let i = index">
+    <ng-container *ngFor="let slide of dynamicDatabase.slides; let i = index">
       <a (click)="currentSlide = i"></a>
     </ng-container>
   </div>
   <!-- <button class="control prev" (click)="onPreviousClick()">
     <span class="arrow left"></span>
   </button>
-  <button class="control next" (click)="onNextClick(slides.length)">
+  <button class="control next" (click)="onNextClick()">
     <span class="arrow right"></span>
   </button> -->
 </div>
