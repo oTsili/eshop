@@ -1,6 +1,8 @@
 <footer class="container">
   <mat-toolbar color="primary">
+    <!-- wrapper -->
     <div
+      [ngStyle.lt-md]="{ 'text-align': 'center' }"
       gdAreas.lt-md="{{ getFooterAreas(numberOfRows) }}"
       gdAreas.lt-sm="{{ getFooterAreas(footer_content.length) }}"
       gdAreas="{{ getFooterAreas(1) }}"
@@ -10,12 +12,13 @@
       *ngIf="footer_content"
       class="footer-wrapper"
     >
+      <!-- logo -->
       <div
         [ngStyle.lt-md]="{ 'font-size': '1.5rem' }"
         *ngIf="footer_content[0].links"
         class="footer-col header logo"
       >
-        <div [ngStyle.lt-md]="{ 'text-align': 'left' }" class="logo-container">
+        <div class="logo-container">
           <div>My app</div>
           <div [ngStyle.lt-md]="{ 'margin-bottom': '6%' }" class="social-media">
             <a href="#">
@@ -37,6 +40,7 @@
           </div>
         </div>
       </div>
+      <!-- useful links -->
       <div class="footer-col information">
         <div [ngStyle.lt-md]="{ 'font-size': '1.5rem' }" class="header">
           {{ footer_content[1].header }}
@@ -49,6 +53,7 @@
           </ul>
         </div>
       </div>
+      <!-- customer care -->
       <div
         [ngStyle.lt-md]="{ 'margin-bottom': '15%' }"
         [ngStyle.lt-sm]="{ 'margin-bottom': '0' }"
@@ -66,6 +71,7 @@
           </ul>
         </div>
       </div>
+      <!-- newsletter -->
       <div
         [ngStyle.lt-sm]="{ 'padding-bottom': '15%' }"
         class="footer-col newsletter"

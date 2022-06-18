@@ -84,7 +84,6 @@ export class CustomCarouselComponent implements OnInit, OnDestroy {
   // @Input() animationType = AnimationType.Scale;
   animationType = 'scaleIn';
   imagesLengthSubscription: Subscription;
-  intervalSubscription: Subscription;
   intervalId: NodeJS.Timer | null;
 
   slides: Slide[] = [
@@ -129,37 +128,23 @@ export class CustomCarouselComponent implements OnInit, OnDestroy {
   }
 
   onNextClick(len: number) {
-    // console.log(len);
     const next = this.currentSlide + 1;
-    // this.currentSlide = next === this.slides.length  ? 0 : next;
     this.currentSlide = next === len ? 0 : next;
-    // console.log('next clicked, new current slide is: ', this.currentSlide);
   }
 
   slideShow() {
-    // console.log('start');
-
-    // setTimeout(() => {
-    //   this.customCarouselService.onImagesLengthUpdate(this.slides.length);
-    //   this.slideShow();
-    // }, 5000);
     this.intervalId = setInterval(() => {
       this.customCarouselService.onImagesLengthUpdate(this.slides.length);
-      // this.slideShow();
     }, 5000);
   }
 
   stopSlideShow() {
-    // console.log('stop');
-    // console.log(this.intervalId);
     clearInterval(this.intervalId!);
     this.intervalId = null;
-    // this.intervalSubscription.unsubscribe();
-    // this.imagesLengthSubscription.unsubscribe();
   }
 
   ngOnInit() {
-    this.preloadImages(); // for the demo
+    this.preloadImages();
     this.imagesLengthSubscription = this.customCarouselService
       .getImagesLengthListener()
       .subscribe((response) => {
@@ -170,7 +155,6 @@ export class CustomCarouselComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.intervalSubscription.unsubscribe();
     this.imagesLengthSubscription.unsubscribe();
   }
 

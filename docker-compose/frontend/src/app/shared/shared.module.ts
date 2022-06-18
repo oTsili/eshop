@@ -10,7 +10,7 @@ import { DragScrollModule } from 'ngx-drag-scroll';
 import { ConceptSentenceComponent } from 'src/app/shared/concept-sentence/concept-sentence.component';
 import { ClickDragCarouselComponent } from './click-drag-carousel/click-drag-carousel.component';
 import { CustomCarouselComponent } from './custom-carousel/custom-carousel.component';
-import { ActivateDirective } from './click-drag-carousel/activate.directive';
+// import { ActivateDirective } from './click-drag-carousel/activate.directive';
 import { GridLinkImgsComponent } from './grid-link-imgs/grid-link-imgs.component';
 import { InputComponent } from './input/input.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -22,7 +22,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ConceptSentenceComponent,
     ClickDragCarouselComponent,
     CustomCarouselComponent,
-    ActivateDirective,
+    // ActivateDirective,
     GridLinkImgsComponent,
     InputComponent,
     NavBarComponent,
@@ -44,7 +44,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     SlideCardsComponent,
     ClickDragCarouselComponent,
     CustomCarouselComponent,
-    ActivateDirective,
+    // ActivateDirective,
     GridLinkImgsComponent,
     InputComponent,
     NavBarComponent,

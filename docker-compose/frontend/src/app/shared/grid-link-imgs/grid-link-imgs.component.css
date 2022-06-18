@@ -20,7 +20,7 @@
   transform-origin: center center;
   transform: scale(1);
   transition: transform 0.5s;
-  height: 100vh;
+  height: 57vh;
   /* width: 25vw; */
   /* background-attachment: fixed; */
 }

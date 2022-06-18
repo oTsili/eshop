@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DragScrollComponent } from 'ngx-drag-scroll';
+import { Product } from './click-drag-carousel.interfaces';
 
 @Component({
   selector: 'app-click-drag-carousel',
@@ -12,7 +13,7 @@ import { DragScrollComponent } from 'ngx-drag-scroll';
 export class ClickDragCarouselComponent implements OnInit {
   @ViewChild('nav', { read: DragScrollComponent }) ds: DragScrollComponent;
   current_slide: number;
-  products = [
+  products: Product[] = [
     {
       src: './assets/images/clickAndDrag/1.jpeg',
       altSrc: '/assets/images/clickAndDrag/1-1.jpeg',
@@ -91,4 +92,8 @@ export class ClickDragCarouselComponent implements OnInit {
     let index = this.current_slide - 1;
     this.ds.moveTo(index);
   }
+
+  // hoverItem(product: Product) {
+  //   product.hovered = !product.hovered;
+  // }
 }

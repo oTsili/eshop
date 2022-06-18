@@ -50,3 +50,40 @@
     transform: rotate(225deg);
   }
 }
+
+.main-slide {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out, visibility 1.2s;
+}
+
+.hover-slide {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.5s ease-in-out, visibility 1.2s;
+}
+
+.main-slide:hover {
+  opacity: 0;
+}
+
+.hover-slide:hover {
+  opacity: 1;
+}
+
+// .slide-item {
+//   opacity: 0;
+//   visibility: hidden;
+//   transition: opacity 1.2s ease-in-out, visibility 1.2s;
+//   z-index: -1;
+//   // position: absolute;
+//   // top: 0;
+//   // left: 0;
+// }
+
+// .slide-item.active {
+//   opacity: 1;
+//   visibility: visible;
+//   z-index: 10;
+// }
