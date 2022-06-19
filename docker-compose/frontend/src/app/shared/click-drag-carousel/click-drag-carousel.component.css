@@ -46,11 +46,11 @@
 .slide > img {
   cursor: pointer;
   height: 40rem;
-  min-width: 30rem;
+  /* min-width: 30rem; */
   /* height: 57vh; */
 }
 
-.hide-scrollbar .drag-scroll-content {
+::ng-deep .hide-scrollbar .drag-scroll-content {
   height: auto !important;
   overflow: hidden !important;
   width: auto !important;

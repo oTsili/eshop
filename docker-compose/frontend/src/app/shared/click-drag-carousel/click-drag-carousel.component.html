@@ -16,18 +16,31 @@
     <div class="container-wrapper">
       <div class="container--slider">
         <!-- each slider -->
-        <div class="slider" *ngFor="let porduct of products; let i = index">
+        <div class="slider" *ngFor="let product of products; let i = index">
           <!-- main-slide -->
           <div class="slide main-slide">
-            <img drag-scroll-item appActivate [src]="products[i].src" />
+            <img
+              [ngStyle.lt-md]="{ height: '30rem', width: '20rem' }"
+              drag-scroll-item
+              appActivate
+              [src]="products[i].src"
+            />
             <div class="sales-text--wrapper">
-              <div class="sales-text">-{{ products[i].sales }}%</div>
+              <div class="sales-text">-{{ product.sales }}%</div>
               <hr />
             </div>
             <div class="product-details">
-              <div class="product product-name">{{ products[i].name }}</div>
-              <div class="procuct product-description">
-                {{ products[i].description }}
+              <div
+                [ngStyle.lt-md]="{ 'font-size': '1.6rem' }"
+                class="product product-name"
+              >
+                {{ product.name }}
+              </div>
+              <div
+                [ngStyle.lt-md]="{ 'font-size': '1.3rem' }"
+                class="procuct product-description"
+              >
+                {{ product.description }}
               </div>
               <div class="product product-actions">
                 <a href="#" class="icon--medium">
@@ -39,25 +52,38 @@
               </div>
               <div class="product product-price--wrapper">
                 <span class="product-price product-price-old">
-                  {{ products[i].price }}
+                  {{ product.price }}
                 </span>
                 <span class="product-price product-price-new">
-                  {{ products[i].special_price }}
+                  {{ product.special_price }}
                 </span>
               </div>
             </div>
           </div>
           <!-- hover slide -->
           <div class="slide hover-slide">
-            <img drag-scroll-item appActivate [src]="products[i].altSrc" />
+            <img
+              [ngStyle.lt-md]="{ height: '30rem', width: '20rem' }"
+              drag-scroll-item
+              appActivate
+              [src]="product.altSrc"
+            />
             <div class="sales-text--wrapper">
-              <div class="sales-text">-{{ products[i].sales }}%</div>
+              <div class="sales-text">-{{ product.sales }}%</div>
               <hr />
             </div>
             <div class="product-details">
-              <div class="product product-name">{{ products[i].name }}</div>
-              <div class="procuct product-description">
-                {{ products[i].description }}
+              <div
+                [ngStyle.lt-md]="{ 'font-size': '1.6rem' }"
+                class="product product-name"
+              >
+                {{ product.name }}
+              </div>
+              <div
+                [ngStyle.lt-md]="{ 'font-size': '1.3rem' }"
+                class="procuct product-description"
+              >
+                {{ product.description }}
               </div>
               <div class="product product-actions">
                 <a href="#" class="icon--medium">
@@ -69,10 +95,10 @@
               </div>
               <div class="product product-price--wrapper">
                 <span class="product-price product-price-old">
-                  {{ products[i].price }}
+                  {{ product.price }}
                 </span>
                 <span class="product-price product-price-new">
-                  {{ products[i].special_price }}
+                  {{ product.special_price }}
                 </span>
               </div>
             </div>

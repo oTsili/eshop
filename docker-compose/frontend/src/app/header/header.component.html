@@ -1,6 +1,9 @@
 <header>
   <mat-toolbar color="primary">
-    <mat-toolbar-row class="toolbar-container">
+    <mat-toolbar-row
+      [ngStyle.lt-sm]="{ padding: '0 2rem' }"
+      class="toolbar-container"
+    >
       <app-nav-bar
         fxHide
         fxShow.gt-md="false"
@@ -10,10 +13,12 @@
       ></app-nav-bar>
 
       <div
+        style="padding-bottom: 1%"
         clas="language-selector"
         fxFlexOrder.gt-md="-1"
         fxFlexOrder.lt-md="1"
         [ngStyle.lt-md]="{ 'margin-left': '3%' }"
+        [ngStyle.lt-sm]="{ 'padding-bottom': '1.4%', 'margin-left': '3%' }"
       >
         <a href="#" class="text--medium"> ΕΛ </a> &#124;
         <a href="#" class="text--medium">EN </a>
@@ -24,11 +29,11 @@
       <span class="spacer"></span>
       <span>My App</span>
       <span class="spacer"></span>
-      <a href="#" class="icon--medium">
+      <a fxShow.lt-sm="false" href="#" class="icon--medium">
         <!-- <mat-icon>share</mat-icon> -->
         <i class="ph-user"></i>
       </a>
-      <a href="#" class="icon--medium">
+      <a fxShow.lt-sm="false" href="#" class="icon--medium">
         <i class="ph-heart"></i>
       </a>
       <a href="#" class="icon--medium">

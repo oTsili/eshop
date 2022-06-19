@@ -1,0 +1,14 @@
+.wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  height: 71rem;
+}
+
+.slides {
+  cursor: move;
+  /* position: absolute; */
+  user-select: none;
+  display: flex;
+  flex-direction: row;
+}

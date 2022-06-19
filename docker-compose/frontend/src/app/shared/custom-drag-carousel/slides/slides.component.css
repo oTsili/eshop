@@ -1,0 +1,6 @@
+.slides {
+  cursor: move;
+  position: absolute;
+  user-select: none;
+    
+}

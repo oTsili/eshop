@@ -29,3 +29,7 @@ header {
 .toolbar-container {
   padding: 0 7rem;
 }
+
+.language-selector {
+  padding-bottom: 2% !important;
+}
