@@ -11,7 +11,7 @@ import { DynamicDatabase } from './dynamic-database';
 @Component({
   selector: 'app-custom-drag-carousel',
   templateUrl: './custom-drag-carousel.component.html',
-  styleUrls: ['./custom-drag-carousel.component.css'],
+  styleUrls: ['./custom-drag-carousel.component.scss'],
 })
 export class CustomDragCarouselComponent implements OnInit, AfterViewInit {
   @ViewChild('wrapper') wrapper: ElementRef;
@@ -32,6 +32,9 @@ export class CustomDragCarouselComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // console.log(this.wrapper.nativeElement);
   }
+
+  moveLeft() {}
+  moveRight() {}
 
   mouseDownHandler(e: MouseEvent) {
     e.preventDefault();

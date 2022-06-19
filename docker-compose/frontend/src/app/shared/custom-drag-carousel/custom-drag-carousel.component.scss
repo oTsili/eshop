@@ -1,0 +1,212 @@
+.container {
+  padding: 3%;
+}
+
+.slider-container {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  /* height: 71rem; */
+}
+
+.slides {
+  cursor: move;
+  /* position: absolute; */
+  user-select: none;
+  display: flex;
+  flex-direction: row;
+  width: 40rem;
+  height: auto !important;
+}
+
+.wrapper {
+  position: relative;
+  margin-right: 3rem;
+  height: 100%;
+  width: 100%;
+}
+
+.slide > img {
+  cursor: pointer;
+}
+
+/* Title */
+
+.title-wrapper {
+  display: block;
+  padding: 1% 0 2% 0;
+  transform: translateY(-2rem);
+}
+
+.title {
+  padding-top: 2%;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  text-align: center;
+  /* border-bottom: solid 5px; */
+}
+
+.title > h3 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  word-spacing: 0.4rem;
+  letter-spacing: 0.1rem;
+}
+
+.title > hr {
+  margin-top: 3%;
+}
+
+/* Product Details  */
+
+.sales-text--wrapper {
+  width: 30%;
+  top: 0.8rem;
+  right: 0;
+  font-size: 2rem;
+  position: absolute;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.sales-text {
+  padding-left: 55%;
+  /* border-bottom: solid 5px #c8c8c8; */
+  justify-self: end;
+  padding: 5%;
+}
+
+.sales-text--wrapper > hr {
+  border: none;
+  height: 0.5rem;
+  background-color: #c8c8c8;
+}
+
+.product {
+  padding: 2% 0;
+}
+
+.product-actions > a {
+  padding: 2% 3%;
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.product-name {
+  font-size: 2rem;
+  color: black;
+}
+.product-description {
+  font-size: 1.5rem;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-weight: 600;
+  white-space: pre-wrap !important;
+}
+
+.product-price {
+  font-size: 2rem;
+  margin: 0 3%;
+}
+
+.product-price-old {
+  text-decoration: line-through;
+}
+
+.product-price-new {
+  color: black;
+}
+
+.product-price::after {
+  content: "\20AC";
+}
+
+/* Controls  */
+
+.control {
+  border: none;
+  background-color: transparent;
+  outline: 0; // remove blue outline border, but make sure they are still focussable for accessibility
+  //   position: absolute;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0.5rem 3% 0.5rem;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  //   font-size: 3em;
+  user-select: none;
+  height: 100%;
+  opacity: 50%;
+  //   top: 0;
+  font-size: 3rem;
+  // transition: opacity 150ms cubic-bezier(0.25, 0.46, 0.45, 0.84);
+  // opacity effect on hover
+
+  &:hover,
+  &:focus {
+    opacity: 90%;
+  }
+
+  transform: translateY(-5%);
+
+  /* Position the buttons */
+  &.next {
+    right: 0;
+  }
+  &.prev {
+    left: 0;
+  }
+}
+
+/* style the arrows */
+.arrow {
+  display: block;
+  border-left: 0.15rem solid rgb(0, 0, 0);
+  border-bottom: 0.15rem solid rgb(0, 0, 0);
+  width: 2rem;
+  height: 2rem;
+
+  &.left {
+    transform: rotate(45deg);
+  }
+  &.right {
+    transform: rotate(225deg);
+  }
+}
+
+.main-slide {
+  opacity: 1;
+  // visibility: visible;
+  // transition: opacity 0.5s ease-in-out, visibility 1.2s;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.hover-slide {
+  opacity: 0;
+  // visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  // transition: opacity 0.5s ease-in-out, visibility 1.2s;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.main-slide:hover {
+  opacity: 0;
+  // visibility: hidden;
+}
+
+.hover-slide:hover {
+  opacity: 1;
+  // visibility: visible;
+}
