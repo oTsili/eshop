@@ -24,7 +24,7 @@
     class="slider-container"
   >
     <div #slides class="slides">
-      <div class="wrapper" *ngFor="let product of products">
+      <div #mainSlide class="wrapper" *ngFor="let product of products">
         <div class="slide main-slide">
           <img src="{{ product.src }}" />
           <div class="sales-text--wrapper">

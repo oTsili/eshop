@@ -17,7 +17,7 @@ import { DynamicDatabase } from './dynamic-database';
 export class CustomDragCarouselComponent implements OnInit, AfterViewInit {
   @ViewChild('wrapper') wrapper: ElementRef;
   @ViewChild('container') container: ElementRef;
-  @ViewChild('slides') slides: ElementRef;
+  @ViewChild('mainSlide') mainSlide: ElementRef;
   pos = { top: 0, left: 0, x: 0, y: 0 };
   isMouseDown = false;
   isAnimating = false;
@@ -58,46 +58,21 @@ export class CustomDragCarouselComponent implements OnInit, AfterViewInit {
   }
 
   moveLeft() {
-    let container = this.container.nativeElement;
-    let containerWidth = container.clientWidth;
-    let offsetWidth = container.offsetWidth;
-
-    let childrenObj = this.slides.nativeElement.children;
-    let childrenLen = Object.values(childrenObj).length;
-    this.scrollTo(
-      this.wrapper.nativeElement,
-      500,
-      containerWidth,
-      offsetWidth,
-      childrenLen,
-      'left'
-    );
+    let slideWidth = this.mainSlide.nativeElement.clientWidth;
+    let wrapper = this.wrapper.nativeElement;
+    this.scrollTo(wrapper, 500, slideWidth, 'left');
   }
 
   moveRight() {
-    let container = this.container.nativeElement;
-    let containerWidth = container.clientWidth;
-    let offsetWidth = container.offsetWidth;
-
-    let childrenObj = this.slides.nativeElement.children;
-    let childrenLen = Object.values(childrenObj).length;
-
-    this.scrollTo(
-      this.wrapper.nativeElement,
-      500,
-      containerWidth,
-      offsetWidth,
-      childrenLen,
-      'right'
-    );
+    let slideWidth = this.mainSlide.nativeElement.clientWidth;
+    let wrapper = this.wrapper.nativeElement;
+    this.scrollTo(wrapper, 500, slideWidth, 'right');
   }
 
   scrollTo(
     element: HTMLElement,
     duration: number,
-    containerWidth: number,
-    offsetWidth: number,
-    childrenLen: number,
+    slideWidth: number,
     direction: string
   ) {
     const self = this;
@@ -105,19 +80,11 @@ export class CustomDragCarouselComponent implements OnInit, AfterViewInit {
     let start, change, increment;
     if (direction == 'right') {
       start = element.scrollLeft;
-      change =
-        (element.scrollLeft +
-          (containerWidth + offsetWidth) / childrenLen -
-          start) *
-        1.9;
+      change = slideWidth + slideWidth * 0.1;
       increment = 20;
     } else if (direction === 'left') {
       start = element.scrollLeft;
-      change =
-        (element.scrollLeft -
-          (containerWidth + offsetWidth) / childrenLen -
-          start) *
-        1.9;
+      change = -(slideWidth + slideWidth * 0.1);
       increment = 20;
     }
 
