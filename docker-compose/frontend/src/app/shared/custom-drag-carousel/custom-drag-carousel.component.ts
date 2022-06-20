@@ -5,6 +5,7 @@ import {
   Renderer2,
   ViewChild,
   AfterViewInit,
+  EventEmitter,
 } from '@angular/core';
 import { DynamicDatabase } from './dynamic-database';
 
@@ -15,6 +16,8 @@ import { DynamicDatabase } from './dynamic-database';
 })
 export class CustomDragCarouselComponent implements OnInit, AfterViewInit {
   @ViewChild('wrapper') wrapper: ElementRef;
+  @ViewChild('container') container: ElementRef;
+  @ViewChild('slides') slides: ElementRef;
   pos = { top: 0, left: 0, x: 0, y: 0 };
   isMouseDown = false;
 
@@ -30,11 +33,52 @@ export class CustomDragCarouselComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // console.log(this.wrapper.nativeElement);
+    // console.log(this.wrapper.nativeElement);moveLeft
+    this.moveLeft();
   }
 
-  moveLeft() {}
-  moveRight() {}
+  moveLeft() {
+    const container = this.container.nativeElement;
+    const containerWidth = container.clientWidth;
+    const offsetWidth = container.offsetWidth;
+
+    const childrenObj = this.slides.nativeElement.children;
+    const childrenLen = Object.values(childrenObj).length;
+    this.wrapper.nativeElement.scrollLeft =
+      this.wrapper.nativeElement.scrollLeft -
+      (containerWidth + offsetWidth) / childrenLen;
+
+    console.log(this.wrapper.nativeElement.scrollLeft);
+    console.log((containerWidth + offsetWidth) / childrenLen);
+    console.log(this.wrapper.nativeElement);
+    // wrapper.scrollToTimer;
+  }
+
+  maximumIndex(containerWidth, childrenElements) {}
+
+  isScrollReachesRightEnd() {
+    const container = this.container.nativeElement;
+    const scrollLeftPos = container.scrollLeft + container.offsetWidth;
+    return scrollLeftPos >= container.scrollWidth;
+  }
+
+  moveRight() {
+    const container = this.container.nativeElement;
+    const containerWidth = container.clientWidth;
+    const offsetWidth = container.offsetWidth;
+
+    const childrenObj = this.slides.nativeElement.children;
+    const childrenLen = Object.values(childrenObj).length;
+    this.wrapper.nativeElement.scrollLeft =
+      this.wrapper.nativeElement.scrollLeft +
+      (containerWidth + offsetWidth) / childrenLen;
+
+    console.log(this.wrapper.nativeElement.scrollLeft);
+    console.log((containerWidth + offsetWidth) / childrenLen);
+    console.log(this.wrapper.nativeElement);
+  }
+
+  scrollTo(element, to, duration) {}
 
   mouseDownHandler(e: MouseEvent) {
     e.preventDefault();

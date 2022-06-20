@@ -24,10 +24,12 @@
   margin-right: 3rem;
   height: 100%;
   width: 100%;
+  transition: scrollLeft 0.5s ease-in-out;
 }
 
 .slide > img {
   cursor: pointer;
+  height: 40rem;
 }
 
 /* Title */

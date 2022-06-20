@@ -1,4 +1,4 @@
-<div class="container">
+<div #container class="container">
   <div class="title-wrapper">
     <div class="title">
       <button class="control prev" (click)="moveLeft()">
@@ -23,7 +23,7 @@
     #wrapper
     class="slider-container"
   >
-    <div class="slides">
+    <div #slides class="slides">
       <div class="wrapper" *ngFor="let product of products">
         <div class="slide main-slide">
           <img src="{{ product.src }}" />
