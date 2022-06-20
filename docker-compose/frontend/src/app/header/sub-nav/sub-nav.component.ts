@@ -1,16 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { DynamicDatabase } from 'src/app/header/dynamic-database';
-import { navBarElement } from 'src/app/header/header.component';
+import {
+  Component,
+  ContentChild,
+  Input,
+  OnInit,
+  TemplateRef,
+} from '@angular/core';
+import { DynamicDatabase } from '../dynamic-database';
+import { navBarElement } from '../header.interfaces';
 
 @Component({
-  selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css'],
+  selector: 'app-sub-nav',
+  templateUrl: './sub-nav.component.html',
+  styleUrls: ['./sub-nav.component.css'],
 })
-export class NavBarComponent implements OnInit {
+export class SubNavComponent implements OnInit {
   @Input() data: navBarElement[] | undefined = [];
   @Input() trigger = 'Trigger';
   @Input() isRootNode = false;
+  @Input() text: string;
+  @ContentChild(TemplateRef) public inputElement: TemplateRef<any>;
 
   constructor(private database: DynamicDatabase) {}
 

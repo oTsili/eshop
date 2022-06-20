@@ -33,3 +33,7 @@ header {
 .language-selector {
   padding-bottom: 2% !important;
 }
+
+.link {
+  cursor: pointer;
+}

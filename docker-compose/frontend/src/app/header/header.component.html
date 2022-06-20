@@ -4,13 +4,18 @@
       [ngStyle.lt-sm]="{ padding: '0 2rem' }"
       class="toolbar-container"
     >
-      <app-nav-bar
+      <app-sub-nav
+        class="link"
         fxHide
         fxShow.gt-md="false"
         fxShow.lt-md="true"
         [data]="initialData"
         [isRootNode]="true"
-      ></app-nav-bar>
+      >
+        <ng-template>
+          <i class="ph-list"></i>
+        </ng-template>
+      </app-sub-nav>
 
       <div
         style="padding-bottom: 1%"
@@ -54,13 +59,18 @@
           >
             {{ initialData[i].text }}</a
           >
+          <a *ngIf="initialData[i].subNavBarElements" class="text--large">
+            <app-sub-nav [data]="initialData" [isRootNode]="true">
+              <ng-template>
+                <a href="{{ initialData[i].href }}" class="text--large">
+                  {{ initialData[i].text }}
+                </a>
+              </ng-template>
+            </app-sub-nav></a
+          >
         </li>
       </ul>
       <span class="spacer"></span>
     </mat-toolbar-row>
   </mat-toolbar>
-
-  <mat-menu #navigationBar="matMenu">
-    <button mat-menu-item></button>
-  </mat-menu>
 </header>

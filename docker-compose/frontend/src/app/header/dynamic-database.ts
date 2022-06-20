@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { delay, of } from 'rxjs';
-import { navBarElement } from './header.component';
+import { navBarElement } from './header.interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class DynamicDatabase {

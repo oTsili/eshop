@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDatabase } from './dynamic-database';
+import { navBarElement } from './header.interfaces';
 
-export interface navBarElement {
-  text: string;
-  href: string;
-  subNavBarElements?: navBarElement[];
-}
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  Renderer2,
-  ViewChild,
-  AfterViewInit,
-  EventEmitter,
-} from '@angular/core';
+import { Component, ElementRef, ViewChild, EventEmitter } from '@angular/core';
 import { DynamicDatabase } from './dynamic-database';
 
 @Component({
@@ -14,26 +6,20 @@ import { DynamicDatabase } from './dynamic-database';
   templateUrl: './custom-drag-carousel.component.html',
   styleUrls: ['./custom-drag-carousel.component.scss'],
 })
-export class CustomDragCarouselComponent implements OnInit, AfterViewInit {
+export class CustomDragCarouselComponent {
   @ViewChild('wrapper') wrapper: ElementRef;
-  @ViewChild('container') container: ElementRef;
   @ViewChild('mainSlide') mainSlide: ElementRef;
   pos = { top: 0, left: 0, x: 0, y: 0 };
   isMouseDown = false;
   isAnimating = false;
-  _snapOffset = 0;
   scrollToTimer: number | NodeJS.Timeout = -1;
   snapAnimationFinished = new EventEmitter();
   indexChanged = new EventEmitter();
   _index = 0;
+  wrapperElementMarginRight = 0.07;
+
   products = this.dynamicDatabase.products;
 
-  get snapOffset() {
-    return this._snapOffset;
-  }
-  set snapOffset(value) {
-    this._snapOffset = value;
-  }
   get currIndex() {
     return this._index;
   }
@@ -43,19 +29,7 @@ export class CustomDragCarouselComponent implements OnInit, AfterViewInit {
       this.indexChanged.emit(value);
     }
   }
-  constructor(
-    public dynamicDatabase: DynamicDatabase,
-    private elementRef: ElementRef,
-    private render: Renderer2
-  ) {}
-
-  ngOnInit(): void {
-    // console.log(this.slide.nativeElement);
-  }
-
-  ngAfterViewInit(): void {
-    // console.log(this.wrapper.nativeElement);moveLeft
-  }
+  constructor(public dynamicDatabase: DynamicDatabase) {}
 
   moveLeft() {
     let slideWidth = this.mainSlide.nativeElement.clientWidth;
@@ -80,11 +54,15 @@ export class CustomDragCarouselComponent implements OnInit, AfterViewInit {
     let start, change, increment;
     if (direction == 'right') {
       start = element.scrollLeft;
-      change = slideWidth + slideWidth * 0.1;
+      change =
+        slideWidth + slideWidth * (this.wrapperElementMarginRight + 0.03);
       increment = 20;
     } else if (direction === 'left') {
       start = element.scrollLeft;
-      change = -(slideWidth + slideWidth * 0.1);
+      change = -(
+        slideWidth +
+        slideWidth * (this.wrapperElementMarginRight + 0.03)
+      );
       increment = 20;
     }
 
