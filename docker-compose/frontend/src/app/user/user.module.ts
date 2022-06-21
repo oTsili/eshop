@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SubNavComponent } from './header/sub-nav/sub-nav.component';
+import { UserAppComponent } from './user-app/user-app.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SubNavComponent } from './header/sub-nav/sub-nav.component';
     FooterComponent,
     HomeComponent,
     SubNavComponent,
+    UserAppComponent,
   ],
   imports: [
     CommonModule,
@@ -35,5 +37,6 @@ import { SubNavComponent } from './header/sub-nav/sub-nav.component';
     HomeComponent,
     SubNavComponent,
   ],
+  bootstrap: [UserAppComponent],
 })
 export class UserModule {}
