@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SlideCardsComponent } from './slide-cards/slide-cards.component';
-import { AngularMaterialModule } from 'src/app/modules/angular-material.module';
-import { NgbdCarouselPauseModule } from 'src/app/modules/carousel-pause.module';
+import { AngularMaterialModule } from 'src/app/user/modules/angular-material.module';
+import { NgbdCarouselPauseModule } from 'src/app/user/modules/carousel-pause.module';
 import { DragScrollModule } from 'ngx-drag-scroll';
 
-import { ConceptSentenceComponent } from 'src/app/shared/concept-sentence/concept-sentence.component';
+import { ConceptSentenceComponent } from 'src/app/user/shared/concept-sentence/concept-sentence.component';
 import { ClickDragCarouselComponent } from './click-drag-carousel/click-drag-carousel.component';
 import { CustomCarouselComponent } from './custom-carousel/custom-carousel.component';
 // import { ActivateDirective } from './click-drag-carousel/activate.directive';

@@ -10,7 +10,7 @@ import {
   templateUrl: './ngdb-carousel-pause.component.html',
   styleUrls: [
     './ngdb-carousel-pause.component.css',
-    '../../../assets/css/bootstrap.min.css',
+    '../../../../assets/css/bootstrap.min.css',
   ],
 })
 export class NgbdCarouselPause {
