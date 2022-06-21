@@ -28,7 +28,10 @@
         <a href="#" class="text--medium"> ΕΛ </a> &#124;
         <a href="#" class="text--medium">EN </a>
       </div>
-      <a href="#" class="icon--medium left-spacer--mini">
+      <a
+        (click)="toggleActiveClass()"
+        class="link icon--medium left-spacer--mini"
+      >
         <i class="ph-magnifying-glass"></i>
       </a>
       <span class="spacer"></span>
@@ -73,4 +76,17 @@
       <span class="spacer"></span>
     </mat-toolbar-row>
   </mat-toolbar>
+  <mat-form-field
+    [ngClass]="{ active: isActiveClassEnabled }"
+    class="search-box"
+    appearance="fill"
+  >
+    <mat-icon class="search-icon" matPrefix>search</mat-icon>
+    <input
+      matInput
+      type="text"
+      aria-label="Clear"
+      placeholder="Αναζήτηση σε όλο το κατάστημα"
+    />
+  </mat-form-field>
 </header>

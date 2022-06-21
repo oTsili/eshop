@@ -1,5 +1,6 @@
 header {
   box-shadow: 0 1.2rem 3.2rem rgb(0 0 0 / 10%);
+  position: relative;
 }
 
 .icon--medium {
@@ -36,4 +37,31 @@ header {
 
 .link {
   cursor: pointer;
+}
+
+.search-box {
+  position: absolute;
+  top: 100%;
+  z-index: 1000;
+  background-color: ghostwhite;
+  font-size: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.active {
+  opacity: 0.85;
+}
+
+::ng-deep .mat-form-field-prefix {
+  padding-right: 5%;
+  padding-left: 2%;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+
+::ng-deep .mat-form-field-underline {
+  bottom: 0 !important;
 }
