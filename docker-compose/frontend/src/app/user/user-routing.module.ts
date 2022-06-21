@@ -16,8 +16,19 @@ export const userRoutes: Routes = [
       {
         path: 'search',
         component: SearchComponent,
+        children: [
+          {
+            path: ':query',
+            redirectTo: 'search/:query',
+            pathMatch: 'full',
+          },
+        ],
       },
     ],
+  },
+  {
+    path: 'search/:query',
+    component: SearchComponent,
   },
 ];
 

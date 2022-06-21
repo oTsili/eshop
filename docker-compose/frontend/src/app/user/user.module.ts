@@ -37,6 +37,5 @@ import { UserAppComponent } from './user-app/user-app.component';
     HomeComponent,
     SubNavComponent,
   ],
-  bootstrap: [UserAppComponent],
 })
 export class UserModule {}

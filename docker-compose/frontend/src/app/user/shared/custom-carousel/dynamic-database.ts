@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { delay, of } from 'rxjs';
 import { Slide } from './custom-carousel.interface';
 
 @Injectable({ providedIn: 'root' })
