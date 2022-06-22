@@ -14,20 +14,20 @@ services:
     volumes:
       - "./frontend:/app"
     # working_dir: /app
-# ###### BACKEND #######
-#  backend:
-#   container_name: backend
-#   build:  # specify the directory of the Dockerfile
-#     context: ./backend
-#     dockerfile: Dockerfile
-#   ports:
-#   - "3000:3000" #specify ports mapping
-#   links:
-#   - database # link this service to the database service
+  ###### BACKEND #######
+  backend:
+    container_name: backend
+    build: # specify the directory of the Dockerfile
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000" #specify ports mapping
+    links:
+      - database # link this service to the database service
 
-# ###### DATABASE #######
-#  database:
-#   image: mongo # specify image to build container from
-#   container_name: mongo
-#   ports:
-#   - "27017:27017" # specify port forwarding
+  ###### DATABASE #######
+  database:
+    image: mongo # specify image to build container from
+    container_name: mongo
+    ports:
+      - "27017:27017" # specify port forwarding
