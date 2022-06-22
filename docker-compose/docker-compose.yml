@@ -13,6 +13,8 @@ services:
       - "4200:4200" # specify port mapping
     volumes:
       - "./frontend:/app"
+      - /etc/localtime:/etc/localtime:ro
+
     # working_dir: /app
   ###### BACKEND #######
   backend:
@@ -24,6 +26,8 @@ services:
       - "3000:3000" #specify ports mapping
     links:
       - database # link this service to the database service
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
 
   ###### DATABASE #######
   database:
@@ -31,3 +35,6 @@ services:
     container_name: mongo
     ports:
       - "27017:27017" # specify port forwarding
+    volumes:
+      - ./mongo/db:/data/db
+      - /etc/localtime:/etc/localtime:ro
