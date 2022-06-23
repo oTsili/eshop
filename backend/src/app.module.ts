@@ -1,19 +1,24 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ProductsModule } from './products/products.module';
-import { CarouselSlideModule } from './carousel-slide/carousel-slide.module';
+import { CarouselSlidesModule } from './carousel-slides/carousel-slides.module';
+import { NavbarModule } from './navbar/navbar.module';
 
 @Module({
   // connect to the demo Database
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'static'),
+    }),
     MongooseModule.forRoot(
       `${process.env['ME_CONFIG_MONGODB_URL']}/eshop?authSource=admin`,
     ),
     ProductsModule,
-    CarouselSlideModule,
+    CarouselSlidesModule,
+    NavbarModule,
   ],
   controllers: [],
   providers: [],

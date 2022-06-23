@@ -5,9 +5,6 @@ export type CarouselSlideDocument = CarouselSlide & Document;
 
 @Schema()
 export class CarouselSlide {
-  // @Prop()
-  // name: string;
-
   @Prop()
   headline: string;
 
