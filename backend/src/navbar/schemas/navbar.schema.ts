@@ -6,6 +6,9 @@ export type navBarElementDocument = NavBarElement & Document;
 @Schema()
 export class NavBarElement {
   @Prop()
+  position: string;
+
+  @Prop()
   text: string;
 
   @Prop()

@@ -57,7 +57,7 @@ export class CustomCarouselComponent implements OnInit, OnDestroy {
     //   new Image().src = slide.src;
     // }
     this.customCarouselService.getCarouselSlides().subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       this.slides = response.carouselSlides;
     });
   }

@@ -3,18 +3,13 @@ import { NavBarElement } from '../schemas/navbar.schema';
 
 export class CreateNavbarElementDto {
   @IsNotEmpty()
-  text: string;
+  position: string;
 
-  @IsNotEmpty()
-  href: string;
-}
-
-export class CreateNavbarElementsDto {
   @IsNotEmpty()
   text: string;
 
   @IsNotEmpty()
   href: string;
 
-  subNavBarElements: CreateNavbarElementDto[];
+  subNavBarElements: NavBarElement[];
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
 import { response } from 'express';
 import { NavbarService } from './navbar.service';
 import { NavBarElement } from './schemas/navbar.schema';
@@ -16,6 +16,14 @@ export class NavbarController {
 
     return response.status(HttpStatus.CREATED).json({
       newNavBarElement,
+    });
+  }
+
+  @Get()
+  async fetchAll(@Res() response) {
+    const navBarElement = await this.navBarService.findAll();
+    return response.status(HttpStatus.OK).json({
+      navBarElement,
     });
   }
 }

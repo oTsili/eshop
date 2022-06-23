@@ -1,17 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Slide } from './custom-carousel.interface';
+import { navBarElement } from './header.interfaces';
 
-const BACKEND_URL = environment.BASE_URL + 'carousel-slides';
+const BACKEND_URL = environment.BASE_URL + 'navbar';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class CustomCarouselService {
+@Injectable({ providedIn: 'root' })
+export class HeaderService {
   constructor(private http: HttpClient) {}
 
-  getCarouselSlides() {
+  getNavBarElements() {
     return this.http.get<any>(`${BACKEND_URL}`, {
       withCredentials: true,
     });

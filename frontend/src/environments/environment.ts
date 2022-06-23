@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  CAROUSEL_SLIDES_BASE_URL: 'http://localhost:3000/api/',
+  BASE_URL: 'http://localhost:3000/api/',
 };
 
 /*
