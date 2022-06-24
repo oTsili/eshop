@@ -1,6 +1,5 @@
 <app-spinner *ngIf="isLoading" [spinnerClass]="'circle-thick'"></app-spinner>
 
-
 <div *ngIf="!isLoading" class="container">
   <div class="title-wrapper">
     <div class="title">
@@ -29,78 +28,16 @@
     <div class="slides">
       <div #mainSlide class="wrapper" *ngFor="let product of products">
         <div class="slide main-slide">
-          <img src="{{ product.src }}" />
-          <div class="sales-text--wrapper">
-            <div class="sales-text">-{{ product.sales }}%</div>
-            <hr />
-          </div>
-          <div class="product-details">
-            <div
-              [ngStyle.lt-md]="{ 'font-size': '1.6rem' }"
-              class="product product-name"
-            >
-              {{ product.name }}
-            </div>
-            <div
-              [ngStyle.lt-md]="{ 'font-size': '1.3rem' }"
-              class="procuct product-description"
-            >
-              {{ product.description }}
-            </div>
-            <div class="product product-actions">
-              <a href="#" class="icon--medium">
-                <i class="ph-heart"></i>
-              </a>
-              <a href="#" class="icon--medium">
-                <i class="ph-shopping-bag"></i>
-              </a>
-            </div>
-            <div class="product product-price--wrapper">
-              <span class="product-price product-price-old">
-                {{ product.price }}
-              </span>
-              <span class="product-price product-price-new">
-                {{ product.special_price }}
-              </span>
-            </div>
-          </div>
+          <app-drag-slide
+            [product]="product"
+            [source]="product.src"
+          ></app-drag-slide>
         </div>
         <div class="slide hover-slide">
-          <img src="{{ product.altSrc }}" />
-          <div class="sales-text--wrapper">
-            <div class="sales-text">-{{ product.sales }}%</div>
-            <hr />
-          </div>
-          <div class="product-details">
-            <div
-              [ngStyle.lt-md]="{ 'font-size': '1.6rem' }"
-              class="product product-name"
-            >
-              {{ product.name }}
-            </div>
-            <div
-              [ngStyle.lt-md]="{ 'font-size': '1.3rem' }"
-              class="procuct product-description"
-            >
-              {{ product.description }}
-            </div>
-            <div class="product product-actions">
-              <a href="#" class="icon--medium">
-                <i class="ph-heart"></i>
-              </a>
-              <a href="#" class="icon--medium">
-                <i class="ph-shopping-bag"></i>
-              </a>
-            </div>
-            <div class="product product-price--wrapper">
-              <span class="product-price product-price-old">
-                {{ product.price }}
-              </span>
-              <span class="product-price product-price-new">
-                {{ product.special_price }}
-              </span>
-            </div>
-          </div>
+          <app-drag-slide
+            [product]="product"
+            [source]="product.altSrc"
+          ></app-drag-slide>
         </div>
       </div>
     </div>

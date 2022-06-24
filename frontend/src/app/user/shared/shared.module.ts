@@ -14,9 +14,8 @@ import { GridLinkImgsComponent } from './grid-link-imgs/grid-link-imgs.component
 import { InputComponent } from './input/input.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomDragCarouselComponent } from './custom-drag-carousel/custom-drag-carousel.component';
-import { SlideComponent } from './custom-drag-carousel/slides/slide/slide.component';
-import { SlidesComponent } from './custom-drag-carousel/slides/slides.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { DragSlideComponent } from './custom-drag-carousel/drag-slide/drag-slide.component';
 
 @NgModule({
   declarations: [
@@ -27,9 +26,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     GridLinkImgsComponent,
     InputComponent,
     CustomDragCarouselComponent,
-    SlideComponent,
-    SlidesComponent,
     SpinnerComponent,
+    DragSlideComponent,
   ],
   imports: [
     CommonModule,

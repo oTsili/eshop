@@ -9,16 +9,6 @@
   /* height: 71rem; */
 }
 
-.slides {
-  cursor: move;
-  /* position: absolute; */
-  user-select: none;
-  display: flex;
-  flex-direction: row;
-  width: 40rem;
-  height: auto !important;
-}
-
 .wrapper {
   position: relative;
   margin-right: 7%;
@@ -27,12 +17,7 @@
   transition: scrollLeft 0.5s ease-in-out;
 }
 
-.slide > img {
-  cursor: pointer;
-  height: 40rem;
-}
-
-/* Title */
+/************** Title ****************/
 
 .title-wrapper {
   display: block;
@@ -61,77 +46,7 @@
   margin-top: 3%;
 }
 
-/* Product Details  */
-
-.sales-text--wrapper {
-  width: 30%;
-  top: 0.8rem;
-  right: 0;
-  font-size: 2rem;
-  position: absolute;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-}
-
-.sales-text {
-  padding-left: 55%;
-  /* border-bottom: solid 5px #c8c8c8; */
-  justify-self: end;
-  padding: 5%;
-}
-
-.sales-text--wrapper > hr {
-  border: none;
-  height: 0.5rem;
-  background-color: #c8c8c8;
-}
-
-.product {
-  padding: 2% 0;
-}
-
-.product-actions > a {
-  padding: 2% 3%;
-  font-size: 3rem;
-  font-weight: 600;
-}
-
-.product-name {
-  font-size: 2rem;
-  color: black;
-}
-.product-description {
-  font-size: 1.5rem;
-  word-break: break-word;
-  overflow-wrap: anywhere;
-}
-
-.product-details {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  font-weight: 600;
-  white-space: pre-wrap !important;
-}
-
-.product-price {
-  font-size: 2rem;
-  margin: 0 3%;
-}
-
-.product-price-old {
-  text-decoration: line-through;
-}
-
-.product-price-new {
-  color: black;
-}
-
-.product-price::after {
-  content: "\20AC";
-}
-
-/* Controls  */
+/******************* Controls  ************************/
 
 .control {
   border: none;
@@ -184,6 +99,17 @@
   &.right {
     transform: rotate(225deg);
   }
+}
+
+/****************** Slides *******************/
+.slides {
+  cursor: move;
+  /* position: absolute; */
+  user-select: none;
+  display: flex;
+  flex-direction: row;
+  width: 40rem;
+  height: auto !important;
 }
 
 .main-slide {
