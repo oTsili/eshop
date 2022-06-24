@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { DynamicDatabase } from '../dynamic-database';
 import { navBarElement } from '../header.interfaces';
+import { HeaderService } from '../header.service';
 
 @Component({
   selector: 'app-sub-nav',
@@ -25,8 +26,10 @@ export class SubNavComponent implements OnInit {
   ngOnInit(): void {}
 
   isExpandable(node: navBarElement): boolean {
-    // console.log(!!node.subNavBarElements);
-    return !!node.subNavBarElements;
+    if (node.subNavBarElements?.length! > 0) {
+      return true;
+    }
+    return false;
   }
 
   getData(nodeText: string) {

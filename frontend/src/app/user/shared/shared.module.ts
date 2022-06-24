@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { SlideCardsComponent } from './slide-cards/slide-cards.component';
 import { AngularMaterialModule } from 'src/app/user/modules/angular-material.module';
 import { NgbdCarouselPauseModule } from 'src/app/user/modules/carousel-pause.module';
 import { DragScrollModule } from 'ngx-drag-scroll';
@@ -21,7 +20,6 @@ import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
-    SlideCardsComponent,
     ConceptSentenceComponent,
     ClickDragCarouselComponent,
     CustomCarouselComponent,
@@ -47,7 +45,6 @@ import { SpinnerComponent } from './spinner/spinner.component';
     NgbdCarouselPauseModule,
     DragScrollModule,
     ConceptSentenceComponent,
-    SlideCardsComponent,
     ClickDragCarouselComponent,
     CustomCarouselComponent,
     // ActivateDirective,

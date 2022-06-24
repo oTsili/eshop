@@ -5,6 +5,7 @@ import {
   EventEmitter,
   OnInit,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CustomCarouselService } from '../custom-carousel/custom-carousel.service';
 import { CustomDragCarouselService } from './custom-drag-carousel.service';
 import { DynamicDatabase } from './dynamic-database';
@@ -26,6 +27,7 @@ export class CustomDragCarouselComponent implements OnInit {
   _index = 0;
   wrapperElementMarginRight = 0.07;
   isLoading = false;
+  customCarouselSubscription: Subscription;
 
   // products = this.dynamicDatabase.products;
   products;
@@ -48,12 +50,18 @@ export class CustomDragCarouselComponent implements OnInit {
     this.preloadImages();
   }
 
+  ngOnDestroy(): void {
+    this.customCarouselSubscription.unsubscribe();
+  }
+
   preloadImages() {
     this.isLoading = true;
-    this.customDragCarouselService.getCarouselSlides().subscribe((response) => {
-      this.products = response.dragCarousel;
-      this.isLoading = false;
-    });
+    this.customCarouselSubscription = this.customDragCarouselService
+      .getCarouselSlides()
+      .subscribe((response) => {
+        this.products = response.dragCarousel;
+        this.isLoading = false;
+      });
   }
 
   moveLeft() {

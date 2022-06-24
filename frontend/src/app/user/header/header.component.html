@@ -56,13 +56,16 @@
           *ngFor="let navBarElement of initialData; let i = index"
         >
           <a
-            *ngIf="!initialData[i].subNavBarElements"
+            *ngIf="initialData[i].subNavBarElements!.length === 0"
             href="{{ initialData[i].href }}"
             class="text--large"
           >
             {{ initialData[i].text }}</a
           >
-          <a *ngIf="initialData[i].subNavBarElements" class="text--large">
+          <a
+            *ngIf="initialData[i].subNavBarElements!.length > 0"
+            class="text--large"
+          >
             <app-sub-nav [data]="initialData" [isRootNode]="true">
               <ng-template>
                 <a href="{{ initialData[i].href }}" class="text--large">

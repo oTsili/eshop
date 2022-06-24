@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { DynamicDatabase } from './dynamic-database';
 import { navBarElement } from './header.interfaces';
 import { HeaderService } from './header.service';
@@ -8,29 +9,40 @@ import { HeaderService } from './header.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   isActiveClassEnabled = false;
   initialData: navBarElement[];
+  navBarElementsSubsciption: Subscription;
+
   constructor(
-    // private database: DynamicDatabase,
+    private dynamicDatabase: DynamicDatabase,
     private headerService: HeaderService
   ) {
     // this.initialData = this.database.navBarElements;
     // this.preloadNavBarElements();
+    // console.log(this.initialData);
   }
 
   ngOnInit(): void {
     this.preloadNavBarElements();
   }
 
+  ngOnDestroy(): void {
+    this.navBarElementsSubsciption.unsubscribe();
+  }
+
   preloadNavBarElements() {
-    this.headerService.getNavBarElements().subscribe((response) => {
-      this.initialData = response.navBarElement;
-    });
+    this.navBarElementsSubsciption = this.headerService
+      .getNavBarElements()
+      .subscribe((response) => {
+        this.initialData = response.navBarElement;
+        this.dynamicDatabase.navBarElements = this.initialData;
+        // console.log(this.initialData);
+      });
   }
 
   toggleActiveClass() {
     this.isActiveClassEnabled = !this.isActiveClassEnabled;
-    console.log(this.isActiveClassEnabled);
+    // console.log(this.isActiveClassEnabled);
   }
 }
