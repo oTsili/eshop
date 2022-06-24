@@ -1,4 +1,6 @@
-<div class="carousel-container--2cols">
+<app-spinner *ngIf="isLoading" [spinnerClass]="'circle-thick'"></app-spinner>
+
+<div *ngIf="!isLoading" class="carousel-container--2cols">
   <div
     gdAreas="img txt"
     gdAreas.lt-md="img | txt"

@@ -17,6 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomDragCarouselComponent } from './custom-drag-carousel/custom-drag-carousel.component';
 import { SlideComponent } from './custom-drag-carousel/slides/slide/slide.component';
 import { SlidesComponent } from './custom-drag-carousel/slides/slides.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { SlidesComponent } from './custom-drag-carousel/slides/slides.component'
     CustomDragCarouselComponent,
     SlideComponent,
     SlidesComponent,
+    SpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +55,7 @@ import { SlidesComponent } from './custom-drag-carousel/slides/slides.component'
     InputComponent,
     FlexLayoutModule,
     CustomDragCarouselComponent,
+    SpinnerComponent,
   ],
 })
 export class SharedModule {}

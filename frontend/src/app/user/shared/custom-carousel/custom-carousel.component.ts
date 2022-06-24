@@ -12,6 +12,7 @@ import { DynamicDatabase } from './dynamic-database';
 export class CustomCarouselComponent implements OnInit, OnDestroy {
   imagesLengthSubscription: Subscription;
   intervalId: NodeJS.Timer | null;
+  isLoading = false;
   currentSlide = 0;
   slides: Slide[];
 
@@ -56,9 +57,11 @@ export class CustomCarouselComponent implements OnInit, OnDestroy {
     // for (const slide of this.dynamicDatabase.slides) {
     //   new Image().src = slide.src;
     // }
+    this.isLoading = true;
     this.customCarouselService.getCarouselSlides().subscribe((response) => {
       // console.log(response);
       this.slides = response.carouselSlides;
+      this.isLoading = false;
     });
   }
 }

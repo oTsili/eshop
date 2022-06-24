@@ -25,19 +25,8 @@ export class HeaderComponent implements OnInit {
 
   preloadNavBarElements() {
     this.headerService.getNavBarElements().subscribe((response) => {
-      let tempData = response.navBarElement;
-      tempData = this.sortArr(tempData);
-
-      this.initialData = tempData;
+      this.initialData = response.navBarElement;
     });
-  }
-
-  sortArr(array: navBarElement[]) {
-    array.sort((a, b) => {
-      return a.position! - b.position!;
-    });
-
-    return array;
   }
 
   toggleActiveClass() {
