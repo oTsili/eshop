@@ -1,4 +1,7 @@
-<div class="container">
+<app-spinner *ngIf="isLoading" [spinnerClass]="'circle-thick'"></app-spinner>
+
+
+<div *ngIf="!isLoading" class="container">
   <div class="title-wrapper">
     <div class="title">
       <button class="control prev" (click)="moveLeft()">

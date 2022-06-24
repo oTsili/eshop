@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../shared.service';
 import { ProductCategory } from './grid-link-imgs.interfaces';
+import { GridLinksImgsService } from './grid-links.service';
 
 @Component({
   selector: 'app-grid-link-imgs',
@@ -9,34 +10,49 @@ import { ProductCategory } from './grid-link-imgs.interfaces';
 })
 export class GridLinkImgsComponent implements OnInit {
   numberOfRows = 2;
-  categories: ProductCategory[] = [
-    {
-      id: '0',
-      name: 'Winter',
-      imageSrc: './assets/images/categories/1.webp',
-    },
-    {
-      id: '1',
-      name: 'Summer',
-      imageSrc: './assets/images/categories/2.webp',
-    },
-    {
-      id: '2',
-      name: 'Kids',
-      imageSrc: './assets/images/categories/3.webp',
-    },
-    {
-      id: '3',
-      name: 'New Collection',
-      imageSrc: './assets/images/categories/4.webp',
-    },
-  ];
+  isLoading = false;
 
-  constructor(private sharedService: SharedService) {}
+  categories: ProductCategory[];
+  // categories: ProductCategory[] = [
+  //   {
+  //     id: '0',
+  //     name: 'Winter',
+  //     imageSrc: './assets/images/categories/1.webp',
+  //   },
+  //   {
+  //     id: '1',
+  //     name: 'Summer',
+  //     imageSrc: './assets/images/categories/2.webp',
+  //   },
+  //   {
+  //     id: '2',
+  //     name: 'Kids',
+  //     imageSrc: './assets/images/categories/3.webp',
+  //   },
+  //   {
+  //     id: '3',
+  //     name: 'New Collection',
+  //     imageSrc: './assets/images/categories/4.webp',
+  //   },
+  // ];
 
-  ngOnInit(): void {}
+  constructor(private gridLinksImgsService: GridLinksImgsService) {}
+
+  ngOnInit(): void {
+    this.preloadImages();
+  }
 
   getCategoriesAreas(numOfCols: number) {
-    return this.sharedService.getGridAreas(numOfCols, this.categories);
+    return this.gridLinksImgsService.getGridAreas(numOfCols, this.categories);
+  }
+
+  preloadImages() {
+    this.isLoading = true;
+
+    this.gridLinksImgsService.getGridCategories().subscribe((response) => {
+      // console.log(response);
+      this.categories = response.gridCategories;
+      this.isLoading = false;
+    });
   }
 }

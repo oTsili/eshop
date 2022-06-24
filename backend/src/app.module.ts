@@ -7,6 +7,7 @@ import { ProductsModule } from './products/products.module';
 import { CarouselSlidesModule } from './carousel-slides/carousel-slides.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { DragCarouselModule } from './drag-carousel/drag-carousel.module';
+import { GridCategoriesModule } from './grid-categories/grid-categories.module';
 
 @Module({
   // connect to the demo Database
@@ -21,6 +22,7 @@ import { DragCarouselModule } from './drag-carousel/drag-carousel.module';
     CarouselSlidesModule,
     NavbarModule,
     DragCarouselModule,
+    GridCategoriesModule,
   ],
   controllers: [],
   providers: [],
