@@ -1,4 +1,12 @@
-import { Component, ElementRef, ViewChild, EventEmitter } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  EventEmitter,
+  OnInit,
+} from '@angular/core';
+import { CustomCarouselService } from '../custom-carousel/custom-carousel.service';
+import { CustomDragCarouselService } from './custom-drag-carousel.service';
 import { DynamicDatabase } from './dynamic-database';
 
 @Component({
@@ -6,7 +14,7 @@ import { DynamicDatabase } from './dynamic-database';
   templateUrl: './custom-drag-carousel.component.html',
   styleUrls: ['./custom-drag-carousel.component.scss'],
 })
-export class CustomDragCarouselComponent {
+export class CustomDragCarouselComponent implements OnInit {
   @ViewChild('wrapper') wrapper: ElementRef;
   @ViewChild('mainSlide') mainSlide: ElementRef;
   pos = { top: 0, left: 0, x: 0, y: 0 };
@@ -17,8 +25,10 @@ export class CustomDragCarouselComponent {
   indexChanged = new EventEmitter();
   _index = 0;
   wrapperElementMarginRight = 0.07;
+  isLoading = false;
 
-  products = this.dynamicDatabase.products;
+  // products = this.dynamicDatabase.products;
+  products;
 
   get currIndex() {
     return this._index;
@@ -29,7 +39,22 @@ export class CustomDragCarouselComponent {
       this.indexChanged.emit(value);
     }
   }
-  constructor(public dynamicDatabase: DynamicDatabase) {}
+  constructor(
+    public dynamicDatabase: DynamicDatabase,
+    private customDragCarouselService: CustomDragCarouselService
+  ) {}
+
+  ngOnInit(): void {
+    this.preloadImages();
+  }
+
+  preloadImages() {
+    this.isLoading = true;
+    this.customDragCarouselService.getCarouselSlides().subscribe((response) => {
+      this.products = response.dragCarousel;
+      this.isLoading = false;
+    });
+  }
 
   moveLeft() {
     let slideWidth = this.mainSlide.nativeElement.clientWidth;
