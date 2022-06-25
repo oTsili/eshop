@@ -4,12 +4,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
-import { NgbdCarouselPause } from 'src/app/user/shared/ngdb-carousel-pause/ngdb-carousel-pause.component';
+// import { NgbdCarouselPause } from 'src/app/user/shared/NOT-USED-ngdb-carousel-pause/ngdb-carousel-pause.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, NgbModule],
-  declarations: [NgbdCarouselPause],
-  exports: [NgbdCarouselPause],
-  bootstrap: [NgbdCarouselPause],
+  declarations: [
+    // NgbdCarouselPause
+  ],
+  exports: [
+    // NgbdCarouselPause
+  ],
+  bootstrap: [
+    // NgbdCarouselPause
+  ],
 })
 export class NgbdCarouselPauseModule {}

@@ -15,30 +15,11 @@ export class GridLinkImgsComponent implements OnInit {
   gridLinkImgsSubscription: Subscription;
 
   categories: ProductCategory[];
-  // categories: ProductCategory[] = [
-  //   {
-  //     id: '0',
-  //     name: 'Winter',
-  //     imageSrc: './assets/images/categories/1.webp',
-  //   },
-  //   {
-  //     id: '1',
-  //     name: 'Summer',
-  //     imageSrc: './assets/images/categories/2.webp',
-  //   },
-  //   {
-  //     id: '2',
-  //     name: 'Kids',
-  //     imageSrc: './assets/images/categories/3.webp',
-  //   },
-  //   {
-  //     id: '3',
-  //     name: 'New Collection',
-  //     imageSrc: './assets/images/categories/4.webp',
-  //   },
-  // ];
 
-  constructor(private gridLinksImgsService: GridLinksImgsService) {}
+  constructor(
+    private gridLinksImgsService: GridLinksImgsService,
+    private sharedService: SharedService
+  ) {}
 
   ngOnInit(): void {
     this.preloadImages();
@@ -49,7 +30,7 @@ export class GridLinkImgsComponent implements OnInit {
   }
 
   getCategoriesAreas(numOfCols: number) {
-    return this.gridLinksImgsService.getGridAreas(numOfCols, this.categories);
+    return this.sharedService.getGridAreas(numOfCols, this.categories);
   }
 
   preloadImages() {

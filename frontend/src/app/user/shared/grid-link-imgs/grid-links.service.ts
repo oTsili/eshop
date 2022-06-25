@@ -15,24 +15,4 @@ export class GridLinksImgsService {
       withCredentials: true,
     });
   }
-
-  getGridAreas(mumOfCols: number, arr: any[]) {
-    let areas = '';
-    for (let [index, category] of arr.entries()) {
-      if (mumOfCols === arr.length && index === 0) {
-        areas = areas + `area${index} |`;
-      } else if (index === 0) {
-        areas = areas + `area${index} `;
-      } else if (index === arr.length - 1) {
-        areas = areas + `area${index}`;
-      } else if (index % mumOfCols !== 0) {
-        areas = areas + `area${index} |`;
-      } else {
-        areas = areas + ` area${index} `;
-      }
-    }
-
-    // console.log(areas);
-    return areas;
-  }
 }
