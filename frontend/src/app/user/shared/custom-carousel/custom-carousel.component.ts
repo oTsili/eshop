@@ -54,13 +54,11 @@ export class CustomCarouselComponent implements OnInit, OnDestroy {
   }
 
   preloadImages() {
-    // for (const slide of this.dynamicDatabase.slides) {
-    //   new Image().src = slide.src;
-    // }
     this.isLoading = true;
     this.customCarouselService.getCarouselSlides().subscribe((response) => {
       // console.log(response);
       this.slides = response.carouselSlides;
+      this.dynamicDatabase.slides = this.slides;
       this.isLoading = false;
     });
   }

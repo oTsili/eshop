@@ -17,11 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private dynamicDatabase: DynamicDatabase,
     private headerService: HeaderService
-  ) {
-    // this.initialData = this.database.navBarElements;
-    // this.preloadNavBarElements();
-    // console.log(this.initialData);
-  }
+  ) {}
 
   ngOnInit(): void {
     this.preloadNavBarElements();
@@ -37,12 +33,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.initialData = response.navBarElement;
         this.dynamicDatabase.navBarElements = this.initialData;
-        // console.log(this.initialData);
       });
   }
 
   toggleActiveClass() {
     this.isActiveClassEnabled = !this.isActiveClassEnabled;
-    // console.log(this.isActiveClassEnabled);
   }
 }

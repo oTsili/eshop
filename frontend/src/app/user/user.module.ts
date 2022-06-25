@@ -12,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SubNavComponent } from './header/sub-nav/sub-nav.component';
 import { UserAppComponent } from './user-app/user-app.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { UserAppComponent } from './user-app/user-app.component';
     HomeComponent,
     SubNavComponent,
     UserAppComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import { UserAppComponent } from './user-app/user-app.component';
     FooterComponent,
     HomeComponent,
     SubNavComponent,
+    SearchComponent,
   ],
 })
 export class UserModule {}

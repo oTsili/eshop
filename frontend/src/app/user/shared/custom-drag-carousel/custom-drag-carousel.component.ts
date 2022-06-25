@@ -6,9 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CustomCarouselService } from '../custom-carousel/custom-carousel.service';
 import { CustomDragCarouselService } from './custom-drag-carousel.service';
-import { DynamicDatabase } from './dynamic-database';
 
 @Component({
   selector: 'app-custom-drag-carousel',
@@ -41,10 +39,7 @@ export class CustomDragCarouselComponent implements OnInit {
       this.indexChanged.emit(value);
     }
   }
-  constructor(
-    public dynamicDatabase: DynamicDatabase,
-    private customDragCarouselService: CustomDragCarouselService
-  ) {}
+  constructor(private customDragCarouselService: CustomDragCarouselService) {}
 
   ngOnInit(): void {
     this.preloadImages();
