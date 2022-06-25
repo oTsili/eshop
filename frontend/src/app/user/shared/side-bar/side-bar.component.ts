@@ -9,7 +9,7 @@ import { SideBar } from './side-bar.interface';
 })
 export class SideBarComponent implements OnInit {
   sidebar: SideBar;
-
+  collapsing = false;
   constructor(private dynamicDatabase: DynamicDatabase) {}
 
   ngOnInit(): void {

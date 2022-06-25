@@ -16,9 +16,8 @@ import { InputComponent } from './input/input.component';
 import { CustomDragCarouselComponent } from './custom-drag-carousel/custom-drag-carousel.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { DragSlideComponent } from './custom-drag-carousel/drag-slide/drag-slide.component';
-import { AccordionComponent } from './accordion/accordion.component';
-import { PanelComponent } from './accordion/panel/panel.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
+import { AccordionModule } from './accordion/accordion.module';
 
 @NgModule({
   declarations: [
@@ -31,8 +30,6 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     CustomDragCarouselComponent,
     SpinnerComponent,
     DragSlideComponent,
-    AccordionComponent,
-    PanelComponent,
     SideBarComponent,
   ],
   imports: [
@@ -43,6 +40,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    AccordionModule,
   ],
   exports: [
     // NgbdCarouselPauseModule,
@@ -50,6 +48,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     // ActivateDirective,
     AngularMaterialModule,
     DragScrollModule,
+    AccordionModule,
     ConceptSentenceComponent,
     CustomCarouselComponent,
     GridLinkImgsComponent,
@@ -57,7 +56,6 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     FlexLayoutModule,
     CustomDragCarouselComponent,
     SpinnerComponent,
-    AccordionComponent,
     SideBarComponent,
   ],
 })

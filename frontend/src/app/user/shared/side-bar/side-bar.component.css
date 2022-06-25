@@ -1,7 +1,20 @@
 .container {
   padding: 5%;
+  text-align: center;
 }
 
 .header {
   font-weight: 600;
+  /* border-bottom: solid 1px #c8c8c8; */
+}
+
+.header-wrapper {
+  padding: 0 10%;
+}
+
+.header-wrapper > hr {
+  margin-top: 5%;
+  /* border: none;
+  height: 0.5rem;
+  background-color: #c8c8c8; */
 }
