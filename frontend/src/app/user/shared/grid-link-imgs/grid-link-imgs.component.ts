@@ -10,11 +10,10 @@ import { GridLinksImgsService } from './grid-links.service';
   styleUrls: ['./grid-link-imgs.component.css'],
 })
 export class GridLinkImgsComponent implements OnInit {
-  numberOfRows = 2;
+  categories: ProductCategory[];
+  numberOfRows: number;
   isLoading = false;
   gridLinkImgsSubscription: Subscription;
-
-  categories: ProductCategory[];
 
   constructor(
     private gridLinksImgsService: GridLinksImgsService,
@@ -41,6 +40,7 @@ export class GridLinkImgsComponent implements OnInit {
       .subscribe((response) => {
         // console.log(response);
         this.categories = response.gridCategories;
+        this.numberOfRows = this.categories.length / 2;
         this.isLoading = false;
       });
   }

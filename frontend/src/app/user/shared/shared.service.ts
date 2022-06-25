@@ -6,6 +6,12 @@ import { Injectable } from '@angular/core';
 export class SharedService {
   constructor() {}
 
+  /**
+   *get the string for css-property grid-template-areas or gdAreas(in flexLayout library)
+   * @param mumOfCols the number of grid area columns
+   * @param arr the array  of the grid contents
+   * @returns a string to use as value in css-property grid-template-areas or gdAreas(in flexLayout library)
+   */
   getGridAreas(mumOfCols: number, arr: any[]) {
     // console.log(colNum);
     let areas = '';
