@@ -7,8 +7,8 @@
           class="color {{ colorsArr[j].color }}"
         ></div>
         <div
-          *ngIf="i === 1 && colorsArr[arrOfCols.length + (j + 1)]"
-          class="color {{ colorsArr[arrOfCols.length + (j + 1)].color }}"
+          *ngIf="i === 1 && colorsArr[arrOfCols.length + j]"
+          class="color {{ colorsArr[arrOfCols.length + j].color }}"
         ></div>
         <div
           *ngIf="i !== 0 && i !== 1 && colorsArr[i * arrOfCols.length + j]"

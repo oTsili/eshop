@@ -12,6 +12,14 @@
 /* border-radius: var(--accordion-border-radius); */
 /* } */
 
+.accordion__item {
+  margin-bottom: 5%;
+}
+
+.accordion__content {
+  text-align: start;
+}
+
 .accordion__item:first-child .accordion__header {
   border-radius: var(--accordion-border-radius) var(--accordion-border-radius) 0
     0;
@@ -32,7 +40,7 @@
   cursor: pointer;
   background: var(--accordion-header-bg);
   border-bottom: 0.1rem solid rgb(85, 85, 85);
-  margin-bottom: 7%;
+  margin-bottom: 8%;
 }
 
 /* Default toggle button styles */

@@ -1,0 +1,25 @@
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  /* justify-content: center; */
+  align-content: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.element {
+  margin: 5%;
+  height: 3rem;
+  width: 3rem;
+  border: 0.1rem solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.element:hover {
+  font-weight: 600;
+}

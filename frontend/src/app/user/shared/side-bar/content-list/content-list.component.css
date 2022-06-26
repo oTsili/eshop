@@ -1,0 +1,17 @@
+.container {
+  text-align: center;
+}
+
+ul .list {
+  margin: 2.2rem 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+.element {
+  margin: 1.5rem 0;
+}
+
+.element:hover {
+  font-weight: 600;
+}
