@@ -7,13 +7,13 @@
 >
   <div
     class="wrapper"
-    gdAreas.lt-md="{{ getCategoriesAreas(numberOfRows) }}"
+    gdAreas.lt-md="{{ getCategoriesAreas(numberOfCols) }}"
     gdAreas.lt-sm="{{ getCategoriesAreas(categories.length) }}"
     gdAreas="{{ getCategoriesAreas(1) }}"
   >
     <div
       *ngFor="let category of categories; let i = index"
-      gdArea="{{ 'area' + i }}"
+      gdArea="{{ 'area' + (i + 1) }}"
       class="category"
       [style.background-image]="
         'linear-gradient(rgba(0, 0, 0, -0.3), rgba(0, 0, 0, 0.7)), url(' +
