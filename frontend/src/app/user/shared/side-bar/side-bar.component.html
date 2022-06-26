@@ -9,7 +9,9 @@
   <app-accordion [collapsing]="collapsing">
     <ng-container *ngFor="let accordion of sidebar.accordions">
       <accordion-item title="{{ accordion.header }}">
-        <ng-template accordionContent> </ng-template>
+        <ng-template accordionContent>
+          <app-accordion [panels]="panels"></app-accordion
+        ></ng-template>
       </accordion-item>
     </ng-container>
   </app-accordion>

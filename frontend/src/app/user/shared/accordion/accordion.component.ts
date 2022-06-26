@@ -15,7 +15,11 @@ import {
   QueryList,
   ViewChild,
 } from '@angular/core';
+
 import { AccordionItem } from './directives/accordion-item.directive';
+import { AccordionDirective } from './directives/accordion.directive';
+import { PanelItem } from './panel/panel';
+import { Panel } from './panel/panel.interface';
 
 @Component({
   selector: 'app-accordion',
@@ -39,7 +43,12 @@ import { AccordionItem } from './directives/accordion-item.directive';
     ]),
   ],
 })
-export class AccordionComponent {
+export class AccordionComponent implements OnInit {
+  @Input() panels: PanelItem[] = [];
+  @ViewChild(AccordionDirective, { static: true })
+  panelHost!: AccordionDirective;
+  panelIndex = -1;
+
   // @ViewChild('accordion_item') accordion_item: ElementRef;
   expanded = new Set<number>();
   /**
@@ -50,6 +59,9 @@ export class AccordionComponent {
 
   @ContentChildren(AccordionItem) items: QueryList<AccordionItem>;
 
+  ngOnInit(): void {
+    this.loadComponent();
+  }
   /**
    * Make the toggle function available to be called from
    * outside.
@@ -70,4 +82,17 @@ export class AccordionComponent {
       this.expanded.add(index);
     }
   };
+
+  loadComponent() {
+    this.panelIndex = (this.panelIndex + 1) % this.panels.length;
+    const panelItem = this.panels[this.panelIndex];
+    const viewContainerRef = this.panelHost.viewContainerRef;
+    viewContainerRef.clear();
+    if (panelItem) {
+      const componentRef = viewContainerRef.createComponent<Panel>(
+        panelItem.component
+      );
+      componentRef.instance.data = panelItem.data;
+    }
+  }
 }

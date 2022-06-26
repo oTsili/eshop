@@ -7,6 +7,8 @@ import { AccordionContent } from './directives/accordion-content.directive';
 import { AccordionTitle } from './directives/accordion-title.directive';
 import { AccordionHeader } from './directives/accordion-header.directive';
 import { ClickAccordionHeader } from './directives/click-accordion-header.directive';
+import { AccordionDirective } from './directives/accordion.directive';
+import { PanelComponent } from './panel/panel.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { ClickAccordionHeader } from './directives/click-accordion-header.direct
     AccordionTitle,
     AccordionHeader,
     ClickAccordionHeader,
+    AccordionDirective,
+    PanelComponent,
   ],
   imports: [CommonModule],
   exports: [
@@ -25,6 +29,8 @@ import { ClickAccordionHeader } from './directives/click-accordion-header.direct
     AccordionTitle,
     AccordionHeader,
     ClickAccordionHeader,
+    // AccordionDirective,
+    // PanelComponent,
   ],
 })
 export class AccordionModule {}
