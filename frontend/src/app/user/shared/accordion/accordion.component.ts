@@ -9,9 +9,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
+  ElementRef,
   Input,
   OnInit,
   QueryList,
+  ViewChild,
 } from '@angular/core';
 import { AccordionItem } from './directives/accordion-item.directive';
 
@@ -38,6 +40,7 @@ import { AccordionItem } from './directives/accordion-item.directive';
   ],
 })
 export class AccordionComponent {
+  // @ViewChild('accordion_item') accordion_item: ElementRef;
   expanded = new Set<number>();
   /**
    * Decides if the single item will be open at once or not.

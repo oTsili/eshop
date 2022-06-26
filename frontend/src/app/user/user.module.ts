@@ -13,6 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SubNavComponent } from './header/sub-nav/sub-nav.component';
 import { UserAppComponent } from './user-app/user-app.component';
 import { SearchComponent } from './search/search.component';
+import { SideBarModule } from './shared/side-bar/side-bar.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SearchComponent } from './search/search.component';
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
+    SideBarModule,
   ],
   exports: [
     SharedModule,
@@ -39,6 +41,7 @@ import { SearchComponent } from './search/search.component';
     HomeComponent,
     SubNavComponent,
     SearchComponent,
+    SideBarModule,
   ],
 })
 export class UserModule {}

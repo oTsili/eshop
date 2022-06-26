@@ -16,7 +16,6 @@ import { InputComponent } from './input/input.component';
 import { CustomDragCarouselComponent } from './custom-drag-carousel/custom-drag-carousel.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { DragSlideComponent } from './custom-drag-carousel/drag-slide/drag-slide.component';
-import { SideBarComponent } from './side-bar/side-bar.component';
 import { AccordionModule } from './accordion/accordion.module';
 
 @NgModule({
@@ -30,7 +29,6 @@ import { AccordionModule } from './accordion/accordion.module';
     CustomDragCarouselComponent,
     SpinnerComponent,
     DragSlideComponent,
-    SideBarComponent,
   ],
   imports: [
     // NgbdCarouselPauseModule,
@@ -40,7 +38,6 @@ import { AccordionModule } from './accordion/accordion.module';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    AccordionModule,
   ],
   exports: [
     // NgbdCarouselPauseModule,
@@ -56,7 +53,6 @@ import { AccordionModule } from './accordion/accordion.module';
     FlexLayoutModule,
     CustomDragCarouselComponent,
     SpinnerComponent,
-    SideBarComponent,
   ],
 })
 export class SharedModule {}

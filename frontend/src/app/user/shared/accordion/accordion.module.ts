@@ -6,6 +6,7 @@ import { AccordionItem } from './directives/accordion-item.directive';
 import { AccordionContent } from './directives/accordion-content.directive';
 import { AccordionTitle } from './directives/accordion-title.directive';
 import { AccordionHeader } from './directives/accordion-header.directive';
+import { ClickAccordionHeader } from './directives/click-accordion-header.directive';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { AccordionHeader } from './directives/accordion-header.directive';
     AccordionContent,
     AccordionTitle,
     AccordionHeader,
+    ClickAccordionHeader,
   ],
   imports: [CommonModule],
   exports: [
@@ -22,6 +24,7 @@ import { AccordionHeader } from './directives/accordion-header.directive';
     AccordionContent,
     AccordionTitle,
     AccordionHeader,
+    ClickAccordionHeader,
   ],
 })
 export class AccordionModule {}

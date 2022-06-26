@@ -4,6 +4,7 @@
     class="accordion__item"
     [class.disabled]="item.disabled"
     [class.active]="expanded.has(i)"
+    clickAccordionHeader
   >
     <ng-container
       [ngTemplateOutlet]="item?.customHeader?.templateRef || defaultHeader"
@@ -13,10 +14,11 @@
         toggle: getToggleState(i)
       }"
     ></ng-container>
+
     <div
       class="accordion__content"
       [class.expanded]="expanded.has(i)"
-      [@contentExpansion]="expanded.has(i) ? 'expanded' : 'collapsed'"
+      [@contentExpansion]="expanded.has(i) ? 'collapsed' : 'expanded'"
     >
       <ng-container
         *ngTemplateOutlet="item?.content?.templateRef!"

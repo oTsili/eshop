@@ -5,8 +5,8 @@
 .header-wrapper {
   position: relative;
   text-align: center;
-  padding-bottom: 1.5rem;
-  margin-bottom: 1rem;
+  padding: 1.5rem 0;
+  margin: 1rem 0;
 }
 
 .header {
