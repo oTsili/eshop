@@ -7,10 +7,11 @@
   width: 100%;
 }
 
-.accordion {
-  /* border: 1px solid hsl(0, 0%, 80%); */
-  /* border-radius: var(--accordion-border-radius); */
-}
+/* .accordion { */
+/* border: 1px solid hsl(0, 0%, 80%); */
+/* border-radius: var(--accordion-border-radius); */
+/* } */
+
 .accordion__item:first-child .accordion__header {
   border-radius: var(--accordion-border-radius) var(--accordion-border-radius) 0
     0;

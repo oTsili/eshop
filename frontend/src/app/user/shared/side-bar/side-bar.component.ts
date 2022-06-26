@@ -21,6 +21,9 @@ export class SideBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.sidebar = this.dynamicDatabase.sidebar;
+    /**
+     * get the accordion panels
+     */
     this.panels = this.accordionService.getPanels();
   }
 }

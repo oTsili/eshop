@@ -1,4 +1,10 @@
-import { Directive, ViewContainerRef } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Input,
+  Renderer2,
+  ViewContainerRef,
+} from '@angular/core';
 
 @Directive({
   selector: '[panelHost]',

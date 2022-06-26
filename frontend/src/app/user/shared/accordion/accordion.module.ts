@@ -29,8 +29,6 @@ import { PanelComponent } from './panel/panel.component';
     AccordionTitle,
     AccordionHeader,
     ClickAccordionHeader,
-    // AccordionDirective,
-    // PanelComponent,
   ],
 })
 export class AccordionModule {}

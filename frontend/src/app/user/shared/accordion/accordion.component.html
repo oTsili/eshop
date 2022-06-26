@@ -21,7 +21,10 @@
       [@contentExpansion]="expanded.has(i) ? 'collapsed' : 'expanded'"
     >
       <ng-container
-        *ngTemplateOutlet="item?.content?.templateRef!"
+        *ngTemplateOutlet="
+          item?.content?.templateRef!;
+          context: { $implicit: item, index: i }
+        "
       ></ng-container>
     </div>
   </div>
@@ -53,4 +56,4 @@
     <p class="accordion__title">{{ item?.title }}</p>
   </ng-template>
 </ng-template>
-<ng-template panelHost></ng-template>
+<ng-template panelHost let-item let-index="index"> </ng-template>

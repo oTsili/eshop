@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ColorSelectorComponent } from '../side-bar/color-selector/color-selector.component';
 import { PanelItem } from './panel/panel';
 import { PanelComponent } from './panel/panel.component';
 
@@ -6,9 +7,14 @@ import { PanelComponent } from './panel/panel.component';
   providedIn: 'root',
 })
 export class AccordionService {
+  index = -1;
+  /**
+   * A function to create an array of componnents
+   * @returns the array of components, that will be  used and rendered by accordion componnet
+   */
   getPanels() {
     return [
-      new PanelItem(PanelComponent, {
+      new PanelItem(ColorSelectorComponent, {
         header: 'Bombasto',
         comp: 'Brave as they come',
       }),
@@ -25,5 +31,13 @@ export class AccordionService {
         comp: 'Apply today',
       }),
     ];
+  }
+
+  increaseIndex() {
+    this.index = this.index + 1;
+  }
+
+  getIndex() {
+    return this.index;
   }
 }

@@ -15,6 +15,7 @@ import {
   QueryList,
   ViewChild,
 } from '@angular/core';
+import { AccordionService } from './accordion.service';
 
 import { AccordionItem } from './directives/accordion-item.directive';
 import { AccordionDirective } from './directives/accordion.directive';
@@ -47,6 +48,7 @@ export class AccordionComponent implements OnInit {
   @Input() panels: PanelItem[] = [];
   @ViewChild(AccordionDirective, { static: true })
   panelHost!: AccordionDirective;
+  panelIdx = 0;
   panelIndex = -1;
 
   // @ViewChild('accordion_item') accordion_item: ElementRef;
@@ -58,6 +60,8 @@ export class AccordionComponent implements OnInit {
   @Input() collapsing = true;
 
   @ContentChildren(AccordionItem) items: QueryList<AccordionItem>;
+
+  constructor(private accordionService: AccordionService) {}
 
   ngOnInit(): void {
     this.loadComponent();
@@ -84,14 +88,20 @@ export class AccordionComponent implements OnInit {
   };
 
   loadComponent() {
-    this.panelIndex = (this.panelIndex + 1) % this.panels.length;
+    // this.panelIndex = (this.panelIndex + 1) % this.panels.length;
+    // this.panelIndex = this.index;
+    this.panelIndex = this.accordionService.getIndex();
+    this.accordionService.increaseIndex();
+
     const panelItem = this.panels[this.panelIndex];
     const viewContainerRef = this.panelHost.viewContainerRef;
+
     viewContainerRef.clear();
     if (panelItem) {
       const componentRef = viewContainerRef.createComponent<Panel>(
         panelItem.component
       );
+
       componentRef.instance.data = panelItem.data;
     }
   }
