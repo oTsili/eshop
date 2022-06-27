@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-grid-boxes',
@@ -6,6 +6,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./grid-boxes.component.css'],
 })
 export class GridBoxesComponent implements OnInit {
+  /**
+   * updates the number of colors, the array of Cols and
+   * array of Rows, to be used in the grid of elements,
+   * when window is resized
+   */
+  @HostListener('window:resize', ['$event'])
+  updateRowsCols() {
+    // get the sidebar offset(px), convert to rem(*0.1), divide with
+    // the box width plus the margin (3rem + .6rem + .6rem = 4.2rem)
+    this.numberOfCols = Math.floor(
+      (this.elementRef.nativeElement.offsetWidth * 0.1) / 4.2
+    );
+    this.arrOfCols = Array(this.numberOfCols)
+      .fill(1)
+      .map((x, i) => i + 1);
+
+    this.arrOfRows = Array(
+      Math.ceil(this.elementsArr.length / this.numberOfCols)
+    )
+      .fill(1)
+      .map((x, i) => i + 1);
+  }
+
   elementsArr = [
     { text: '36' },
     { text: '37' },
@@ -14,15 +37,13 @@ export class GridBoxesComponent implements OnInit {
     { text: '40' },
   ];
 
-  numberOfCols = 3;
-  arrOfCols = Array(this.numberOfCols)
-    .fill(1)
-    .map((x, i) => i + 1);
+  numberOfCols: number;
+  arrOfCols: number[];
+  arrOfRows: number[];
 
-  arrOfRows = Array(Math.ceil(this.elementsArr.length / this.numberOfCols))
-    .fill(1)
-    .map((x, i) => i + 1);
-  constructor() {}
+  constructor(private elementRef: ElementRef) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.updateRowsCols();
+  }
 }

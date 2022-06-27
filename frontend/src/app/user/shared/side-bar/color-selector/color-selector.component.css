@@ -1,6 +1,7 @@
 .col {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .row {
@@ -8,12 +9,13 @@
   align-content: center;
   display: flex;
   flex-direction: row;
+  width: 100%;
 }
 
 .color {
-  margin: 5%;
-  height: 3rem;
-  width: 3rem;
+  margin: 0.6rem;
+  min-height: 3rem;
+  min-width: 3rem;
   border: 0.1rem solid;
 }
 

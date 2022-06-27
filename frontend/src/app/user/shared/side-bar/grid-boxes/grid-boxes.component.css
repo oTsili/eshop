@@ -12,8 +12,8 @@
 
 .element {
   margin: 5%;
-  height: 3rem;
-  width: 3rem;
+  min-height: 3rem;
+  min-width: 3rem;
   border: 0.1rem solid;
   display: flex;
   justify-content: center;
