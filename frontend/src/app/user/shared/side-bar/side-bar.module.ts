@@ -7,10 +7,25 @@ import { ColorSelectorComponent } from './color-selector/color-selector.componen
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ContentListComponent } from './content-list/content-list.component';
 import { GridBoxesComponent } from './grid-boxes/grid-boxes.component';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
-  declarations: [SideBarComponent, ColorSelectorComponent, ContentListComponent, GridBoxesComponent],
-  imports: [CommonModule, AccordionModule, FlexLayoutModule],
+  declarations: [
+    SideBarComponent,
+    ColorSelectorComponent,
+    ContentListComponent,
+    GridBoxesComponent,
+  ],
+  imports: [
+    CommonModule,
+    AccordionModule,
+    FlexLayoutModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+  ],
   exports: [SideBarComponent],
 })
 export class SideBarModule {}

@@ -5,7 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AngularMaterialModule } from 'src/app/user/modules/angular-material.module';
 import { NgbdCarouselPauseModule } from 'src/app/user/modules/carousel-pause.module';
-import { DragScrollModule } from 'ngx-drag-scroll';
+// import { DragScrollModule } from 'ngx-drag-scroll';
 
 // import { ClickDragCarouselComponent } from './NOT-USED-click-drag-carousel/click-drag-carousel.component';
 // import { ActivateDirective } from './NOT-USED-click-drag-carousel/activate.directive';
@@ -34,7 +34,7 @@ import { AccordionModule } from './accordion/accordion.module';
     // NgbdCarouselPauseModule,
     CommonModule,
     AngularMaterialModule,
-    DragScrollModule,
+    // DragScrollModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
@@ -44,7 +44,7 @@ import { AccordionModule } from './accordion/accordion.module';
     // ClickDragCarouselComponent,
     // ActivateDirective,
     AngularMaterialModule,
-    DragScrollModule,
+    // DragScrollModule,
     AccordionModule,
     ConceptSentenceComponent,
     CustomCarouselComponent,

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ColorSelectorComponent } from '../side-bar/color-selector/color-selector.component';
 import { ContentListComponent } from '../side-bar/content-list/content-list.component';
+import { DoubleSliderComponent } from '../side-bar/double-slider/double-slider.component';
 import { GridBoxesComponent } from '../side-bar/grid-boxes/grid-boxes.component';
 import { PanelItem } from './panel/panel';
 import { PanelComponent } from './panel/panel.component';
@@ -17,20 +18,20 @@ export class AccordionService {
   getPanels() {
     return [
       new PanelItem(ColorSelectorComponent, {
-        header: 'Bombasto',
-        comp: 'Brave as they come',
+        // header: 'Bombasto',
+        // comp: 'Brave as they come',
       }),
       new PanelItem(ContentListComponent, {
-        header: 'Dr IQ',
-        comp: 'Smart as they come',
+        // header: 'Dr IQ',
+        // comp: 'Smart as they come',
       }),
       new PanelItem(GridBoxesComponent, {
-        header: 'Hiring for several positions',
-        comp: 'Submit your resume today!',
+        // header: 'Hiring for several positions',
+        // comp: 'Submit your resume today!',
       }),
-      new PanelItem(PanelComponent, {
-        header: 'Openings in all departments',
-        comp: 'Apply today',
+      new PanelItem(DoubleSliderComponent, {
+        // header: 'Openings in all departments',
+        // comp: 'Apply today',
       }),
     ];
   }
