@@ -9,5 +9,5 @@
     placeholder="{{ inputElement.placeholder }}"
   />
 
-  <mat-error *ngIf="this.control.invalid">{{ getErrorMessage() }} </mat-error>
+  <mat-error *ngIf="control.invalid">{{ getErrorMessage() }} </mat-error>
 </mat-form-field>

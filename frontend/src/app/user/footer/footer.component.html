@@ -86,9 +86,7 @@
             #emailForm
           >
             <app-input
-              [control]="
-                convertToFormControl(newsLetterForm.get('emailControl'))
-              "
+              [formnControl]="newsLetterForm.get('emailControl')"
               [inputElement]="emailElement"
             ></app-input>
             <div class="button">
@@ -100,6 +98,7 @@
                 Register
               </button>
             </div>
+            
           </form>
         </div>
       </div>

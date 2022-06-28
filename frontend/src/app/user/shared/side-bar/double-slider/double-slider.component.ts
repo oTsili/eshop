@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-double-slider',
@@ -8,6 +9,11 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 export class DoubleSliderComponent implements OnInit {
   @ViewChild('fromSlider', { static: true }) fromSlider: ElementRef;
   @ViewChild('toSlider', { static: true }) toSlider: ElementRef;
+  priceElement = {
+    label: 'papa',
+    type: 'number',
+    placeholder: 'paap',
+  };
   constructor() {}
 
   ngOnInit(): void {
@@ -21,6 +27,20 @@ export class DoubleSliderComponent implements OnInit {
     this.setToggleAccessible(this.toSlider.nativeElement);
   }
 
+  priceForm = new FormGroup({
+    priceControl: new FormControl('', {
+      // validators: [Validators.numbe],
+    }),
+  });
+
+  onRegister(form: FormGroup) {
+    console.log(this.priceForm);
+    if (form.invalid) {
+      console.log('form invalid');
+      return;
+    }
+    console.log(form);
+  }
   controlFromInput(
     fromSlider: HTMLInputElement,
     fromInput: HTMLInputElement,

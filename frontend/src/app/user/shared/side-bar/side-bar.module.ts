@@ -10,6 +10,9 @@ import { GridBoxesComponent } from './grid-boxes/grid-boxes.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { TestComponent } from './test/test.component';
+import { MatInputModule } from '@angular/material/input';
+import { InputModule } from '../input/input.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,7 @@ import { BrowserModule } from '@angular/platform-browser';
     ColorSelectorComponent,
     ContentListComponent,
     GridBoxesComponent,
+    TestComponent,
   ],
   imports: [
     CommonModule,
@@ -25,6 +29,8 @@ import { BrowserModule } from '@angular/platform-browser';
     FormsModule,
     BrowserAnimationsModule,
     BrowserModule,
+    MatInputModule,
+    InputModule,
   ],
   exports: [SideBarComponent],
 })

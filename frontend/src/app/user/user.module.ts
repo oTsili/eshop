@@ -9,16 +9,15 @@ import { UserRoutingModule } from './user-routing.module';
 
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { SubNavComponent } from './header/sub-nav/sub-nav.component';
 import { UserAppComponent } from './user-app/user-app.component';
 import { SearchComponent } from './search/search.component';
 import { SideBarModule } from './shared/side-bar/side-bar.module';
+import { FooterModule } from './footer/footer.module';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent,
     HomeComponent,
     SubNavComponent,
     UserAppComponent,
@@ -33,11 +32,11 @@ import { SideBarModule } from './shared/side-bar/side-bar.module';
     FormsModule,
     SharedModule,
     SideBarModule,
+    FooterModule,
   ],
   exports: [
     SharedModule,
     HeaderComponent,
-    FooterComponent,
     HomeComponent,
     SubNavComponent,
     SearchComponent,

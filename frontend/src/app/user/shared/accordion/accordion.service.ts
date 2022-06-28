@@ -3,6 +3,7 @@ import { ColorSelectorComponent } from '../side-bar/color-selector/color-selecto
 import { ContentListComponent } from '../side-bar/content-list/content-list.component';
 import { DoubleSliderComponent } from '../side-bar/double-slider/double-slider.component';
 import { GridBoxesComponent } from '../side-bar/grid-boxes/grid-boxes.component';
+import { TestComponent } from '../side-bar/test/test.component';
 import { PanelItem } from './panel/panel';
 import { PanelComponent } from './panel/panel.component';
 
@@ -30,6 +31,10 @@ export class AccordionService {
         // comp: 'Submit your resume today!',
       }),
       new PanelItem(DoubleSliderComponent, {
+        // header: 'Openings in all departments',
+        // comp: 'Apply today',
+      }),
+      new PanelItem(TestComponent, {
         // header: 'Openings in all departments',
         // comp: 'Apply today',
       }),

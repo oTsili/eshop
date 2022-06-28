@@ -1,50 +1,59 @@
 <div class="range_container">
-  <div class="sliders_control">
-    <input
-      (input)="controlFromSlider(fromSlider, toSlider, fromInput)"
-      #fromSlider
-      id="fromSlider"
-      type="range"
-      value="15"
-      min="0"
-      max="100"
-    />
-    <input
-      #toSlider
-      (input)="controlToSlider(fromSlider, toSlider, toInput)"
-      id="toSlider"
-      type="range"
-      value="75"
-      min="0"
-      max="100"
-    />
-  </div>
-  <div class="form_control">
-    <div class="form_control_container">
-      <div class="form_control_container__time">Min</div>
+  <form
+    (ngSubmit)="onRegister(priceForm)"
+    [formGroup]="priceForm"
+    #priceElementForm
+  >
+    <div class="sliders_control">
       <input
-        #fromInput
-        (input)="controlFromInput(fromSlider, fromInput, toInput, toSlider)"
-        class="form_control_container__time__input"
-        type="number"
-        id="fromInput"
+        (input)="controlFromSlider(fromSlider, toSlider, fromInput)"
+        #fromSlider
+        id="fromSlider"
+        type="range"
         value="15"
         min="0"
         max="100"
       />
-    </div>
-    <div class="form_control_container">
-      <div class="form_control_container__time">Max</div>
       <input
-        #toInput
-        (input)="controlToInput(toSlider, fromInput, toInput, toSlider)"
-        class="form_control_container__time__input"
-        type="number"
-        id="toInput"
+        #toSlider
+        (input)="controlToSlider(fromSlider, toSlider, toInput)"
+        id="toSlider"
+        type="range"
         value="75"
         min="0"
         max="100"
       />
     </div>
-  </div>
+    <div class="form_control">
+      <div class="form_control_container">
+        <mat-label class="form_control_container__time">Min</mat-label>
+        <input
+          #fromInput
+          (input)="controlFromInput(fromSlider, fromInput, toInput, toSlider)"
+          class="form_control_container__time__input"
+          type="number"
+          id="fromInput"
+          value="15"
+          min="0"
+          max="100"
+        />
+        <mat-icon matSuffix>euro_symbol</mat-icon>
+      </div>
+
+      <div class="form_control_container">
+        <mat-label class="form_control_container__time">Max</mat-label>
+        <input
+          #toInput
+          (input)="controlToInput(toSlider, fromInput, toInput, toSlider)"
+          class="form_control_container__time__input"
+          type="number"
+          id="toInput"
+          value="75"
+          min="0"
+          max="100"
+        />
+        <mat-icon matSuffix>euro_symbol</mat-icon>
+      </div>
+    </div>
+  </form>
 </div>

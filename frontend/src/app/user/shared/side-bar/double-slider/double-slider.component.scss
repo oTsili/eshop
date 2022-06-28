@@ -29,8 +29,6 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
 }
 
-
-
 input[type="range"]::-moz-range-thumb {
   -webkit-appearance: none;
   pointer-events: all;
@@ -53,7 +51,7 @@ input[type="range"]::-webkit-slider-thumb:active {
 
 input[type="number"] {
   color: #8a8383;
-  width: 5rem;
+  // width: 5rem;
   height: 3rem;
   font-size: 1.5rem;
   border: none;
@@ -78,15 +76,3 @@ input[type="range"] {
   height: 0;
   z-index: 1;
 }
-
-// #toSlider {
-//   background: linear-gradient(
-//     to right,
-//     rgb(198, 198, 198) 0%,
-//     rgb(198, 198, 198) 10%,
-//     rgb(0, 0, 0) 10%,
-//     rgb(0, 0, 0) 70%,
-//     rgb(198, 198, 198) 70%,
-//     rgb(198, 198, 198) 100%
-//   ) !important;
-// }

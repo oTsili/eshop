@@ -99,10 +99,10 @@ export class FooterComponent implements OnInit {
     }),
   });
 
-  convertToFormControl(absCtrl: AbstractControl | null): FormControl {
-    const ctrl = absCtrl as FormControl;
-    return ctrl;
-  }
+  // convertToFormControl(absCtrl: AbstractControl | null): FormControl {
+  //   const ctrl = absCtrl as FormControl;
+  //   return ctrl;
+  // }
 
   onRegister(form: FormGroup) {
     console.log(this.newsLetterForm);

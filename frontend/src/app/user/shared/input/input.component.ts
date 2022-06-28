@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 import { MyErrorStateMatcher } from '../my-error-state-matcher';
 
 @Component({
@@ -8,16 +8,19 @@ import { MyErrorStateMatcher } from '../my-error-state-matcher';
   styleUrls: ['./input.component.css'],
 })
 export class InputComponent implements OnInit {
-  @Input() control: FormControl;
+  @Input() formnControl: AbstractControl | null;
   @Input() inputElement: {
     label: string;
     type: string;
     placeholder: string;
   };
+  control: FormControl;
   constructor() {}
   matcher = new MyErrorStateMatcher();
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.control = this.convertToFormControl(this.formnControl);
+  }
 
   getErrorMessage() {
     if (this.control.hasError('required')) {
@@ -57,5 +60,10 @@ export class InputComponent implements OnInit {
     //   : this.control.hasError('pattern')
     //   ? 'Invalid format'
     //   : '';
+  }
+
+  convertToFormControl(absCtrl: AbstractControl | null): FormControl {
+    const ctrl = absCtrl as FormControl;
+    return ctrl;
   }
 }
