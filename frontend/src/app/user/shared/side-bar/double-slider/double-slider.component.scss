@@ -7,36 +7,38 @@
 
 .sliders_control {
   position: relative;
-  min-height: 50px;
+  min-height: 5rem;
 }
 
 .form_control {
   position: relative;
   display: flex;
   justify-content: space-between;
-  font-size: 24px;
+  font-size: 1.5rem;
   color: #635a5a;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   pointer-events: all;
-  width: 24px;
-  height: 24px;
+  width: 1.8rem;
+  height: 1.8rem;
   background-color: #fff;
   border-radius: 50%;
-  box-shadow: 0 0 0 1px #c6c6c6;
+  box-shadow: 0 0 0 0.1rem #c6c6c6;
   cursor: pointer;
 }
+
+
 
 input[type="range"]::-moz-range-thumb {
   -webkit-appearance: none;
   pointer-events: all;
-  width: 24px;
-  height: 24px;
+  width: 1.8rem;
+  height: 1.8rem;
   background-color: #fff;
   border-radius: 50%;
-  box-shadow: 0 0 0 1px #c6c6c6;
+  box-shadow: 0 0 0 0.1rem #c6c6c6;
   cursor: pointer;
 }
 
@@ -45,15 +47,15 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 input[type="range"]::-webkit-slider-thumb:active {
-  box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
-  -webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+  box-shadow: inset 0 0 0.3rem #635a5a, 0 0 0.9rem #635a5a;
+  -webkit-box-shadow: inset 0 0 0.3rem #635a5a, 0 0 0.9rem #635a5a;
 }
 
 input[type="number"] {
   color: #8a8383;
-  width: 50px;
-  height: 30px;
-  font-size: 20px;
+  width: 5rem;
+  height: 3rem;
+  font-size: 1.5rem;
   border: none;
 }
 
@@ -65,7 +67,7 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  height: 2px;
+  height: 0.2rem;
   width: 100%;
   position: absolute;
   background-color: #c6c6c6;
@@ -76,3 +78,15 @@ input[type="range"] {
   height: 0;
   z-index: 1;
 }
+
+// #toSlider {
+//   background: linear-gradient(
+//     to right,
+//     rgb(198, 198, 198) 0%,
+//     rgb(198, 198, 198) 10%,
+//     rgb(0, 0, 0) 10%,
+//     rgb(0, 0, 0) 70%,
+//     rgb(198, 198, 198) 70%,
+//     rgb(198, 198, 198) 100%
+//   ) !important;
+// }

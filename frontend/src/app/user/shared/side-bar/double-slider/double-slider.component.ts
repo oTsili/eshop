@@ -15,70 +15,93 @@ export class DoubleSliderComponent implements OnInit {
       this.fromSlider.nativeElement,
       this.toSlider.nativeElement,
       '#C6C6C6',
-      '#25daa5',
+      '#000000',
       this.toSlider.nativeElement
     );
-    this.setToggleAccessible(this.toSlider);
+    this.setToggleAccessible(this.toSlider.nativeElement);
   }
 
-  controlFromInput(fromSlider, fromInput, toInput, controlSlider) {
+  controlFromInput(
+    fromSlider: HTMLInputElement,
+    fromInput: HTMLInputElement,
+    toInput: HTMLInputElement,
+    controlSlider: HTMLInputElement
+  ) {
     const [from, to] = this.getParsed(fromInput, toInput);
-    this.fillSlider(fromInput, toInput, '#C6C6C6', '#25daa5', controlSlider);
+    this.fillSlider(fromInput, toInput, '#C6C6C6', '#000000', controlSlider);
     if (from > to) {
-      fromSlider.value = to;
-      fromInput.value = to;
+      fromSlider.value = to.toString();
+      fromInput.value = to.toString();
     } else {
-      fromSlider.value = from;
+      fromSlider.value = from.toString();
     }
   }
 
-  controlToInput(toSlider, fromInput, toInput, controlSlider) {
+  controlToInput(
+    toSlider: HTMLInputElement,
+    fromInput: HTMLInputElement,
+    toInput: HTMLInputElement,
+    controlSlider: HTMLInputElement
+  ) {
     const [from, to] = this.getParsed(fromInput, toInput);
-    this.fillSlider(fromInput, toInput, '#C6C6C6', '#25daa5', controlSlider);
+    this.fillSlider(fromInput, toInput, '#C6C6C6', '#000000', controlSlider);
     this.setToggleAccessible(toInput);
     if (from <= to) {
-      toSlider.value = to;
-      toInput.value = to;
+      toSlider.value = to.toString();
+      toInput.value = to.toString();
     } else {
-      toInput.value = from;
+      toInput.value = from.toString();
     }
   }
 
-  controlFromSlider(fromSlider, toSlider, fromInput) {
+  controlFromSlider(
+    fromSlider: HTMLInputElement,
+    toSlider: HTMLInputElement,
+    fromInput: HTMLInputElement
+  ) {
     const [from, to] = this.getParsed(fromSlider, toSlider);
-    console.log(from, to);
-    this.fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
+    this.fillSlider(fromSlider, toSlider, '#C6C6C6', '#000000', toSlider);
     if (from > to) {
-      fromSlider.value = to;
-      fromInput.value = to;
+      fromSlider.value = to.toString();
+      fromInput.value = to.toString();
     } else {
-      fromInput.value = from;
+      fromInput.value = from.toString();
     }
   }
 
-  controlToSlider(fromSlider, toSlider, toInput) {
+  controlToSlider(
+    fromSlider: HTMLInputElement,
+    toSlider: HTMLInputElement,
+    toInput: HTMLInputElement
+  ) {
     const [from, to] = this.getParsed(fromSlider, toSlider);
-    this.fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
+    this.fillSlider(fromSlider, toSlider, '#C6C6C6', '#000000', toSlider);
     this.setToggleAccessible(toSlider);
     if (from <= to) {
-      toSlider.value = to;
-      toInput.value = to;
+      toSlider.value = to.toString();
+      toInput.value = to.toString();
     } else {
-      toInput.value = from;
-      toSlider.value = from;
+      toInput.value = from.toString();
+      toSlider.value = from.toString();
     }
   }
 
-  getParsed(currentFrom, currentTo) {
+  getParsed(currentFrom: HTMLInputElement, currentTo: HTMLInputElement) {
     const from = parseInt(currentFrom.value, 10);
     const to = parseInt(currentTo.value, 10);
     return [from, to];
   }
 
-  fillSlider(from, to, sliderColor, rangeColor, controlSlider) {
-    const rangeDistance = to.max - to.min;
-    const fromPosition = from.value - to.min;
-    const toPosition = to.value - to.min;
+  fillSlider(
+    from: HTMLInputElement,
+    to: HTMLInputElement,
+    sliderColor: string,
+    rangeColor: string,
+    controlSlider: HTMLInputElement
+  ) {
+    const rangeDistance = parseInt(to.max) - parseInt(to.min);
+    const fromPosition = parseInt(from.value) - parseInt(to.min);
+    const toPosition = parseInt(to.value) - parseInt(to.min);
     controlSlider.style.background = `linear-gradient(
       to right,
       ${sliderColor} 0%,
@@ -89,8 +112,7 @@ export class DoubleSliderComponent implements OnInit {
       ${sliderColor} 100%)`;
   }
 
-  setToggleAccessible(currentTarget) {
-    // const toSlider = document.querySelector('#toSlider');
+  setToggleAccessible(currentTarget: HTMLInputElement) {
     if (Number(currentTarget.value) <= 0) {
       this.toSlider.nativeElement.style.zIndex = 2;
     } else {
