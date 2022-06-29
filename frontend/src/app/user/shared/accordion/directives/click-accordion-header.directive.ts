@@ -5,7 +5,9 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class ClickAccordionHeader {
   @HostListener('click', ['$event'])
-  simulateToggleBtnClickEvent(): void {
+  simulateToggleBtnClickEvent($event: MouseEvent): void {
+    $event.stopPropagation();
+
     // this.elementRef.nativeElement.children[0].children[1].focus();
     this.elementRef.nativeElement.querySelector('button').focus();
   }
