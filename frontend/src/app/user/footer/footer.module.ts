@@ -5,6 +5,7 @@ import { FooterComponent } from './footer.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [FooterComponent],
@@ -12,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     InputModule,
     MatToolbarModule,
+    MatButtonModule,
     FlexLayoutModule,
     ReactiveFormsModule,
   ],

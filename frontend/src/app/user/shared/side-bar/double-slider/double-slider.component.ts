@@ -9,11 +9,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class DoubleSliderComponent implements OnInit {
   @ViewChild('fromSlider', { static: true }) fromSlider: ElementRef;
   @ViewChild('toSlider', { static: true }) toSlider: ElementRef;
-  priceElement = {
-    label: 'papa',
-    type: 'number',
-    placeholder: 'paap',
-  };
 
   from = 15;
   to = 75;
