@@ -4,25 +4,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { SharedModule } from './shared/shared.module';
 import { UserRoutingModule } from './user-routing.module';
 
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
-import { SubNavComponent } from './header/sub-nav/sub-nav.component';
 import { UserAppComponent } from './user-app/user-app.component';
 import { SearchComponent } from './search/search.component';
 import { SideBarModule } from './shared/side-bar/side-bar.module';
 import { FooterModule } from './footer/footer.module';
+import { HeaderModule } from './header/header.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    HomeComponent,
-    SubNavComponent,
-    UserAppComponent,
-    SearchComponent,
-  ],
+  declarations: [UserAppComponent, SearchComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -30,17 +22,11 @@ import { FooterModule } from './footer/footer.module';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModule,
     SideBarModule,
     FooterModule,
+    HeaderModule,
+    HomeModule,
   ],
-  exports: [
-    SharedModule,
-    HeaderComponent,
-    HomeComponent,
-    SubNavComponent,
-    SearchComponent,
-    SideBarModule,
-  ],
+  exports: [SearchComponent, SideBarModule],
 })
 export class UserModule {}
