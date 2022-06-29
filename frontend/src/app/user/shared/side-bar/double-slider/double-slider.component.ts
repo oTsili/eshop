@@ -18,9 +18,7 @@ export class DoubleSliderComponent implements OnInit {
   from = 15;
   to = 75;
 
-  constructor() {
-    console.log(this.from);
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.fillSlider(
@@ -114,7 +112,6 @@ export class DoubleSliderComponent implements OnInit {
       ${sliderColor} ${(toPosition / rangeDistance) * 100}%, 
       ${sliderColor} 100%)`;
     }
-    console.log(background);
     controlSlider.style.background = background;
   }
 

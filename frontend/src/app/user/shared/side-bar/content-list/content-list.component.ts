@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-content-list',
@@ -6,12 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./content-list.component.css'],
 })
 export class ContentListComponent implements OnInit {
-  elementList = [
-    { text: 'ΧΑΜΗΛΟ (3-5CM)' },
-    { text: 'ΜΕΣΑΙ0 (6-9CM)' },
-    { text: 'ΨΗΛΟ (10-12CM)' },
-  ];
+  @Input() data: any;
+  elementList;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.elementList = this.data.elementList;
+  }
 }

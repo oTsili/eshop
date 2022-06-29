@@ -3,7 +3,6 @@ import { ColorSelectorComponent } from '../side-bar/color-selector/color-selecto
 import { ContentListComponent } from '../side-bar/content-list/content-list.component';
 import { DoubleSliderComponent } from '../side-bar/double-slider/double-slider.component';
 import { GridBoxesComponent } from '../side-bar/grid-boxes/grid-boxes.component';
-import { TestComponent } from '../side-bar/test/test.component';
 import { PanelItem } from './panel/panel';
 import { PanelComponent } from './panel/panel.component';
 
@@ -25,6 +24,11 @@ export class AccordionService {
       new PanelItem(ContentListComponent, {
         // header: 'Dr IQ',
         // comp: 'Smart as they come',
+        elementList: [
+          { text: 'ΧΑΜΗΛΟ (3-5CM)' },
+          { text: 'ΜΕΣΑΙ0 (6-9CM)' },
+          { text: 'ΨΗΛΟ (10-12CM)' },
+        ],
       }),
       new PanelItem(GridBoxesComponent, {
         // header: 'Hiring for several positions',
@@ -34,9 +38,29 @@ export class AccordionService {
         // header: 'Openings in all departments',
         // comp: 'Apply today',
       }),
-      new PanelItem(TestComponent, {
-        // header: 'Openings in all departments',
-        // comp: 'Apply today',
+      new PanelItem(ContentListComponent, {
+        header: 'Openings in all departments',
+
+        elementList: [
+          { text: 'Εώς 10' },
+          { text: '10 - 20' },
+          { text: '20 - 30' },
+          { text: '30 - 40' },
+          { text: '50 - 60' },
+          { text: '70 - 80' },
+          { text: '80 και άνω' },
+        ],
+      }),
+
+      new PanelItem(ContentListComponent, {
+        header: 'Openings in all departments',
+
+        elementList: [
+          { text: 'ΣΥΝΘΕΤΙΚΟ ΔΕΡΜΑ' },
+          { text: 'ΣΥΝΘΕΤΙΚΟ ΣΟΥΕΤ' },
+          { text: 'ΥΦΑΣΜΑ' },
+          { text: 'PONY SKIN' },
+        ],
       }),
     ];
   }
