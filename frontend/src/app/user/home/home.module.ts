@@ -5,6 +5,7 @@ import { ConceptSentenceModule } from '../shared/concept-sentence/concept-senten
 import { CustomCarouselModule } from '../shared/custom-carousel/custom-carousel.module';
 import { CustomDragCarouselModule } from '../shared/custom-drag-carousel/custom-drag-carousel.module';
 import { GridLinkImgsModule } from '../shared/grid-link-imgs/grid-link-imgs.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -14,6 +15,13 @@ import { GridLinkImgsModule } from '../shared/grid-link-imgs/grid-link-imgs.modu
     CustomCarouselModule,
     CustomDragCarouselModule,
     GridLinkImgsModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        pathMatch: 'full',
+        component: HomeComponent,
+      },
+    ]),
   ],
 })
 export class HomeModule {}

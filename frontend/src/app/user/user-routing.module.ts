@@ -1,34 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
-import { UserAppComponent } from './user-app/user-app.component';
+import { HomeModule } from './home/home.module';
+import { SearchModule } from './search/search.module';
+import { UserAppComponent } from './user-app.component';
 
-export const userRoutes: Routes = [
+const userRoutes: Routes = [
   {
     path: '',
     component: UserAppComponent,
     children: [
       {
         path: '',
-        component: HomeComponent,
+        pathMatch: 'full',
+        loadChildren: () =>
+          import('./home/home.module').then((m) => m.HomeModule),
       },
       {
         path: 'search',
-        component: SearchComponent,
-        children: [
-          {
-            path: ':query',
-            redirectTo: 'search/:query',
-            pathMatch: 'full',
-          },
-        ],
+        loadChildren: () =>
+          import('./search/search.module').then((m) => m.SearchModule),
       },
     ],
-  },
-  {
-    path: 'search/:query',
-    component: SearchComponent,
   },
 ];
 

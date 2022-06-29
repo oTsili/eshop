@@ -8,8 +8,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ContentListComponent } from './content-list/content-list.component';
 import { GridBoxesComponent } from './grid-boxes/grid-boxes.component';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
 import { MatInputModule } from '@angular/material/input';
 import { InputModule } from '../input/input.module';
 
@@ -25,8 +23,6 @@ import { InputModule } from '../input/input.module';
     AccordionModule,
     FlexLayoutModule,
     FormsModule,
-    BrowserAnimationsModule,
-    BrowserModule,
     MatInputModule,
     InputModule,
   ],
