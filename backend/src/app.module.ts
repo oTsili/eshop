@@ -8,6 +8,7 @@ import { CarouselSlidesModule } from './carousel-slides/carousel-slides.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { DragCarouselModule } from './drag-carousel/drag-carousel.module';
 import { GridCategoriesModule } from './grid-categories/grid-categories.module';
+import { FooterModule } from './footer/footer.module';
 
 @Module({
   // connect to the demo Database
@@ -23,6 +24,7 @@ import { GridCategoriesModule } from './grid-categories/grid-categories.module';
     NavbarModule,
     DragCarouselModule,
     GridCategoriesModule,
+    FooterModule,
   ],
   controllers: [],
   providers: [],

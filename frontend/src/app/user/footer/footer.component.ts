@@ -6,6 +6,8 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { SharedService } from '../shared/shared.service';
+import { FooterContent } from './footer.interface';
+import { FooterService } from './footer.service';
 
 @Component({
   selector: 'app-footer',
@@ -15,83 +17,27 @@ import { SharedService } from '../shared/shared.service';
 export class FooterComponent implements OnInit {
   numberOfRows = 2;
 
-  footer_content = [
-    {
-      header: 'ΤΗΛΕΦΩΝΙΚΕΣ ΠΑΡΑΓΓΕΛΙΕΣ',
-      links: [
-        {
-          text: 'Τηλεφωνικές Παραγγελίες',
-          link: '#',
-        },
-        {
-          text: '+30 2310 760 187',
-          link: 'tel:+302310760187',
-        },
-      ],
-    },
-    {
-      header: 'ΧΡΗΣΙΜΟΙ ΣΥΝΔΕΣΜΟΙ',
-      links: [
-        {
-          text: 'Η Εταιρεία',
-          link: '#',
-        },
-        {
-          text: 'Σύνδεση',
-          link: '#',
-        },
-        {
-          text: 'Ο Λογαριασμός μου',
-          link: '#',
-        },
-        {
-          text: 'Επικοινωνία',
-          link: '#',
-        },
-      ],
-    },
-    {
-      header: 'ΕΞΥΠΗΡΕΤΗΣΗ ΠΕΛΑΤΩΝ',
-      links: [
-        {
-          text: 'Η Εταιρεία',
-          link: '#',
-        },
-        {
-          text: 'Τρόποι Αποστολής/Πληρωμής',
-          link: '#',
-        },
-        {
-          text: 'Αλλαγές/Επιστροφές',
-          link: '#',
-        },
-        {
-          text: 'Όροι και Προϋποθέσεις',
-          link: '#',
-        },
-        {
-          text: 'Πολιτική Απορρήτου',
-          link: '#',
-        },
-        {
-          text: 'Μεγεθολόγιο',
-          link: '#',
-        },
-      ],
-    },
-    {
-      header: 'ΕΓΓΡΑΦΗ ΣΤΟ NEWSLETTER',
-    },
-  ];
+  footer_content: FooterContent[];
 
   emailElement = {
     label: 'Email',
     type: 'email',
     placeholder: 'Ex. pat@example.com',
   };
-  constructor(private sharedService: SharedService) {}
+  constructor(
+    private sharedService: SharedService,
+    private footerService: FooterService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getFooterContent();
+  }
+
+  getFooterContent() {
+    this.footerService.getCarouselSlides().subscribe((response) => {
+      this.footer_content = response.footer;
+    });
+  }
 
   newsLetterForm = new FormGroup({
     emailControl: new FormControl('', {
