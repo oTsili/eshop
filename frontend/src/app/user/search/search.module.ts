@@ -4,6 +4,7 @@ import { SearchComponent } from './search.component';
 import { SideBarModule } from '../shared/side-bar/side-bar.module';
 import { SearchRoutingModule } from './search-routing.module';
 import { RouterModule } from '@angular/router';
+import { ProductsModule } from '../shared/products/products.module';
 
 @NgModule({
   declarations: [SearchComponent],
@@ -11,6 +12,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     SideBarModule,
     SearchRoutingModule,
+    ProductsModule,
     RouterModule.forChild([
       {
         path: '',

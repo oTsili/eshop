@@ -1,4 +1,10 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-grid-boxes',
@@ -18,15 +24,13 @@ export class GridBoxesComponent implements OnInit {
     this.numberOfCols = Math.floor(
       (this.elementRef.nativeElement.offsetWidth * 0.1) / 4.2
     );
-    this.arrOfCols = Array(this.numberOfCols)
-      .fill(1)
-      .map((x, i) => i + 1);
+    this.arrOfCols = Array(this.numberOfCols).fill(1);
+    // .map((x, i) => i + 1);
 
     this.arrOfRows = Array(
       Math.ceil(this.elementsArr.length / this.numberOfCols)
-    )
-      .fill(1)
-      .map((x, i) => i + 1);
+    ).fill(1);
+    // .map((x, i) => i + 1);
   }
 
   elementsArr = [

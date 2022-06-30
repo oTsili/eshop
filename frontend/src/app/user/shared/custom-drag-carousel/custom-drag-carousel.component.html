@@ -28,16 +28,13 @@
     <div class="slides">
       <div #mainSlide class="wrapper" *ngFor="let product of products">
         <div class="slide main-slide">
-          <app-drag-slide
-            [product]="product"
-            [source]="product.src"
-          ></app-drag-slide>
+          <app-product [product]="product" [source]="product.src"></app-product>
         </div>
         <div class="slide hover-slide">
-          <app-drag-slide
+          <app-product
             [product]="product"
             [source]="product.altSrc"
-          ></app-drag-slide>
+          ></app-product>
         </div>
       </div>
     </div>

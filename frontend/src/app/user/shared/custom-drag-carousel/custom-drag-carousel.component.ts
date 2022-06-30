@@ -54,7 +54,7 @@ export class CustomDragCarouselComponent implements OnInit {
     this.customCarouselSubscription = this.customDragCarouselService
       .getCarouselSlides()
       .subscribe((response) => {
-        this.products = response.dragCarousel;
+        this.products = response.products_with_sales;
         this.isLoading = false;
       });
   }

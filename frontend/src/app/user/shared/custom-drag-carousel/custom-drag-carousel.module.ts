@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomDragCarouselComponent } from './custom-drag-carousel.component';
-import { DragSlideComponent } from './drag-slide/drag-slide.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SpinnerModule } from '../spinner/spinner.module';
+import { ProductModule } from '../products/product/product.module';
 
 @NgModule({
-  declarations: [CustomDragCarouselComponent, DragSlideComponent],
-  imports: [CommonModule, FlexLayoutModule, SpinnerModule],
+  declarations: [CustomDragCarouselComponent],
+  imports: [CommonModule, FlexLayoutModule, SpinnerModule, ProductModule],
   exports: [CustomDragCarouselComponent],
 })
 export class CustomDragCarouselModule {}

@@ -20,4 +20,10 @@ export class ProductsController {
     const products = await this.productService.findAll();
     return response.status(HttpStatus.OK).json({ products });
   }
+
+  @Get('sales')
+  async fetchSales(@Res() response) {
+    const products_with_sales = await this.productService.findSales();
+    return response.status(HttpStatus.OK).json({ products_with_sales });
+  }
 }

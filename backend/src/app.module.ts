@@ -6,7 +6,6 @@ import { join } from 'path';
 import { ProductsModule } from './products/products.module';
 import { CarouselSlidesModule } from './carousel-slides/carousel-slides.module';
 import { NavbarModule } from './navbar/navbar.module';
-import { DragCarouselModule } from './drag-carousel/drag-carousel.module';
 import { GridCategoriesModule } from './grid-categories/grid-categories.module';
 import { FooterModule } from './footer/footer.module';
 
@@ -22,7 +21,6 @@ import { FooterModule } from './footer/footer.module';
     ProductsModule,
     CarouselSlidesModule,
     NavbarModule,
-    DragCarouselModule,
     GridCategoriesModule,
     FooterModule,
   ],

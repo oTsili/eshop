@@ -1,10 +1,9 @@
-export class CreateProductDto {
+export interface Product {
   src: string;
   altSrc: string;
   name: string;
   description: string;
   price: string;
-  in_sales: string;
-  sales: string;
   special_price: string;
+  sales: string;
 }

@@ -19,13 +19,13 @@ export class ColorSelectorComponent implements OnInit {
     this.numberOfCols = Math.floor(
       (this.elementRef.nativeElement.offsetWidth * 0.1) / 4.2
     );
-    this.arrOfCols = Array(this.numberOfCols)
-      .fill(1)
-      .map((x, i) => i + 1);
+    this.arrOfCols = Array(this.numberOfCols).fill(1);
+    // .map((x, i) => i + 1);
 
-    this.arrOfRows = Array(Math.ceil(this.colorsArr.length / this.numberOfCols))
-      .fill(1)
-      .map((x, i) => i + 1);
+    this.arrOfRows = Array(
+      Math.ceil(this.colorsArr.length / this.numberOfCols)
+    ).fill(1);
+    // .map((x, i) => i + 1);
   }
 
   colorsArr = [

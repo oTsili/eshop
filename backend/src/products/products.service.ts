@@ -18,4 +18,8 @@ export class ProductsService {
   async findAll(): Promise<Product[]> {
     return this.productModel.find().exec();
   }
+
+  async findSales(): Promise<Product[]> {
+    return this.productModel.find({ in_sales: true }).exec();
+  }
 }
