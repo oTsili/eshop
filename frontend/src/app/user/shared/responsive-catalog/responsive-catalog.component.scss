@@ -1,0 +1,30 @@
+.products {
+  cursor: move;
+  // display: grid;
+  /* position: absolute; */
+  user-select: none;
+  // display: flex;
+  // flex-direction: row;
+  width: 26.5rem;
+  height: auto !important;
+}
+
+.wrapper {
+  position: relative;
+  margin: 5rem 3rem 3rem 5rem;
+  height: 100%;
+  width: 100%;
+  transition: scrollLeft 0.5s ease-in-out;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  /* justify-content: center; */
+  align-content: center;
+  display: flex;
+  flex-direction: row;
+}

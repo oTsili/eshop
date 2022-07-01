@@ -29,9 +29,6 @@ export class ProductComponent implements AfterViewInit {
 
   constructor(private elementRef: ElementRef) {}
 
-  // ngOnInit(): void {
-  //   // this.elementInitialize.emit(this.elementRef.nativeElement.offsetWidth);
-  // }
   ngAfterViewInit(): void {
     this.elementInitialize.emit(
       this.elementRef.nativeElement.querySelector('.element').offsetWidth

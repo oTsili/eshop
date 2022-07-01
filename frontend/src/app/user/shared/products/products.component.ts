@@ -2,15 +2,11 @@ import {
   Component,
   ElementRef,
   HostListener,
-  OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
-  ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from '../custom-drag-carousel/custom-drag-carousel.interfaces';
-import { SharedService } from '../shared.service';
 import { ProductsService } from './products.service';
 
 @Component({

@@ -1,0 +1,37 @@
+<div class="items">
+  <ng-container *ngIf="arrOfRows">
+    <div class="col" *ngFor="let row of arrOfRows; let i = index">
+      <div class="row">
+        <ng-container *ngFor="let col of arrOfCols; let j = index">
+          <!--  -->
+          <div class="wrapper" *ngIf="i === 0 && items[j]">
+            <app-item
+              (elementInitialize)="updateItemWidth($event)"
+              [item]="items[j]"
+              [source]="items[j].src"
+            ></app-item>
+          </div>
+          <!--  -->
+          <div class="wrapper" *ngIf="i === 1 && items[arrOfCols.length + j]">
+            <app-item
+              (elementInitialize)="updateItemWidth($event)"
+              [item]="items[j]"
+              [source]="items[j].src"
+            ></app-item>
+          </div>
+          <!--  -->
+          <div
+            class="wrapper"
+            *ngIf="i !== 0 && i !== 1 && items[i * arrOfCols.length + j]"
+          >
+            <app-item
+              (elementInitialize)="updateItemWidth($event)"
+              [item]="items[j]"
+              [source]="items[j].src"
+            ></app-item>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+</div>

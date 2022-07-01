@@ -4,7 +4,7 @@
       <div class="row">
         <ng-container *ngFor="let col of arrOfCols; let j = index">
           <!--  -->
-          <div #mainSlide class="wrapper" *ngIf="i === 0 && products[j]">
+          <div class="wrapper" *ngIf="i === 0 && products[j]">
             <div class="product main-product">
               <app-product
                 (elementInitialize)="updateProductWidth($event)"
@@ -22,7 +22,6 @@
 
           <!--  -->
           <div
-            #mainSlide
             *ngIf="i === 1 && products[arrOfCols.length + j]"
             class="wrapper"
           >
@@ -42,7 +41,6 @@
           </div>
           <!--  -->
           <div
-            #mainSlide
             *ngIf="i !== 0 && i !== 1 && products[i * arrOfCols.length + j]"
             class="wrapper"
           >
