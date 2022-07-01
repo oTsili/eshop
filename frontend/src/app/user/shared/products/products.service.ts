@@ -10,7 +10,7 @@ const BACKEND_URL = environment.BASE_URL + 'products';
 export class ProductsService {
   constructor(private http: HttpClient) {}
 
-  getCarouselSlides() {
+  getProducts() {
     return this.http.get<any>(`${BACKEND_URL}`, {
       withCredentials: true,
     });

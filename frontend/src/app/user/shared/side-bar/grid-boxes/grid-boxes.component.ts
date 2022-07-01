@@ -12,6 +12,12 @@ import {
   styleUrls: ['./grid-boxes.component.css'],
 })
 export class GridBoxesComponent implements OnInit {
+  numberOfCols: number;
+  arrOfCols: number[];
+  arrOfRows: number[];
+
+  constructor(private elementRef: ElementRef) {}
+
   /**
    * updates the number of colors, the array of Cols and
    * array of Rows, to be used in the grid of elements,
@@ -40,12 +46,6 @@ export class GridBoxesComponent implements OnInit {
     { text: '39' },
     { text: '40' },
   ];
-
-  numberOfCols: number;
-  arrOfCols: number[];
-  arrOfRows: number[];
-
-  constructor(private elementRef: ElementRef) {}
 
   ngOnInit(): void {
     this.updateRowsCols();

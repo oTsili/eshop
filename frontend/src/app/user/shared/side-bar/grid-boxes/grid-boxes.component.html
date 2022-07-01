@@ -1,11 +1,10 @@
-<div #container class="container">
+<div class="container">
   <div class="col" *ngFor="let row of arrOfRows; let i = index">
     <div class="row">
       <ng-container *ngFor="let col of arrOfCols; let j = index">
         <div class="element" *ngIf="i === 0 && elementsArr[j]">
           <a href="#">{{ elementsArr[j].text }}</a>
         </div>
-
         <div
           class="element"
           *ngIf="i === 1 && elementsArr[arrOfCols.length + j]"

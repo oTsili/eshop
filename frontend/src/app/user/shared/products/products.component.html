@@ -1,10 +1,68 @@
 <div class="products">
-  <div #mainSlide class="wrapper" *ngFor="let product of products">
-    <div class="slide main-slide">
-      <app-product [product]="product" [source]="product.src"></app-product>
+  <ng-container *ngIf="arrOfRows">
+    <div class="col" *ngFor="let row of arrOfRows; let i = index">
+      <div class="row">
+        <ng-container *ngFor="let col of arrOfCols; let j = index">
+          <!--  -->
+          <div #mainSlide class="wrapper" *ngIf="i === 0 && products[j]">
+            <div class="product main-product">
+              <app-product
+                (elementInitialize)="updateProductWidth($event)"
+                [product]="products[j]"
+                [source]="products[j].src"
+              ></app-product>
+            </div>
+            <div class="product hover-product">
+              <app-product
+                [product]="products[j]"
+                [source]="products[j].altSrc"
+              ></app-product>
+            </div>
+          </div>
+
+          <!--  -->
+          <div
+            #mainSlide
+            *ngIf="i === 1 && products[arrOfCols.length + j]"
+            class="wrapper"
+          >
+            <div class="product main-product">
+              <app-product
+                (elementInitialize)="updateProductWidth($event)"
+                [product]="products[arrOfCols.length + j]"
+                [source]="products[arrOfCols.length + j].src"
+              ></app-product>
+            </div>
+            <div class="product hover-product">
+              <app-product
+                [product]="products[arrOfCols.length + j]"
+                [source]="products[arrOfCols.length + j].altSrc"
+              ></app-product>
+            </div>
+          </div>
+          <!--  -->
+          <div
+            #mainSlide
+            *ngIf="i !== 0 && i !== 1 && products[i * arrOfCols.length + j]"
+            class="wrapper"
+          >
+            <div class="product main-product">
+              <app-product
+                (elementInitialize)="updateProductWidth($event)"
+                [product]="products[i * arrOfCols.length + j]"
+                [source]="products[i * arrOfCols.length + j].src"
+              ></app-product>
+            </div>
+            <div class="product hover-product">
+              <app-product
+                [product]="products[i * arrOfCols.length + j]"
+                [source]="products[i * arrOfCols.length + j].altSrc"
+              ></app-product>
+            </div>
+          </div>
+          <!--  -->
+        </ng-container>
+      </div>
     </div>
-    <div class="slide hover-slide">
-      <app-product [product]="product" [source]="product.altSrc"></app-product>
-    </div>
-  </div>
+  </ng-container>
 </div>
