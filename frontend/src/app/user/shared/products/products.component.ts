@@ -33,10 +33,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
     // the box width plus the margin (3rem + .6rem + .6rem = 4.2rem)
 
     if (this.productWidth) {
-      console.log(this.elementRef.nativeElement.offsetWidth);
-      console.log(this.productWidth);
-      this.numOfCols = Math.ceil(
-        parseInt(this.elementRef.nativeElement.offsetWidth) / this.productWidth
+      let element = this.elementRef.nativeElement.querySelector('.wrapper');
+      let marginRight = window
+        .getComputedStyle(element)
+        .getPropertyValue('margin-right');
+      let marginLeft = window
+        .getComputedStyle(element)
+        .getPropertyValue('margin-left');
+      let totalMargin = parseInt(marginLeft) + parseInt(marginRight);
+      this.numOfCols = Math.floor(
+        parseInt(this.elementRef.nativeElement.offsetWidth) /
+          (this.productWidth + totalMargin)
       );
     }
     this.arrOfCols = Array(this.numOfCols).fill(1);
@@ -44,8 +51,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.arrOfRows = Array(
       Math.ceil(this.products.length / this.numOfCols)
     ).fill(1);
-
-    console.log(this.arrOfCols, this.arrOfRows);
   }
 
   constructor(
@@ -74,6 +79,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   updateProductWidth(productWidth: number) {
     this.productWidth = productWidth;
-    // this.updateRowsCols();
+    this.updateRowsCols();
   }
 }

@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -15,18 +16,25 @@ import { Product } from './product.interface';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements AfterViewInit {
   @Input() product: Product;
   @Input() source: string;
   @Output() elementInitialize: EventEmitter<number> =
     new EventEmitter<number>();
+
   @HostListener('window:resize', ['$event'])
   emitWidth() {
     this.elementInitialize.emit(this.elementRef.nativeElement.offsetWidth);
   }
-  constructor(private elementRef: ElementRef) {
-    this.elementInitialize.emit(this.elementRef.nativeElement.offsetWidth);
-  }
 
-  ngOnInit(): void {}
+  constructor(private elementRef: ElementRef) {}
+
+  // ngOnInit(): void {
+  //   // this.elementInitialize.emit(this.elementRef.nativeElement.offsetWidth);
+  // }
+  ngAfterViewInit(): void {
+    this.elementInitialize.emit(
+      this.elementRef.nativeElement.querySelector('.element').offsetWidth
+    );
+  }
 }
