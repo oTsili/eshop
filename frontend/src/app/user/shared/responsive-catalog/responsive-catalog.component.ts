@@ -1,21 +1,31 @@
 import {
+  AfterContentInit,
   Component,
+  ContentChild,
+  ContentChildren,
   ElementRef,
   HostListener,
   Input,
   OnInit,
+  QueryList,
+  ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Item } from './container/item/item';
+import { ItemContent } from './container/item/item.directive';
+import { ResponsiveCatalogDirective } from './responsive-catalog.directive';
 
 @Component({
   selector: 'app-responsive-catalog',
   templateUrl: './responsive-catalog.component.html',
   styleUrls: ['./responsive-catalog.component.scss'],
 })
-export class ResponsiveCatalogComponent implements OnInit {
+export class ResponsiveCatalogComponent implements AfterContentInit {
   isLoading = false;
   productsSubscription: Subscription;
   @Input() items: any[];
+  @Input() itemComponents: Item[];
+  @Input() customWidth: number;
   numOfCols: number = 3;
   arrOfCols: number[];
   arrOfRows: number[];
@@ -47,10 +57,15 @@ export class ResponsiveCatalogComponent implements OnInit {
     this.arrOfRows = Array(Math.ceil(this.items.length / this.numOfCols)).fill(
       1
     );
+
+    console.log(this.arrOfCols.length, this.arrOfRows.length);
   }
   constructor(private elementRef: ElementRef) {}
 
-  ngOnInit(): void {
+  // ngOnInit(): void {
+  // }
+
+  ngAfterContentInit(): void {
     this.updateRowsCols();
   }
 

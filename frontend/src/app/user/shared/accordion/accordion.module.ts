@@ -8,7 +8,7 @@ import { AccordionTitle } from './directives/accordion-title.directive';
 import { AccordionHeader } from './directives/accordion-header.directive';
 import { ClickAccordionHeader } from './directives/click-accordion-header.directive';
 import { AccordionDirective } from './directives/accordion.directive';
-import { PanelComponent } from './panel/panel.component';
+import { PanelComponent } from './panel/panel-item.component';
 import { DoubleSliderModule } from '../side-bar/double-slider/double-slider.module';
 
 @NgModule({

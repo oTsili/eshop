@@ -3,8 +3,8 @@ import { ColorSelectorComponent } from '../side-bar/color-selector/color-selecto
 import { ContentListComponent } from '../side-bar/content-list/content-list.component';
 import { DoubleSliderComponent } from '../side-bar/double-slider/double-slider.component';
 import { GridBoxesComponent } from '../side-bar/grid-boxes/grid-boxes.component';
-import { PanelItem } from './panel/panel';
-import { PanelComponent } from './panel/panel.component';
+import { PanelItem } from './panel/panel-item';
+import { PanelComponent } from './panel/panel-item.component';
 
 @Injectable({
   providedIn: 'root',

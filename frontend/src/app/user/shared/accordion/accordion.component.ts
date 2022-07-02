@@ -19,8 +19,8 @@ import { AccordionService } from './accordion.service';
 
 import { AccordionItem } from './directives/accordion-item.directive';
 import { AccordionDirective } from './directives/accordion.directive';
-import { PanelItem } from './panel/panel';
-import { Panel } from './panel/panel.interface';
+import { PanelItem } from './panel/panel-item';
+import { Panel } from './panel/panel-item.interface';
 
 @Component({
   selector: 'app-accordion',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccordionService } from '../accordion/accordion.service';
-import { PanelItem } from '../accordion/panel/panel';
+import { PanelItem } from '../accordion/panel/panel-item';
 import { DynamicDatabase } from './dynamic-database';
 import { SideBar } from './side-bar.interface';
 
