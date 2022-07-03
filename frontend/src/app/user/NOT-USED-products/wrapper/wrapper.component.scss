@@ -1,0 +1,35 @@
+.wrapper {
+  position: relative;
+  margin: 5rem 3rem 3rem 5rem;
+  height: 100%;
+  width: 100%;
+  transition: scrollLeft 0.5s ease-in-out;
+  width: 27rem;
+}
+
+.main-product {
+  opacity: 1;
+  // visibility: visible;
+  // transition: opacity 0.5s ease-in-out, visibility 1.2s;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.hover-product {
+  opacity: 0;
+  // visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  // transition: opacity 0.5s ease-in-out, visibility 1.2s;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.main-product:hover {
+  opacity: 0;
+  // visibility: hidden;
+}
+
+.hover-product:hover {
+  opacity: 1;
+  // visibility: visible;
+}

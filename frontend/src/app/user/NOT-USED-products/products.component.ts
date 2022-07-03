@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Item } from '../shared/responsive-catalog/container/item/item';
+import { ItemClass } from '../shared/NOT-USED-responsive-catalog/container/item/item';
 import { Product } from './products.interface';
 import { ProductsService } from './products.service';
 
@@ -9,17 +9,20 @@ import { ProductsService } from './products.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
   isLoading = false;
   productsSubscription: Subscription;
   products: Product[];
-  productComponents: Item[] = [];
+  productComponents: ItemClass[] = [];
 
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
     this.getProducts();
-    this.getProductComponents();
+  }
+
+  ngOnDestroy(): void {
+    this.productsSubscription.unsubscribe();
   }
 
   getProducts() {
@@ -29,12 +32,13 @@ export class ProductsComponent implements OnInit {
       .subscribe((response) => {
         this.products = response.products;
         this.isLoading = false;
+        this.getProductComponents(this.products);
       });
   }
 
-  getProductComponents() {
-    this.isLoading = true;
-    this.productComponents = this.productsService.getProductComponents();
-    console.log(this.productComponents);
+  getProductComponents(products: Product[]) {
+    // this.isLoading = true;
+    this.productComponents =
+      this.productsService.getProductComponents(products);
   }
 }

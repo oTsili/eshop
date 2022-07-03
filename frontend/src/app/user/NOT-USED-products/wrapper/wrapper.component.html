@@ -1,0 +1,18 @@
+<!--itemIndex / numOfCols gives us the current row  -->
+<!--itemIndex / numOfCols * numOfCols gives us the current row * numOfCols ==> the sum of indexes until the current  -->
+<!--itemIndex % numOfCols gives us the current col  -->
+<div class="wrapper" *ngIf="products[itemIndex]">
+  <div class="product main-product">
+    <app-product
+      [product]="products[itemIndex]"
+      [source]="products[itemIndex].src"
+    ></app-product>
+  </div>
+  <div class="product hover-product">
+    <app-product
+      [product]="products[itemIndex]"
+      [source]="products[itemIndex].altSrc"
+    ></app-product>
+  </div>
+</div>
+<!--  -->

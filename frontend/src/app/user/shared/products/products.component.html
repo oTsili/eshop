@@ -21,7 +21,7 @@
           </div>
 
           <!--  -->
-          <div
+          <!-- <div
             *ngIf="i === 1 && products[arrOfCols.length + j]"
             class="wrapper"
           >
@@ -38,10 +38,10 @@
                 [source]="products[arrOfCols.length + j].altSrc"
               ></app-product>
             </div>
-          </div>
+          </div> -->
           <!--  -->
           <div
-            *ngIf="i !== 0 && i !== 1 && products[i * arrOfCols.length + j]"
+            *ngIf="i !== 0 && products[i * arrOfCols.length + j]"
             class="wrapper"
           >
             <div class="product main-product">

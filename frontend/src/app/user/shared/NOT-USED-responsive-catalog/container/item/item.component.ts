@@ -26,9 +26,6 @@ export class ItemComponent implements AfterViewInit {
   constructor(private elementRef: ElementRef) {}
 
   ngAfterViewInit(): void {
-    console.log(
-      this.elementRef.nativeElement.querySelector('.element').offsetWidth
-    );
     this.itemInitialize.emit(
       this.elementRef.nativeElement.querySelector('.element').offsetWidth
     );

@@ -5,6 +5,6 @@ import { Directive, ElementRef } from '@angular/core';
 })
 export class DoubleSliderDirective {
   constructor(private elementRef: ElementRef) {
-    console.log(this.elementRef);
+    // console.log(this.elementRef);
   }
 }
