@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -7,7 +8,8 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from './product/product.interface';
-import { ProductsService } from './catalog.service';
+import { CatalogService } from './catalog.service';
+import { ItemClass } from './item/item';
 
 @Component({
   selector: 'app-catalog',
@@ -22,6 +24,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
   arrOfCols: number[];
   arrOfRows: number[];
   productWidth: number;
+  items: ItemClass[] = [];
 
   @HostListener('window:resize', ['$event'])
   updateRowsCols() {
@@ -50,8 +53,9 @@ export class CatalogComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private productsService: ProductsService,
-    private elementRef: ElementRef
+    private catalogService: CatalogService,
+    private elementRef: ElementRef,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -64,12 +68,18 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   getProducts() {
     this.isLoading = true;
-    this.productsSubscription = this.productsService
+    this.productsSubscription = this.catalogService
       .getProducts()
       .subscribe((response) => {
         this.products = response.products;
+
         this.isLoading = false;
+
         this.updateRowsCols();
+
+        this.items = this.catalogService.getItems(this.products);
+
+        this.cd.detectChanges();
       });
   }
 

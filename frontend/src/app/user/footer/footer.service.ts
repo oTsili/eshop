@@ -10,7 +10,7 @@ const BACKEND_URL = environment.BASE_URL + 'footer';
 export class FooterService {
   constructor(private http: HttpClient) {}
 
-  getCarouselSlides() {
+  getLinks() {
     return this.http.get<any>(`${BACKEND_URL}`, {
       withCredentials: true,
     });

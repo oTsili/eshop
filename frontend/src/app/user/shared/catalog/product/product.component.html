@@ -1,37 +1,81 @@
-<div class="element">
-  <img class="image" src="{{ source }}" />
-  <div class="sales-text--wrapper">
-    <div class="sales-text">-{{ product.sales }}%</div>
-    <hr />
+<div class="wrapper">
+  <div class="product main-product">
+    <div class="element">
+      <img class="image" src="{{ src }}" />
+      <div class="sales-text--wrapper">
+        <div class="sales-text">-{{ product.sales }}%</div>
+        <hr />
+      </div>
+      <div class="product-details">
+        <div
+          [ngStyle.lt-md]="{ 'font-size': '1.6rem' }"
+          class="product product-name"
+        >
+          {{ product.name }}
+        </div>
+        <div
+          [ngStyle.lt-md]="{ 'font-size': '1.3rem' }"
+          class="product product-description"
+        >
+          {{ product.description }}
+        </div>
+        <div class="product product-actions">
+          <a href="#" class="icon--medium">
+            <i class="ph-heart"></i>
+          </a>
+          <a href="#" class="icon--medium">
+            <i class="ph-shopping-bag"></i>
+          </a>
+        </div>
+        <div class="product product-price--wrapper">
+          <span class="product-price product-price-old">
+            {{ product.price }}
+          </span>
+          <span class="product-price product-price-new">
+            {{ product.special_price }}
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="product-details">
-    <div
-      [ngStyle.lt-md]="{ 'font-size': '1.6rem' }"
-      class="product product-name"
-    >
-      {{ product.name }}
-    </div>
-    <div
-      [ngStyle.lt-md]="{ 'font-size': '1.3rem' }"
-      class="product product-description"
-    >
-      {{ product.description }}
-    </div>
-    <div class="product product-actions">
-      <a href="#" class="icon--medium">
-        <i class="ph-heart"></i>
-      </a>
-      <a href="#" class="icon--medium">
-        <i class="ph-shopping-bag"></i>
-      </a>
-    </div>
-    <div class="product product-price--wrapper">
-      <span class="product-price product-price-old">
-        {{ product.price }}
-      </span>
-      <span class="product-price product-price-new">
-        {{ product.special_price }}
-      </span>
+  <!--  -->
+  <div class="product hover-product">
+    <div class="element">
+      <img class="image" src="{{ altSrc }}" />
+      <div class="sales-text--wrapper">
+        <div class="sales-text">-{{ product.sales }}%</div>
+        <hr />
+      </div>
+      <div class="product-details">
+        <div
+          [ngStyle.lt-md]="{ 'font-size': '1.6rem' }"
+          class="product product-name"
+        >
+          {{ product.name }}
+        </div>
+        <div
+          [ngStyle.lt-md]="{ 'font-size': '1.3rem' }"
+          class="product product-description"
+        >
+          {{ product.description }}
+        </div>
+        <div class="product product-actions">
+          <a href="#" class="icon--medium">
+            <i class="ph-heart"></i>
+          </a>
+          <a href="#" class="icon--medium">
+            <i class="ph-shopping-bag"></i>
+          </a>
+        </div>
+        <div class="product product-price--wrapper">
+          <span class="product-price product-price-old">
+            {{ product.price }}
+          </span>
+          <span class="product-price product-price-new">
+            {{ product.special_price }}
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

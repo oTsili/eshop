@@ -34,7 +34,7 @@ export class FooterComponent implements OnInit {
   }
 
   getFooterContent() {
-    this.footerService.getCarouselSlides().subscribe((response) => {
+    this.footerService.getLinks().subscribe((response) => {
       this.footer_content = response.footer;
     });
   }
