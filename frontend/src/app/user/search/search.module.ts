@@ -5,8 +5,10 @@ import { SideBarModule } from '../shared/side-bar/side-bar.module';
 import { SearchRoutingModule } from './search-routing.module';
 import { RouterModule } from '@angular/router';
 import { ProductsModule } from '../shared/products/products.module';
-// import { ProductsModule } from '../products/products.module';
+// import { ProductsModule } from '../products/products.module'
+;
 import { ResponsiveCatalogModule } from '../shared/NOT-USED-responsive-catalog/responsive-catalog.module';
+import { CatalogModule } from '../shared/catalog/catalog.module';
 
 @NgModule({
   declarations: [SearchComponent],
@@ -16,6 +18,7 @@ import { ResponsiveCatalogModule } from '../shared/NOT-USED-responsive-catalog/r
     SearchRoutingModule,
     ProductsModule,
     ResponsiveCatalogModule,
+    CatalogModule,
     RouterModule.forChild([
       {
         path: '',

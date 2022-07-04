@@ -7,14 +7,14 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from './product/product.interface';
-import { ProductsService } from './products.service';
+import { ProductsService } from './catalog.service';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss'],
+  selector: 'app-catalog',
+  templateUrl: './catalog.component.html',
+  styleUrls: ['./catalog.component.scss'],
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class CatalogComponent implements OnInit, OnDestroy {
   isLoading = false;
   productsSubscription: Subscription;
   products: Product[];
