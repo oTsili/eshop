@@ -2,7 +2,6 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  HostListener,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -20,17 +19,19 @@ export class CatalogComponent implements OnInit, OnDestroy {
   isLoading = false;
   productsSubscription: Subscription;
   products: Product[];
-  numOfCols: number = 3;
+  numOfCols: number = 1;
   arrOfCols: number[];
   arrOfRows: number[];
   productWidth: number;
   items: ItemClass[] = [];
+  itemIndex: number = 0;
 
-  @HostListener('window:resize', ['$event'])
+  /**
+   * calculate the number of columns and rows for the catalog.
+   * reads the
+   */
   updateRowsCols() {
-    // get the sidebar offset(px), convert to rem(*0.1), divide with
-    // the box width plus the margin (3rem + .6rem + .6rem = 4.2rem)
-
+    let totalWidth: number;
     if (this.productWidth) {
       let element = this.elementRef.nativeElement.querySelector('.wrapper');
       let marginRight = window
@@ -40,9 +41,12 @@ export class CatalogComponent implements OnInit, OnDestroy {
         .getComputedStyle(element)
         .getPropertyValue('margin-left');
       let totalMargin = parseInt(marginLeft) + parseInt(marginRight);
-      this.numOfCols = Math.floor(
-        parseInt(this.elementRef.nativeElement.offsetWidth) /
-          (this.productWidth + totalMargin)
+      totalWidth = this.elementRef.nativeElement.offsetWidth + totalMargin;
+      this.numOfCols = Math.floor(totalWidth / this.productWidth);
+      console.log(
+        { totalWidth },
+        { totalMargin },
+        { productWidth: this.productWidth }
       );
     }
     this.arrOfCols = Array(this.numOfCols).fill(1);
@@ -50,6 +54,14 @@ export class CatalogComponent implements OnInit, OnDestroy {
     this.arrOfRows = Array(
       Math.ceil(this.products.length / this.numOfCols)
     ).fill(1);
+
+    console.log({
+      arCol: this.arrOfCols.length,
+      arrRow: this.arrOfRows.length,
+      cols: this.numOfCols,
+    });
+
+    // this.cd.detectChanges();
   }
 
   constructor(
@@ -60,6 +72,11 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getProducts();
+
+    this.catalogService.getElementInitializeListener().subscribe((response) => {
+      this.productWidth = response;
+      this.updateRowsCols();
+    });
   }
 
   ngOnDestroy(): void {
@@ -75,16 +92,16 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
         this.isLoading = false;
 
-        this.updateRowsCols();
+        this.items = this.catalogService.getComponents(this.products);
 
-        this.items = this.catalogService.getItems(this.products);
+        this.updateRowsCols();
 
         this.cd.detectChanges();
       });
   }
 
-  updateProductWidth(productWidth: number) {
-    this.productWidth = productWidth;
-    this.updateRowsCols();
+  updateIndex(event) {
+    this.catalogService.itemIndex = event;
+    //  this.cd.detectChanges();
   }
 }

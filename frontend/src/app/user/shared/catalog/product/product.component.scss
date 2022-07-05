@@ -1,50 +1,51 @@
+$base-width: 25rem;
+
+.wrapper {
+  position: relative;
+  margin: 3rem;
+  height: 100%;
+  transition: scrollLeft 0.5s ease-in-out;
+  width: $base-width;
+}
+
 .main-product {
   opacity: 1;
-  // visibility: visible;
-  // transition: opacity 0.5s ease-in-out, visibility 1.2s;
   transition: opacity 0.5s ease-in-out;
 }
 
 .hover-product {
   opacity: 0;
-  // visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
-  // transition: opacity 0.5s ease-in-out, visibility 1.2s;
   transition: opacity 0.5s ease-in-out;
 }
 
 .main-product:hover {
   opacity: 0;
-  // visibility: hidden;
 }
 
 .hover-product:hover {
   opacity: 1;
-  // visibility: visible;
 }
 
 .element {
-  width: 27rem;
+  width: $base-width;
 }
 
 img {
   cursor: pointer;
   height: 40rem;
-  width: 27rem;
+  width: $base-width;
 }
 
 .main-slide {
   opacity: 1;
-  // visibility: visible;
-  // transition: opacity 0.5s ease-in-out, visibility 1.2s;
   transition: opacity 0.5s ease-in-out;
 }
 
 .main-slide:hover {
   opacity: 0;
-  // visibility: hidden;
 }
 
 .sales-text--wrapper {
@@ -65,7 +66,6 @@ img {
 
 .sales-text {
   padding-left: 55%;
-  /* border-bottom: solid 5px #c8c8c8; */
   justify-self: end;
   padding: 5%;
 }
@@ -118,15 +118,12 @@ img {
 
 .hover-slide {
   opacity: 0;
-  // visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
-  // transition: opacity 0.5s ease-in-out, visibility 1.2s;
   transition: opacity 0.5s ease-in-out;
 }
 
 .hover-slide:hover {
   opacity: 1;
-  // visibility: visible;
 }

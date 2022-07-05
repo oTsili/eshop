@@ -5,9 +5,16 @@ import { ProductModule } from './product/product.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ItemDirective } from './item/item.directive';
 import { ItemComponent } from './item/item.component';
+import { InvokeDirective } from './catalog.directive';
+
 
 @NgModule({
-  declarations: [CatalogComponent, ItemDirective, ItemComponent],
+  declarations: [
+    CatalogComponent,
+    ItemDirective,
+    ItemComponent,
+    InvokeDirective,
+  ],
   imports: [CommonModule, ProductModule, FlexLayoutModule],
   exports: [CatalogComponent],
 })

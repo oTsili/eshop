@@ -3,19 +3,13 @@
   // display: grid;
   /* position: absolute; */
   user-select: none;
-  // display: flex;
-  // flex-direction: row;
   width: 26.5rem;
   height: auto !important;
-}
-
-.wrapper {
-  position: relative;
-  margin: 5rem 3rem 3rem 5rem;
-  height: 100%;
-  width: 100%;
-  transition: scrollLeft 0.5s ease-in-out;
-  // width: 26.5rem;
+  display: flex;
+  flex-direction: column;
+  // transform: translateX(100%);
+  // align-items: center;
+  margin-left: 7rem;
 }
 
 .col {

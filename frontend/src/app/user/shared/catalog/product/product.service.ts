@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({ providedIn: 'root' })
-export class ProductsService {
+@Injectable({
+  providedIn: 'root',
+})
+export class ProductService {
   private index = 0;
 
   get itemIndex() {
@@ -9,8 +11,8 @@ export class ProductsService {
   }
 
   set itemIndex(idx: number) {
-    if (!idx) {
-      console.log('index provided');
+    if (idx === undefined) {
+      console.log('index not provided');
       return;
     }
     this.index = idx;

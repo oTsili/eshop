@@ -10,7 +10,6 @@ import { Item } from './item.interface';
 })
 export class ItemComponent implements OnInit {
   @Input() items: ItemClass[] = [];
-
   currentAdIndex = -1;
 
   @ViewChild(ItemDirective, { static: true }) adHost!: ItemDirective;
