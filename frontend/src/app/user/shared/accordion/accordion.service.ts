@@ -18,11 +18,11 @@ export class AccordionService {
   getPanels() {
     return [
       new PanelItem(ColorSelectorComponent, {
-        // header: 'Bombasto',
+        header: 'ΧΡΩΜΑ',
         // comp: 'Brave as they come',
       }),
       new PanelItem(ContentListComponent, {
-        // header: 'Dr IQ',
+        header: 'ΥΨΟΣ ΤΑΚΟΥΝΙΟΥ',
         // comp: 'Smart as they come',
         elementList: [
           { text: 'ΧΑΜΗΛΟ (3-5CM)' },
@@ -31,15 +31,15 @@ export class AccordionService {
         ],
       }),
       new PanelItem(GridBoxesComponent, {
-        // header: 'Hiring for several positions',
+        header: 'ΜΕΓΕΘΟΣ',
         // comp: 'Submit your resume today!',
       }),
       new PanelItem(DoubleSliderComponent, {
-        // header: 'Openings in all departments',
+        header: 'ΤΙΜΗ',
         // comp: 'Apply today',
       }),
       new PanelItem(ContentListComponent, {
-        header: 'Openings in all departments',
+        header: 'ΕΚΠΤΩΣΗ',
 
         elementList: [
           { text: 'Εώς 10' },
@@ -53,7 +53,7 @@ export class AccordionService {
       }),
 
       new PanelItem(ContentListComponent, {
-        header: 'Openings in all departments',
+        header: 'ΥΛΙΚΟ',
 
         elementList: [
           { text: 'ΣΥΝΘΕΤΙΚΟ ΔΕΡΜΑ' },

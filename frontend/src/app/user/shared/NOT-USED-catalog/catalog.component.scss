@@ -5,19 +5,21 @@ $base-width: 25rem;
   // display: grid;
   /* position: absolute; */
   user-select: none;
-  // display: flex;
-  // flex-direction: row;
-  width: $base-width;
-
+  width: 26.5rem;
   height: auto !important;
+  display: flex;
+  flex-direction: column;
+  // transform: translateX(100%);
+  // align-items: center;
+  margin-left: 7rem;
 }
 
 .wrapper {
   position: relative;
   margin: 3rem;
   height: 100%;
-  width: $base-width;
   transition: scrollLeft 0.5s ease-in-out;
+  width: $base-width;
 }
 
 .col {
@@ -30,10 +32,6 @@ $base-width: 25rem;
   align-content: center;
   display: flex;
   flex-direction: row;
-}
-
-.product {
-  width: $base-width;
 }
 
 .main-product {

@@ -19,7 +19,41 @@ export class ProductsService {
     return this.productModel.find().exec();
   }
 
-  async findSales(): Promise<Product[]> {
-    return this.productModel.find({ in_sales: true }).exec();
+  async findHeel(heel): Promise<Product[]> {
+    return this.productModel.find({ heel }).exec();
+  }
+
+  async findColor(color): Promise<Product[]> {
+    return this.productModel.find({ color }).exec();
+  }
+
+  async findSize(size): Promise<Product[]> {
+    return this.productModel.find({ size }).exec();
+  }
+
+  async findMaterial(material): Promise<Product[]> {
+    return this.productModel.find({ material }).exec();
+  }
+
+  async findPrice(price): Promise<Product[]> {
+    return (
+      this.productModel
+        .find()
+        .where('price')
+        // .gte(minPrice)
+        // .lte(maxPrice)
+        .exec()
+    );
+  }
+
+  async findSales(sales): Promise<Product[]> {
+    return (
+      this.productModel
+        .find({ in_sales: true })
+        .where('sales')
+        // .gte(minSales)
+        // .lte(maxSales)
+        .exec()
+    );
   }
 }

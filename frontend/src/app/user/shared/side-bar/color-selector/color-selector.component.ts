@@ -1,4 +1,12 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  forwardRef,
+  HostListener,
+  OnInit,
+} from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { ProductsService } from '../../products/products.service';
 import { SharedService } from '../../shared.service';
 
 @Component({
@@ -7,6 +15,19 @@ import { SharedService } from '../../shared.service';
   styleUrls: ['./color-selector.component.css'],
 })
 export class ColorSelectorComponent implements OnInit {
+  colorsArr = [
+    { color: 'red' },
+    { color: 'blue' },
+    { color: 'green' },
+    { color: 'white' },
+    { color: 'beige' },
+    { color: 'brown' },
+    { color: 'yellow' },
+    { color: 'pink' },
+    { color: 'mocha' },
+    { color: 'purple' },
+    { color: 'orange' },
+  ];
   /**
    * updates the number of colors, the array of Cols and
    * array of Rows, to be used in the grid of elements,
@@ -28,27 +49,21 @@ export class ColorSelectorComponent implements OnInit {
     // .map((x, i) => i + 1);
   }
 
-  colorsArr = [
-    { color: 'red' },
-    { color: 'blue' },
-    { color: 'green' },
-    { color: 'white' },
-    { color: 'beige' },
-    { color: 'brown' },
-    { color: 'yellow' },
-    { color: 'pink' },
-    { color: 'mocha' },
-    { color: 'purple' },
-    { color: 'orange' },
-  ];
-
   numberOfCols: number;
   arrOfCols: number[];
   arrOfRows: number[];
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(
+    private elementRef: ElementRef,
+    private productsService: ProductsService
+  ) {}
 
   ngOnInit(): void {
     this.updateRowsCols();
+  }
+
+  onSubmit(color: string) {
+    console.log(color);
+    this.productsService.onProductsUpdate(color);
   }
 }

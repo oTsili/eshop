@@ -15,6 +15,7 @@ const BACKEND_URL = environment.BASE_URL + 'products';
 export class CatalogService {
   private elementInitializeListener = new Subject<number>();
   private index = 0;
+  private imageSrc = '';
   private items: any[];
 
   constructor(private http: HttpClient) {}
@@ -30,21 +31,6 @@ export class CatalogService {
       new ItemClass(ProductComponent, {
         name: 'Bombasto',
         bio: 'Brave as they come',
-        products: products,
-      }),
-      new ItemClass(ProductComponent, {
-        name: 'Dr IQ',
-        bio: 'Smart as they come',
-        products: products,
-      }),
-      new ItemClass(ProductComponent, {
-        headline: 'Hiring for several positions',
-        body: 'Submit your resume today!',
-        products: products,
-      }),
-      new ItemClass(ProductComponent, {
-        headline: 'Openings in all departments',
-        body: 'Apply today',
         products: products,
       }),
     ];
@@ -76,5 +62,17 @@ export class CatalogService {
       return;
     }
     this.index = idx;
+  }
+
+  get imgSrc() {
+    return this.imageSrc;
+  }
+
+  set imgSrc(imageSrc: string) {
+    if (imageSrc === undefined) {
+      console.log('index not provided');
+      return;
+    }
+    this.imageSrc = imageSrc;
   }
 }

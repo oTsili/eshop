@@ -7,9 +7,10 @@ import { ColorSelectorComponent } from './color-selector/color-selector.componen
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ContentListComponent } from './content-list/content-list.component';
 import { GridBoxesComponent } from './grid-boxes/grid-boxes.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { InputModule } from '../input/input.module';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,10 @@ import { InputModule } from '../input/input.module';
     FlexLayoutModule,
     FormsModule,
     MatInputModule,
+    MatButtonModule,
     InputModule,
+    ReactiveFormsModule,
+    // FormsModule,
   ],
   exports: [SideBarComponent],
 })

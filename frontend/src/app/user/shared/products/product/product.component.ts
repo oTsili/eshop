@@ -30,8 +30,12 @@ export class ProductComponent implements AfterViewInit {
   constructor(private elementRef: ElementRef) {}
 
   ngAfterViewInit(): void {
+    /**
+     * emit the product element's width to the parent element, so that it
+     * can calculate the columns
+     */
     this.elementInitialize.emit(
-      this.elementRef.nativeElement.querySelector('.element').offsetWidth
+      this.elementRef.nativeElement.querySelector('.image').offsetWidth
     );
   }
 }

@@ -1,7 +1,11 @@
+.button {
+  cursor: pointer;
+}
+
 .col {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .row {
@@ -15,8 +19,8 @@
 .color {
   /* if margin is changed updateRowsCols() methods should be updated*/
   margin: 0.6rem;
-  min-height: 3rem;
-  min-width: 3rem;
+  height: 3rem;
+  width: 3rem;
   border: 0.1rem solid;
 }
 

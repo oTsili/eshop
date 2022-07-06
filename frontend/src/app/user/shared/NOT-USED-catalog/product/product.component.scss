@@ -1,33 +1,33 @@
 $base-width: 25rem;
 
-.wrapper {
-  position: relative;
-  margin: 3rem;
-  height: 100%;
-  transition: scrollLeft 0.5s ease-in-out;
-  width: $base-width;
-}
+// .wrapper {
+//   position: relative;
+//   margin: 3rem;
+//   height: 100%;
+//   transition: scrollLeft 0.5s ease-in-out;
+//   width: $base-width;
+// }
 
-.main-product {
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
+// .main-product {
+//   opacity: 1;
+//   transition: opacity 0.5s ease-in-out;
+// }
 
-.hover-product {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: opacity 0.5s ease-in-out;
-}
+// .hover-product {
+//   opacity: 0;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   transition: opacity 0.5s ease-in-out;
+// }
 
-.main-product:hover {
-  opacity: 0;
-}
+// .main-product:hover {
+//   opacity: 0;
+// }
 
-.hover-product:hover {
-  opacity: 1;
-}
+// .hover-product:hover {
+//   opacity: 1;
+// }
 
 .element {
   width: $base-width;

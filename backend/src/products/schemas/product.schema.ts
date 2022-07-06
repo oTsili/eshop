@@ -17,6 +17,18 @@ export class Product {
   name: string;
 
   @Prop()
+  color: string[];
+
+  @Prop()
+  heelHeight: string;
+
+  @Prop()
+  size: string;
+
+  @Prop()
+  material: string;
+
+  @Prop()
   description: string;
 
   @Prop()

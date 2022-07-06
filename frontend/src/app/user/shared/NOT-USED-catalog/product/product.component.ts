@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -8,6 +9,7 @@ import {
   Output,
 } from '@angular/core';
 import { CatalogService } from '../catalog.service';
+import { ItemService } from '../item/item.service';
 import { Product } from './product.interface';
 import { ProductService } from './product.service';
 
@@ -22,13 +24,13 @@ export class ProductComponent implements AfterViewInit, OnInit {
   products: Product[];
   product: Product;
   src: string;
-  altSrc: string;
+  // altSrc: string;
   itemIndex: number = 0;
-
+  adHost;
   constructor(
     private elementRef: ElementRef,
     private catalogService: CatalogService,
-    private productService: ProductService
+    private itemService: ItemService // private cd: ChangeDetectorRef, // private productService: ProductService
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +48,8 @@ export class ProductComponent implements AfterViewInit, OnInit {
   updateProductWidth() {
     let productWidth = this.elementRef.nativeElement.offsetWidth;
     this.catalogService.updateElementInitialize(productWidth);
+
+    // this.cd.detectChanges();
   }
   /**
    * itemIndex is taken from the catalogService in which is stored
@@ -58,26 +62,18 @@ export class ProductComponent implements AfterViewInit, OnInit {
 
     console.log(this.itemIndex);
     this.product = this.data.products[this.itemIndex];
-    this.src = this.product.src;
+    this.src = this.catalogService.imgSrc;
 
-    this.altSrc = this.product.altSrc;
+    // this.altSrc = this.catalogService.imgSrc;
   }
 
-  // onInit() {
-  //   this.products = this.data.products;
-  //   if (this.productService.itemIndex < this.products.length) {
-  //     this.itemIndex = this.productService.itemIndex;
-  //     this.productService.itemIndex = this.itemIndex + 1;
-  //   } else {
-  //     this.itemIndex = 0;
-  //     this.productService.itemIndex = this.itemIndex + 1;
-  //   }
+  clearComponents() {
+    let comps = this.itemService.components;
+    this.adHost = this.itemService.itemHost;
+    console.log(this.adHost);
+    console.log({ comps });
+    const viewContainerRef = this.adHost.viewContainerRef;
 
-  //   this.product = this.data.products[this.itemIndex];
-
-  //   console.log(this.product);
-  //   console.log(this.itemIndex);
-  //   this.src = this.product.src;
-  //   this.altSrc = this.product.altSrc;
-  // }
+    viewContainerRef.clear();
+  }
 }

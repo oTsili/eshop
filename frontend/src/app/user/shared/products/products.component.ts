@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -39,7 +40,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       let totalMargin = parseInt(marginLeft) + parseInt(marginRight);
       this.numOfCols = Math.floor(
         parseInt(this.elementRef.nativeElement.offsetWidth) /
-          (this.productWidth + totalMargin)
+          (this.productWidth + parseInt(marginRight))
       );
     }
     this.arrOfCols = Array(this.numOfCols).fill(1);
@@ -51,11 +52,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   constructor(
     private productsService: ProductsService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.getProducts();
+
+    this.productsService.getUpdateListener().subscribe((response) => {
+      console.log(response);
+      this.productsService.updateColor(response.query).subscribe((response) => {
+        console.log(response);
+        this.products = response.products;
+      });
+    });
   }
 
   ngOnDestroy(): void {
@@ -76,5 +86,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   updateProductWidth(productWidth: number) {
     this.productWidth = productWidth;
     this.updateRowsCols();
+    this.cd.detectChanges();
   }
 }

@@ -11,6 +11,7 @@ export class ContentListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    console.log(this.data);
     this.elementList = this.data.elementList;
   }
 }

@@ -12,6 +12,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   query: string | null;
   page = this.dynamicDatabase.searchPage;
   queryParamMapSubscription: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     public dynamicDatabase: DynamicDatabase

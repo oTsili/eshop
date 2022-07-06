@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { Product } from './product/product.interface';
 import { CatalogService } from './catalog.service';
 import { ItemClass } from './item/item';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-catalog',
@@ -25,7 +26,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
   productWidth: number;
   items: ItemClass[] = [];
   itemIndex: number = 0;
-
+  someSubscription: Subscription;
   /**
    * calculate the number of columns and rows for the catalog.
    * reads the
@@ -43,11 +44,11 @@ export class CatalogComponent implements OnInit, OnDestroy {
       let totalMargin = parseInt(marginLeft) + parseInt(marginRight);
       totalWidth = this.elementRef.nativeElement.offsetWidth + totalMargin;
       this.numOfCols = Math.floor(totalWidth / this.productWidth);
-      console.log(
-        { totalWidth },
-        { totalMargin },
-        { productWidth: this.productWidth }
-      );
+      // console.log(
+      //   { totalWidth },
+      //   { totalMargin },
+      //   { productWidth: this.productWidth }
+      // );
     }
     this.arrOfCols = Array(this.numOfCols).fill(1);
 
@@ -55,19 +56,18 @@ export class CatalogComponent implements OnInit, OnDestroy {
       Math.ceil(this.products.length / this.numOfCols)
     ).fill(1);
 
-    console.log({
-      arCol: this.arrOfCols.length,
-      arrRow: this.arrOfRows.length,
-      cols: this.numOfCols,
-    });
-
-    // this.cd.detectChanges();
+    // console.log({
+    //   arCol: this.arrOfCols.length,
+    //   arrRow: this.arrOfRows.length,
+    //   cols: this.numOfCols,
+    // });
   }
 
   constructor(
     private catalogService: CatalogService,
     private elementRef: ElementRef,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -101,7 +101,12 @@ export class CatalogComponent implements OnInit, OnDestroy {
   }
 
   updateIndex(event) {
+    console.log(event);
     this.catalogService.itemIndex = event;
-    //  this.cd.detectChanges();
+  }
+
+  updateImgSrc(event) {
+    console.log(event);
+    this.catalogService.imgSrc = event;
   }
 }

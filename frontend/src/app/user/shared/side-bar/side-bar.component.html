@@ -1,17 +1,18 @@
 <div class="container">
   <div class="header-wrapper">
-    <span class="header">{{ sidebar.header }}</span>
+    <span class="header">{{ mainHeader }}</span>
     <hr />
   </div>
 
   <!-- Accordion Start -->
-
   <app-accordion [collapsing]="collapsing">
-    <ng-container *ngFor="let accordion of sidebar.accordions">
-      <accordion-item title="{{ accordion.header }}">
+    <ng-container *ngFor="let panel of panels">
+      <accordion-item title="{{ panel.data.header }}">
         <ng-template accordionContent>
-          <app-accordion [panels]="panels"></app-accordion
-        ></ng-template>
+          <!-- Panel Start -->
+          <app-accordion [panels]="panels"></app-accordion>
+          <!-- Panel end -->
+        </ng-template>
       </accordion-item>
     </ng-container>
   </app-accordion>
