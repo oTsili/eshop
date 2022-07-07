@@ -61,6 +61,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     this.productsService.getUpdateListener().subscribe((response) => {
       console.log(response);
+
       this.productsService.updateColor(response.query).subscribe((response) => {
         console.log(response);
         this.products = response.products;

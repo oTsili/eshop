@@ -5,22 +5,11 @@ import { SearchComponent } from './search.component';
 export const searchRoutes: Routes = [
   {
     path: '',
-    component: SearchComponent,
-    children: [
-      {
-        path: '',
-        children: [
-          {
-            path: ':query',
-            redirectTo: 'search/:query',
-            pathMatch: 'full',
-          },
-        ],
-      },
-    ],
+    redirectTo: 'query',
+    pathMatch: 'full',
   },
   {
-    path: 'search/:query',
+    path: 'query',
     component: SearchComponent,
   },
 ];

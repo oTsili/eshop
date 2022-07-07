@@ -29,9 +29,10 @@ export class ProductsService {
     });
   }
 
-  updateColor(color: string) {
-    console.log(`${BACKEND_URL}?color=${color}`);
-    return this.http.get<any>(`${BACKEND_URL}/query?color=${color}`, {
+  updateColor(query: string) {
+    let url = `${BACKEND_URL}/query?${query}`;
+    console.log(url);
+    return this.http.get<any>(url, {
       withCredentials: true,
     });
   }

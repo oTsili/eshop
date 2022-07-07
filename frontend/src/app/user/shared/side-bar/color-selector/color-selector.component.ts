@@ -6,6 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router, UrlSerializer } from '@angular/router';
 import { ProductsService } from '../../products/products.service';
 import { SharedService } from '../../shared.service';
 
@@ -55,15 +56,36 @@ export class ColorSelectorComponent implements OnInit {
 
   constructor(
     private elementRef: ElementRef,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private router: Router,
+    private urlSerializer: UrlSerializer
   ) {}
 
   ngOnInit(): void {
     this.updateRowsCols();
   }
-
+  /**
+   * Updates or inserts a query parameter of color with
+   * the color provided by the template with the click
+   * event. First deserializes the current url, then updates
+   * the color parameter, before navigating in the frontend
+   * and calling the onProductUpdate service method to
+   * update (http req) the products
+   * @param color
+   */
   onSubmit(color: string) {
-    console.log(color);
-    this.productsService.onProductsUpdate(color);
+    // deserialize
+    let urlTree = this.router.parseUrl(this.router.url);
+    // update the color query param
+    urlTree.queryParams['color'] = color;
+    // navigate to the updated url
+    this.router.navigateByUrl(urlTree);
+    // serialize the url
+    let url = this.urlSerializer.serialize(urlTree);
+
+    let newUrl = url.split('?')[1];
+    console.log(newUrl);
+    // call the method to update the products
+    this.productsService.onProductsUpdate(newUrl);
   }
 }
