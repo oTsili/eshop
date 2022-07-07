@@ -59,7 +59,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getProducts();
 
-    this.productsService.getUpdateListener().subscribe((response) => {
+    this.productsService.getProductsUpdateListener().subscribe((response) => {
       console.log(response);
 
       this.productsService.updateColor(response.query).subscribe((response) => {

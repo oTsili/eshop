@@ -19,11 +19,12 @@ export class ProductsService {
     });
   }
 
-  getUpdateListener() {
+  getProductsUpdateListener() {
     return this.updateListener.asObservable();
   }
 
   onProductsUpdate(query: string) {
+    console.log(query);
     this.updateListener.next({
       query,
     });
@@ -31,7 +32,6 @@ export class ProductsService {
 
   updateColor(query: string) {
     let url = `${BACKEND_URL}/query?${query}`;
-    console.log(url);
     return this.http.get<any>(url, {
       withCredentials: true,
     });

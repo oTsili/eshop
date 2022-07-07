@@ -1,14 +1,6 @@
-import {
-  Component,
-  ElementRef,
-  forwardRef,
-  HostListener,
-  OnInit,
-} from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router, UrlSerializer } from '@angular/router';
 import { ProductsService } from '../../products/products.service';
-import { SharedService } from '../../shared.service';
 
 @Component({
   selector: 'app-color-selector',
@@ -82,9 +74,8 @@ export class ColorSelectorComponent implements OnInit {
     this.router.navigateByUrl(urlTree);
     // serialize the url
     let url = this.urlSerializer.serialize(urlTree);
-
+    // keep only the queries parameters
     let newUrl = url.split('?')[1];
-    console.log(newUrl);
     // call the method to update the products
     this.productsService.onProductsUpdate(newUrl);
   }
