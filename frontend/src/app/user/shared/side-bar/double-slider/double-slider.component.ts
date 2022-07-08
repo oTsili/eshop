@@ -1,5 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router, UrlSerializer } from '@angular/router';
+import { ProductsService } from '../../products/products.service';
 
 @Component({
   selector: 'app-double-slider',
@@ -13,7 +15,11 @@ export class DoubleSliderComponent implements OnInit {
   from = 15;
   to = 75;
 
-  constructor() {}
+  constructor(
+    private router: Router,
+    private urlSerializer: UrlSerializer,
+    private productsService: ProductsService
+  ) {}
 
   ngOnInit(): void {
     this.fillSlider(
@@ -32,6 +38,25 @@ export class DoubleSliderComponent implements OnInit {
       // validators: [Validators.numbe],
     }),
   });
+
+  onSubmit() {
+    // deserialize
+    let urlTree = this.router.parseUrl(this.router.url);
+
+    let price = `${this.from}\u20AC	-${this.to}\u20AC	`;
+    // update the color query param
+    urlTree.queryParams['price'] = price;
+    // navigate to the updated url
+    this.router.navigateByUrl(urlTree);
+    // serialize the url
+    let url = this.urlSerializer.serialize(urlTree);
+    // keep only the queries parameters
+    let query = url.split('?')[1];
+
+    let chip = { key: 'price', value: price };
+    // call the method to update the products
+    this.productsService.onProductsUpdate(query, chip);
+  }
 
   onRegister(form: FormGroup) {
     console.log(this.priceForm);

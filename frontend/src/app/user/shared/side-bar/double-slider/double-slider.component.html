@@ -1,34 +1,36 @@
 <div class="container">
-<div class="range_container">
-  <form
-    (ngSubmit)="onRegister(priceForm)"
-    [formGroup]="priceForm"
-    #priceElementForm
-  >
-    <div class="sliders_control">
-      <input
-        (input)="controlFromSlider(fromSlider, toSlider, $event)"
-        #fromSlider
-        id="fromSlider"
-        type="range"
-        value="{{ from }}"
-        min="0"
-        max="100"
-      />
-      <input
-        #toSlider
-        (input)="controlToSlider(fromSlider, toSlider, $event)"
-        id="toSlider"
-        type="range"
-        value="{{ to }}"
-        min="0"
-        max="100"
-      />
-      <div class="price">
-        <mat-label class="from">{{ from }}</mat-label>
-        <mat-label class="to">{{ to }}</mat-label>
+  <div class="range_container">
+    <form
+      (ngSubmit)="onRegister(priceForm)"
+      [formGroup]="priceForm"
+      #priceElementForm
+    >
+      <div class="sliders_control">
+        <input
+          (mouseup)="onSubmit()"
+          (input)="controlFromSlider(fromSlider, toSlider, $event)"
+          #fromSlider
+          id="fromSlider"
+          type="range"
+          value="{{ from }}"
+          min="0"
+          max="100"
+        />
+        <input
+          (mouseup)="onSubmit()"
+          #toSlider
+          (input)="controlToSlider(fromSlider, toSlider, $event)"
+          id="toSlider"
+          type="range"
+          value="{{ to }}"
+          min="0"
+          max="100"
+        />
+        <div class="price">
+          <mat-label class="from">{{ from }}</mat-label>
+          <mat-label class="to">{{ to }}</mat-label>
+        </div>
       </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
 </div>
