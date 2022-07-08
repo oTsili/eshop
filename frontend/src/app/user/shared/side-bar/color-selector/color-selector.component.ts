@@ -1,6 +1,14 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+} from '@angular/core';
 import { Router, UrlSerializer } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ProductsService } from '../../products/products.service';
+import { ColorSelectorService } from './color-selector.service';
 
 @Component({
   selector: 'app-color-selector',
@@ -8,19 +16,13 @@ import { ProductsService } from '../../products/products.service';
   styleUrls: ['./color-selector.component.css'],
 })
 export class ColorSelectorComponent implements OnInit {
-  colorsArr = [
-    { color: 'red' },
-    { color: 'blue' },
-    { color: 'green' },
-    { color: 'white' },
-    { color: 'beige' },
-    { color: 'brown' },
-    { color: 'yellow' },
-    { color: 'pink' },
-    { color: 'mocha' },
-    { color: 'purple' },
-    { color: 'orange' },
-  ];
+  numberOfCols: number;
+  arrOfCols: number[];
+  arrOfRows: number[];
+  colorsArr: { color: string }[] = [];
+  // arrOfColsArray: Array<boolean> = [];
+  activeStatusSubscription: Subscription;
+  activeStatusArray: boolean[] = [];
   /**
    * updates the number of colors, the array of Cols and
    * array of Rows, to be used in the grid of elements,
@@ -42,20 +44,34 @@ export class ColorSelectorComponent implements OnInit {
     // .map((x, i) => i + 1);
   }
 
-  numberOfCols: number;
-  arrOfCols: number[];
-  arrOfRows: number[];
-
   constructor(
     private elementRef: ElementRef,
     private productsService: ProductsService,
     private router: Router,
-    private urlSerializer: UrlSerializer
+    private urlSerializer: UrlSerializer,
+    private colorSelectorService: ColorSelectorService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
+    this.colorsArr = this.colorSelectorService.getColorsArray();
+
     this.updateRowsCols();
+    // this.activeStatus = this.colorSelectorService.getActiveStatusArray();
+    this.activeStatusSubscription = this.colorSelectorService
+      .getActiveStatusListener()
+      .subscribe((response) => {
+        console.log(response);
+        this.activeStatusArray = response;
+        this.cdr.detectChanges();
+      });
   }
+
+  toggleActiveClass(index: number) {
+    this.colorSelectorService.initializeActiveStatusArray();
+    this.colorSelectorService.onUpdateActiveStatus(index);
+  }
+
   /**
    * Updates or inserts a query parameter of color with
    * the color provided by the template with the click

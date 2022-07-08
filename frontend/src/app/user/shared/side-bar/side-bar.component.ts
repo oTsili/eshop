@@ -6,6 +6,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { ProductsService } from '../products/products.service';
 import { Router, UrlSerializer } from '@angular/router';
 import { Chip } from './side-bar.interfaces';
+import { ColorSelectorService } from './color-selector/color-selector.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -25,7 +26,8 @@ export class SideBarComponent implements OnInit {
     private accordionService: AccordionService,
     private productsService: ProductsService,
     private urlSerializer: UrlSerializer,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private colorSelectorService: ColorSelectorService
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +49,10 @@ export class SideBarComponent implements OnInit {
       // this.chipsList.splice(index, 1);
       this.productsService.removeChip(chip.key);
       this.updateProducts(chip);
+      console.log(chip);
+      if (chip.key === 'color') {
+        this.colorSelectorService.initializeActiveStatusArray();
+      }
     }
   }
   /**

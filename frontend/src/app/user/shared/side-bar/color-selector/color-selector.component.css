@@ -8,6 +8,16 @@
   /* width: 100%; */
 }
 
+.col:hover {
+  border-radius: 25%;
+  background-color: #00000045;
+}
+
+.active {
+  border-radius: 25%;
+  background-color: #00000045;
+}
+
 .row {
   /* justify-content: center; */
   align-content: center;

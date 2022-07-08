@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../shared/products/products.service';
+import { ColorSelectorService } from '../shared/side-bar/color-selector/color-selector.service';
 import { Chip } from '../shared/side-bar/side-bar.interfaces';
 import { DynamicDatabase } from './dynamic-database';
 
@@ -25,7 +26,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
     private route: ActivatedRoute,
     public dynamicDatabase: DynamicDatabase,
     private router: Router,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private colorSelectorService: ColorSelectorService
   ) {}
 
   ngAfterViewInit(): void {
@@ -33,8 +35,16 @@ export class SearchComponent implements AfterViewInit, OnInit {
     const query = url.split('?')[1];
     // call the method to update the products
     // on Products component
-    this.productsService.chipsListInitialize(this.getQueryValues());
+    let queryArr = this.getQueryValues();
+    this.productsService.chipsListInitialize(queryArr);
     this.productsService.onProductsUpdate(query);
+    let colorIndex = this.productsService.getChipIndex('color');
+    let colorValue = '';
+    if (colorIndex >= 0) {
+      colorValue = queryArr[colorIndex].value;
+      this.colorSelectorService.onUpdateActiveStatus(null, colorValue);
+    }
+    // this.colorSelectorService.onUpdateActiveStatus(queryIndex);
   }
 
   ngOnInit(): void {}
