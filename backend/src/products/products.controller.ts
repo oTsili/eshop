@@ -6,8 +6,11 @@ import {
   Param,
   Post,
   Query,
+  Req,
   Res,
 } from '@nestjs/common';
+import { request } from 'http';
+import { getMaxListeners } from 'process';
 import { ProductsService } from './products.service';
 import { Product } from './schemas/product.schema';
 
@@ -30,56 +33,27 @@ export class ProductsController {
   }
 
   @Get('/query?')
-  async fetchColor(
+  async fetchFromQuery(
     @Res() response,
-    @Query('color') color: string,
-    @Query('heel') heel: string,
-    @Query('size') size: string,
-    @Query('material') material: string,
-    @Query('heel') sales: string,
-    @Query('heel') price: string,
+    @Req() request,
+
+    @Query('sales') sales: string,
+    @Query('price') price: string,
   ) {
-    console.log({ color });
-    console.log({ heel });
-    console.log({ size });
-    console.log({ material });
-    if (color) {
-      const products = await this.productService.findColor(color);
-      return response.status(HttpStatus.OK).json({ products });
+    let query = request.query;
+    if (sales && price) {
+      const [minPrice, maxPrice] = price.split('-');
+      query.price = { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) };
+      const [minSales, maxSales] = price.split('-');
+      query.price = { $gte: parseInt(minSales), $lte: parseInt(maxSales) };
+    } else if (sales) {
+      const [min, max] = sales.split('-');
+      query.sales = { $gte: parseInt(min), $lte: parseInt(max) };
+    } else if (price) {
+      const [min, max] = price.split('-');
+      query.price = { $gte: parseInt(min), $lte: parseInt(max) };
     }
-
-    // if
+    const products = await this.productService.findFromQuery(query);
+    return response.status(HttpStatus.OK).json({ products });
   }
-
-  // @Get('/query?')
-  // async fetchHeel(@Res() response, @Query('heel') heel) {
-  //   console.log(heel);
-  //   const products = await this.productService.findHeel(heel);
-  //   return response.status(HttpStatus.OK).json({ products });
-  // }
-
-  // @Get('/query?')
-  // async fetchSize(@Res() response, @Query('size') size) {
-  //   const products = await this.productService.findSize(size);
-  //   return response.status(HttpStatus.OK).json({ products });
-  // }
-
-  // @Get('/query?')
-  // async fetchMaterial(@Res() response, @Query('material') material) {
-  //   const products = await this.productService.findMaterial(material);
-  //   return response.status(HttpStatus.OK).json({ products });
-  // }
-
-  // @Get('/query?')
-  // async fetchSales(@Res() response, @Query('sales') sales) {
-  //   console.log(sales);
-  //   const products = await this.productService.findSales(sales);
-  //   return response.status(HttpStatus.OK).json({ products });
-  // }
-
-  // @Get('/query?')
-  // async fetchPrice(@Res() response, @Query('price') price) {
-  //   const products = await this.productService.findPrice(price);
-  //   return response.status(HttpStatus.OK).json({ products });
-  // }
 }

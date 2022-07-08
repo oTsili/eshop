@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { InputModule } from '../input/input.module';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     InputModule,
     ReactiveFormsModule,
+    MatChipsModule,
+    MatIconModule,
     // FormsModule,
   ],
   exports: [SideBarComponent],

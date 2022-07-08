@@ -18,3 +18,14 @@
   height: 0.5rem;
   background-color: #c8c8c8; */
 }
+:host {
+  ::ng-deep {
+    .mat-chip.mat-standard-chip,
+    .mat-chip.mat-standard-chip,
+    .mat-chip-list-wrapper input.mat-input-element,
+    .mat-chip-list-wrapper .mat-standard-chip {
+      background-color: transparent !important;
+      margin: 0;
+    }
+  }
+}

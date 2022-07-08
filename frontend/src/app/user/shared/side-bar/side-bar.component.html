@@ -3,6 +3,16 @@
     <span class="header">{{ mainHeader }}</span>
     <hr />
   </div>
+  <div>
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip *ngFor="let chip of chipsList" (removed)="remove(chip)">
+        {{ chip.value }}
+        <button matChipRemove>
+          <i class="ph-x"></i>
+        </button>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
 
   <!-- Accordion Start -->
   <app-accordion [collapsing]="collapsing">

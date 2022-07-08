@@ -75,8 +75,24 @@ export class ColorSelectorComponent implements OnInit {
     // serialize the url
     let url = this.urlSerializer.serialize(urlTree);
     // keep only the queries parameters
-    let newUrl = url.split('?')[1];
+    let query = url.split('?')[1];
+
+    let chip = { key: 'color', value: color };
     // call the method to update the products
-    this.productsService.onProductsUpdate(newUrl);
+    this.productsService.onProductsUpdate(query, chip);
+  }
+
+  /**
+   * Gets the current url and returns an array of the query parameters values
+   * @returns an array of the query parameters values
+   */
+  getQueryValues() {
+    let urlTree = this.router.parseUrl(this.router.url);
+    let queryArr: string[] = [];
+    Object.entries(urlTree.queryParams).forEach(([key, value], index) => {
+      queryArr.push(`${value}`);
+    });
+    console.log(queryArr);
+    return queryArr;
   }
 }

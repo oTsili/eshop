@@ -19,20 +19,8 @@ export class ProductsService {
     return this.productModel.find().exec();
   }
 
-  async findHeel(heel): Promise<Product[]> {
-    return this.productModel.find({ heel }).exec();
-  }
-
-  async findColor(color): Promise<Product[]> {
-    return this.productModel.find({ color }).exec();
-  }
-
-  async findSize(size): Promise<Product[]> {
-    return this.productModel.find({ size }).exec();
-  }
-
-  async findMaterial(material): Promise<Product[]> {
-    return this.productModel.find({ material }).exec();
+  async findFromQuery(query) {
+    return this.productModel.find(query).exec();
   }
 
   async findPrice(price): Promise<Product[]> {

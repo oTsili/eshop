@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../shared/products/products.service';
+import { Chip } from '../shared/side-bar/side-bar.interfaces';
 import { DynamicDatabase } from './dynamic-database';
 
 @Component({
@@ -9,7 +10,7 @@ import { DynamicDatabase } from './dynamic-database';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
 })
-export class SearchComponent implements AfterViewInit {
+export class SearchComponent implements AfterViewInit, OnInit {
   searchQuery: string | null;
   color: string | null;
   size: string | null;
@@ -21,6 +22,7 @@ export class SearchComponent implements AfterViewInit {
   queryParamMapSubscription: Subscription;
 
   constructor(
+    private route: ActivatedRoute,
     public dynamicDatabase: DynamicDatabase,
     private router: Router,
     private productsService: ProductsService
@@ -28,13 +30,33 @@ export class SearchComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     const url = this.router.url;
-    console.log(url);
-    const newUrl = url.split('?')[1];
+    const query = url.split('?')[1];
     // call the method to update the products
-    this.productsService.onProductsUpdate(newUrl);
+    // on Products component
+    this.productsService.chipsListInitialize(this.getQueryValues());
+    this.productsService.onProductsUpdate(query);
+  }
+
+  ngOnInit(): void {}
+  /**
+   * Gets the current url and returns an array of the query parameters values
+   * @returns an array of the query parameters values
+   */
+  getQueryValues() {
+    let urlTree = this.router.parseUrl(this.router.url);
+    let queryArr: Chip[] = [];
+    Object.entries(urlTree.queryParams).forEach(([key, value], index) => {
+      let chipObject: Chip = {
+        key: `${key}`,
+        value: `${value}`,
+      };
+      queryArr.push(chipObject);
+    });
+    return queryArr;
   }
 
   // ngOnInit(): void {
+  // let urlTree = this.router.parseUrl(this.router.url);
   // deserialize
   // Object.entries(urlTree.queryParams).forEach(([key, value], index) => {
   //   // console.log(`${index}: ${key} = ${value}`);
@@ -51,6 +73,7 @@ export class SearchComponent implements AfterViewInit {
   // });
   // this.queryParamMapSubscription = this.route.queryParamMap.subscribe(
   //   (paramMap: ParamMap) => {
+  // console.log({ ...paramMap.keys });
   // const t = { ...paramMap };
   // console.log(t);
   // if (paramMap.has('color')) {
@@ -74,8 +97,8 @@ export class SearchComponent implements AfterViewInit {
   // if (paramMap.has('searchQuery')) {
   //   this.searchQuery = paramMap.get('searchQuery');
   // }
-  //   }
-  // );
+  //     }
+  //   );
   // }
 
   // ngOnDestroy(): void {
