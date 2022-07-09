@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { SharedService } from '../shared/shared.service';
 import { FooterContent } from './footer.interface';
 import { FooterService } from './footer.service';
@@ -14,9 +15,9 @@ import { FooterService } from './footer.service';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css'],
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements OnInit, OnDestroy {
   numberOfRows = 2;
-
+  footerSubscription: Subscription;
   footer_content: FooterContent[];
 
   emailElement = {
@@ -33,10 +34,16 @@ export class FooterComponent implements OnInit {
     this.getFooterContent();
   }
 
+  ngOnDestroy(): void {
+    this.footerSubscription.unsubscribe();
+  }
+
   getFooterContent() {
-    this.footerService.getLinks().subscribe((response) => {
-      this.footer_content = response.footer;
-    });
+    this.footerSubscription = this.footerService
+      .getLinks()
+      .subscribe((response) => {
+        this.footer_content = response.footer;
+      });
   }
 
   newsLetterForm = new FormGroup({

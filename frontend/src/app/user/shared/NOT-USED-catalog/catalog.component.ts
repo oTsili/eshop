@@ -19,6 +19,7 @@ import { NavigationEnd, Router } from '@angular/router';
 export class CatalogComponent implements OnInit, OnDestroy {
   isLoading = false;
   productsSubscription: Subscription;
+  productWidthSubscription: Subscription;
   products: Product[];
   numOfCols: number = 1;
   arrOfCols: number[];
@@ -73,14 +74,17 @@ export class CatalogComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getProducts();
 
-    this.catalogService.getElementInitializeListener().subscribe((response) => {
-      this.productWidth = response;
-      this.updateRowsCols();
-    });
+    this.productWidthSubscription = this.catalogService
+      .getElementInitializeListener()
+      .subscribe((response) => {
+        this.productWidth = response;
+        this.updateRowsCols();
+      });
   }
 
   ngOnDestroy(): void {
     this.productsSubscription.unsubscribe();
+    this.productWidthSubscription.unsubscribe();
   }
 
   getProducts() {

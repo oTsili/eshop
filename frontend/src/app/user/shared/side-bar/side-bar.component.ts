@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { AccordionService } from '../accordion/accordion.service';
 import { PanelItem } from '../accordion/panel/panel-item';
@@ -7,17 +7,20 @@ import { ProductsService } from '../products/products.service';
 import { Router, UrlSerializer } from '@angular/router';
 import { Chip } from './side-bar.interfaces';
 import { ColorSelectorService } from './color-selector/color-selector.service';
+import { Subscription } from 'rxjs';
+import { ContentListService } from './content-list/content-list.service';
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.scss'],
 })
-export class SideBarComponent implements OnInit {
+export class SideBarComponent implements OnInit, OnDestroy {
   collapsing = false;
   panels: PanelItem[] = [];
   mainHeader = 'Φίλτρα';
   chipsList: Chip[] = [];
+  chipListSubscription: Subscription;
   // allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -27,7 +30,8 @@ export class SideBarComponent implements OnInit {
     private productsService: ProductsService,
     private urlSerializer: UrlSerializer,
     private cd: ChangeDetectorRef,
-    private colorSelectorService: ColorSelectorService
+    private colorSelectorService: ColorSelectorService,
+    private contentListService: ContentListService
   ) {}
 
   ngOnInit(): void {
@@ -35,29 +39,38 @@ export class SideBarComponent implements OnInit {
     this.panels = this.accordionService.getPanels();
 
     // get the chiplist and subscribe
-    this.productsService.getChipsListUpdateListener().subscribe((response) => {
-      console.log(response);
-      this.chipsList = response.chipsList;
-      this.cd.detectChanges();
-    });
+    this.chipListSubscription = this.productsService
+      .getChipsListUpdateListener()
+      .subscribe((response) => {
+        this.chipsList = response.chipsList;
+        this.cd.detectChanges();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.chipListSubscription.unsubscribe();
   }
 
   remove(chip: Chip): void {
     const index = this.chipsList.indexOf(chip);
-
     if (index >= 0) {
       // this.chipsList.splice(index, 1);
       this.productsService.removeChip(chip.key);
-      this.updateProducts(chip);
-      console.log(chip);
+
       if (chip.key === 'color') {
         this.colorSelectorService.initializeActiveStatusArray();
+      } else if (chip.key === 'heelHeight') {
+        this.contentListService.initializeHeelHeightActiveStatusArray();
+      } else if (chip.key === 'sales') {
+        this.contentListService.initializeSalesActiveStatusArray();
+      } else if (chip.key === 'material') {
+        this.contentListService.initializeMaterialActiveStatusArray();
       }
+
+      this.updateProducts(chip);
     }
   }
-  /**
-   *
-   */
+
   updateProducts(chip: Chip) {
     // get the domain: "baseUrl" and the current route: "query"
     const url = this.router.url;
@@ -66,12 +79,17 @@ export class SideBarComponent implements OnInit {
     // compose the new url
     let newUrl = '';
     let newQuery = '';
-
+    let queryParam = '';
     // if no chips/queryParams left remove and the 'query?' strin
     // from the url
     if (this.chipsList.length > 0) {
+      // the greek are encoded in the URI/URL, so in order to compoare
+      // must be converted to URI code format
+      if (chip.key === 'heelHeight') {
+        chip.value = encodeURI(chip.value);
+      }
       // compose the string of key=value of chip
-      const queryParam = `${chip.key}=${chip.value}`;
+      queryParam = `${chip.key}=${chip.value}`;
       // remove the query param of the removed chip
       newQuery = query.replace(queryParam, '');
       newUrl = `${baseUrl}?${newQuery}`;
@@ -79,7 +97,7 @@ export class SideBarComponent implements OnInit {
       baseUrl = baseUrl.replace('/query', '');
       newUrl = `${baseUrl}`;
     }
-    console.log(newUrl);
+
     // navigate to the new url
     this.router.navigateByUrl(newUrl);
 

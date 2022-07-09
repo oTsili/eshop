@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ContentList } from './content-list.interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class ContentListService {
@@ -10,29 +11,29 @@ export class ContentListService {
   private salesActiveStatusArray: boolean[] = [];
   private materialActiveStatusArray: boolean[] = [];
 
-  private heelHeightArr: string[] = [];
-  private salesArr: string[] = [];
-  private materialArr: string[] = [];
+  private heelHeightArr: ContentList[] = [];
+  private salesArr: ContentList[] = [];
+  private materialArr: ContentList[] = [];
 
-  set heelHeighArray(heelHeighArr: string[]) {
+  set heelHeighArray(heelHeighArr: ContentList[]) {
     this.heelHeightArr = heelHeighArr;
   }
-  set salesArray(salesArr: string[]) {
+  set salesArray(salesArr: ContentList[]) {
     this.salesArr = salesArr;
   }
-  set materialArray(matArr: string[]) {
+  set materialArray(matArr: ContentList[]) {
     this.materialArr = matArr;
   }
 
-  get heelHeighArray() {
-    return this.heelHeightArr;
-  }
-  get salesArray() {
-    return this.salesArr;
-  }
-  get materialArray() {
-    return this.materialArr;
-  }
+  //   get heelHeighArray() {
+  //     return this.heelHeightArr;
+  //   }
+  //   get salesArray() {
+  //     return this.salesArr;
+  //   }
+  //   get materialArray() {
+  //     return this.materialArr;
+  //   }
 
   getHeelHeighActiveStatusListener() {
     return this.heelHeighActiveStatusListener.asObservable();
@@ -46,49 +47,94 @@ export class ContentListService {
     return this.materialActiveStatusListener.asObservable();
   }
 
-  //   onUpdateHeelHeighActiveStatusArray(index: number | null, chipValue?: string) {
-  //     if (!index && chipValue) {
-  //       console.log(index, chipValue);
-  //       index = this.getColorArrayIndex(chipValue);
-  //     }
-  //     // fill the array with false value
-  //     this.initializeActiveStatusArray();
-  //     // set true to the provided index
-  //     if (index) {
-  //       this.activeStatusArray[index] = true;
-  //     }
-  //     // inform the app about the change
-  //     this.activeStatusListener.next(this.activeStatusArray);
-  //   }
-  //   onUpdateSalesActiveStatusArray(index: number | null, chipValue?: string) {
-  //     if (!index && chipValue) {
-  //       console.log(index, chipValue);
-  //       index = this.getColorArrayIndex(chipValue);
-  //     }
-  //     // fill the array with false value
-  //     this.initializeActiveStatusArray();
-  //     // set true to the provided index
-  //     if (index) {
-  //       this.activeStatusArray[index] = true;
-  //     }
-  //     // inform the app about the change
-  //     this.activeStatusListener.next(this.activeStatusArray);
-  //   }
-  //   onUpdatematerialActiveStatusArray(index: number | null, chipValue?: string) {
-  //     if (!index && chipValue) {
-  //       console.log(index, chipValue);
-  //       index = this.getColorArrayIndex(chipValue);
-  //     }
-  //     // fill the array with false value
-  //     this.initializeActiveStatusArray();
-  //     // set true to the provided index
-  //     if (index) {
-  //       this.activeStatusArray[index] = true;
-  //     }
-  //     // inform the app about the change
-  //     this.activeStatusListener.next(this.activeStatusArray);
-  //   }
+  // Fills the heelHeight status array with false values
+  initializeHeelHeightActiveStatusArray() {
+    this.heelHeighActiveStatusArray = Array(this.heelHeightArr.length).fill(
+      false
+    );
+    this.heelHeighActiveStatusListener.next(this.heelHeighActiveStatusArray);
+  }
 
+  // Fills the sales status array with false values
+  initializeSalesActiveStatusArray() {
+    this.salesActiveStatusArray = Array(this.salesArr.length).fill(false);
+    this.salesActiveStatusListener.next(this.salesActiveStatusArray);
+  }
+
+  // Fills the material status array with false values
+  initializeMaterialActiveStatusArray() {
+    this.materialActiveStatusArray = Array(this.materialArr.length).fill(false);
+    this.materialActiveStatusListener.next(this.materialActiveStatusArray);
+  }
+  /**
+   * updates the active status array of material content list component
+   * @param index the index of the value to be updated
+   * @param chipValue optional. The value of the chip, to be used in the
+   * getArrayIndex function to get the index of the item to be updated
+   */
+  onUpdateHeelHeighActiveStatusArray(index: number | null, chipValue?: string) {
+    //   calling from search component and from different component than content-list
+    if (!index && chipValue) {
+      index = this.getArrayIndex(chipValue, this.heelHeightArr);
+    }
+    // fill the array with false value
+    this.initializeHeelHeightActiveStatusArray();
+    // set true to the provided index
+    if (index != null) {
+      this.heelHeighActiveStatusArray[index] = true;
+    }
+    // inform the app about the change
+    this.heelHeighActiveStatusListener.next(this.heelHeighActiveStatusArray);
+  }
+  /**
+   * updates the active status array of material content list component
+   * @param index the index of the value to be updated
+   * @param chipValue optional. The value of the chip, to be used in the
+   * getArrayIndex function to get the index of the item to be updated
+   */
+  onUpdateSalesActiveStatusArray(index: number | null, chipValue?: string) {
+    //   calling from search component and from different component than content-list
+    if (!index && chipValue) {
+      index = this.getArrayIndex(chipValue, this.salesArr);
+    }
+    // fill the array with false value
+    this.initializeSalesActiveStatusArray();
+    // set true to the provided index
+    if (index) {
+      this.salesActiveStatusArray[index] = true;
+    }
+    // inform the app about the change
+    this.salesActiveStatusListener.next(this.salesActiveStatusArray);
+  }
+
+  /**
+   * updates the active status array of material content list component
+   * @param index the index of the value to be updated
+   * @param chipValue optional. The value of the chip, to be used in the
+   * getArrayIndex function to get the index of the item to be updated
+   */
+  onUpdateMaterialActiveStatusArray(index: number | null, chipValue?: string) {
+    //   calling from search component and from different component than content-list
+    if (!index && chipValue) {
+      index = this.getArrayIndex(chipValue, this.materialArr);
+    }
+    // fill the array with false value
+    this.initializeMaterialActiveStatusArray();
+    // set true to the provided index
+    if (index) {
+      this.materialActiveStatusArray[index] = true;
+    }
+    // inform the app about the change
+    this.materialActiveStatusListener.next(this.materialActiveStatusArray);
+  }
+  /**
+   * Returns a substring of string between provided start string
+   * and end string
+   * @param str the initial string
+   * @param start the character/string from which the substring wil begin
+   * @param end the character/string from which the substring will end
+   * @returns the substring between start and end strings
+   */
   getSubstring(str: string, start: string, end: string): string {
     const startIndex = str.indexOf(start);
     const endIndex = str.indexOf(end);
@@ -97,5 +143,19 @@ export class ContentListService {
     } else {
       return '';
     }
+  }
+
+  /**
+   * Gets a string and an array and returns the index of
+   * the string inside the array
+   * @param text a string
+   * @param array of strings
+   * @returns the index of the string inside the array
+   */
+  getArrayIndex(text: string, array: ContentList[]) {
+    const colorIndex = array.findIndex((item) => {
+      return item.text_el === text;
+    });
+    return colorIndex;
   }
 }

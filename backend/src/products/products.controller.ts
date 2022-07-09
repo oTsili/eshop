@@ -41,6 +41,7 @@ export class ProductsController {
     @Query('sales') sales: string,
     @Query('price') price: string,
   ) {
+    console.log(heelHeight);
     let query = request.query;
     if (sales) {
       const [min, max] = sales.split('-').map((num: string) => parseInt(num));
@@ -51,9 +52,12 @@ export class ProductsController {
       query.price = { $gte: min, $lte: max };
     }
     if (heelHeight) {
+      console.log(heelHeight);
       const [min, max] = heelHeight
         .split('-')
         .map((num: string) => parseInt(num));
+
+      console.log(min, max);
       query.heelHeight = { $gte: min, $lte: max };
     }
 

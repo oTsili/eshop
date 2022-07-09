@@ -27,9 +27,9 @@ export class AccordionService {
         header_en: 'heelHeight',
         // comp: 'Smart as they come',
         elementList: [
-          { text_el: 'χαμηλο (3-5CM)', text_en: 'low (3-5CM)' },
-          { text_el: 'ΜΕΣΑΙ0 (6-9CM)', text_en: 'low (3-5CM)' },
-          { text_el: 'ΨΗΛΟ (10-12CM)', text_en: 'low (3-5CM)' },
+          { text_el: 'ΧΑΜΗΛΟ (3-5CM)', text_en: 'low (3-5CM)' },
+          { text_el: 'ΜΕΣΑΙ0 (6-9CM)', text_en: 'medium (6-9CM)' },
+          { text_el: 'ΨΗΛΟ (10-12CM)', text_en: 'high (10-12CM)' },
         ],
       }),
       new PanelItem(GridBoxesComponent, {

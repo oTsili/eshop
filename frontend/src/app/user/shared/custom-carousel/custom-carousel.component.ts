@@ -10,8 +10,8 @@ import { DynamicDatabase } from './dynamic-database';
   styleUrls: ['./custom-carousel.component.scss'],
 })
 export class CustomCarouselComponent implements OnInit, OnDestroy {
-  imagesLengthSubscription: Subscription;
   intervalId: NodeJS.Timer | null;
+  carouselSlidesSubscription: Subscription;
   isLoading = false;
   currentSlide = 0;
   slides: Slide[];
@@ -28,7 +28,7 @@ export class CustomCarouselComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.imagesLengthSubscription.unsubscribe();
+    this.carouselSlidesSubscription.unsubscribe();
   }
 
   onPreviousClick() {
@@ -55,11 +55,13 @@ export class CustomCarouselComponent implements OnInit, OnDestroy {
 
   preloadImages() {
     this.isLoading = true;
-    this.customCarouselService.getCarouselSlides().subscribe((response) => {
-      // console.log(response);
-      this.slides = response.carouselSlides;
-      this.dynamicDatabase.slides = this.slides;
-      this.isLoading = false;
-    });
+    this.carouselSlidesSubscription = this.customCarouselService
+      .getCarouselSlides()
+      .subscribe((response) => {
+        // console.log(response);
+        this.slides = response.carouselSlides;
+        this.dynamicDatabase.slides = this.slides;
+        this.isLoading = false;
+      });
   }
 }

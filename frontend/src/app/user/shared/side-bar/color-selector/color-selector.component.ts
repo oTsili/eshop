@@ -62,7 +62,6 @@ export class ColorSelectorComponent implements OnInit, OnDestroy {
     this.activeStatusSubscription = this.colorSelectorService
       .getActiveStatusListener()
       .subscribe((response) => {
-        console.log(response);
         this.activeStatusArray = response;
         this.cdr.detectChanges();
       });

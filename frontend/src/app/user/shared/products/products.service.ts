@@ -39,6 +39,7 @@ export class ProductsService {
     if (chip) {
       // get the index of the chip to be replaced
       const chipIndex = this.getChipIndex(chip.key);
+      console.log(chip);
       // if there is already a same chip
       if (chipIndex >= 0) {
         // remove the chip
@@ -49,6 +50,8 @@ export class ProductsService {
       // inform the app for the chipList update
       this.chipsListUpdateListener.next({ chipsList: this.chipsList });
     }
+
+    console.log(query);
     // inform the app for the products list update
     this.productUdateListener.next({
       query,

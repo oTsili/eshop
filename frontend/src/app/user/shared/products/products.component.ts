@@ -18,6 +18,8 @@ import { ProductsService } from './products.service';
 export class ProductsComponent implements OnInit, OnDestroy {
   isLoading = false;
   productsSubscription: Subscription;
+  initialProductsSubscription: Subscription;
+  internalProductsSubscription: Subscription;
   products: Product[];
   numOfCols: number = 3;
   arrOfCols: number[];
@@ -59,21 +61,25 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getProducts();
 
-    this.productsService.getProductsUpdateListener().subscribe((response) => {
-      console.log(response);
+    this.initialProductsSubscription = this.productsService
+      .getProductsUpdateListener()
+      .subscribe((response) => {
+        console.log(response);
 
-      this.productsService
-        .updateProductsList(response.query)
-        .subscribe((response) => {
-          console.log(response);
-          this.products = response.products;
-          this.cd.detectChanges();
-        });
-    });
+        this.internalProductsSubscription = this.productsService
+          .updateProductsList(response.query)
+          .subscribe((response) => {
+            console.log(response);
+            this.products = response.products;
+            this.cd.detectChanges();
+          });
+      });
   }
 
   ngOnDestroy(): void {
     this.productsSubscription.unsubscribe();
+    this.initialProductsSubscription.unsubscribe();
+    this.internalProductsSubscription.unsubscribe();
   }
 
   getProducts() {

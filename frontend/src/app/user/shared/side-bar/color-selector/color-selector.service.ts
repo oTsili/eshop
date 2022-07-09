@@ -35,7 +35,7 @@ export class ColorSelectorService {
     // fill the array with false value
     this.initializeActiveStatusArray();
     // set true to the provided index
-    if (index) {
+    if (index != null) {
       this.activeStatusArray[index] = true;
     }
     // inform the app about the change

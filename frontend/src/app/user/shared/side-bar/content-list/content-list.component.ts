@@ -1,4 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Router, UrlSerializer } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../../products/products.service';
@@ -15,22 +21,19 @@ export class ContentListComponent implements OnInit, OnDestroy {
   private heelHeightActiveStatusSubscription: Subscription;
   private salesActiveStatusSubscription: Subscription;
   private materialActiveStatusSubscription: Subscription;
-  //  heelHeightActiveStatusArray: boolean[];
-  //  salesActiveStatusArray: boolean[];
-  //  materialActiveStatusArray: boolean[];
+
   activeStatusArray: boolean[] = [];
 
   constructor(
     private contentListService: ContentListService,
     private router: Router,
     private urlSerializer: UrlSerializer,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    // console.log(this.data);
     this.elementList = this.data.elementList;
-    console.log(this.elementList);
     let elHeader = this.data.header_en;
     if (elHeader === 'heelHeight') {
       this.contentListService.heelHeighArray = this.elementList;
@@ -38,6 +41,7 @@ export class ContentListComponent implements OnInit, OnDestroy {
         .getHeelHeighActiveStatusListener()
         .subscribe((response) => {
           this.activeStatusArray = response;
+          this.cdr.detectChanges();
         });
     } else if (elHeader === 'sales') {
       this.contentListService.salesArray = this.elementList;
@@ -45,6 +49,7 @@ export class ContentListComponent implements OnInit, OnDestroy {
         .getSalesActiveStatusListener()
         .subscribe((response) => {
           this.activeStatusArray = response;
+          this.cdr.detectChanges();
         });
     } else if (elHeader === 'material') {
       this.contentListService.materialArray = this.elementList;
@@ -52,6 +57,7 @@ export class ContentListComponent implements OnInit, OnDestroy {
         .getMaterialActiveStatusListener()
         .subscribe((response) => {
           this.activeStatusArray = response;
+          this.cdr.detectChanges();
         });
     }
   }
@@ -61,20 +67,31 @@ export class ContentListComponent implements OnInit, OnDestroy {
     this.heelHeightActiveStatusSubscription.unsubscribe();
   }
 
+  toggleActiveClass(index: number) {
+    let elHeader = this.data.header_en;
+    if (elHeader === 'heelHeight') {
+      this.contentListService.initializeHeelHeightActiveStatusArray();
+      this.contentListService.onUpdateHeelHeighActiveStatusArray(index);
+    } else if (elHeader === 'sales') {
+      this.contentListService.initializeSalesActiveStatusArray();
+      this.contentListService.onUpdateSalesActiveStatusArray(index);
+    } else if (elHeader === ' material') {
+      this.contentListService.initializeMaterialActiveStatusArray();
+      this.contentListService.onUpdateMaterialActiveStatusArray(index);
+    }
+  }
+
   onSubmit(index: number) {
     let elHeader = this.data.header_en;
     // deserialize
     let urlTree = this.router.parseUrl(this.router.url);
     let chipKey = '';
-    let chipValue = '';
+    const chipValue = this.elementList[index].text_el;
     if (elHeader === 'heelHeight') {
-      chipValue = this.getHeelHeighChipValue(index);
       chipKey = 'heelHeight';
     } else if (elHeader === 'sales') {
-      chipValue = this.elementList[index].text_el;
       chipKey = 'sales';
     } else if (elHeader === 'material') {
-      chipValue = this.elementList[index].text_el;
       chipKey = 'material';
     }
 
@@ -86,19 +103,32 @@ export class ContentListComponent implements OnInit, OnDestroy {
     let url = this.urlSerializer.serialize(urlTree);
     // keep only the queries parameters
     let query = url.split('?')[1];
+    if (elHeader === 'heelHeight') {
+      query = this.contentListService
+        .getSubstring(query, '(', ')')
+        .replace('(', '');
 
+      query = `heelHeight=${query}`;
+    }
+
+    console.log({ query });
     let chip = { key: chipKey, value: chipValue };
     // call the method to update the products
     this.productsService.onProductsUpdate(query, chip);
   }
 
-  getHeelHeighChipValue(index: number) {
+  /**
+   * Specific function to get the values from the
+   * initial text of the list
+   * @param index index of the item element
+   * @returns the string to be place on chip component
+   */
+  getHeelHeightChipValue(index: number) {
     let listElementValue = this.elementList[index].text_el;
     let chipValue = listElementValue
       .split(' ')[1]
       .replace('(', '')
       .replace(')', '');
-    console.log(chipValue);
 
     return chipValue;
   }
