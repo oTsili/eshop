@@ -37,22 +37,26 @@ export class ProductsController {
     @Res() response,
     @Req() request,
 
+    @Query('heelHeight') heelHeight: string,
     @Query('sales') sales: string,
     @Query('price') price: string,
   ) {
     let query = request.query;
-    if (sales && price) {
-      const [minPrice, maxPrice] = price.split('-');
-      query.price = { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) };
-      const [minSales, maxSales] = price.split('-');
-      query.price = { $gte: parseInt(minSales), $lte: parseInt(maxSales) };
-    } else if (sales) {
-      const [min, max] = sales.split('-');
-      query.sales = { $gte: parseInt(min), $lte: parseInt(max) };
-    } else if (price) {
-      const [min, max] = price.split('-');
-      query.price = { $gte: parseInt(min), $lte: parseInt(max) };
+    if (sales) {
+      const [min, max] = sales.split('-').map((num: string) => parseInt(num));
+      query.sales = { $gte: min, $lte: max };
     }
+    if (price) {
+      const [min, max] = price.split('-').map((num: string) => parseInt(num));
+      query.price = { $gte: min, $lte: max };
+    }
+    if (heelHeight) {
+      const [min, max] = heelHeight
+        .split('-')
+        .map((num: string) => parseInt(num));
+      query.heelHeight = { $gte: min, $lte: max };
+    }
+
     const products = await this.productService.findFromQuery(query);
     return response.status(HttpStatus.OK).json({ products });
   }

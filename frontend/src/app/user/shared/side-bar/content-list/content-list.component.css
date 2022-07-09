@@ -11,8 +11,17 @@ ul {
 
 .element {
   margin: 1.5rem 0;
+  cursor: pointer;
 }
 
 .element:hover {
   font-weight: 600;
+}
+
+.active {
+  font-weight: 600;
+}
+
+a {
+  text-transform: uppercase;
 }

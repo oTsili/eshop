@@ -18,48 +18,54 @@ export class AccordionService {
   getPanels() {
     return [
       new PanelItem(ColorSelectorComponent, {
-        header: 'ΧΡΩΜΑ',
+        header_el: 'ΧΡΩΜΑ',
+        header_en: 'color',
         // comp: 'Brave as they come',
       }),
       new PanelItem(ContentListComponent, {
-        header: 'ΥΨΟΣ ΤΑΚΟΥΝΙΟΥ',
+        header_el: 'ΥΨΟΣ ΤΑΚΟΥΝΙΟΥ',
+        header_en: 'heelHeight',
         // comp: 'Smart as they come',
         elementList: [
-          { text: 'ΧΑΜΗΛΟ (3-5CM)' },
-          { text: 'ΜΕΣΑΙ0 (6-9CM)' },
-          { text: 'ΨΗΛΟ (10-12CM)' },
+          { text_el: 'χαμηλο (3-5CM)', text_en: 'low (3-5CM)' },
+          { text_el: 'ΜΕΣΑΙ0 (6-9CM)', text_en: 'low (3-5CM)' },
+          { text_el: 'ΨΗΛΟ (10-12CM)', text_en: 'low (3-5CM)' },
         ],
       }),
       new PanelItem(GridBoxesComponent, {
-        header: 'ΜΕΓΕΘΟΣ',
+        header_el: 'ΜΕΓΕΘΟΣ',
+        header_en: 'size',
         // comp: 'Submit your resume today!',
       }),
       new PanelItem(DoubleSliderComponent, {
-        header: 'ΤΙΜΗ',
+        header_el: 'ΤΙΜΗ',
+        header_en: 'price',
         // comp: 'Apply today',
       }),
       new PanelItem(ContentListComponent, {
-        header: 'ΕΚΠΤΩΣΗ',
+        header_el: 'ΕΚΠΤΩΣΗ',
+        header_en: 'sales',
 
         elementList: [
-          { text: 'Εώς 10' },
-          { text: '10 - 20' },
-          { text: '20 - 30' },
-          { text: '30 - 40' },
-          { text: '50 - 60' },
-          { text: '70 - 80' },
-          { text: '80 και άνω' },
+          { text_el: 'Εώς 10', text_en: 'up to 10' },
+          { text_el: '10 - 20', text_en: '10 - 20' },
+          { text_el: '20 - 30', text_en: '20 - 30' },
+          { text_el: '30 - 40', text_en: '30 - 40' },
+          { text_el: '50 - 60', text_en: '50 - 60' },
+          { text_el: '70 - 80', text_en: '70 - 80' },
+          { text_el: '80 και άνω', text_en: '80 and above' },
         ],
       }),
 
       new PanelItem(ContentListComponent, {
-        header: 'ΥΛΙΚΟ',
+        header_el: 'ΥΛΙΚΟ',
+        header_en: 'material',
 
         elementList: [
-          { text: 'ΣΥΝΘΕΤΙΚΟ ΔΕΡΜΑ' },
-          { text: 'ΣΥΝΘΕΤΙΚΟ ΣΟΥΕΤ' },
-          { text: 'ΥΦΑΣΜΑ' },
-          { text: 'PONY SKIN' },
+          { text_el: 'ΣΥΝΘΕΤΙΚΟ ΔΕΡΜΑ', text_en: 'synthetic leather' },
+          { text_el: 'ΣΥΝΘΕΤΙΚΟ ΣΟΥΕΤ', text_en: 'SYNTHETIC SUEDE' },
+          { text_el: 'ΥΦΑΣΜΑ', text_en: 'Textile' },
+          { text_el: 'PONY SKIN', text_en: 'PONY SKIN' },
         ],
       }),
     ];

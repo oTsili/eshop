@@ -1,9 +1,11 @@
 <div class="container">
   <ul class="list">
-    <li class="element" *ngFor="let element of elementList">
-      <a href="#">
-        {{ element.text }}
-      </a>
-    </li>
+    <ng-container *ngFor="let element of elementList; let i = index">
+      <li class="element" [ngClass]="{ active: activeStatusArray[i] }">
+        <a (click)="onSubmit(i)">
+          {{ element.text_el }}
+        </a>
+      </li>
+    </ng-container>
   </ul>
 </div>

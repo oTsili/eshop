@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ProductsService } from '../../products/products.service';
 
 @Injectable({ providedIn: 'root' })
 export class ColorSelectorService {
@@ -29,7 +28,6 @@ export class ColorSelectorService {
   }
 
   onUpdateActiveStatus(index: number | null, chipValue?: string) {
-    console.log('paok');
     if (!index && chipValue) {
       console.log(index, chipValue);
       index = this.getColorArrayIndex(chipValue);
@@ -48,15 +46,6 @@ export class ColorSelectorService {
     this.activeStatusArray = Array(this.colorsArr.length).fill(false);
     this.activeStatusListener.next(this.activeStatusArray);
   }
-
-  // toggleActiveStatus(index: number) {
-  //   this.initializeActiveStatusArray();
-  //   this.activeStatus[index] = !this.activeStatus[index];
-  // }
-
-  // getActiveStatusArray() {
-  //   return this.activeStatus;
-  // }
 
   getColorArrayIndex(color: string) {
     const colorIndex = this.colorsArr.findIndex((item) => {

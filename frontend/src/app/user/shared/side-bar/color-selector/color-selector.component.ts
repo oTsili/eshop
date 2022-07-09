@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   HostListener,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { Router, UrlSerializer } from '@angular/router';
@@ -15,7 +16,7 @@ import { ColorSelectorService } from './color-selector.service';
   templateUrl: './color-selector.component.html',
   styleUrls: ['./color-selector.component.css'],
 })
-export class ColorSelectorComponent implements OnInit {
+export class ColorSelectorComponent implements OnInit, OnDestroy {
   numberOfCols: number;
   arrOfCols: number[];
   arrOfRows: number[];
@@ -65,6 +66,10 @@ export class ColorSelectorComponent implements OnInit {
         this.activeStatusArray = response;
         this.cdr.detectChanges();
       });
+  }
+
+  ngOnDestroy(): void {
+    this.activeStatusSubscription.unsubscribe();
   }
 
   toggleActiveClass(index: number) {

@@ -17,7 +17,7 @@
   <!-- Accordion Start -->
   <app-accordion [collapsing]="collapsing">
     <ng-container *ngFor="let panel of panels">
-      <accordion-item title="{{ panel.data.header }}">
+      <accordion-item title="{{ panel.data.header_el }}">
         <ng-template accordionContent>
           <!-- Panel Start -->
           <app-accordion [panels]="panels"></app-accordion>
