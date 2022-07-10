@@ -42,24 +42,34 @@ export class ProductsController {
     @Query('price') price: string,
   ) {
     console.log(heelHeight);
+    /**
+     * for the query parameters heelHeight, sales and price, which contain
+     * non-numeral characters, refactor mongodb queryies, by stripping those
+     * non-numeral characters, and parsing the strings to numbers
+     */
     let query = request.query;
     if (sales) {
-      const [min, max] = sales.split('-').map((num: string) => parseInt(num));
+      const [min, max] = sales
+        .split('-')
+        .map((num: string) => parseInt(num.replace(/\D/g, '')));
       query.sales = { $gte: min, $lte: max };
     }
     if (price) {
-      const [min, max] = price.split('-').map((num: string) => parseInt(num));
+      const [min, max] = price
+        .split('-')
+        .map((num: string) => parseInt(num.replace(/\D/g, '')));
       query.price = { $gte: min, $lte: max };
     }
     if (heelHeight) {
       console.log(heelHeight);
       const [min, max] = heelHeight
         .split('-')
-        .map((num: string) => parseInt(num));
+        .map((num: string) => parseInt(num.replace(/\D/g, '')));
 
       console.log(min, max);
       query.heelHeight = { $gte: min, $lte: max };
     }
+    console.log(query);
 
     const products = await this.productService.findFromQuery(query);
     return response.status(HttpStatus.OK).json({ products });

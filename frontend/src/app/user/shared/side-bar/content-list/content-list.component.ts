@@ -103,33 +103,10 @@ export class ContentListComponent implements OnInit, OnDestroy {
     let url = this.urlSerializer.serialize(urlTree);
     // keep only the queries parameters
     let query = url.split('?')[1];
-    if (elHeader === 'heelHeight') {
-      query = this.contentListService
-        .getSubstring(query, '(', ')')
-        .replace('(', '');
-
-      query = `heelHeight=${query}`;
-    }
 
     console.log({ query });
     let chip = { key: chipKey, value: chipValue };
     // call the method to update the products
     this.productsService.onProductsUpdate(query, chip);
-  }
-
-  /**
-   * Specific function to get the values from the
-   * initial text of the list
-   * @param index index of the item element
-   * @returns the string to be place on chip component
-   */
-  getHeelHeightChipValue(index: number) {
-    let listElementValue = this.elementList[index].text_el;
-    let chipValue = listElementValue
-      .split(' ')[1]
-      .replace('(', '')
-      .replace(')', '');
-
-    return chipValue;
   }
 }

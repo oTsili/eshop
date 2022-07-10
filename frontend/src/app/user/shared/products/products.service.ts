@@ -43,7 +43,7 @@ export class ProductsService {
       // if there is already a same chip
       if (chipIndex >= 0) {
         // remove the chip
-        this.removeChip(chip.key);
+        this.removeChip(chipIndex);
       }
       // add the new(updated) chip
       this.addChip(chip);
@@ -67,10 +67,7 @@ export class ProductsService {
     }
   }
 
-  removeChip(chipKey: string): void {
-    const chipIndex = this.getChipIndex(chipKey);
-
-    // const index = this.chipsList.indexOf(chip);
+  removeChip(chipIndex: number): void {
     if (chipIndex >= 0) {
       this.chipsList.splice(chipIndex, 1);
       this.chipsListUpdateListener.next({ chipsList: this.chipsList });
@@ -81,7 +78,7 @@ export class ProductsService {
     if (chip) {
       const chipIndex = this.getChipIndex(chip.key);
       if (chipIndex >= 0) {
-        this.removeChip(chip.key);
+        this.removeChip(chipIndex);
       }
       this.chipsList.push(chip);
       this.chipsListUpdateListener.next({ chipsList: this.chipsList });

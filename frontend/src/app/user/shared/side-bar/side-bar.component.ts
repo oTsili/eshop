@@ -53,9 +53,11 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
   remove(chip: Chip): void {
     const index = this.chipsList.indexOf(chip);
+
+    console.log(index);
     if (index >= 0) {
       // this.chipsList.splice(index, 1);
-      this.productsService.removeChip(chip.key);
+      this.productsService.removeChip(index);
 
       if (chip.key === 'color') {
         this.colorSelectorService.initializeActiveStatusArray();
@@ -82,25 +84,27 @@ export class SideBarComponent implements OnInit, OnDestroy {
     let queryParam = '';
     // if no chips/queryParams left remove and the 'query?' strin
     // from the url
-    if (this.chipsList.length > 0) {
+    if (this.chipsList.length <= 0) {
+      baseUrl = baseUrl.replace('/query', '');
+      newUrl = `${baseUrl}`;
+    } else {
       // the greek are encoded in the URI/URL, so in order to compoare
       // must be converted to URI code format
-      if (chip.key === 'heelHeight') {
-        chip.value = encodeURI(chip.value);
-      }
+      chip.value = encodeURI(chip.value);
       // compose the string of key=value of chip
       queryParam = `${chip.key}=${chip.value}`;
       // remove the query param of the removed chip
       newQuery = query.replace(queryParam, '');
+      // conpose the new url
       newUrl = `${baseUrl}?${newQuery}`;
-    } else {
-      baseUrl = baseUrl.replace('/query', '');
-      newUrl = `${baseUrl}`;
     }
 
     // navigate to the new url
     this.router.navigateByUrl(newUrl);
 
+    newQuery = decodeURI(newQuery);
+
+    console.log(newQuery);
     // call the method to update the products
     this.productsService.onProductsUpdate(newQuery);
   }

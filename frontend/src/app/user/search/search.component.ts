@@ -43,9 +43,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
     // update ActiveStatus arrays of all the filters
     this.updateColorActiveStatus();
-    // the query string of heelHeight contains strange characters,
-    // so it has to be updated
-    query = this.updateHeelHeightActiveStatus(query) || query;
+    this.updateHeelHeightActiveStatus();
     this.updateMaterialActiveStatus();
     this.updateSalesActiveStatus();
     // update the products on Products component
@@ -61,7 +59,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
     }
   }
 
-  updateHeelHeightActiveStatus(query: string) {
+  updateHeelHeightActiveStatus() {
     const heelHeightIndex = this.productsService.getChipIndex('heelHeight');
     let heelHeightValue = '';
     if (heelHeightIndex >= 0) {
@@ -70,15 +68,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
         null,
         heelHeightValue
       );
-
-      query = this.contentListService
-        .getSubstring(query, '(', ')')
-        .replace('(', '');
-
-      query = `heelHeight=${query}`;
-      return query;
-    } else {
-      return null;
     }
   }
 
