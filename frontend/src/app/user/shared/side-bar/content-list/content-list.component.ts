@@ -61,12 +61,18 @@ export class ContentListComponent implements OnInit, OnDestroy {
         });
     }
   }
+
   ngOnDestroy(): void {
     this.salesActiveStatusSubscription.unsubscribe();
     this.materialActiveStatusSubscription.unsubscribe();
     this.heelHeightActiveStatusSubscription.unsubscribe();
   }
 
+  /**
+   * function to toggle the activeStatus array of each content list element,
+   * by getting the index of the specific element inside its containing array
+   * @param index
+   */
   toggleActiveClass(index: number) {
     let elHeader = this.data.header_en;
     if (elHeader === 'heelHeight') {
@@ -81,31 +87,29 @@ export class ContentListComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * function to be triggered when an option of the content-list is clicked
+   * @param index
+   */
   onSubmit(index: number) {
-    let elHeader = this.data.header_en;
-    // deserialize
-    let urlTree = this.router.parseUrl(this.router.url);
-    let chipKey = '';
-    const chipValue = this.elementList[index].text_el;
-    if (elHeader === 'heelHeight') {
-      chipKey = 'heelHeight';
-    } else if (elHeader === 'sales') {
-      chipKey = 'sales';
-    } else if (elHeader === 'material') {
-      chipKey = 'material';
-    }
+    // get the chip key from the element provided from the products Service
+    const chipKey = this.data.header_en;
+    // get the chip value from the element list provided (initially) from the products Service
+    const chipValue = `${this.data.header_el}: ${this.elementList[index].text_el}`;
 
+    // deserialize the url
+    const urlTree = this.router.parseUrl(this.router.url);
     // update the color query param
     urlTree.queryParams[chipKey] = chipValue;
     // navigate to the updated url
     this.router.navigateByUrl(urlTree);
     // serialize the url
-    let url = this.urlSerializer.serialize(urlTree);
+    const url = this.urlSerializer.serialize(urlTree);
     // keep only the queries parameters
-    let query = url.split('?')[1];
+    const query = url.split('?')[1];
 
     console.log({ query });
-    let chip = { key: chipKey, value: chipValue };
+    const chip = { key: chipKey, value: chipValue };
     // call the method to update the products
     this.productsService.onProductsUpdate(query, chip);
   }

@@ -20,6 +20,20 @@ export class AccordionService {
       new PanelItem(ColorSelectorComponent, {
         header_el: 'ΧΡΩΜΑ',
         header_en: 'color',
+
+        elementList: [
+          { text_en: 'red', text_el: 'ΚΟΚΚΙΝΟ' },
+          { text_en: 'blue', text_el: 'ΜΠΛΕ' },
+          { text_en: 'green', text_el: 'ΠΡΑΣΙΝΟ' },
+          { text_en: 'white', text_el: 'ΑΣΠΡΟ' },
+          { text_en: 'beige', text_el: 'ΜΠΕΖ' },
+          { text_en: 'brown', text_el: 'ΚΑΦΕ' },
+          { text_en: 'yellow', text_el: 'ΚΙΤΡΙΝΟ' },
+          { text_en: 'pink', text_el: 'ΡΟΖ' },
+          { text_en: 'mocha', text_el: 'ΜΟΚΑ' },
+          { text_en: 'purple', text_el: 'ΜΩΒ' },
+          { text_en: 'orange', text_el: 'ΠΟΡΤΟΚΑΛΙ' },
+        ],
         // comp: 'Brave as they come',
       }),
       new PanelItem(ContentListComponent, {

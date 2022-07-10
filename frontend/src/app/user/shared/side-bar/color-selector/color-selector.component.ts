@@ -3,12 +3,14 @@ import {
   Component,
   ElementRef,
   HostListener,
+  Input,
   OnDestroy,
   OnInit,
 } from '@angular/core';
 import { Router, UrlSerializer } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../../products/products.service';
+import { Color } from './color-selector.interfaces';
 import { ColorSelectorService } from './color-selector.service';
 
 @Component({
@@ -17,10 +19,11 @@ import { ColorSelectorService } from './color-selector.service';
   styleUrls: ['./color-selector.component.css'],
 })
 export class ColorSelectorComponent implements OnInit, OnDestroy {
+  @Input() data;
   numberOfCols: number;
   arrOfCols: number[];
   arrOfRows: number[];
-  colorsArr: { color: string }[] = [];
+  elementList: Color[] = [];
   // arrOfColsArray: Array<boolean> = [];
   activeStatusSubscription: Subscription;
   activeStatusArray: boolean[] = [];
@@ -40,7 +43,7 @@ export class ColorSelectorComponent implements OnInit, OnDestroy {
     // .map((x, i) => i + 1);
 
     this.arrOfRows = Array(
-      Math.ceil(this.colorsArr.length / this.numberOfCols)
+      Math.ceil(this.elementList.length / this.numberOfCols)
     ).fill(1);
     // .map((x, i) => i + 1);
   }
@@ -55,10 +58,10 @@ export class ColorSelectorComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.colorsArr = this.colorSelectorService.getColorsArray();
+    this.elementList = this.data.elementList;
 
     this.updateRowsCols();
-    // this.activeStatus = this.colorSelectorService.getActiveStatusArray();
+
     this.activeStatusSubscription = this.colorSelectorService
       .getActiveStatusListener()
       .subscribe((response) => {
@@ -85,10 +88,13 @@ export class ColorSelectorComponent implements OnInit, OnDestroy {
    * update (http req) the products
    * @param color
    */
-  onSubmit(color: string) {
+  onSubmit(index: number) {
     // deserialize
     let urlTree = this.router.parseUrl(this.router.url);
     // update the color query param
+
+    let color = this.elementList[index].text_en;
+
     urlTree.queryParams['color'] = color;
     // navigate to the updated url
     this.router.navigateByUrl(urlTree);
@@ -97,22 +103,24 @@ export class ColorSelectorComponent implements OnInit, OnDestroy {
     // keep only the queries parameters
     let query = url.split('?')[1];
 
-    let chip = { key: 'color', value: color };
+    const chipValue = `${this.data.header_el}: ${this.elementList[index].text_el}`;
+
+    let chip = { key: 'color', value: chipValue };
     // call the method to update the products
     this.productsService.onProductsUpdate(query, chip);
   }
 
-  /**
-   * Gets the current url and returns an array of the query parameters values
-   * @returns an array of the query parameters values
-   */
-  getQueryValues() {
-    let urlTree = this.router.parseUrl(this.router.url);
-    let queryArr: string[] = [];
-    Object.entries(urlTree.queryParams).forEach(([key, value], index) => {
-      queryArr.push(`${value}`);
-    });
-    console.log(queryArr);
-    return queryArr;
-  }
+  // /**
+  //  * Gets the current url and returns an array of the query parameters values
+  //  * @returns an array of the query parameters values
+  //  */
+  // getQueryValues() {
+  //   let urlTree = this.router.parseUrl(this.router.url);
+  //   let queryArr: string[] = [];
+  //   Object.entries(urlTree.queryParams).forEach(([key, value], index) => {
+  //     queryArr.push(`${value}`);
+  //   });
+  //   console.log(queryArr);
+  //   return queryArr;
+  // }
 }

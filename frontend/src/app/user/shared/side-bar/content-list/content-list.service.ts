@@ -67,7 +67,10 @@ export class ContentListService {
     this.materialActiveStatusListener.next(this.materialActiveStatusArray);
   }
   /**
-   * updates the active status array of material content list component
+   * Used from inside the contentListCompnent and from outside. In the
+   * first case only the index is provided, thus the active status array is
+   * updated and the app is informed. In the second case the index is searched
+   * from the chipValue that is provided. In this case the index provided is null.
    * @param index the index of the value to be updated
    * @param chipValue optional. The value of the chip, to be used in the
    * getArrayIndex function to get the index of the item to be updated
@@ -87,7 +90,10 @@ export class ContentListService {
     this.heelHeighActiveStatusListener.next(this.heelHeighActiveStatusArray);
   }
   /**
-   * updates the active status array of material content list component
+   * Used from inside the contentListCompnent and from outside. In the
+   * first case only the index is provided, thus the active status array is
+   * updated and the app is informed. In the second case the index is searched
+   * from the chipValue that is provided. In this case the index provided is null.
    * @param index the index of the value to be updated
    * @param chipValue optional. The value of the chip, to be used in the
    * getArrayIndex function to get the index of the item to be updated
@@ -108,7 +114,10 @@ export class ContentListService {
   }
 
   /**
-   * updates the active status array of material content list component
+   * Used from inside the contentListCompnent and from outside. In the
+   * first case only the index is provided, thus the active status array is
+   * updated and the app is informed. In the second case the index is searched
+   * from the chipValue that is provided. In this case the index provided is null.
    * @param index the index of the value to be updated
    * @param chipValue optional. The value of the chip, to be used in the
    * getArrayIndex function to get the index of the item to be updated

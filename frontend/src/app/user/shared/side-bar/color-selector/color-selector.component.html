@@ -2,14 +2,16 @@
   <div class="row" *ngFor="let row of arrOfRows; let i = index">
     <ng-container *ngFor="let col of arrOfCols; let j = index">
       <div
-        *ngIf="colorsArr[i * arrOfCols.length + j]"
+        *ngIf="elementList[i * arrOfCols.length + j]"
         [ngClass]="{ active: activeStatusArray[i * arrOfCols.length + j] }"
         class="col"
         (click)="toggleActiveClass(i * arrOfCols.length + j)"
       >
         <div
-          (click)="onSubmit(colorsArr[i * arrOfCols.length + j].color)"
-          class="button color {{ colorsArr[i * arrOfCols.length + j].color }}"
+          (click)="onSubmit(i * arrOfCols.length + j)"
+          class="button color {{
+            elementList[i * arrOfCols.length + j].text_en
+          }}"
         ></div>
       </div>
     </ng-container>
