@@ -8,7 +8,5 @@ export class CreateProductDto {
   material: string;
   description: string;
   price: string;
-  in_sales: string;
   sales: string;
-  special_price: string;
 }

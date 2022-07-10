@@ -4,6 +4,5 @@ export interface Product {
   name: string;
   description: string;
   price: string;
-  special_price: string;
   sales: string;
 }

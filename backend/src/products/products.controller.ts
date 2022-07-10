@@ -28,7 +28,11 @@ export class ProductsController {
 
   @Get('')
   async fetchAll(@Res() response) {
-    const products = await this.productService.findAll();
+    let products = await this.productService.findAll();
+
+    this.computeSalesPrice(products);
+    console.log(products);
+
     return response.status(HttpStatus.OK).json({ products });
   }
 
@@ -41,7 +45,6 @@ export class ProductsController {
     @Query('sales') sales: string,
     @Query('price') price: string,
   ) {
-    console.log(heelHeight);
     /**
      * for the query parameters heelHeight, sales and price, which contain
      * non-numeral characters, refactor mongodb queryies, by stripping those
@@ -61,7 +64,6 @@ export class ProductsController {
       query.price = { $gte: min, $lte: max };
     }
     if (heelHeight) {
-      console.log(heelHeight);
       const [min, max] = heelHeight
         .split('-')
         .map((num: string) => parseInt(num.replace(/\D/g, '')));
@@ -69,9 +71,26 @@ export class ProductsController {
       console.log(min, max);
       query.heelHeight = { $gte: min, $lte: max };
     }
-    console.log(query);
 
     const products = await this.productService.findFromQuery(query);
+
+    this.computeSalesPrice(products);
+    console.log(products);
     return response.status(HttpStatus.OK).json({ products });
+  }
+
+  /**
+   * computes and save the after-sales special price
+   * @param products the pre-fetched products (with )
+   */
+  computeSalesPrice(products: Product[]) {
+    products.forEach((product: Product) => {
+      if (product.sales) {
+        product.price = (
+          parseInt(product.price) -
+          parseInt(product.price) * (parseInt(product.sales) / 100)
+        ).toString();
+      }
+    });
   }
 }

@@ -16,11 +16,12 @@ import { Product } from './product.interface';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent implements AfterViewInit {
+export class ProductComponent implements AfterViewInit, OnInit {
   @Input() product: Product;
   @Input() source: string;
   @Output() elementInitialize: EventEmitter<number> =
     new EventEmitter<number>();
+  oldPrice: number;
 
   @HostListener('window:resize', ['$event'])
   emitWidth() {
@@ -29,6 +30,11 @@ export class ProductComponent implements AfterViewInit {
 
   constructor(private elementRef: ElementRef) {}
 
+  ngOnInit(): void {
+    this.oldPrice =
+      parseInt(this.product.price) +
+      parseInt(this.product.price) * (parseInt(this.product.sales) / 100);
+  }
   ngAfterViewInit(): void {
     /**
      * emit the product element's width to the parent element, so that it

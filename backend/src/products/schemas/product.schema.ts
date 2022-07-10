@@ -35,13 +35,7 @@ export class Product {
   price: string;
 
   @Prop()
-  in_sales: string;
-
-  @Prop()
   sales: string;
-
-  @Prop()
-  special_price: string;
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);
