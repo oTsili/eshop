@@ -5,6 +5,8 @@
 
 .header {
   font-weight: 600;
+  text-transform: uppercase;
+
   /* border-bottom: solid 1px #c8c8c8; */
 }
 
@@ -28,6 +30,7 @@
       background-color: transparent !important;
       margin: 0;
       font-size: 1.35rem;
+      text-transform: uppercase;
     }
   }
 }

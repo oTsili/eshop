@@ -30,7 +30,7 @@ export class ProductsController {
   async fetchAll(@Res() response) {
     let products = await this.productService.findAll();
 
-    this.computeSalesPrice(products);
+    this.productService.computeSalesPrice(products);
     console.log(products);
 
     return response.status(HttpStatus.OK).json({ products });
@@ -41,12 +41,12 @@ export class ProductsController {
     @Res() response,
     @Req() request,
 
-    @Query('heelHeight') heelHeight: string,
+    @Query('heel_height') heel_height: string,
     @Query('sales') sales: string,
     @Query('price') price: string,
   ) {
     /**
-     * for the query parameters heelHeight, sales and price, which contain
+     * for the query parameters heel_height, sales and price, which contain
      * non-numeral characters, refactor mongodb queryies, by stripping those
      * non-numeral characters, and parsing the strings to numbers
      */
@@ -63,34 +63,19 @@ export class ProductsController {
         .map((num: string) => parseInt(num.replace(/\D/g, '')));
       query.price = { $gte: min, $lte: max };
     }
-    if (heelHeight) {
-      const [min, max] = heelHeight
+    if (heel_height) {
+      const [min, max] = heel_height
         .split('-')
         .map((num: string) => parseInt(num.replace(/\D/g, '')));
 
       console.log(min, max);
-      query.heelHeight = { $gte: min, $lte: max };
+      query.heel_height = { $gte: min, $lte: max };
     }
 
     const products = await this.productService.findFromQuery(query);
 
-    this.computeSalesPrice(products);
+    this.productService.computeSalesPrice(products);
     console.log(products);
     return response.status(HttpStatus.OK).json({ products });
-  }
-
-  /**
-   * computes and save the after-sales special price
-   * @param products the pre-fetched products (with )
-   */
-  computeSalesPrice(products: Product[]) {
-    products.forEach((product: Product) => {
-      if (product.sales) {
-        product.price = (
-          parseInt(product.price) -
-          parseInt(product.price) * (parseInt(product.sales) / 100)
-        ).toString();
-      }
-    });
   }
 }

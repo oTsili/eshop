@@ -3,7 +3,7 @@ export class CreateProductDto {
   altSrc: string;
   name: string;
   color: string[];
-  heelHeight: string;
+  heel_height: string;
   size: string;
   material: string;
   description: string;

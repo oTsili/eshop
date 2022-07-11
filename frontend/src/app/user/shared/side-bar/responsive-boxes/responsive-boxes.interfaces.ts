@@ -1,4 +1,4 @@
-export interface Color {
+export interface ResponsiveBox {
   text_en: string;
   text_el: string;
 }

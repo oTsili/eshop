@@ -3,10 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AccordionModule } from '../accordion/accordion.module';
 import { SideBarComponent } from './side-bar.component';
-import { ColorSelectorComponent } from './color-selector/color-selector.component';
+import { ResponsiveBoxesComponent } from './responsive-boxes/responsive-boxes.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ContentListComponent } from './content-list/content-list.component';
-import { GridBoxesComponent } from './grid-boxes/grid-boxes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { InputModule } from '../input/input.module';
@@ -17,9 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     SideBarComponent,
-    ColorSelectorComponent,
+    ResponsiveBoxesComponent,
     ContentListComponent,
-    GridBoxesComponent,
   ],
   imports: [
     CommonModule,

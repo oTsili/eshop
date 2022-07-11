@@ -45,7 +45,7 @@ export class ContentListComponent implements OnInit, OnDestroy {
         });
     } else if (elHeader === 'sales') {
       this.contentListService.salesArray = this.elementList;
-      this.contentListService
+      this.salesActiveStatusSubscription = this.contentListService
         .getSalesActiveStatusListener()
         .subscribe((response) => {
           this.activeStatusArray = response;
@@ -53,7 +53,7 @@ export class ContentListComponent implements OnInit, OnDestroy {
         });
     } else if (elHeader === 'material') {
       this.contentListService.materialArray = this.elementList;
-      this.contentListService
+      this.materialActiveStatusSubscription = this.contentListService
         .getMaterialActiveStatusListener()
         .subscribe((response) => {
           this.activeStatusArray = response;
@@ -95,7 +95,7 @@ export class ContentListComponent implements OnInit, OnDestroy {
     // get the chip key from the element provided from the products Service
     const chipKey = this.data.header_en;
     // get the chip value from the element list provided (initially) from the products Service
-    const chipValue = `${this.data.header_el}: ${this.elementList[index].text_el}`;
+    const chipValue = `${this.data.header_en}: ${this.elementList[index].text_en}`;
 
     // deserialize the url
     const urlTree = this.router.parseUrl(this.router.url);

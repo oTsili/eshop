@@ -25,16 +25,6 @@ export class ContentListService {
     this.materialArr = matArr;
   }
 
-  //   get heelHeighArray() {
-  //     return this.heelHeightArr;
-  //   }
-  //   get salesArray() {
-  //     return this.salesArr;
-  //   }
-  //   get materialArray() {
-  //     return this.materialArr;
-  //   }
-
   getHeelHeighActiveStatusListener() {
     return this.heelHeighActiveStatusListener.asObservable();
   }
@@ -47,7 +37,7 @@ export class ContentListService {
     return this.materialActiveStatusListener.asObservable();
   }
 
-  // Fills the heelHeight status array with false values
+  // Fills the heel_height status array with false values
   initializeHeelHeightActiveStatusArray() {
     this.heelHeighActiveStatusArray = Array(this.heelHeightArr.length).fill(
       false
@@ -163,7 +153,7 @@ export class ContentListService {
    */
   getArrayIndex(text: string, array: ContentList[]) {
     const colorIndex = array.findIndex((item) => {
-      return item.text_el === text;
+      return item.text_en === text;
     });
     return colorIndex;
   }

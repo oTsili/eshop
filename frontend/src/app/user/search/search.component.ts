@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../shared/products/products.service';
-import { ColorSelectorService } from '../shared/side-bar/color-selector/color-selector.service';
+import { ResponsiveBoxesService } from '../shared/side-bar/responsive-boxes/responsive-boxes.service';
 import { ContentListService } from '../shared/side-bar/content-list/content-list.service';
 import { Chip } from '../shared/side-bar/side-bar.interfaces';
 import { DynamicDatabase } from './dynamic-database';
@@ -29,7 +29,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
     public dynamicDatabase: DynamicDatabase,
     private router: Router,
     private productsService: ProductsService,
-    private colorSelectorService: ColorSelectorService,
+    private responsiveBoxesService: ResponsiveBoxesService,
     private contentListService: ContentListService
   ) {}
 
@@ -39,13 +39,17 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
     // fill the chips array with the chips gained from the url
     this.queryArr = this.getQueryValues();
+    console.log(this.queryArr);
     this.productsService.chipsListInitialize(this.queryArr);
 
     // update ActiveStatus arrays of all the filters
     this.updateColorActiveStatus();
+    this.updateSizeActiveStatus();
     this.updateHeelHeightActiveStatus();
     this.updateMaterialActiveStatus();
     this.updateSalesActiveStatus();
+
+    console.log(query);
     // update the products on Products component
     this.productsService.onProductsUpdate(query);
   }
@@ -55,12 +59,21 @@ export class SearchComponent implements AfterViewInit, OnInit {
     let colorValue = '';
     if (colorIndex >= 0) {
       colorValue = this.queryArr[colorIndex].value;
-      this.colorSelectorService.onUpdateActiveStatus(null, colorValue);
+      this.responsiveBoxesService.onUpdateColorActiveStatus(null, colorValue);
+    }
+  }
+
+  updateSizeActiveStatus() {
+    const sizeIndex = this.productsService.getChipIndex('size');
+    let colorValue = '';
+    if (sizeIndex >= 0) {
+      colorValue = this.queryArr[sizeIndex].value;
+      this.responsiveBoxesService.onUpdateSizeActiveStatus(null, colorValue);
     }
   }
 
   updateHeelHeightActiveStatus() {
-    const heelHeightIndex = this.productsService.getChipIndex('heelHeight');
+    const heelHeightIndex = this.productsService.getChipIndex('heel_height');
     let heelHeightValue = '';
     if (heelHeightIndex >= 0) {
       heelHeightValue = this.queryArr[heelHeightIndex].value;

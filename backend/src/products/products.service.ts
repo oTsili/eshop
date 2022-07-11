@@ -44,4 +44,19 @@ export class ProductsService {
         .exec()
     );
   }
+
+  /**
+   * computes and save the after-sales special price
+   * @param products the pre-fetched products (with )
+   */
+  computeSalesPrice(products: Product[]) {
+    products.forEach((product: Product) => {
+      if (product.sales) {
+        product.price = (
+          parseInt(product.price) -
+          parseInt(product.price) * (parseInt(product.sales) / 100)
+        ).toString();
+      }
+    });
+  }
 }

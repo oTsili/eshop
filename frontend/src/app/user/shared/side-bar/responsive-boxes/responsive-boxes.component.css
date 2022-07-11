@@ -13,6 +13,12 @@
   background-color: #00000045;
 }
 
+.element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .active {
   border-radius: 25%;
   background-color: #00000045;
@@ -26,12 +32,13 @@
   width: 100%;
 }
 
-.color {
+.box {
   /* if margin is changed updateRowsCols() methods should be updated*/
   margin: 0.6rem;
   height: 3rem;
   width: 3rem;
   border: 0.1rem solid;
+  background: white;
 }
 
 .red {

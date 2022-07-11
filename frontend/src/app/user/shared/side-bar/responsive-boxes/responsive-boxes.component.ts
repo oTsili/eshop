@@ -10,23 +10,27 @@ import {
 import { Router, UrlSerializer } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../../products/products.service';
-import { Color } from './color-selector.interfaces';
-import { ColorSelectorService } from './color-selector.service';
+import { ResponsiveBox } from './responsive-boxes.interfaces';
+import { ResponsiveBoxesService } from './responsive-boxes.service';
 
 @Component({
-  selector: 'app-color-selector',
-  templateUrl: './color-selector.component.html',
-  styleUrls: ['./color-selector.component.css'],
+  selector: 'app-responsive-boxes',
+  templateUrl: './responsive-boxes.component.html',
+  styleUrls: ['./responsive-boxes.component.css'],
 })
-export class ColorSelectorComponent implements OnInit, OnDestroy {
+export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
   @Input() data;
   numberOfCols: number;
   arrOfCols: number[];
   arrOfRows: number[];
-  elementList: Color[] = [];
+  elementList: ResponsiveBox[] = [];
   // arrOfColsArray: Array<boolean> = [];
-  activeStatusSubscription: Subscription;
+  colorActiveStatusSubscription: Subscription;
+  sizeActiveStatusSubscription: Subscription;
   activeStatusArray: boolean[] = [];
+  queryParam: string;
+  show_text = false;
+
   /**
    * updates the number of colors, the array of Cols and
    * array of Rows, to be used in the grid of elements,
@@ -53,49 +57,76 @@ export class ColorSelectorComponent implements OnInit, OnDestroy {
     private productsService: ProductsService,
     private router: Router,
     private urlSerializer: UrlSerializer,
-    private colorSelectorService: ColorSelectorService,
+    private responsiveBoxesService: ResponsiveBoxesService,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.elementList = this.data.elementList;
-
+    this.queryParam = this.data.header_en;
+    this.show_text = this.data.show_text;
     this.updateRowsCols();
 
-    this.activeStatusSubscription = this.colorSelectorService
-      .getActiveStatusListener()
-      .subscribe((response) => {
-        this.activeStatusArray = response;
-        this.cdr.detectChanges();
-      });
+    let elHeader = this.data.header_en;
+    if (elHeader === 'color') {
+      this.responsiveBoxesService.colorArray = this.elementList;
+      this.colorActiveStatusSubscription = this.responsiveBoxesService
+        .getColorActiveStatusListener()
+        .subscribe((response) => {
+          this.activeStatusArray = response;
+          this.cdr.detectChanges();
+        });
+    } else if (elHeader === 'size') {
+      this.responsiveBoxesService.sizeArray = this.elementList;
+      this.sizeActiveStatusSubscription = this.responsiveBoxesService
+        .getSizeActiveStatusListener()
+        .subscribe((response) => {
+          this.activeStatusArray = response;
+          this.cdr.detectChanges();
+        });
+    }
+
+    // this.activeStatusSubscription = this.responsiveBoxesService
+    //   .getActiveStatusListener()
+    //   .subscribe((response) => {
+    //     this.activeStatusArray = response;
+    //     this.cdr.detectChanges();
+    //   });
   }
 
   ngOnDestroy(): void {
-    this.activeStatusSubscription.unsubscribe();
+    this.colorActiveStatusSubscription.unsubscribe();
+    this.sizeActiveStatusSubscription.unsubscribe();
   }
 
   toggleActiveClass(index: number) {
-    this.colorSelectorService.initializeActiveStatusArray();
-    this.colorSelectorService.onUpdateActiveStatus(index);
+    let elHeader = this.data.header_en;
+    if (elHeader === 'color') {
+      this.responsiveBoxesService.initializeColorActiveStatusArray();
+      this.responsiveBoxesService.onUpdateColorActiveStatus(index);
+    } else if (elHeader === 'size') {
+      this.responsiveBoxesService.initializeSizeActiveStatusArray;
+      this.responsiveBoxesService.onUpdateSizeActiveStatus(index);
+    }
   }
 
   /**
-   * Updates or inserts a query parameter of color with
-   * the color provided by the template with the click
+   * Updates or inserts a query parameter of color/size with
+   * the color/size provided by the template with the click
    * event. First deserializes the current url, then updates
-   * the color parameter, before navigating in the frontend
+   * the color/size parameter, before navigating in the frontend
    * and calling the onProductUpdate service method to
    * update (http req) the products
-   * @param color
+   * @param index:number
    */
   onSubmit(index: number) {
     // deserialize
     let urlTree = this.router.parseUrl(this.router.url);
-    // update the color query param
 
-    let color = this.elementList[index].text_en;
+    // update the color/size query param
+    let text = this.elementList[index].text_en;
+    urlTree.queryParams[this.queryParam] = text;
 
-    urlTree.queryParams['color'] = color;
     // navigate to the updated url
     this.router.navigateByUrl(urlTree);
     // serialize the url
@@ -103,9 +134,9 @@ export class ColorSelectorComponent implements OnInit, OnDestroy {
     // keep only the queries parameters
     let query = url.split('?')[1];
 
-    const chipValue = `${this.data.header_el}: ${this.elementList[index].text_el}`;
+    const chipValue = `${this.data.header_en}: ${this.elementList[index].text_en}`;
 
-    let chip = { key: 'color', value: chipValue };
+    let chip = { key: this.queryParam, value: chipValue };
     // call the method to update the products
     this.productsService.onProductsUpdate(query, chip);
   }

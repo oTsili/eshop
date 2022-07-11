@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ColorSelectorComponent } from '../side-bar/color-selector/color-selector.component';
+import { ResponsiveBoxesComponent } from '../side-bar/responsive-boxes/responsive-boxes.component';
 import { ContentListComponent } from '../side-bar/content-list/content-list.component';
 import { DoubleSliderComponent } from '../side-bar/double-slider/double-slider.component';
-import { GridBoxesComponent } from '../side-bar/grid-boxes/grid-boxes.component';
 import { PanelItem } from './panel/panel-item';
 import { PanelComponent } from './panel/panel-item.component';
 
@@ -17,10 +16,10 @@ export class AccordionService {
    */
   getPanels() {
     return [
-      new PanelItem(ColorSelectorComponent, {
+      new PanelItem(ResponsiveBoxesComponent, {
         header_el: 'ΧΡΩΜΑ',
         header_en: 'color',
-
+        show_text: false,
         elementList: [
           { text_en: 'red', text_el: 'ΚΟΚΚΙΝΟ' },
           { text_en: 'blue', text_el: 'ΜΠΛΕ' },
@@ -38,7 +37,7 @@ export class AccordionService {
       }),
       new PanelItem(ContentListComponent, {
         header_el: 'ΥΨΟΣ ΤΑΚΟΥΝΙΟΥ',
-        header_en: 'heelHeight',
+        header_en: 'heel_height',
         // comp: 'Smart as they come',
         elementList: [
           { text_el: 'ΧΑΜΗΛΟ (3-5CM)', text_en: 'low (3-5CM)' },
@@ -46,10 +45,17 @@ export class AccordionService {
           { text_el: 'ΨΗΛΟ (10-12CM)', text_en: 'high (10-12CM)' },
         ],
       }),
-      new PanelItem(GridBoxesComponent, {
+      new PanelItem(ResponsiveBoxesComponent, {
         header_el: 'ΜΕΓΕΘΟΣ',
         header_en: 'size',
-        // comp: 'Submit your resume today!',
+        show_text: true,
+        elementList: [
+          { text_el: '36', text_en: '36' },
+          { text_el: '37', text_en: '37' },
+          { text_el: '38', text_en: '38' },
+          { text_el: '39', text_en: '39' },
+          { text_el: '40', text_en: '40' },
+        ],
       }),
       new PanelItem(DoubleSliderComponent, {
         header_el: 'ΤΙΜΗ',

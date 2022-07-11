@@ -6,7 +6,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { ProductsService } from '../products/products.service';
 import { Router, UrlSerializer } from '@angular/router';
 import { Chip } from './side-bar.interfaces';
-import { ColorSelectorService } from './color-selector/color-selector.service';
+import { ResponsiveBoxesService } from './responsive-boxes/responsive-boxes.service';
 import { Subscription } from 'rxjs';
 import { ContentListService } from './content-list/content-list.service';
 
@@ -18,7 +18,7 @@ import { ContentListService } from './content-list/content-list.service';
 export class SideBarComponent implements OnInit, OnDestroy {
   collapsing = false;
   panels: PanelItem[] = [];
-  mainHeader = 'Φίλτρα';
+  mainHeader = 'Filters';
   chipsList: Chip[] = [];
   chipListSubscription: Subscription;
   // allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
@@ -30,7 +30,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
     private productsService: ProductsService,
     private urlSerializer: UrlSerializer,
     private cd: ChangeDetectorRef,
-    private colorSelectorService: ColorSelectorService,
+    private responsiveBoxesService: ResponsiveBoxesService,
     private contentListService: ContentListService
   ) {}
 
@@ -60,8 +60,10 @@ export class SideBarComponent implements OnInit, OnDestroy {
       this.productsService.removeChip(index);
 
       if (chip.key === 'color') {
-        this.colorSelectorService.initializeActiveStatusArray();
-      } else if (chip.key === 'heelHeight') {
+        this.responsiveBoxesService.initializeColorActiveStatusArray();
+      } else if (chip.key === 'size') {
+        this.responsiveBoxesService.initializeSizeActiveStatusArray();
+      } else if (chip.key === 'heel_height') {
         this.contentListService.initializeHeelHeightActiveStatusArray();
       } else if (chip.key === 'sales') {
         this.contentListService.initializeSalesActiveStatusArray();

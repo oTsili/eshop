@@ -31,6 +31,7 @@ export class ProductComponent implements AfterViewInit, OnInit {
   constructor(private elementRef: ElementRef) {}
 
   ngOnInit(): void {
+    // compute the pre-sales(old) price from the sales percentage
     this.oldPrice =
       parseInt(this.product.price) +
       parseInt(this.product.price) * (parseInt(this.product.sales) / 100);

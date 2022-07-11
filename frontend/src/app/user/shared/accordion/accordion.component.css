@@ -41,6 +41,7 @@
   background: var(--accordion-header-bg);
   border-bottom: 0.1rem solid rgb(85, 85, 85);
   margin-bottom: 8%;
+  text-transform: uppercase;
 }
 
 /* Default toggle button styles */

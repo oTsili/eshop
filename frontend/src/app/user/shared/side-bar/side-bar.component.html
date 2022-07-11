@@ -5,7 +5,7 @@
   </div>
   <div>
     <mat-chip-list #chipList aria-label="Fruit selection">
-      <mat-chip *ngFor="let chip of chipsList" (removed)="remove(chip)">
+      <mat-chip  *ngFor="let chip of chipsList" (removed)="remove(chip)">
         {{ chip.value }}
         <button matChipRemove>
           <i class="ph-x"></i>
@@ -17,7 +17,7 @@
   <!-- Accordion Start -->
   <app-accordion [collapsing]="collapsing">
     <ng-container *ngFor="let panel of panels">
-      <accordion-item title="{{ panel.data.header_el }}">
+      <accordion-item  title="{{ panel.data.header_en }}">
         <ng-template accordionContent>
           <!-- Panel Start -->
           <app-accordion [panels]="panels"></app-accordion>

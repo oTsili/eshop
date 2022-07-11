@@ -20,7 +20,7 @@ export class Product {
   color: string[];
 
   @Prop()
-  heelHeight: string;
+  heel_height: string;
 
   @Prop()
   size: string;
