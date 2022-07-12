@@ -63,11 +63,11 @@ export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.elementList = this.data.elementList;
-    this.queryParam = this.data.header_en;
+    this.queryParam = this.data.header;
     this.show_text = this.data.show_text;
     this.updateRowsCols();
 
-    let elHeader = this.data.header_en;
+    let elHeader = this.data.header;
     if (elHeader === 'color') {
       this.responsiveBoxesService.colorArray = this.elementList;
       this.colorActiveStatusSubscription = this.responsiveBoxesService
@@ -100,7 +100,7 @@ export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
   }
 
   toggleActiveClass(index: number) {
-    let elHeader = this.data.header_en;
+    let elHeader = this.data.header;
     if (elHeader === 'color') {
       this.responsiveBoxesService.initializeColorActiveStatusArray();
       this.responsiveBoxesService.onUpdateColorActiveStatus(index);
@@ -124,7 +124,7 @@ export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
     let urlTree = this.router.parseUrl(this.router.url);
 
     // update the color/size query param
-    let text = this.elementList[index].text_en;
+    let text = this.elementList[index].text;
     urlTree.queryParams[this.queryParam] = text;
 
     // navigate to the updated url
@@ -134,7 +134,7 @@ export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
     // keep only the queries parameters
     let query = url.split('?')[1];
 
-    const chipValue = `${this.data.header_en}: ${this.elementList[index].text_en}`;
+    const chipValue = this.elementList[index].text;
 
     let chip = { key: this.queryParam, value: chipValue };
     // call the method to update the products

@@ -96,7 +96,7 @@ export class ResponsiveBoxesService {
    */
   getElementArrayIndex(text: string, elementsArr: ResponsiveBox[]) {
     const colorIndex = elementsArr.findIndex((item) => {
-      return item.text_en === text;
+      return item.text === text;
     });
     return colorIndex;
   }

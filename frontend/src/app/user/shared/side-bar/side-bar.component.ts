@@ -9,6 +9,10 @@ import { Chip } from './side-bar.interfaces';
 import { ResponsiveBoxesService } from './responsive-boxes/responsive-boxes.service';
 import { Subscription } from 'rxjs';
 import { ContentListService } from './content-list/content-list.service';
+import { TranslateService } from '@ngx-translate/core';
+import { SideBarService } from './side-bar.service';
+import defaultLanguage from 'src/assets/i18n/en.json';
+import greekLanguage from 'src/assets/i18n/el.json';
 
 @Component({
   selector: 'app-side-bar',
@@ -18,9 +22,10 @@ import { ContentListService } from './content-list/content-list.service';
 export class SideBarComponent implements OnInit, OnDestroy {
   collapsing = false;
   panels: PanelItem[] = [];
-  mainHeader = 'Filters';
+  mainHeader = 'FILTERS';
   chipsList: Chip[] = [];
   chipListSubscription: Subscription;
+  changeLanguageSubscription: Subscription;
   // allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -31,8 +36,15 @@ export class SideBarComponent implements OnInit, OnDestroy {
     private urlSerializer: UrlSerializer,
     private cd: ChangeDetectorRef,
     private responsiveBoxesService: ResponsiveBoxesService,
-    private contentListService: ContentListService
-  ) {}
+    private contentListService: ContentListService,
+    private translate: TranslateService,
+    private sideBarService: SideBarService
+  ) {
+    translate.setTranslation('en', defaultLanguage);
+    translate.setTranslation('el', greekLanguage);
+    translate.setDefaultLang('en');
+    translate.use('el');
+  }
 
   ngOnInit(): void {
     // get the accordion panels
@@ -45,10 +57,19 @@ export class SideBarComponent implements OnInit, OnDestroy {
         this.chipsList = response.chipsList;
         this.cd.detectChanges();
       });
+
+    // get the chiplist and subscribe
+    this.changeLanguageSubscription = this.sideBarService
+      .getLanguageChangeListener()
+      .subscribe((response) => {
+        console.log(response);
+        this.translate.use(response);
+      });
   }
 
   ngOnDestroy(): void {
     this.chipListSubscription.unsubscribe();
+    this.changeLanguageSubscription.unsubscribe();
   }
 
   remove(chip: Chip): void {

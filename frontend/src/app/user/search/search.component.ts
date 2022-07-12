@@ -38,11 +38,12 @@ export class SearchComponent implements AfterViewInit, OnInit {
     let query = url.split('?')[1];
 
     // fill the chips array with the chips gained from the url
-    this.queryArr = this.getQueryValues();
+    this.queryArr = this.getChipValuesFromUrlQueries();
     console.log(this.queryArr);
     this.productsService.chipsListInitialize(this.queryArr);
 
-    // update ActiveStatus arrays of all the filters
+    // update ActiveStatus arrays of all the filters so that the
+    // selected item to be focused
     this.updateColorActiveStatus();
     this.updateSizeActiveStatus();
     this.updateHeelHeightActiveStatus();
@@ -65,10 +66,10 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   updateSizeActiveStatus() {
     const sizeIndex = this.productsService.getChipIndex('size');
-    let colorValue = '';
+    let sizeValue = '';
     if (sizeIndex >= 0) {
-      colorValue = this.queryArr[sizeIndex].value;
-      this.responsiveBoxesService.onUpdateSizeActiveStatus(null, colorValue);
+      sizeValue = this.queryArr[sizeIndex].value;
+      this.responsiveBoxesService.onUpdateSizeActiveStatus(null, sizeValue);
     }
   }
 
@@ -113,7 +114,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
    * Gets the current url and returns an array of the query parameters values
    * @returns an array of the query parameters values
    */
-  getQueryValues() {
+  getChipValuesFromUrlQueries() {
     let urlTree = this.router.parseUrl(this.router.url);
     let queryArr: Chip[] = [];
     Object.entries(urlTree.queryParams).forEach(([key, value], index) => {

@@ -153,7 +153,7 @@ export class ContentListService {
    */
   getArrayIndex(text: string, array: ContentList[]) {
     const colorIndex = array.findIndex((item) => {
-      return item.text_en === text;
+      return item.text === text;
     });
     return colorIndex;
   }

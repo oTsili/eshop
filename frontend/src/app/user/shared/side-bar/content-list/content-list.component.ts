@@ -34,7 +34,7 @@ export class ContentListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.elementList = this.data.elementList;
-    let elHeader = this.data.header_en;
+    let elHeader = this.data.header;
     if (elHeader === 'heelHeight') {
       this.contentListService.heelHeighArray = this.elementList;
       this.heelHeightActiveStatusSubscription = this.contentListService
@@ -74,7 +74,7 @@ export class ContentListComponent implements OnInit, OnDestroy {
    * @param index
    */
   toggleActiveClass(index: number) {
-    let elHeader = this.data.header_en;
+    let elHeader = this.data.header;
     if (elHeader === 'heelHeight') {
       this.contentListService.initializeHeelHeightActiveStatusArray();
       this.contentListService.onUpdateHeelHeighActiveStatusArray(index);
@@ -93,9 +93,9 @@ export class ContentListComponent implements OnInit, OnDestroy {
    */
   onSubmit(index: number) {
     // get the chip key from the element provided from the products Service
-    const chipKey = this.data.header_en;
+    const chipKey = this.data.header;
     // get the chip value from the element list provided (initially) from the products Service
-    const chipValue = `${this.data.header_en}: ${this.elementList[index].text_en}`;
+    const chipValue = this.elementList[index].text;
 
     // deserialize the url
     const urlTree = this.router.parseUrl(this.router.url);

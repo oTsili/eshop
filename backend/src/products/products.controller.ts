@@ -51,6 +51,7 @@ export class ProductsController {
      * non-numeral characters, and parsing the strings to numbers
      */
     let query = request.query;
+    console.log({ query });
     if (sales) {
       const [min, max] = sales
         .split('-')

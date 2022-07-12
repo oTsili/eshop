@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { SideBarService } from '../shared/side-bar/side-bar.service';
 import { DynamicDatabase } from './dynamic-database';
 import { navBarElement } from './header.interfaces';
 import { HeaderService } from './header.service';
@@ -16,7 +18,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private dynamicDatabase: DynamicDatabase,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private sideBarService: SideBarService
   ) {}
 
   ngOnInit(): void {
@@ -38,5 +41,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleActiveClass() {
     this.isActiveClassEnabled = !this.isActiveClassEnabled;
+  }
+
+  useLanguage(language: string): void {
+    console.log(language);
+    this.sideBarService.onLaguageChange(language);
   }
 }

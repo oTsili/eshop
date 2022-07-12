@@ -9,11 +9,11 @@
       >
         <div
           (click)="onSubmit(i * arrOfCols.length + j)"
-          class="button box {{ elementList[i * arrOfCols.length + j].text_en }}"
+          class="button box {{ elementList[i * arrOfCols.length + j].text }}"
           [ngClass]="{ element: show_text }"
         >
           <ng-container *ngIf="show_text"
-            >{{ elementList[i * arrOfCols.length + j].text_en }}
+            >{{ elementList[i * arrOfCols.length + j].text }}
           </ng-container>
         </div>
       </div>

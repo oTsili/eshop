@@ -1,12 +1,12 @@
 <div class="container">
   <div class="header-wrapper">
-    <span class="header">{{ mainHeader }}</span>
+    <span class="header">{{ mainHeader | translate }}</span>
     <hr />
   </div>
   <div>
     <mat-chip-list #chipList aria-label="Fruit selection">
-      <mat-chip  *ngFor="let chip of chipsList" (removed)="remove(chip)">
-        {{ chip.value }}
+      <mat-chip *ngFor="let chip of chipsList" (removed)="remove(chip)">
+        {{ chip.value | translate }}
         <button matChipRemove>
           <i class="ph-x"></i>
         </button>
@@ -17,7 +17,9 @@
   <!-- Accordion Start -->
   <app-accordion [collapsing]="collapsing">
     <ng-container *ngFor="let panel of panels">
-      <accordion-item  title="{{ panel.data.header_en }}">
+      <accordion-item
+        title="{{ panel.data.header.replace('_', ' ') | translate }}"
+      >
         <ng-template accordionContent>
           <!-- Panel Start -->
           <app-accordion [panels]="panels"></app-accordion>

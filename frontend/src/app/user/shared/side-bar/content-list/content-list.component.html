@@ -6,8 +6,8 @@
         class="element"
         [ngClass]="{ active: activeStatusArray[i] }"
       >
-        <a  (click)="onSubmit(i)">
-          {{ element.text_en }}
+        <a (click)="onSubmit(i)">
+          {{ element.text | translate }}
         </a>
       </li>
     </ng-container>
