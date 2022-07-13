@@ -26,7 +26,6 @@ export class SideBarComponent implements OnInit, OnDestroy {
   chipsList: Chip[] = [];
   chipListSubscription: Subscription;
   changeLanguageSubscription: Subscription;
-  // allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(
@@ -55,6 +54,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
       .getChipsListUpdateListener()
       .subscribe((response) => {
         this.chipsList = response.chipsList;
+
         this.cd.detectChanges();
       });
 
@@ -84,7 +84,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
         this.responsiveBoxesService.initializeColorActiveStatusArray();
       } else if (chip.key === 'size') {
         this.responsiveBoxesService.initializeSizeActiveStatusArray();
-      } else if (chip.key === 'heel_height') {
+      } else if (chip.key === 'heel height') {
         this.contentListService.initializeHeelHeightActiveStatusArray();
       } else if (chip.key === 'sales') {
         this.contentListService.initializeSalesActiveStatusArray();
@@ -111,9 +111,9 @@ export class SideBarComponent implements OnInit, OnDestroy {
       baseUrl = baseUrl.replace('/query', '');
       newUrl = `${baseUrl}`;
     } else {
-      // the greek are encoded in the URI/URL, so in order to compoare
-      // must be converted to URI code format
-      chip.value = encodeURI(chip.value);
+      // must be converted from URI code format to string
+      chip.value = decodeURI(chip.value);
+
       // compose the string of key=value of chip
       queryParam = `${chip.key}=${chip.value}`;
       // remove the query param of the removed chip

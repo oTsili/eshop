@@ -31,7 +31,6 @@ export class ProductsController {
     let products = await this.productService.findAll();
 
     this.productService.computeSalesPrice(products);
-    console.log(products);
 
     return response.status(HttpStatus.OK).json({ products });
   }
@@ -41,7 +40,7 @@ export class ProductsController {
     @Res() response,
     @Req() request,
 
-    @Query('heel_height') heel_height: string,
+    @Query('heel height') heel_height: string,
     @Query('sales') sales: string,
     @Query('price') price: string,
   ) {

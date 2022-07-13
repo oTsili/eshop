@@ -35,7 +35,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     const url = this.router.url;
-    let query = url.split('?')[1];
+    let query = decodeURI(url.split('?')[1]);
 
     // fill the chips array with the chips gained from the url
     this.queryArr = this.getChipValuesFromUrlQueries();
@@ -74,7 +74,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
   }
 
   updateHeelHeightActiveStatus() {
-    const heelHeightIndex = this.productsService.getChipIndex('heel_height');
+    const heelHeightIndex = this.productsService.getChipIndex('heel height');
     let heelHeightValue = '';
     if (heelHeightIndex >= 0) {
       heelHeightValue = this.queryArr[heelHeightIndex].value;
@@ -119,8 +119,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
     let queryArr: Chip[] = [];
     Object.entries(urlTree.queryParams).forEach(([key, value], index) => {
       let chipObject: Chip = {
-        key: `${key}`,
-        value: `${value}`,
+        key: `${decodeURI(key)}`,
+        value: `${decodeURI(value)}`,
       };
       queryArr.push(chipObject);
     });

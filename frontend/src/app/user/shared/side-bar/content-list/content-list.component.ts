@@ -35,7 +35,7 @@ export class ContentListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.elementList = this.data.elementList;
     let elHeader = this.data.header;
-    if (elHeader === 'heelHeight') {
+    if (elHeader === 'heel height') {
       this.contentListService.heelHeighArray = this.elementList;
       this.heelHeightActiveStatusSubscription = this.contentListService
         .getHeelHeighActiveStatusListener()
@@ -75,7 +75,7 @@ export class ContentListComponent implements OnInit, OnDestroy {
    */
   toggleActiveClass(index: number) {
     let elHeader = this.data.header;
-    if (elHeader === 'heelHeight') {
+    if (elHeader === 'heel height') {
       this.contentListService.initializeHeelHeightActiveStatusArray();
       this.contentListService.onUpdateHeelHeighActiveStatusArray(index);
     } else if (elHeader === 'sales') {
@@ -110,6 +110,8 @@ export class ContentListComponent implements OnInit, OnDestroy {
 
     console.log({ query });
     const chip = { key: chipKey, value: chipValue };
+
+    console.log(chip);
     // call the method to update the products
     this.productsService.onProductsUpdate(query, chip);
   }

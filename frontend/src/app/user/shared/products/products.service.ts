@@ -99,6 +99,7 @@ export class ProductsService {
   }
 
   getChipIndex(chipKey: string) {
+    console.log(this.chipsList);
     const chipIndex = this.chipsList.findIndex((chip) => {
       return chip.key === chipKey;
     });

@@ -17,7 +17,7 @@ export class AccordionService {
   getPanels() {
     return [
       new PanelItem(ResponsiveBoxesComponent, {
-        header: 'COLOR',
+        header: 'color',
         show_text: false,
         elementList: [
           { text: 'red' },
@@ -35,16 +35,16 @@ export class AccordionService {
         // comp: 'Brave as they come',
       }),
       new PanelItem(ContentListComponent, {
-        header: 'HEEL HEIGHT',
+        header: 'heel height',
         // comp: 'Smart as they come',
         elementList: [
-          { text: 'LOW (3-5CM)' },
-          { text: 'MEDIUM (6-9CM)' },
-          { text: 'HIGH (10-12CM)' },
+          { text: 'low (3-5CM)' },
+          { text: 'medium (6-9CM)' },
+          { text: 'high (10-12CM)' },
         ],
       }),
       new PanelItem(ResponsiveBoxesComponent, {
-        header: 'SIZE',
+        header: 'size',
         show_text: true,
         elementList: [
           { text: '36' },
@@ -55,29 +55,29 @@ export class AccordionService {
         ],
       }),
       new PanelItem(DoubleSliderComponent, {
-        header: 'PRICE',
+        header: 'price',
         // comp: 'Apply today',
       }),
       new PanelItem(ContentListComponent, {
-        header: 'SALES',
+        header: 'sales',
         elementList: [
-          { text: 'UP TO 10' },
+          { text: 'up to 10' },
           { text: '10 - 20' },
           { text: '20 - 30' },
           { text: '30 - 40' },
           { text: '50 - 60' },
           { text: '70 - 80' },
-          { text: '80 AND ABOVE' },
+          { text: '80 and above' },
         ],
       }),
 
       new PanelItem(ContentListComponent, {
-        header: 'MATERIAL',
+        header: 'material',
         elementList: [
-          { text: 'SYNTHETIC LEATHER' },
-          { text: 'SYNTHETIC SUEDE' },
-          { text: 'TEXTILE' },
-          { text: 'PONY SKIN' },
+          { text: 'synthetic leather' },
+          { text: 'synthetic suede' },
+          { text: 'textile' },
+          { text: 'pony skin' },
         ],
       }),
     ];
