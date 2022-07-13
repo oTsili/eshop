@@ -6,6 +6,10 @@ import { ResponsiveBoxesService } from '../shared/side-bar/responsive-boxes/resp
 import { ContentListService } from '../shared/side-bar/content-list/content-list.service';
 import { Chip } from '../shared/side-bar/side-bar.interfaces';
 import { DynamicDatabase } from './dynamic-database';
+import { TranslateService } from '@ngx-translate/core';
+import defaultLanguage from 'src/assets/i18n/en.json';
+import greekLanguage from 'src/assets/i18n/el.json';
+import { SearchService } from './search.service';
 
 @Component({
   selector: 'app-search',
@@ -22,6 +26,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
   sales: string | null;
   page = this.dynamicDatabase.searchPage;
   queryParamMapSubscription: Subscription;
+  changeLanguageSubscription: Subscription;
   queryArr;
 
   constructor(
@@ -30,8 +35,15 @@ export class SearchComponent implements AfterViewInit, OnInit {
     private router: Router,
     private productsService: ProductsService,
     private responsiveBoxesService: ResponsiveBoxesService,
-    private contentListService: ContentListService
-  ) {}
+    private contentListService: ContentListService,
+    private translate: TranslateService,
+    private searchService: SearchService
+  ) {
+    translate.setTranslation('en', defaultLanguage);
+    translate.setTranslation('el', greekLanguage);
+    translate.setDefaultLang('en');
+    translate.use('el');
+  }
 
   ngAfterViewInit(): void {
     const url = this.router.url;
@@ -109,7 +121,15 @@ export class SearchComponent implements AfterViewInit, OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // get translate language and subscribe
+    this.changeLanguageSubscription = this.searchService
+      .getLanguageChangeListener()
+      .subscribe((response) => {
+        console.log(response);
+        this.translate.use(response);
+      });
+  }
   /**
    * Gets the current url and returns an array of the query parameters values
    * @returns an array of the query parameters values
@@ -126,6 +146,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
     });
     return queryArr;
   }
+
+
 
   // ngOnInit(): void {
   // let urlTree = this.router.parseUrl(this.router.url);

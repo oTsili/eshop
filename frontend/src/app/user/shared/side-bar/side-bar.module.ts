@@ -47,6 +47,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   exports: [SideBarComponent],
 })
 export class SideBarModule {}
+
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);

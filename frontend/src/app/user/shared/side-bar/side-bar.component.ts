@@ -22,7 +22,7 @@ import greekLanguage from 'src/assets/i18n/el.json';
 export class SideBarComponent implements OnInit, OnDestroy {
   collapsing = false;
   panels: PanelItem[] = [];
-  mainHeader = 'FILTERS';
+  mainHeader = 'filters';
   chipsList: Chip[] = [];
   chipListSubscription: Subscription;
   changeLanguageSubscription: Subscription;
@@ -58,7 +58,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
         this.cd.detectChanges();
       });
 
-    // get the chiplist and subscribe
+    // get translate language and subscribe
     this.changeLanguageSubscription = this.sideBarService
       .getLanguageChangeListener()
       .subscribe((response) => {

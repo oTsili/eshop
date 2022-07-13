@@ -6,7 +6,7 @@
   <div>
     <mat-chip-list #chipList aria-label="Fruit selection">
       <mat-chip *ngFor="let chip of chipsList" (removed)="remove(chip)">
-        {{ chip.value | translate }}
+        {{ chip.key | translate }} : {{ chip.value | translate }}
         <button matChipRemove>
           <i class="ph-x"></i>
         </button>

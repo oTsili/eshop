@@ -29,5 +29,25 @@
   "mocha": "μοκα",
   "purple": "μωβ",
   "orange": "πορτοκαλι",
-  "black": "μαυρο"
+  "black": "μαυρο",
+
+  "Search Results for :": "Αποτελεσματα Αναζητησης για :",
+
+  "new arrivals": "νεες παραλαβες",
+  "accessories": "αξεσουαρ",
+  "offers": "προσφορες",
+  "contact": "επικοινωνια",
+  "clothing": "ενδυση",
+  "shoes": "παπουτσια",
+
+  "pumps": "γοβες",
+  "sandals": "πεδιλα",
+  "sneakers": "sneakers",
+  "oxford": "oxford",
+  "balletflats": "μπαλαρινες",
+  "boots": "μποτες",
+  "ankle boots": "μποτακια",
+  "mules": "mules",
+  "platforms": "πλατφορμες",
+  "tactical": "αρβυλες"
 }

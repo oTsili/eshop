@@ -11,6 +11,10 @@ import { ProductsModule } from '../shared/products/products.module';
 import { ResponsiveCatalogModule } from '../shared/NOT-USED-responsive-catalog/responsive-catalog.module';
 import { CatalogModule } from '../shared/NOT-USED-catalog/catalog.module';
 import { ReactiveFormsModule } from '@angular/forms';
+// import ngx-translate and the http loader
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [SearchComponent],
@@ -20,6 +24,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProductsModule,
     ReactiveFormsModule,
     SideBarModule,
+    // ngx-translate and the loader module
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     // ResponsiveCatalogModule,
     // CatalogModule,
     RouterModule.forChild([
@@ -33,3 +46,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [SearchComponent],
 })
 export class SearchModule {}
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}

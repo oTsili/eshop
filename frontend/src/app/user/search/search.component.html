@@ -1,6 +1,8 @@
 <div class="container">
   <div class="header-wrapper">
-    <span class="header"> {{ page.header }} "{{ searchQuery }}" </span>
+    <span class="header">
+      {{ page.header | translate }} "{{ searchQuery }}"
+    </span>
   </div>
 
   <div class="results-wrapper">

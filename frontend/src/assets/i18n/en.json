@@ -28,5 +28,25 @@
   "mocha": "mocha",
   "purple": "purple",
   "orange": "orange",
-  "black": "black"
+  "black": "black",
+
+  "Search Results for :": "Search Results for :",
+
+  "new arrivals": "new arrivals",
+  "accessories": "accessories",
+  "offers": "offers",
+  "contact": "contact",
+  "clothing": "clothing",
+  "shoes": "shoes",
+
+  "pumps": "pumps",
+  "sandals": "sandals",
+  "sneakers": "sneakers",
+  "oxford": "oxford",
+  "balletflats": "balletflats",
+  "boots": "boots",
+  "ankle boots": "ankle boots",
+  "mules": "mules",
+  "platforms": "platforms",
+  "tactical": "tactical"
 }

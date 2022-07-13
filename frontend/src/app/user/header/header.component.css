@@ -3,6 +3,11 @@ header {
   position: relative;
 }
 
+.link {
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
 .icon--medium {
   margin: 1%;
 }

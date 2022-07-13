@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { navBarElement } from './header.interfaces';
 
@@ -8,7 +8,16 @@ const BACKEND_URL = environment.BASE_URL + 'navbar';
 
 @Injectable({ providedIn: 'root' })
 export class HeaderService {
+  private languageChangeListener = new Subject<string>();
+
   constructor(private http: HttpClient) {}
+  getLanguageChangeListener() {
+    return this.languageChangeListener.asObservable();
+  }
+
+  onLanguageChange(lang: string) {
+    this.languageChangeListener.next(lang);
+  }
 
   getNavBarElements() {
     return this.http

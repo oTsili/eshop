@@ -5,6 +5,9 @@ import { SideBarService } from '../shared/side-bar/side-bar.service';
 import { DynamicDatabase } from './dynamic-database';
 import { navBarElement } from './header.interfaces';
 import { HeaderService } from './header.service';
+import defaultLanguage from 'src/assets/i18n/en.json';
+import greekLanguage from 'src/assets/i18n/el.json';
+import { SearchService } from '../search/search.service';
 
 @Component({
   selector: 'app-header',
@@ -15,19 +18,36 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isActiveClassEnabled = false;
   initialData: navBarElement[];
   navBarElementsSubsciption: Subscription;
+  changeLanguageSubscription: Subscription;
 
   constructor(
     private dynamicDatabase: DynamicDatabase,
     private headerService: HeaderService,
-    private sideBarService: SideBarService
-  ) {}
+    private sideBarService: SideBarService,
+    private translate: TranslateService,
+    private searchService: SearchService
+  ) {
+    translate.setTranslation('en', defaultLanguage);
+    translate.setTranslation('el', greekLanguage);
+    translate.setDefaultLang('en');
+    translate.use('el');
+  }
 
   ngOnInit(): void {
+    // get translate language and subscribe
+    this.changeLanguageSubscription = this.headerService
+      .getLanguageChangeListener()
+      .subscribe((response) => {
+        console.log(response);
+        this.translate.use(response);
+      });
+
     this.preloadNavBarElements();
   }
 
   ngOnDestroy(): void {
     this.navBarElementsSubsciption.unsubscribe();
+    this.changeLanguageSubscription.unsubscribe();
   }
 
   preloadNavBarElements() {
@@ -45,6 +65,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   useLanguage(language: string): void {
     console.log(language);
-    this.sideBarService.onLaguageChange(language);
+    this.headerService.onLanguageChange(language);
+    this.searchService.onLanguageChange(language);
   }
 }
