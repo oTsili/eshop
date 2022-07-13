@@ -28,10 +28,15 @@
     <div class="slides">
       <div #mainSlide class="wrapper" *ngFor="let product of products">
         <div class="slide main-slide">
-          <app-product [product]="product" [source]="product.src"></app-product>
+          <app-product
+            [img_height]="'33rem'"
+            [product]="product"
+            [source]="product.src"
+          ></app-product>
         </div>
         <div class="slide hover-slide">
           <app-product
+            [img_height]="'33rem'"
             [product]="product"
             [source]="product.altSrc"
           ></app-product>

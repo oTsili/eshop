@@ -32,7 +32,7 @@ export class SharedService {
       }
     }
 
-    // console.log(areas);
+    console.log(areas);
     return areas;
   }
 }

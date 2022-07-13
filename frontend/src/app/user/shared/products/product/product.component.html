@@ -1,4 +1,8 @@
-<img class="image" src="{{ source }}" />
+<img
+  [style.height]="img_height ? img_height : '40rem'"
+  class="image"
+  src="{{ source }}"
+/>
 <div *ngIf="product.sales" class="sales-text--wrapper">
   <div class="sales-text">-{{ product.sales }}%</div>
   <hr />

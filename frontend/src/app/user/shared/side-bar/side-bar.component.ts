@@ -113,9 +113,11 @@ export class SideBarComponent implements OnInit, OnDestroy {
     } else {
       // must be converted from URI code format to string
       chip.value = decodeURI(chip.value);
+      query = decodeURI(query);
 
       // compose the string of key=value of chip
       queryParam = `${chip.key}=${chip.value}`;
+
       // remove the query param of the removed chip
       newQuery = query.replace(queryParam, '');
       // conpose the new url

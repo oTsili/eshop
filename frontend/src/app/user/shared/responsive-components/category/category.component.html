@@ -1,0 +1,15 @@
+<div
+  class="category"
+  [style.background-image]="
+    'linear-gradient(rgba(0, 0, 0, -0.3), rgba(0, 0, 0, 0.7)), url(' +
+    category.imageSrc +
+    ')'
+  "
+>
+  <div class="category-text-container">
+    <div class="category-text category-name">
+      {{ category.name }}
+    </div>
+    <button class="category-text" mat-button color="accent">SHOP</button>
+  </div>
+</div>

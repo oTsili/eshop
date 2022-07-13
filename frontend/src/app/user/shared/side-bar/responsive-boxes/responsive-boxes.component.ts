@@ -85,13 +85,6 @@ export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
           this.cdr.detectChanges();
         });
     }
-
-    // this.activeStatusSubscription = this.responsiveBoxesService
-    //   .getActiveStatusListener()
-    //   .subscribe((response) => {
-    //     this.activeStatusArray = response;
-    //     this.cdr.detectChanges();
-    //   });
   }
 
   ngOnDestroy(): void {

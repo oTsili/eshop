@@ -16,12 +16,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ResponsiveBoxesModule } from './responsive-boxes/responsive-boxes.module';
 @NgModule({
-  declarations: [
-    SideBarComponent,
-    ResponsiveBoxesComponent,
-    ContentListComponent,
-  ],
+  declarations: [SideBarComponent, ContentListComponent],
   imports: [
     CommonModule,
     AccordionModule,
@@ -33,6 +30,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     MatChipsModule,
     MatIconModule,
+    ResponsiveBoxesModule,
     // FormsModule,
     // ngx-translate and the loader module
     HttpClientModule,

@@ -7,7 +7,7 @@
   [matMenuTriggerFor]="menu"
   (menuOpened)="getData(trigger)"
 >
-  {{ trigger }}
+  {{ trigger | translate }}
 </button>
 <mat-menu #menu="matMenu">
   <ng-container *ngFor="let node of data; let i = index">
@@ -18,7 +18,7 @@
       ></app-sub-nav>
     </button>
     <ng-template #menuItem>
-      <button mat-menu-item>{{ node.text }}</button>
+      <button mat-menu-item>{{ node.text | translate }}</button>
     </ng-template>
   </ng-container>
 </mat-menu>

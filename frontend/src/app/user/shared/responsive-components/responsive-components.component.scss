@@ -1,0 +1,34 @@
+$base-width: 25rem;
+
+.elements {
+  cursor: move;
+  // display: grid;
+  /* position: absolute; */
+  user-select: none;
+  // display: flex;
+  // flex-direction: row;
+  // width: $base-width;
+
+  height: auto !important;
+}
+
+.wrapper {
+  position: relative;
+  // margin: 3rem;
+  height: 100%;
+  // width: $base-width;
+  transition: scrollLeft 0.5s ease-in-out;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  margin: 1%;
+}
+
+.row {
+  /* justify-content: center; */
+  align-content: center;
+  display: flex;
+  flex-direction: row;
+}

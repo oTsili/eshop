@@ -4,8 +4,8 @@ import { HomeComponent } from './home.component';
 import { ConceptSentenceModule } from '../shared/concept-sentence/concept-sentence.module';
 import { CustomCarouselModule } from '../shared/custom-carousel/custom-carousel.module';
 import { CustomDragCarouselModule } from '../shared/custom-drag-carousel/custom-drag-carousel.module';
-import { GridLinkImgsModule } from '../shared/grid-link-imgs/grid-link-imgs.module';
 import { RouterModule } from '@angular/router';
+import { ResponsiveComponentsModule } from '../shared/responsive-components/responsive-components.module';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
     ConceptSentenceModule,
     CustomCarouselModule,
     CustomDragCarouselModule,
-    GridLinkImgsModule,
+    ResponsiveComponentsModule,
     RouterModule.forChild([
       {
         path: '',

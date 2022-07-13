@@ -35,6 +35,15 @@ export class ProductsController {
     return response.status(HttpStatus.OK).json({ products });
   }
 
+  @Get('sales')
+  async fetchSales(@Res() response) {
+    let products = await this.productService.findSales();
+
+    this.productService.computeSalesPrice(products);
+
+    return response.status(HttpStatus.OK).json({ products });
+  }
+
   @Get('/query?')
   async fetchFromQuery(
     @Res() response,

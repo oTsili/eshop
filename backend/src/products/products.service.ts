@@ -34,11 +34,12 @@ export class ProductsService {
     );
   }
 
-  async findSales(sales): Promise<Product[]> {
+  async findSales(): Promise<Product[]> {
     return (
       this.productModel
-        .find({ in_sales: true })
+        .find()
         .where('sales')
+        .ne('')
         // .gte(minSales)
         // .lte(maxSales)
         .exec()

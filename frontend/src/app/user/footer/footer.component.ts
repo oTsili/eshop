@@ -42,6 +42,7 @@ export class FooterComponent implements OnInit, OnDestroy {
     this.footerSubscription = this.footerService
       .getLinks()
       .subscribe((response) => {
+        console.log(response);
         this.footer_content = response.footer;
       });
   }

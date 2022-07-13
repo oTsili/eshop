@@ -8,17 +8,15 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Product } from './product.interface';
+import { Category } from './category.interface';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss'],
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.scss'],
 })
-export class ProductComponent implements AfterViewInit, OnInit {
-  @Input() img_height: string;
-  @Input() product: Product;
-  @Input() source: string;
+export class CategoryComponent implements AfterViewInit, OnInit {
+  @Input() category: Category;
   @Output() elementInitialize: EventEmitter<number> =
     new EventEmitter<number>();
   oldPrice: number;
@@ -30,19 +28,14 @@ export class ProductComponent implements AfterViewInit, OnInit {
 
   constructor(private elementRef: ElementRef) {}
 
-  ngOnInit(): void {
-    // compute the pre-sales(old) price from the sales percentage
-    this.oldPrice =
-      parseInt(this.product.price) +
-      parseInt(this.product.price) * (parseInt(this.product.sales) / 100);
-  }
+  ngOnInit(): void {}
   ngAfterViewInit(): void {
     /**
      * emit the product element's width to the parent element, so that it
      * can calculate the columns
      */
     this.elementInitialize.emit(
-      this.elementRef.nativeElement.querySelector('.image').offsetWidth
+      this.elementRef.nativeElement.querySelector('.category').offsetWidth
     );
   }
 }
