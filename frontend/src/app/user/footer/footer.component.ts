@@ -19,6 +19,9 @@ export class FooterComponent implements OnInit, OnDestroy {
   numberOfRows = 2;
   footerSubscription: Subscription;
   footer_content: FooterContent[];
+  colsEqualtoRows: string;
+  colsEqualtoArrLength: string;
+  colsEqualto1: string;
 
   emailElement = {
     label: 'Email',
@@ -42,8 +45,13 @@ export class FooterComponent implements OnInit, OnDestroy {
     this.footerSubscription = this.footerService
       .getLinks()
       .subscribe((response) => {
-        console.log(response);
         this.footer_content = response.footer;
+
+        this.colsEqualto1 = this.getFooterAreas(1);
+        this.colsEqualtoRows = this.getFooterAreas(this.numberOfRows);
+        this.colsEqualtoArrLength = this.getFooterAreas(
+          this.footer_content.length
+        );
       });
   }
 

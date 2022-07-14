@@ -3,9 +3,9 @@
     <!-- wrapper -->
     <div
       [ngStyle.lt-md]="{ 'text-align': 'center' }"
-      gdAreas.lt-md="{{ getFooterAreas(numberOfRows) }}"
-      gdAreas.lt-sm="{{ getFooterAreas(footer_content.length) }}"
-      gdAreas="{{ getFooterAreas(1) }}"
+      gdAreas="{{ colsEqualtoArrLength }}"
+      gdAreas.lt-sm="{{ colsEqualto1 }}"
+      gdAreas.lt-md="{{ colsEqualtoRows }}"
       gdGap="2% 2%"
       gdGap.lt-md="15% 15%"
       gdGap.lt-sm="4% 4%"
@@ -98,7 +98,6 @@
                 Register
               </button>
             </div>
-            
           </form>
         </div>
       </div>

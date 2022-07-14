@@ -18,8 +18,6 @@ import { ResponsiveComponentsService } from './responsive-components.service';
 export class ResponsiveComponentsComponent implements OnInit, OnDestroy {
   isLoading = false;
   responsiveComponentsSubscription: Subscription;
-  initialResponsiveComponentsSubscription: Subscription;
-  internalResponsiveComponentsSubscription: Subscription;
   responsiveComponents: Category[];
   numOfCols: number = 3;
   arrOfCols: number[];
@@ -40,10 +38,16 @@ export class ResponsiveComponentsComponent implements OnInit, OnDestroy {
         .getComputedStyle(element)
         .getPropertyValue('margin-left');
       let totalMargin = parseInt(marginLeft) + parseInt(marginRight);
+      let totalWidth = parseInt(this.elementRef.nativeElement.offsetWidth);
       this.numOfCols = Math.floor(
-        parseInt(this.elementRef.nativeElement.offsetWidth) /
-          (this.categoryWidth + parseInt(marginRight))
+        totalWidth / (this.categoryWidth + parseInt(marginRight))
       );
+      console.log({ totalWidth });
+      console.log({ marginRight });
+      console.log({ categoryWidth: this.categoryWidth });
+
+      console.log(this.numOfCols);
+      console.log(this.arrOfCols.length, this.arrOfRows.length);
     }
     this.arrOfCols = Array(this.numOfCols).fill(1);
 
@@ -64,8 +68,6 @@ export class ResponsiveComponentsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.responsiveComponentsSubscription.unsubscribe();
-    this.initialResponsiveComponentsSubscription.unsubscribe();
-    this.internalResponsiveComponentsSubscription.unsubscribe();
   }
 
   getResponsiveComponents() {
@@ -80,6 +82,7 @@ export class ResponsiveComponentsComponent implements OnInit, OnDestroy {
   }
 
   updateResponsiveComponentWidth(categoryWidth: number) {
+    console.log(categoryWidth);
     this.categoryWidth = categoryWidth;
     this.updateRowsCols();
     this.cd.detectChanges();

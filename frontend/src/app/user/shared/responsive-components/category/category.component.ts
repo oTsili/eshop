@@ -34,8 +34,10 @@ export class CategoryComponent implements AfterViewInit, OnInit {
      * emit the product element's width to the parent element, so that it
      * can calculate the columns
      */
-    this.elementInitialize.emit(
-      this.elementRef.nativeElement.querySelector('.category').offsetWidth
-    );
+
+    let categoryWidth =
+      this.elementRef.nativeElement.querySelector('.category').offsetWidth;
+
+    this.elementInitialize.emit(categoryWidth);
   }
 }

@@ -13,16 +13,11 @@ export class SharedService {
    * @returns a string to use as value in css-property grid-template-areas or gdAreas(in flexLayout library)
    */
   getGridAreas(numOfCols: number, arr: any[]) {
-    // console.log(colNum);
     let areas = '';
     for (let [index, item] of arr.entries()) {
       let idx = index + 1;
       if (numOfCols === arr.length) {
-        if (idx === arr.length - 1) {
-          areas = areas + `area${idx}`;
-        } else {
-          areas = areas + `area${idx} |`;
-        }
+        areas = areas + `area${idx} `;
       } else {
         if (idx % numOfCols === 0 && idx !== 0 && idx !== arr.length) {
           areas = areas + `area${idx} |`;
@@ -32,7 +27,7 @@ export class SharedService {
       }
     }
 
-    console.log(areas);
+    // console.log(areas);
     return areas;
   }
 }

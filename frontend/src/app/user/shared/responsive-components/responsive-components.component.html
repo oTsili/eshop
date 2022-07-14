@@ -1,4 +1,4 @@
-<div class="elements">
+<div [ngStyle.lt-sm]="{ 'margin-bottom': '4%' }" class="elements">
   <ng-container *ngIf="arrOfRows">
     <div class="row" *ngFor="let row of arrOfRows; let i = index">
       <div class="col" *ngFor="let col of arrOfCols; let j = index">
@@ -8,6 +8,8 @@
           class="wrapper"
         >
           <app-category
+            (elementInitialize)="updateResponsiveComponentWidth($event)"
+            appCategory
             [category]="responsiveComponents[i * arrOfCols.length + j]"
           ></app-category>
         </div>
