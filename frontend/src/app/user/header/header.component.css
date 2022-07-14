@@ -4,8 +4,11 @@ header {
 }
 
 .link {
-  text-transform: uppercase;
   cursor: pointer;
+}
+
+.hyperlink{
+  text-transform: uppercase;
 }
 
 .icon--medium {

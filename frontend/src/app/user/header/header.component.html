@@ -58,7 +58,7 @@
           <a
             *ngIf="initialData[i].subNavBarElements!.length === 0"
             href="{{ initialData[i].href }}"
-            class="link text--large"
+            class="hyperlink text--large"
           >
             {{ initialData[i].text | translate }}</a
           >
@@ -68,7 +68,10 @@
           >
             <app-sub-nav [data]="initialData" [isRootNode]="true">
               <ng-template>
-                <a href="{{ initialData[i].href }}" class="link text--large">
+                <a
+                  href="{{ initialData[i].href }}"
+                  class="hyperlink text--large"
+                >
                   {{ initialData[i].text | translate }}
                 </a>
               </ng-template>

@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [HeaderComponent, SubNavComponent],
@@ -19,6 +20,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     FlexLayoutModule,
     MatMenuModule,
     MatIconModule,
+    MatInputModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({

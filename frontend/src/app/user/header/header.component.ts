@@ -64,7 +64,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   useLanguage(language: string): void {
-    console.log(language);
     this.headerService.onLanguageChange(language);
     this.searchService.onLanguageChange(language);
   }
