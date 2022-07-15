@@ -51,7 +51,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
     // fill the chips array with the chips gained from the url
     this.queryArr = this.getChipValuesFromUrlQueries();
-    console.log(this.queryArr);
     this.productsService.chipsListInitialize(this.queryArr);
 
     // update ActiveStatus arrays of all the filters so that the
@@ -62,7 +61,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.updateMaterialActiveStatus();
     this.updateSalesActiveStatus();
 
-    console.log(query);
     // update the products on Products component
     this.productsService.onProductsUpdate(query);
   }
@@ -146,8 +144,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
     });
     return queryArr;
   }
-
-
 
   // ngOnInit(): void {
   // let urlTree = this.router.parseUrl(this.router.url);

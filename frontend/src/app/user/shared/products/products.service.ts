@@ -13,6 +13,7 @@ const BACKEND_URL = environment.BASE_URL + 'products';
 export class ProductsService {
   productUdateListener = new Subject<{ query: string }>();
   chipsListUpdateListener = new Subject<{ chipsList: Chip[] }>();
+  sideBarWidthListener = new Subject<number>();
   chipsList: Chip[] = [];
 
   constructor(private http: HttpClient) {}
@@ -21,6 +22,14 @@ export class ProductsService {
     return this.http.get<any>(`${BACKEND_URL}`, {
       withCredentials: true,
     });
+  }
+
+  getSideBarWidthListener() {
+    return this.sideBarWidthListener.asObservable();
+  }
+
+  updateSideBarWidth(width: number) {
+    this.sideBarWidthListener.next(width);
   }
 
   getChipsListUpdateListener() {
@@ -52,7 +61,6 @@ export class ProductsService {
       this.chipsListUpdateListener.next({ chipsList: this.chipsList });
     }
 
-    console.log(query);
     // inform the app for the products list update
     this.productUdateListener.next({
       query,
@@ -99,7 +107,6 @@ export class ProductsService {
   }
 
   getChipIndex(chipKey: string) {
-    console.log(this.chipsList);
     const chipIndex = this.chipsList.findIndex((chip) => {
       return chip.key === chipKey;
     });

@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { AccordionService } from '../accordion/accordion.service';
 import { PanelItem } from '../accordion/panel/panel-item';
@@ -19,7 +26,7 @@ import greekLanguage from 'src/assets/i18n/el.json';
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.scss'],
 })
-export class SideBarComponent implements OnInit, OnDestroy {
+export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
   collapsing = false;
   panels: PanelItem[] = [];
   mainHeader = 'filters';
@@ -32,17 +39,23 @@ export class SideBarComponent implements OnInit, OnDestroy {
     private router: Router,
     private accordionService: AccordionService,
     private productsService: ProductsService,
-    private urlSerializer: UrlSerializer,
     private cd: ChangeDetectorRef,
     private responsiveBoxesService: ResponsiveBoxesService,
     private contentListService: ContentListService,
     private translate: TranslateService,
-    private sideBarService: SideBarService
+    private sideBarService: SideBarService,
+    private elementRef: ElementRef
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
     translate.setDefaultLang('en');
     translate.use('el');
+  }
+
+  ngAfterViewInit(): void {
+    let el = this.elementRef.nativeElement.querySelector('.container');
+    let width = window.getComputedStyle(el).getPropertyValue('width');
+    this.productsService.updateSideBarWidth(parseInt(width));
   }
 
   ngOnInit(): void {

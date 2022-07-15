@@ -17,6 +17,7 @@ import { Product } from './product.interface';
 })
 export class ProductComponent implements AfterViewInit, OnInit {
   @Input() img_height: string;
+  @Input() img_width: string;
   @Input() product: Product;
   @Input() source: string;
   @Output() elementInitialize: EventEmitter<number> =

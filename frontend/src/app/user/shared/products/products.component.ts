@@ -5,6 +5,7 @@ import {
   HostListener,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from './product/product.interface';
@@ -26,12 +27,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
   arrOfRows: number[];
   productWidth: number;
   pageWidth: number;
+  sideBarWidth: number;
+  @ViewChild('productsElement') productsElement;
 
   @HostListener('window:resize', ['$event'])
   updateRowsCols() {
     // get the sidebar offset(px), convert to rem(*0.1), divide with
     // the box width plus the margin (3rem + .6rem + .6rem = 4.2rem)
-
+    let windowWidth = window.innerWidth;
+    this.pageWidth = windowWidth - this.sideBarWidth;
     if (this.productWidth) {
       let element = this.elementRef.nativeElement.querySelector('.wrapper');
       let marginRight = window
@@ -41,10 +45,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
         .getComputedStyle(element)
         .getPropertyValue('margin-left');
       let totalMargin = parseInt(marginLeft) + parseInt(marginRight);
-
       this.numOfCols = Math.floor(
-        parseInt(this.elementRef.nativeElement.offsetWidth) /
-          (this.productWidth + parseInt(marginRight))
+        this.pageWidth / (this.productWidth + parseInt(marginRight))
       );
       // compute the width of the container containing the products, so that
       // the paginator has the exactly same widht (and is put just below it)
@@ -66,6 +68,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // get the sideber width, so that it can be subtra
+    this.productsService.getSideBarWidthListener().subscribe((response) => {
+      this.sideBarWidth = response;
+    });
+
     this.getProducts();
 
     this.initialProductsSubscription = this.productsService
