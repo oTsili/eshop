@@ -41,8 +41,8 @@ export class ProductComponent implements AfterViewInit, OnInit {
      * emit the product element's width to the parent element, so that it
      * can calculate the columns
      */
-    this.elementInitialize.emit(
-      this.elementRef.nativeElement.querySelector('.image').offsetWidth
-    );
+    let productWith =
+      this.elementRef.nativeElement.querySelector('img').offsetWidth;
+    this.elementInitialize.emit(productWith);
   }
 }

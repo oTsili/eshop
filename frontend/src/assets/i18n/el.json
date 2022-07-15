@@ -49,5 +49,15 @@
   "ankle boots": "μποτακια",
   "mules": "mules",
   "platforms": "πλατφορμες",
-  "tactical": "αρβυλες"
+  "tactical": "αρβυλες",
+
+  "paginator": {
+    "First page": "Πρώτη σελίδα",
+    "Products per page:": "Προϊόντα ανά σελίδα:",
+    "Last page": "Τελευταία σελίδα",
+    "Next page": "Επόμενη σελίδα",
+    "Previous page": "Προηγούμενη σελίδα",
+    "Page": "Σελίδα",
+    "of": "από"
+  }
 }

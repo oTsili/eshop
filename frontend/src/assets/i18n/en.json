@@ -48,5 +48,15 @@
   "ankle boots": "ankle boots",
   "mules": "mules",
   "platforms": "platforms",
-  "tactical": "tactical"
+  "tactical": "tactical",
+
+  "paginator": {
+    "First page": "First page",
+    "Products per page:": "Products per page:",
+    "Last page": "Last page",
+    "Next page": "Next page",
+    "Previous page": "Previous page",
+    "Page": "Page",
+    "of": "of"
+  }
 }

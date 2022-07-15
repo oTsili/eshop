@@ -25,6 +25,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   arrOfCols: number[];
   arrOfRows: number[];
   productWidth: number;
+  pageWidth: number;
 
   @HostListener('window:resize', ['$event'])
   updateRowsCols() {
@@ -40,10 +41,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
         .getComputedStyle(element)
         .getPropertyValue('margin-left');
       let totalMargin = parseInt(marginLeft) + parseInt(marginRight);
+
       this.numOfCols = Math.floor(
         parseInt(this.elementRef.nativeElement.offsetWidth) /
           (this.productWidth + parseInt(marginRight))
       );
+      // compute the width of the container containing the products, so that
+      // the paginator has the exactly same widht (and is put just below it)
+      this.pageWidth = this.numOfCols * (this.productWidth + totalMargin);
+
+      this.cd.detectChanges();
     }
     this.arrOfCols = Array(this.numOfCols).fill(1);
 
