@@ -46,9 +46,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
-    const url = this.router.url;
-    let query = decodeURI(url.split('?')[1]);
-
     // fill the chips array with the chips gained from the url
     this.queryArr = this.getChipValuesFromUrlQueries();
     this.productsService.chipsListInitialize(this.queryArr);
@@ -61,8 +58,10 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.updateMaterialActiveStatus();
     this.updateSalesActiveStatus();
 
+    // get the url from the browser
+    let urlTree = this.router.parseUrl(this.router.url);
     // update the products on Products component
-    this.productsService.onProductsUpdate(query);
+    this.productsService.onProductsUpdate(urlTree.queryParams);
   }
 
   updateColorActiveStatus() {

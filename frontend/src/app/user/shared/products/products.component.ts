@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import {
   ChangeDetectorRef,
   Component,
@@ -7,6 +8,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { Params, Router, UrlSerializer } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PaginatorService } from '../paginator/paginator.service';
@@ -21,7 +23,6 @@ import { ProductsService } from './products.service';
 export class ProductsComponent implements OnInit, OnDestroy {
   isLoading = false;
   productsSubscription: Subscription;
-  initialProductsSubscription: Subscription;
   updateProductsSubscription: Subscription;
   sideBarWidthSubscription: Subscription;
   products: Product[];
@@ -70,7 +71,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private productsService: ProductsService,
     private paginatorService: PaginatorService,
     private elementRef: ElementRef,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -81,59 +83,44 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.sideBarWidth = response;
       });
 
+    // get the paginator change page listener
     this.productsService.getChangePageListener().subscribe((response) => {
       console.log(response);
       const { productsPerPage, currentPage } = response;
-      this.productsService
-        .getProducts(productsPerPage, currentPage)
-        .subscribe((response) => {
-          console.log(response);
-          const { totalProducts, products, message } = response;
-          this.products = products;
-          this.updateRowsCols();
-          this.cd.detectChanges();
-          this.paginatorService.onProductsLoaded(
-            totalProducts,
-            productsPerPage
-          );
-        });
+
+      this.productsPerPage = productsPerPage;
+      this.currentPage = currentPage;
+
+      let queryParams = this.router.parseUrl(this.router.url).queryParams;
+      this.productsService.onProductsUpdate(queryParams);
     });
 
-    this.getProducts();
+    // get the products on page initialization
+    let queryParams = this.router.parseUrl(this.router.url).queryParams;
+    this.getProducts(queryParams);
 
-    this.initialProductsSubscription = this.productsService
+    // subsribe to events that update the products in the page
+    this.updateProductsSubscription = this.productsService
       .getProductsUpdateListener()
       .subscribe((response) => {
         console.log(response);
-
-        this.updateProductsSubscription = this.productsService
-          .getProducts(this.productsPerPage, this.currentPage, response.query)
-          .subscribe((response) => {
-            console.log(response);
-            const { totalProducts, products, message } = response;
-            this.products = products;
-            this.paginatorService.onProductsLoaded(
-              totalProducts,
-              this.productsPerPage
-            );
-            this.updateRowsCols();
-
-            this.cd.detectChanges();
-          });
+        this.getProducts(response.queryParams);
       });
   }
 
   ngOnDestroy(): void {
     this.sideBarWidthSubscription.unsubscribe();
-    this.productsSubscription.unsubscribe();
-    this.initialProductsSubscription.unsubscribe();
     this.updateProductsSubscription.unsubscribe();
+    this.productsSubscription.unsubscribe();
   }
-
-  getProducts() {
+  /**
+   * gets the products from the db and updates the paginator
+   * @param query: query parameters to the http request
+   */
+  getProducts(query?: Params) {
     this.isLoading = true;
     this.productsSubscription = this.productsService
-      .getProducts(this.productsPerPage, this.currentPage)
+      .getProducts(this.productsPerPage, this.currentPage, query)
       .subscribe((response) => {
         const { totalProducts, products, message } = response;
         this.products = products;
@@ -147,6 +134,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Called from the product component to inform about its width so that the
+   * rows and columns are updated
+   * @param productWidth
+   */
   updateProductWidth(productWidth: number) {
     this.productWidth = productWidth;
     this.updateRowsCols();

@@ -122,16 +122,13 @@ export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
 
     // navigate to the updated url
     this.router.navigateByUrl(urlTree);
-    // serialize the url
-    let url = this.urlSerializer.serialize(urlTree);
-    // keep only the queries parameters
-    let query = url.split('?')[1];
 
+    // compose the chip view
     const chipValue = this.elementList[index].text;
-
     let chip = { key: this.queryParam, value: chipValue };
+
     // call the method to update the products
-    this.productsService.onProductsUpdate(query, chip);
+    this.productsService.onProductsUpdate(urlTree.queryParams, chip);
   }
 
   // /**

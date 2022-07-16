@@ -103,16 +103,13 @@ export class ContentListComponent implements OnInit, OnDestroy {
     urlTree.queryParams[chipKey] = chipValue;
     // navigate to the updated url
     this.router.navigateByUrl(urlTree);
-    // serialize the url
-    const url = this.urlSerializer.serialize(urlTree);
-    // keep only the queries parameters
-    const query = url.split('?')[1];
 
-    console.log({ query });
+    // compose the chip view
     const chip = { key: chipKey, value: chipValue };
-
     console.log(chip);
+
+    console.log({ queryParams: urlTree.queryParams });
     // call the method to update the products
-    this.productsService.onProductsUpdate(query, chip);
+    this.productsService.onProductsUpdate(urlTree.queryParams, chip);
   }
 }

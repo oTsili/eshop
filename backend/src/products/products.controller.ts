@@ -69,7 +69,7 @@ export class ProductsController {
      * non-numeral characters, refactor mongodb queryies, by stripping those
      * non-numeral characters, and parsing the strings to numbers
      */
-    console.log(pageSize, currentPage, sort, filter);
+    console.log({ pageSize }, { currentPage }, { sort }, { filter });
     let query = request.query;
     console.log({ query });
     if (sales) {
@@ -93,6 +93,7 @@ export class ProductsController {
       query.heel_height = { $gte: min, $lte: max };
     }
 
+    // get the products
     const products = await this.productService.findFromQuery(
       query,
       pageSize,
@@ -101,14 +102,15 @@ export class ProductsController {
       filter,
     );
 
+    // get the number of the products, so that the paginator is informed (e.g. page 1 of ...._)
     const totalProducts = await this.productService.countProducts(query);
 
+    // update the value attribute with respect the sales attribute if there is in each product
     this.productService.computeSalesPrice(products);
 
-    const message = 'products fetched';
-
+    // return the response to the frontend
     return response
       .status(HttpStatus.OK)
-      .json({ message, products, totalProducts });
+      .json({ message: 'products fetched', products, totalProducts });
   }
 }

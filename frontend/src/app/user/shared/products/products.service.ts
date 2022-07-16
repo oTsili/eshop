@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Params, UrlTree } from '@angular/router';
 import { filter, Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
@@ -12,7 +13,7 @@ const BACKEND_URL = environment.BASE_URL + 'products';
   providedIn: 'root',
 })
 export class ProductsService {
-  productUdateListener = new Subject<{ query: string }>();
+  productUdateListener = new Subject<{ queryParams: Params }>();
   chipsListUpdateListener = new Subject<{ chipsList: Chip[] }>();
   sideBarWidthListener = new Subject<number>();
   changePageListener = new Subject<{
@@ -34,16 +35,21 @@ export class ProductsService {
   getProducts(
     porductsPerPage: number,
     currentPage: number,
-    query?: string,
+    params?: Params,
     sort = '',
     filter = ''
   ) {
-    const queryParams = new HttpParams()
+    let queryParams = new HttpParams()
       .set('pageSize', porductsPerPage)
       .set('currentPage', currentPage)
       .set('sort', sort)
       .set('filter', filter);
-    // const queryParams = `?pagesize=${porductsPerPage}&page=${currentPage}&sort=${sort}&filter=${filterValues}`;
+
+    if (params) {
+      Object.entries(params).forEach(([key, value], index) => {
+        queryParams = queryParams.set(key, value);
+      });
+    }
 
     return this.httpClient.get<{
       message: string;
@@ -72,7 +78,8 @@ export class ProductsService {
     return this.productUdateListener.asObservable();
   }
 
-  onProductsUpdate(query: string, chip?: Chip) {
+  onProductsUpdate(queryParams: Params, chip?: Chip) {
+    console.log(queryParams);
     // update the chipsList
     if (chip) {
       // get the index of the chip to be replaced
@@ -91,7 +98,7 @@ export class ProductsService {
 
     // inform the app for the products list update
     this.productUdateListener.next({
-      query,
+      queryParams,
     });
   }
 

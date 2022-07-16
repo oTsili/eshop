@@ -48,14 +48,12 @@ export class DoubleSliderComponent implements OnInit {
     urlTree.queryParams['price'] = price;
     // navigate to the updated url
     this.router.navigateByUrl(urlTree);
-    // serialize the url
-    let url = this.urlSerializer.serialize(urlTree);
-    // keep only the queries parameters
-    let query = url.split('?')[1];
 
+    // compose the chip view
     let chip = { key: 'price', value: price };
+
     // call the method to update the products
-    this.productsService.onProductsUpdate(query, chip);
+    this.productsService.onProductsUpdate(urlTree.queryParams, chip);
   }
 
   onRegister(form: FormGroup) {

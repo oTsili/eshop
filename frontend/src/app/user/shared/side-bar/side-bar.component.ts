@@ -11,7 +11,7 @@ import { AccordionService } from '../accordion/accordion.service';
 import { PanelItem } from '../accordion/panel/panel-item';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ProductsService } from '../products/products.service';
-import { Router, UrlSerializer } from '@angular/router';
+import { ActivatedRoute, Params, Router, UrlSerializer } from '@angular/router';
 import { Chip } from './side-bar.interfaces';
 import { ResponsiveBoxesService } from './responsive-boxes/responsive-boxes.service';
 import { Subscription } from 'rxjs';
@@ -20,6 +20,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { SideBarService } from './side-bar.service';
 import defaultLanguage from 'src/assets/i18n/en.json';
 import greekLanguage from 'src/assets/i18n/el.json';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-side-bar',
@@ -37,6 +38,7 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private accordionService: AccordionService,
     private productsService: ProductsService,
     private cd: ChangeDetectorRef,
@@ -110,40 +112,16 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   updateProducts(chip: Chip) {
-    // get the domain: "baseUrl" and the current route: "query"
-    const url = this.router.url;
-    let [baseUrl, query] = url.split('?');
+    // get the url from the browser
+    let urlTree = this.router.parseUrl(this.router.url);
 
-    // compose the new url
-    let newUrl = '';
-    let newQuery = '';
-    let queryParam = '';
-    // if no chips/queryParams left remove and the 'query?' strin
-    // from the url
-    if (this.chipsList.length <= 0) {
-      baseUrl = baseUrl.replace('/query', '');
-      newUrl = `${baseUrl}`;
-    } else {
-      // must be converted from URI code format to string
-      chip.value = decodeURI(chip.value);
-      query = decodeURI(query);
-
-      // compose the string of key=value of chip
-      queryParam = `${chip.key}=${chip.value}`;
-
-      // remove the query param of the removed chip
-      newQuery = query.replace(queryParam, '');
-      // conpose the new url
-      newUrl = `${baseUrl}?${newQuery}`;
-    }
+    // delete the query parameter came from the chip
+    delete urlTree.queryParams[chip.key];
 
     // navigate to the new url
-    this.router.navigateByUrl(newUrl);
+    this.router.navigateByUrl(urlTree);
 
-    newQuery = decodeURI(newQuery);
-
-    console.log(newQuery);
     // call the method to update the products
-    this.productsService.onProductsUpdate(newQuery);
+    this.productsService.onProductsUpdate(urlTree.queryParams);
   }
 }
