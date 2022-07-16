@@ -3,15 +3,12 @@ $base-width: 25rem;
 .products {
   cursor: move;
   user-select: none;
-  // width: $base-width;
-  // width: 100%;
-
   height: auto !important;
 }
 
 .wrapper {
   position: relative;
-  margin: 3rem;
+  margin: 2rem;
   height: 100%;
   width: $base-width;
   transition: scrollLeft 0.5s ease-in-out;

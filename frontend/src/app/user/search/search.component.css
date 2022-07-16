@@ -30,3 +30,8 @@
   display: grid;
   grid-template-columns: 1fr 4fr;
 }
+
+app-side-bar {
+  position: sticky;
+  top: -3%;
+}

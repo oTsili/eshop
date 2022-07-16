@@ -5,6 +5,10 @@
 export const environment = {
   production: false,
   BASE_URL: 'http://localhost:3000/api/',
+  PAGE_SIZE_OPTIONS: [6, 12, 18, 24, 30],
+  TOTAL_PRODUCTS: 0,
+  PRODUCTS_PER_PAGE: 6,
+  CURRENT_PAGE: 1,
 };
 
 /*

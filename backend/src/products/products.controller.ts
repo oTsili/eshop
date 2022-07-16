@@ -30,9 +30,15 @@ export class ProductsController {
   async fetchAll(@Res() response) {
     let products = await this.productService.findAll();
 
+    // compute/update prices from sales
     this.productService.computeSalesPrice(products);
 
-    return response.status(HttpStatus.OK).json({ products });
+    const totalProducts = products.length;
+    const message = 'products fetched';
+
+    return response
+      .status(HttpStatus.OK)
+      .json({ message, products, totalProducts });
   }
 
   @Get('sales')
@@ -49,6 +55,11 @@ export class ProductsController {
     @Res() response,
     @Req() request,
 
+    @Query('pageSize') pageSize: number,
+    @Query('currentPage') currentPage: number,
+    @Query('sort') sort,
+    @Query('filter') filter,
+
     @Query('heel height') heel_height: string,
     @Query('sales') sales: string,
     @Query('price') price: string,
@@ -58,6 +69,7 @@ export class ProductsController {
      * non-numeral characters, refactor mongodb queryies, by stripping those
      * non-numeral characters, and parsing the strings to numbers
      */
+    console.log(pageSize, currentPage, sort, filter);
     let query = request.query;
     console.log({ query });
     if (sales) {
@@ -77,14 +89,26 @@ export class ProductsController {
         .split('-')
         .map((num: string) => parseInt(num.replace(/\D/g, '')));
 
-      console.log(min, max);
+      console.log({ min }, { max });
       query.heel_height = { $gte: min, $lte: max };
     }
 
-    const products = await this.productService.findFromQuery(query);
+    const products = await this.productService.findFromQuery(
+      query,
+      pageSize,
+      currentPage,
+      sort,
+      filter,
+    );
+
+    const totalProducts = await this.productService.countProducts(query);
 
     this.productService.computeSalesPrice(products);
-    console.log(products);
-    return response.status(HttpStatus.OK).json({ products });
+
+    const message = 'products fetched';
+
+    return response
+      .status(HttpStatus.OK)
+      .json({ message, products, totalProducts });
   }
 }

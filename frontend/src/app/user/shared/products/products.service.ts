@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { filter, Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Chip } from '../side-bar/side-bar.interfaces';
+import { Product } from './product/product.interface';
 
 const BACKEND_URL = environment.BASE_URL + 'products';
 
@@ -14,14 +15,41 @@ export class ProductsService {
   productUdateListener = new Subject<{ query: string }>();
   chipsListUpdateListener = new Subject<{ chipsList: Chip[] }>();
   sideBarWidthListener = new Subject<number>();
+  changePageListener = new Subject<{
+    productsPerPage: number;
+    currentPage: number;
+  }>();
   chipsList: Chip[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
-  getProducts() {
-    return this.http.get<any>(`${BACKEND_URL}`, {
-      withCredentials: true,
-    });
+  getChangePageListener() {
+    return this.changePageListener.asObservable();
+  }
+
+  onChangePage(productsPerPage: number, currentPage: number) {
+    this.changePageListener.next({ productsPerPage, currentPage });
+  }
+
+  getProducts(
+    porductsPerPage: number,
+    currentPage: number,
+    query?: string,
+    sort = '',
+    filter = ''
+  ) {
+    const queryParams = new HttpParams()
+      .set('pageSize', porductsPerPage)
+      .set('currentPage', currentPage)
+      .set('sort', sort)
+      .set('filter', filter);
+    // const queryParams = `?pagesize=${porductsPerPage}&page=${currentPage}&sort=${sort}&filter=${filterValues}`;
+
+    return this.httpClient.get<{
+      message: string;
+      products: Product[];
+      totalProducts: number;
+    }>(`${BACKEND_URL}/query`, { params: queryParams, withCredentials: true });
   }
 
   getSideBarWidthListener() {
@@ -94,17 +122,17 @@ export class ProductsService {
     }
   }
 
-  updateProductsList(query: string) {
-    let url = '';
-    if (query !== '') {
-      url = `${BACKEND_URL}/query?${query}`;
-    } else {
-      url = `${BACKEND_URL}`;
-    }
-    return this.http.get<any>(url, {
-      withCredentials: true,
-    });
-  }
+  // updateProductsList(query: string) {
+  //   let url = '';
+  //   if (query !== '') {
+  //     url = `${BACKEND_URL}/query?${query}`;
+  //   } else {
+  //     url = `${BACKEND_URL}`;
+  //   }
+  //   return this.httpClient.get<any>(url, {
+  //     withCredentials: true,
+  //   });
+  // }
 
   getChipIndex(chipKey: string) {
     const chipIndex = this.chipsList.findIndex((chip) => {

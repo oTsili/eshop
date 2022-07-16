@@ -19,8 +19,16 @@ export class ProductsService {
     return this.productModel.find().exec();
   }
 
-  async findFromQuery(query) {
-    return this.productModel.find(query).exec();
+  async countProducts(query) {
+    return this.productModel.find(query).countDocuments();
+  }
+
+  async findFromQuery(query, pageSize, currentPage, sort, filter) {
+    return this.productModel
+      .find(query)
+      .skip(pageSize * (currentPage - 1))
+      .limit(pageSize)
+      .exec();
   }
 
   async findPrice(price): Promise<Product[]> {

@@ -13,7 +13,7 @@ import {
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { PaginatorService } from './paginator.service';
+import { PaginatorTranslateService } from './paginator-translate.service';
 @NgModule({
   declarations: [PaginatorComponent],
   imports: [
@@ -28,18 +28,18 @@ import { PaginatorService } from './paginator.service';
       },
     }),
   ],
-  exports: [PaginatorComponent],
   providers: [
     {
       provide: MatPaginatorIntl,
       useFactory: (translate) => {
-        const service = new PaginatorService();
+        const service = new PaginatorTranslateService();
         service.injectTranslateService(translate);
         return service;
       },
       deps: [TranslateService],
     },
   ],
+  exports: [PaginatorComponent],
 })
 export class PaginatorModule {}
 // required for AOT compilation
