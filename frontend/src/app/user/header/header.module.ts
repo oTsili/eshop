@@ -11,9 +11,16 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
+import { SimulateClickDirective } from './mouse-enter.directive';
+import { SimulateUnclickDirective } from './mouse-out.directive';
 
 @NgModule({
-  declarations: [HeaderComponent, SubNavComponent],
+  declarations: [
+    HeaderComponent,
+    SubNavComponent,
+    SimulateClickDirective,
+    SimulateUnclickDirective,
+  ],
   imports: [
     CommonModule,
     MatToolbarModule,

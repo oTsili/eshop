@@ -42,12 +42,12 @@ export class ResponsiveComponentsComponent implements OnInit, OnDestroy {
       this.numOfCols = Math.floor(
         totalWidth / (this.categoryWidth + parseInt(marginRight))
       );
-      console.log({ totalWidth });
-      console.log({ marginRight });
-      console.log({ categoryWidth: this.categoryWidth });
+      // console.log({ totalWidth });
+      // console.log({ marginRight });
+      // console.log({ categoryWidth: this.categoryWidth });
 
-      console.log(this.numOfCols);
-      console.log(this.arrOfCols.length, this.arrOfRows.length);
+      // console.log(this.numOfCols);
+      // console.log(this.arrOfCols.length, this.arrOfRows.length);
     }
     this.arrOfCols = Array(this.numOfCols).fill(1);
 
@@ -82,7 +82,7 @@ export class ResponsiveComponentsComponent implements OnInit, OnDestroy {
   }
 
   updateResponsiveComponentWidth(categoryWidth: number) {
-    console.log(categoryWidth);
+    // console.log(categoryWidth);
     this.categoryWidth = categoryWidth;
     this.updateRowsCols();
     this.cd.detectChanges();

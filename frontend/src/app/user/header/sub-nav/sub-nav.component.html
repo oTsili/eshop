@@ -1,4 +1,10 @@
-<a *ngIf="isRootNode" [matMenuTriggerFor]="menu">
+<a
+  *ngIf="isRootNode"
+  [matMenuTriggerFor]="menu"
+  #menuTrigger="matMenuTrigger"
+  (mouseenter)="menuTrigger.openMenu()"
+  (mouseleave)="menuTrigger.closeMenu()"
+>
   <ng-container [ngTemplateOutlet]="inputElement"> </ng-container>
 </a>
 <button
@@ -9,7 +15,7 @@
 >
   {{ trigger | translate }}
 </button>
-<mat-menu #menu="matMenu">
+<mat-menu #menu="matMenu" [hasBackdrop]="false">
   <ng-container *ngFor="let node of data; let i = index">
     <button mat-menu-item>
       <app-sub-nav

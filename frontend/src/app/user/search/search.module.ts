@@ -8,8 +8,6 @@ import { SearchRoutingModule } from './search-routing.module';
 import { ProductsModule } from '../shared/products/products.module';
 // import { ProductsModule } from '../products/products.module'
 
-import { ResponsiveCatalogModule } from '../shared/NOT-USED-responsive-catalog/responsive-catalog.module';
-import { CatalogModule } from '../shared/NOT-USED-catalog/catalog.module';
 import { ReactiveFormsModule } from '@angular/forms';
 // import ngx-translate and the http loader
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';

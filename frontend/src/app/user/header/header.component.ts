@@ -12,7 +12,7 @@ import { SearchService } from '../search/search.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isActiveClassEnabled = false;
@@ -54,6 +54,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.navBarElementsSubsciption = this.headerService
       .getNavBarElements()
       .subscribe((response) => {
+        console.log(response);
         this.initialData = response.navBarElement;
         this.dynamicDatabase.navBarElements = this.initialData;
       });

@@ -55,3 +55,15 @@ button {
 ::ng-deep .mat-form-field {
   width: 100% !important;
 }
+
+::ng-deep .mat-menu-item,
+.mat-toolbar,
+.mat-toolbar h1,
+.mat-toolbar h2,
+.mat-toolbar h3,
+.mat-toolbar h4,
+.mat-toolbar h5,
+.mat-toolbar h6 {
+  font-family: "Source Serif Pro", "Roboto Serif", "Roboto", "Rubik", sans-serif !important;
+  font-weight: 500 !important;
+}

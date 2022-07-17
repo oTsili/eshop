@@ -7,7 +7,7 @@ header {
   cursor: pointer;
 }
 
-.hyperlink{
+.hyperlink {
   text-transform: uppercase;
 }
 
@@ -72,4 +72,35 @@ header {
 
 ::ng-deep .mat-form-field-underline {
   bottom: 0 !important;
+}
+
+::ng-deep .mat-toolbar,
+.mat-toolbar h1,
+.mat-toolbar h2,
+.mat-toolbar h3,
+.mat-toolbar h4,
+.mat-toolbar h5,
+.mat-toolbar h6 {
+  font-family: "Source Serif Pro", "Roboto Serif", "Roboto", "Rubik", sans-serif !important;
+  line-height: 3.2rem !important;
+  font-weight: 600 !important;
+}
+
+::ng-deep .mat-button,
+.mat-icon-button,
+.mat-stroked-button,
+.mat-flat-button {
+  font-family: "Source Serif Pro", "Roboto Serif", "Roboto", "Rubik", sans-serif !important;
+  border-radius: 0 !important;
+}
+
+::ng-deep .mat-form-field {
+  font-family: "Source Serif Pro", "Roboto Serif", "Roboto", "Rubik", sans-serif !important;
+}
+::ng-deep .mat-menu-item {
+  letter-spacing: 0.15rem;
+}
+
+:ng-deep .mat-menu-panel {
+  border-radius: 0%;
 }

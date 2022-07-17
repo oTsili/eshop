@@ -23,7 +23,9 @@ export class SubNavComponent implements OnInit {
 
   constructor(private database: DynamicDatabase) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+  }
 
   isExpandable(node: navBarElement): boolean {
     if (node.subNavBarElements?.length! > 0) {

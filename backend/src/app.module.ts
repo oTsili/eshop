@@ -11,7 +11,6 @@ import { GridCategoriesModule } from './grid-categories/grid-categories.module';
 import { FooterModule } from './footer/footer.module';
 // import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
 import { TestController } from './test/test.controller';
-// import { ColorsModule } from './NOT-USED colors/colors.module';
 
 @Module({
   // connect to the demo Database
