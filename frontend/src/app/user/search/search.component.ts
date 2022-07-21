@@ -16,7 +16,7 @@ import { SearchService } from './search.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
 })
-export class SearchComponent implements AfterViewInit, OnInit {
+export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   searchQuery: string | null;
   color: string | null;
   size: string | null;
@@ -30,7 +30,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
   queryArr;
 
   constructor(
-    private route: ActivatedRoute,
     public dynamicDatabase: DynamicDatabase,
     private router: Router,
     private productsService: ProductsService,
@@ -126,6 +125,10 @@ export class SearchComponent implements AfterViewInit, OnInit {
         console.log(response);
         this.translate.use(response);
       });
+  }
+
+  ngOnDestroy(): void {
+    this.changeLanguageSubscription.unsubscribe();
   }
   /**
    * Gets the current url and returns an array of the query parameters values

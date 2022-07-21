@@ -16,7 +16,7 @@
       <div
         [ngStyle.lt-md]="{ 'font-size': '1.5rem' }"
         *ngIf="footer_content[0].links"
-        class="footer-col header logo"
+        class="footer-col logo"
       >
         <div class="logo-container">
           <div>My app</div>
@@ -29,12 +29,12 @@
             </a>
           </div>
           <div [ngStyle.lt-md]="{ 'font-size': '1.2rem' }" class="order">
-            {{ footer_content[0].links[0].text }}
+            {{ footer_content[0].links[0].text | translate }}
           </div>
           <div [ngStyle.lt-md]="{ 'font-size': '1.2rem' }" class="order">
             <b>
               <a href="{{ footer_content[0].links[1].link }}">{{
-                footer_content[0].links[1].text
+                footer_content[0].links[1].text | translate
               }}</a>
             </b>
           </div>
@@ -43,12 +43,12 @@
       <!-- useful links -->
       <div class="footer-col information">
         <div [ngStyle.lt-md]="{ 'font-size': '1.5rem' }" class="header">
-          {{ footer_content[1].header }}
+          {{ footer_content[1].header | translate }}
         </div>
         <div [ngStyle.lt-md]="{ 'font-size': '1.2rem' }" class="links">
           <ul>
             <li *ngFor="let link of footer_content[1].links; let i = index">
-              <a href="#">{{ link.text }}</a>
+              <a href="#">{{ link.text | translate }}</a>
             </li>
           </ul>
         </div>
@@ -60,13 +60,13 @@
         class="footer-col contact"
       >
         <div [ngStyle.lt-md]="{ 'font-size': '1.5rem' }" class="header">
-          {{ footer_content[2].header }}
+          {{ footer_content[2].header | translate }}
         </div>
 
         <div [ngStyle.lt-md]="{ 'font-size': '1.2rem' }" class="links">
           <ul>
             <li *ngFor="let link of footer_content[2].links; let i = index">
-              <a href="#">{{ link.text }}</a>
+              <a href="#">{{ link.text | translate }}</a>
             </li>
           </ul>
         </div>
@@ -77,7 +77,7 @@
         class="footer-col newsletter"
       >
         <div [ngStyle.lt-md]="{ 'font-size': '1.5rem' }" class="header">
-          {{ footer_content[3].header }}
+          {{ footer_content[3].header | translate }}
         </div>
         <div [ngStyle.lt-md]="{ 'font-size': '1.2rem' }" class="links">
           <form
@@ -95,7 +95,7 @@
                 mat-button
                 type="submit"
               >
-                Register
+                {{ footer_content[3].links[0].text | translate }}
               </button>
             </div>
           </form>

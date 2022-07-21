@@ -5,10 +5,13 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { SharedService } from '../shared/shared.service';
 import { FooterContent } from './footer.interface';
 import { FooterService } from './footer.service';
+import defaultLanguage from 'src/assets/i18n/en.json';
+import greekLanguage from 'src/assets/i18n/el.json';
 
 @Component({
   selector: 'app-footer',
@@ -17,6 +20,7 @@ import { FooterService } from './footer.service';
 })
 export class FooterComponent implements OnInit, OnDestroy {
   numberOfRows = 2;
+  changeLanguageSubscription: Subscription;
   footerSubscription: Subscription;
   footer_content: FooterContent[];
   colsEqualtoRows: string;
@@ -30,15 +34,30 @@ export class FooterComponent implements OnInit, OnDestroy {
   };
   constructor(
     private sharedService: SharedService,
-    private footerService: FooterService
-  ) {}
+    private footerService: FooterService,
+    private translate: TranslateService
+  ) {
+    translate.setTranslation('en', defaultLanguage);
+    translate.setTranslation('el', greekLanguage);
+    translate.setDefaultLang('en');
+    translate.use('el');
+  }
 
   ngOnInit(): void {
+    // get translate language and subscribe
+    this.changeLanguageSubscription = this.footerService
+      .getLanguageChangeListener()
+      .subscribe((response) => {
+        console.log(response);
+        this.translate.use(response);
+      });
+
     this.getFooterContent();
   }
 
   ngOnDestroy(): void {
     this.footerSubscription.unsubscribe();
+    this.changeLanguageSubscription.unsubscribe();
   }
 
   getFooterContent() {

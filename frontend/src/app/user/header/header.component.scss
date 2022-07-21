@@ -41,6 +41,12 @@ header {
 
 .language-selector {
   padding-bottom: 2% !important;
+  font-size: 1.5rem;
+}
+
+.language {
+  font-size: 1.3rem;
+  font-weight: 400;
 }
 
 .link {
@@ -85,6 +91,10 @@ header {
   line-height: 3.2rem !important;
   font-weight: 600 !important;
 }
+
+// ::ng-deep .mat-toolbar {
+//   font-size: 1.5rem;
+// }
 
 ::ng-deep .mat-button,
 .mat-icon-button,

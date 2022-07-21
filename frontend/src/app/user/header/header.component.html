@@ -25,8 +25,20 @@
         [ngStyle.lt-md]="{ 'margin-left': '3%' }"
         [ngStyle.lt-sm]="{ 'padding-bottom': '1.4%', 'margin-left': '3%' }"
       >
-        <a (click)="useLanguage('el')" class="link text--medium"> ΕΛ </a> &#124;
-        <a (click)="useLanguage('en')" class="link text--medium">EN </a>
+        <a
+          [ngStyle]="{ 'font-weight': activeLanguage === 'el' ? 700 : 400 }"
+          (click)="useLanguage('el')"
+          class="link text--medium language"
+        >
+          ΕΛ
+        </a>
+        &#124;
+        <a
+          [ngStyle]="{ 'font-weight': activeLanguage === 'en' ? 700 : 400 }"
+          (click)="useLanguage('en')"
+          class="link text--medium language"
+          >EN
+        </a>
       </div>
       <a
         (click)="toggleActiveClass()"
