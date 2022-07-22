@@ -4,7 +4,9 @@ import {
   Input,
   OnInit,
   TemplateRef,
+  ViewChild,
 } from '@angular/core';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { DynamicDatabase } from '../dynamic-database';
 import { navBarElement } from '../header.interfaces';
 import { HeaderService } from '../header.service';
@@ -20,8 +22,16 @@ export class SubNavComponent implements OnInit {
   @Input() isRootNode = false;
   @Input() text: string;
   @ContentChild(TemplateRef) public inputElement: TemplateRef<any>;
+  @ViewChild(MatMenuTrigger) myTrigger: MatMenuTrigger;
 
   constructor(private database: DynamicDatabase) {}
+
+  openMyMenu() {
+    this.myTrigger.openMenu();
+  }
+  closeMyMenu() {
+    this.myTrigger.closeMenu();
+  }
 
   ngOnInit(): void {
     console.log(this.data);

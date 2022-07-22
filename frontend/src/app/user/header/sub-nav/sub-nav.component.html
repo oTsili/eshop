@@ -2,8 +2,7 @@
   *ngIf="isRootNode"
   [matMenuTriggerFor]="menu"
   #menuTrigger="matMenuTrigger"
-  (mouseenter)="menuTrigger.openMenu()"
-  (mouseleave)="menuTrigger.closeMenu()"
+  (mouseenter)="openMyMenu()"
 >
   <ng-container [ngTemplateOutlet]="inputElement"> </ng-container>
 </a>
@@ -15,16 +14,18 @@
 >
   {{ trigger | translate }}
 </button>
-<mat-menu #menu="matMenu" [hasBackdrop]="false">
-  <ng-container *ngFor="let node of data; let i = index">
-    <button mat-menu-item>
-      <app-sub-nav
-        [trigger]="node.text"
-        *ngIf="isExpandable(node); else menuItem"
-      ></app-sub-nav>
-    </button>
-    <ng-template #menuItem>
-      <button mat-menu-item>{{ node.text | translate }}</button>
-    </ng-template>
-  </ng-container>
+<mat-menu #menu="matMenu" overlapTrigger="false" [hasBackdrop]="false">
+  <span (mouseleave)="closeMyMenu()">
+    <ng-container *ngFor="let node of data; let i = index">
+      <button mat-menu-item>
+        <app-sub-nav
+          [trigger]="node.text"
+          *ngIf="isExpandable(node); else menuItem"
+        ></app-sub-nav>
+      </button>
+      <ng-template #menuItem>
+        <button mat-menu-item>{{ node.text | translate }}</button>
+      </ng-template>
+    </ng-container>
+  </span>
 </mat-menu>

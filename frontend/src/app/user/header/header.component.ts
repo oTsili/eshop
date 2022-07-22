@@ -14,6 +14,7 @@ import defaultLanguage from 'src/assets/i18n/en.json';
 import greekLanguage from 'src/assets/i18n/el.json';
 import { SearchService } from '../search/search.service';
 import { FooterService } from '../footer/footer.service';
+import { UserAppService } from '../user-app.service';
 
 @Component({
   selector: 'app-header',
@@ -28,6 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   activeLanguage: string;
 
   constructor(
+    private userAppService: UserAppService,
     private dynamicDatabase: DynamicDatabase,
     private headerService: HeaderService,
     private translate: TranslateService,
@@ -58,6 +60,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.navBarElementsSubsciption.unsubscribe();
     this.changeLanguageSubscription.unsubscribe();
+  }
+
+  openLoginModal(){
+    this.userAppService.onToggleModal();
   }
 
   preloadNavBarElements() {

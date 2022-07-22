@@ -49,14 +49,18 @@
       <span class="spacer"></span>
       <span>My App</span>
       <span class="spacer"></span>
-      <a fxShow.lt-sm="false" href="#" class="icon--medium">
+      <a
+        fxShow.lt-sm="false"
+        (click)="openLoginModal()"
+        class="link icon--medium"
+      >
         <!-- <mat-icon>share</mat-icon> -->
         <i class="ph-user"></i>
       </a>
-      <a fxShow.lt-sm="false" href="#" class="icon--medium">
+      <a fxShow.lt-sm="false" class="link icon--medium">
         <i class="ph-heart"></i>
       </a>
-      <a href="#" class="icon--medium">
+      <a class="link icon--medium">
         <i class="ph-shopping-bag"></i>
       </a>
     </mat-toolbar-row>
