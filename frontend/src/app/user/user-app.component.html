@@ -3,10 +3,41 @@
   <router-outlet></router-outlet>
   <app-footer></app-footer>
   <app-modal (close)="toggleModal()" *ngIf="modalOpen">
-    <div modalTitle>I am a REUSABLE TITLE</div>
-    <app-login></app-login>
+    <div modalTitle>Register</div>
+    <div class="wrapper">
+      <span class="modal-item">
+        <app-login
+          [ngStyle]="{ opacity: mainActive ? 1 : 0 }"
+          class="main"
+        ></app-login>
+        <app-login-promo
+          [ngStyle]="{ opacity: mainActive ? 0 : 1 }"
+          class="secondary"
+        >
+          <button (click)="toggleActive()" mat-raised-button color="accent">
+            Login
+          </button>
+        </app-login-promo>
+      </span>
+      <span class="modal-item">
+        <app-signup
+          [ngStyle]="{ opacity: mainActive ? 0 : 1 }"
+          class="secondary"
+        ></app-signup>
+        <app-signup-promo
+          [ngStyle]="{ opacity: mainActive ? 1 : 0 }"
+          class="main"
+        >
+          <button (click)="toggleActive()" mat-raised-button color="accent">
+            Signup
+          </button>
+        </app-signup-promo>
+      </span>
+    </div>
     <ng-container modalFooter>
-      <button (click)="toggleModal()">CLOSE ME!</button>
+      <button mat-button mat-raised-button color="accent" type="submit">
+        Login
+      </button>
     </ng-container>
   </app-modal>
 </div>

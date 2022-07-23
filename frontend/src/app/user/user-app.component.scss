@@ -1,0 +1,57 @@
+.container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+// ::ng-deep .ui.modal .content {
+//   min-height: 36rem;
+// }
+
+// ::ng-deep .ui.modal .actions {
+//   text-align: left !important;
+//   margin-left: 3% !important;
+// }
+
+::ng-deep .mat-button,
+.mat-icon-button,
+.mat-stroked-button,
+.mat-raised-button,
+.mat-flat-button {
+  font-family: "Source Serif Pro", "Roboto Serif", "Roboto", "Rubik", sans-serif !important;
+  border-radius: 0 !important;
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: 0.1rem;
+}
+
+.main {
+  // position: absolute;
+  top: 0;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.secondary {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  /* gap: 4%; */
+}
+
+.modal-item {
+  margin: 0 3%;
+  position: relative;
+  width: -webkit-fill-available;
+}
+
+// .form,
+// .promo {
+// }

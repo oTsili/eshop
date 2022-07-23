@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+p {
+  color: #000000c7;
+  font-weight: 400;
+}
+
+::ng-deep .mat-button,
+.mat-icon-button,
+.mat-stroked-button,
+.mat-raised-button,
+.mat-flat-button {
+  font-family: "Source Serif Pro", "Roboto Serif", "Roboto", "Rubik", sans-serif !important;
+  border-radius: 0 !important;
+  font-weight: 700;
+  font-size: 1.7rem;
+  letter-spacing: 0.1rem;
+}
+
+:ng-deep .mat-menu-panel {
+  border-radius: 0%;
+}

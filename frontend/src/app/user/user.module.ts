@@ -11,6 +11,10 @@ import { UserAppComponent } from './user-app.component';
 import { ModalModule } from './shared/modal/modal.module';
 import { CommonModule } from '@angular/common';
 import { LoginModule } from './header/login/login.module';
+import { MatButtonModule } from '@angular/material/button';
+import { SignupModule } from './header/signup/signup.module';
+import { SignupPromoModule } from './header/signup-promo/signup-promo.module';
+import { LoginPromoModule } from './header/login-promo/login-promo.module';
 
 @NgModule({
   declarations: [UserAppComponent],
@@ -20,8 +24,12 @@ import { LoginModule } from './header/login/login.module';
     FooterModule,
     HeaderModule,
     HomeModule,
+    MatButtonModule,
     ModalModule,
     LoginModule,
+    SignupModule,
+    SignupPromoModule,
+    LoginPromoModule,
     RouterModule.forChild([
       {
         path: '',

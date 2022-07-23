@@ -18,3 +18,8 @@ i.icon {
   justify-content: flex-end;
   cursor: pointer;
 }
+
+.ui.modal .content {
+  font-size: 1.5rem;
+}
+
