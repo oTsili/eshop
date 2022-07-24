@@ -7,11 +7,17 @@
     <div class="wrapper">
       <span class="modal-item">
         <app-login
-          [ngStyle]="{ opacity: mainActive ? 1 : 0 }"
+          [ngStyle]="{
+            opacity: mainActive ? 1 : 0,
+            'z-index': mainActive ? 1000 : -1000
+          }"
           class="main"
         ></app-login>
         <app-login-promo
-          [ngStyle]="{ opacity: mainActive ? 0 : 1 }"
+          [ngStyle]="{
+            opacity: mainActive ? 0 : 1,
+            'z-index': mainActive ? -1000 : 1000
+          }"
           class="secondary"
         >
           <button (click)="toggleActive()" mat-raised-button color="accent">
@@ -21,11 +27,17 @@
       </span>
       <span class="modal-item">
         <app-signup
-          [ngStyle]="{ opacity: mainActive ? 0 : 1 }"
+          [ngStyle]="{
+            opacity: mainActive ? 0 : 1,
+            'z-index': mainActive ? -1000 : 1000
+          }"
           class="secondary"
         ></app-signup>
         <app-signup-promo
-          [ngStyle]="{ opacity: mainActive ? 1 : 0 }"
+          [ngStyle]="{
+            opacity: mainActive ? 1 : 0,
+            'z-index': mainActive ? 1000 : -1000
+          }"
           class="main"
         >
           <button (click)="toggleActive()" mat-raised-button color="accent">

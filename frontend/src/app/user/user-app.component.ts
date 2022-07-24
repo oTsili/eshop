@@ -55,7 +55,6 @@ export class UserAppComponent implements OnInit {
 
           this.renderer.setStyle(modalActions, 'text-align', 'left');
           this.renderer.setStyle(modalActions, 'margin-left', '3%');
-          console.log(modalActions);
         },
 
         10
@@ -70,19 +69,18 @@ export class UserAppComponent implements OnInit {
     // select modal and change height, so that it contains signup form too
     const modalContent =
       document.body.querySelector<HTMLElement>('.ui.modal .content');
-    const modalActions = document.body.querySelector<HTMLElement>(
+    const modalFooterButton = document.body.querySelector<HTMLElement>(
       '.ui.modal .actions:not(.actions-default)'
     );
     if (this.mainActive) {
       this.renderer.setStyle(modalContent, 'height', 'auto');
-      this.renderer.setStyle(modalActions, 'text-align', 'left');
-      this.renderer.setStyle(modalActions, 'margin-left', '3%');
+      this.renderer.setStyle(modalFooterButton, 'text-align', 'left');
+      this.renderer.setStyle(modalFooterButton, 'margin-left', '3%');
     } else {
       this.renderer.setStyle(modalContent, 'height', '36rem');
-      this.renderer.setStyle(modalActions, 'text-align', 'right');
-      this.renderer.setStyle(modalActions, 'margin-left', '0');
-      this.renderer.setStyle(modalActions, 'margin-right', '3%');
+      this.renderer.setStyle(modalFooterButton, 'text-align', 'right');
+      this.renderer.setStyle(modalFooterButton, 'margin-left', '0');
+      this.renderer.setStyle(modalFooterButton, 'margin-right', '3%');
     }
-    console.log(modalActions);
   }
 }
