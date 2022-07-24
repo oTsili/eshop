@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpLoaderFactory } from '../shared/loader-factory';
 
 @NgModule({
   declarations: [FooterComponent],
@@ -33,7 +34,3 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   exports: [FooterComponent],
 })
 export class FooterModule {}
-// required for AOT compilation
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http);
-}

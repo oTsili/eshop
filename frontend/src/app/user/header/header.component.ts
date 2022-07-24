@@ -44,6 +44,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.activeLanguage = this.translate.currentLang;
+    this.headerService.selectedLanguage = this.activeLanguage;
     console.log(this.activeLanguage);
 
     // get translate language and subscribe
@@ -52,6 +53,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         console.log(response);
         this.translate.use(response);
+        this.headerService.selectedLanguage = response;
       });
 
     this.preloadNavBarElements();
@@ -62,7 +64,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.changeLanguageSubscription.unsubscribe();
   }
 
-  openLoginModal(){
+  openLoginModal() {
     this.userAppService.onToggleModal();
   }
 

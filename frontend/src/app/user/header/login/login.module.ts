@@ -4,10 +4,28 @@ import { LoginComponent } from './login.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpinnerModule } from '../../shared/spinner/spinner.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../../shared/loader-factory';
 
 @NgModule({
   declarations: [LoginComponent],
-  imports: [CommonModule, MatInputModule, FormsModule, SpinnerModule],
+  imports: [
+    CommonModule,
+    MatInputModule,
+    FormsModule,
+    SpinnerModule,
+    CommonModule,
+    // ngx-translate and the loader module
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
+  ],
   exports: [LoginComponent],
 })
 export class LoginModule {}

@@ -2,36 +2,37 @@
 <div *ngIf="!userIsAuthenticated">
   <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
     <mat-form-field color="accent">
+      <mat-label>{{ "E-mail" | translate }}</mat-label>
+
       <input
         matInput
         name="email"
         ngModel
         type="email"
-        placeholder="E-mail"
         #emailInput="ngModel"
         required
         email
       />
-      <mat-error *ngIf="emailInput.invalid"
-        >Please enter a valid email address</mat-error
-      >
+      <mat-error *ngIf="emailInput.invalid">{{
+        "Please enter a valid email address" | translate
+      }}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
+      <mat-label>{{ "Password" | translate }}</mat-label>
       <input
         matInput
         name="password"
         ngModel
         type="password"
-        placeholder="Password"
         #passwordInput="ngModel"
         required
       />
-      <mat-error *ngIf="passwordInput.invalid"
-        >Please enter a valid password</mat-error
-      >
+      <mat-error *ngIf="passwordInput.invalid">{{
+        "Please enter a valid password" | translate
+      }}</mat-error>
     </mat-form-field>
   </form>
 </div>
 <div *ngIf="userIsAuthenticated">
-  <h5>You are already logged in.</h5>
+  <h5>{{ "You are already logged in" | translate }}</h5>
 </div>

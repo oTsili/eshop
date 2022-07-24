@@ -1,21 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { imgMimeType } from '../../shared/validators/img-mime-type-validator';
 import { RetypeConfirm } from '../../shared/validators/password-confirm-validator';
 import { SignupAuthData } from './signup.interfaces';
+import defaultLanguage from 'src/assets/i18n/en.json';
+import greekLanguage from 'src/assets/i18n/el.json';
+import { Subscription } from 'rxjs';
+import { HeaderService } from '../header.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
   isLoading = false;
   theSignupForm: FormGroup;
   signupDate: string;
-  constructor() {}
+
+  constructor(
+    private translate: TranslateService,
+    private headerService: HeaderService
+  ) {
+    translate.setTranslation('en', defaultLanguage);
+    translate.setTranslation('el', greekLanguage);
+    translate.setDefaultLang('en');
+    translate.use('el');
+  }
 
   ngOnInit(): void {
+    // get translate language and subscribe
+    const selectedLanguage = this.headerService.selectedLanguage;
+    this.translate.use(selectedLanguage);
+
     this.theSignupForm = new FormGroup({
       email: new FormControl(null, {
         validators: [Validators.required, Validators.email],
@@ -40,6 +58,8 @@ export class SignupComponent implements OnInit {
       }),
     });
   }
+
+  ngOnDestroy(): void {}
 
   onSignup(form: FormGroup) {
     if (form.invalid) {

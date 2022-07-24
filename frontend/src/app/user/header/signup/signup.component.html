@@ -5,38 +5,38 @@
   *ngIf="!isLoading"
 >
   <mat-form-field color="accent">
-    <mat-label>E-mail</mat-label>
+    <mat-label>{{ "E-mail" | translate }}</mat-label>
     <input formControlName="email" matInput type="email" required email />
-    <mat-error *ngIf="theSignupForm.get('email')!.invalid"
-      >Please enter a valid email address</mat-error
-    >
+    <mat-error *ngIf="theSignupForm.get('email')!.invalid">{{
+      "Please enter a valid email address" | translate
+    }}</mat-error>
   </mat-form-field>
   <mat-form-field color="accent">
-    <mat-label>first name</mat-label>
+    <mat-label>{{ "first name" | translate }}</mat-label>
     <input formControlName="firstName" matInput type="text" required />
-    <mat-error *ngIf="theSignupForm.get('firstName')!.invalid"
-      >Please enter a valid name</mat-error
-    >
+    <mat-error *ngIf="theSignupForm.get('firstName')!.invalid">{{
+      "Please enter a valid name" | translate
+    }}</mat-error>
   </mat-form-field>
   <mat-form-field color="accent">
-    <mat-label>last name</mat-label>
+    <mat-label>{{ "last name" | translate }}</mat-label>
     <input formControlName="lastName" matInput type="text" required />
-    <mat-error *ngIf="theSignupForm.get('lastName')!.invalid"
-      >Please enter a valid name</mat-error
-    >
+    <mat-error *ngIf="theSignupForm.get('lastName')!.invalid">{{
+      "Please enter a valid name" | translate
+    }}</mat-error>
   </mat-form-field>
 
-  <mat-label color="accent">Password</mat-label>
+  <mat-label color="accent">{{ "Password" | translate }}</mat-label>
   <div formGroupName="passwordsForm">
     <mat-form-field color="accent">
       <input formControlName="password" matInput type="password" required />
-      <mat-error *ngIf="theSignupForm.get('passwordsForm.password')!.invalid"
-        >Password must contain minimum eight characters, at least one letter and
-        one number</mat-error
-      >
+      <mat-error *ngIf="theSignupForm.get('passwordsForm.password')!.invalid">{{
+        "Password must contain minimum eight characters, at least one letter and one number"
+          | translate
+      }}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
-      <mat-label>Password Confirm</mat-label>
+      <mat-label>{{ "Password Confirm" | translate }}</mat-label>
       <input
         formControlName="passwordConfirm"
         matInput
@@ -48,7 +48,7 @@
       theSignupForm.get('passwordsForm.passwordConfirm')!.errors
                   ?.['mismatch']
               "
-        >Passwords do not match</mat-error
+        >{{ "Passwords do not match" | translate }}</mat-error
       >
     </mat-form-field>
   </div>

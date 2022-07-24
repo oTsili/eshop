@@ -8,7 +8,8 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+    loadChildren: () =>
+      import('./user/user-app.module').then((m) => m.UserModule),
   },
   {
     path: 'admin',

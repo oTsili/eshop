@@ -2,8 +2,8 @@
   <app-header></app-header>
   <router-outlet></router-outlet>
   <app-footer></app-footer>
-  <app-modal (close)="toggleModal()" *ngIf="modalOpen">
-    <div modalTitle>Register</div>
+  <app-modal (close)="toggleModal(); mainActive = true" *ngIf="modalOpen">
+    <div modalTitle>{{ "register" | translate }}</div>
     <div class="wrapper">
       <span class="modal-item">
         <app-login
@@ -15,7 +15,7 @@
           class="secondary"
         >
           <button (click)="toggleActive()" mat-raised-button color="accent">
-            Login
+            {{ "Open Login Form" | translate }}
           </button>
         </app-login-promo>
       </span>
@@ -29,14 +29,29 @@
           class="main"
         >
           <button (click)="toggleActive()" mat-raised-button color="accent">
-            Signup
+            {{ "Open Signup Form" | translate }}
           </button>
         </app-signup-promo>
       </span>
     </div>
     <ng-container modalFooter>
-      <button mat-button mat-raised-button color="accent" type="submit">
-        Login
+      <button
+        [ngStyle]="{ opacity: mainActive ? 1 : 0 }"
+        mat-button
+        mat-raised-button
+        color="accent"
+        type="submit"
+      >
+        {{ "login" | translate }}
+      </button>
+      <button
+        [ngStyle]="{ opacity: mainActive ? 0 : 1 }"
+        mat-button
+        mat-raised-button
+        color="accent"
+        type="submit"
+      >
+        {{ "signup" | translate }}
       </button>
     </ng-container>
   </app-modal>

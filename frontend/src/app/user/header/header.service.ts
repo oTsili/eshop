@@ -9,8 +9,18 @@ const BACKEND_URL = environment.BASE_URL + 'navbar';
 @Injectable({ providedIn: 'root' })
 export class HeaderService {
   private languageChangeListener = new Subject<string>();
+  private selectedLang: string;
 
   constructor(private http: HttpClient) {}
+
+  set selectedLanguage(language: string) {
+    this.selectedLang = language;
+  }
+
+  get selectedLanguage() {
+    return this.selectedLang;
+  }
+
   getLanguageChangeListener() {
     return this.languageChangeListener.asObservable();
   }

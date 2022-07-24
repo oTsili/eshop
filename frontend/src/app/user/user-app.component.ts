@@ -1,12 +1,18 @@
 import {
   AfterContentInit,
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   OnInit,
   Renderer2,
 } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { UserAppService } from './user-app.service';
+
+import defaultLanguage from 'src/assets/i18n/en.json';
+import greekLanguage from 'src/assets/i18n/el.json';
+import { HeaderService } from './header/header.service';
 
 @Component({
   selector: 'app-user-app',
@@ -19,8 +25,15 @@ export class UserAppComponent implements OnInit {
 
   constructor(
     private userAppService: UserAppService,
-    private renderer: Renderer2
-  ) {}
+    private renderer: Renderer2,
+    private translate: TranslateService,
+    private cd: ChangeDetectorRef
+  ) {
+    translate.setTranslation('en', defaultLanguage);
+    translate.setTranslation('el', greekLanguage);
+    translate.setDefaultLang('en');
+    translate.use('el');
+  }
 
   ngOnInit(): void {
     this.userAppService.getModalListener().subscribe((response) => {
@@ -45,9 +58,10 @@ export class UserAppComponent implements OnInit {
           console.log(modalActions);
         },
 
-        500
+        10
       );
     }
+    this.cd.detectChanges();
   }
 
   toggleActive() {
@@ -67,6 +81,7 @@ export class UserAppComponent implements OnInit {
       this.renderer.setStyle(modalContent, 'height', '36rem');
       this.renderer.setStyle(modalActions, 'text-align', 'right');
       this.renderer.setStyle(modalActions, 'margin-left', '0');
+      this.renderer.setStyle(modalActions, 'margin-right', '3%');
     }
     console.log(modalActions);
   }

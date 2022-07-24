@@ -11,6 +11,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
+import { HttpLoaderFactory } from '../shared/loader-factory';
 
 @NgModule({
   declarations: [HeaderComponent, SubNavComponent],
@@ -34,7 +35,3 @@ import { MatInputModule } from '@angular/material/input';
   exports: [HeaderComponent],
 })
 export class HeaderModule {}
-// required for AOT compilation
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http);
-}

@@ -14,6 +14,7 @@ import {
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { PaginatorTranslateService } from './paginator-translate.service';
+import { HttpLoaderFactory } from '../loader-factory';
 @NgModule({
   declarations: [PaginatorComponent],
   imports: [
@@ -42,7 +43,3 @@ import { PaginatorTranslateService } from './paginator-translate.service';
   exports: [PaginatorComponent],
 })
 export class PaginatorModule {}
-// required for AOT compilation
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http);
-}

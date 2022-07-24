@@ -17,6 +17,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ResponsiveBoxesModule } from './responsive-boxes/responsive-boxes.module';
+import { HttpLoaderFactory } from '../loader-factory';
 @NgModule({
   declarations: [SideBarComponent, ContentListComponent],
   imports: [
@@ -45,8 +46,3 @@ import { ResponsiveBoxesModule } from './responsive-boxes/responsive-boxes.modul
   exports: [SideBarComponent],
 })
 export class SideBarModule {}
-
-// required for AOT compilation
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http);
-}

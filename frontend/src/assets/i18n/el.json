@@ -72,5 +72,27 @@
   "shipping & payments": "Τρόποι Αποστολής/Πληρωμής",
   "terms & conditions": "Όροι και Προϋποθέσεις",
   "sizes": "Μεγεθολόγιο",
-  "register": "Εγγραφή"
+  "register": "Εγγραφή",
+
+  "signup": "Εγγραφή",
+  "Open Signup Form": "Φόρμα Εγγραφής",
+  "Open Login Form": "Φόρμα Σύνδεσης",
+
+  "Allready a member!": "Ήδη μέλος!",
+  "Sign in to your account..": "Συνδεθείτε στον λογαριασμό σας..",
+  "Not a member yet!": "Δεν είστε μέλος ακόμα!",
+  "Sign up to check out faster, keep more than one addresses, track orders and more..": "Εγγραφείτε για να κάνετε check out πιο γρήγορα, να διατηρήσετε περισσότερες από μία διευθύνσεις, να παρακολουθείτε παραγγελίες και πολλά άλλα..",
+
+  "Please enter a valid email address": "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση ηλεκτρονικού ταχυδρομείου",
+  "Please enter a valid password": "Παρακαλώ εισάγετε έναν έγκυρο κωδικό πρόσβασης",
+  "You are already logged in": "Ειστε ηδη συνδεδεμενος",
+  "E-mail": "E-mail",
+  "Password": "Κωδικός πρόσβασης",
+
+  "Please enter a valid name": "Παρακαλώ εισάγετε ένα έγκυρο όνομα",
+  "Password must contain minimum eight characters, at least one letter and one number": "Ο κωδικός πρόσβασης πρέπει να περιέχει τουλάχιστον οκτώ χαρακτήρες, τουλάχιστον ένα γράμμα και έναν αριθμό",
+  "Password Confirm": "Επιβεβαίωση κωδικού",
+  "Passwords do not match": "Οι κωδικοί πρόσβασης δεν ταιριάζουν",
+  "first name": "Όνομα",
+  "last name": "Επίθετο"
 }

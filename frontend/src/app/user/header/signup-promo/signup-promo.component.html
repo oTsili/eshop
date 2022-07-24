@@ -1,8 +1,10 @@
 <div class="container">
-  <h1>Not a member yet!</h1>
+  <h1>{{ "Not a member yet!" | translate }}</h1>
   <p>
-    Sign up to check out faster, keep more than one addresses, track orders and
-    more..
+    {{
+      "Sign up to check out faster, keep more than one addresses, track orders and more.."
+        | translate
+    }}
   </p>
   <ng-content></ng-content>
 </div>

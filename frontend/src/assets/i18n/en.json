@@ -71,5 +71,27 @@
   "shopping & payments": "Shipping & Payments",
   "terms & conditions": "Terms & Conditions",
   "sizes": "Sizes",
-  "register": "Register"
+  "register": "Register",
+
+  "signup": "Signup",
+  "Open Signup Form": "Open Signup Form",
+  "Open Login Form": "Open Login Form",
+
+  "Allready a member!": "Allready a member!",
+  "Sign in to your account..": "Sign in to your account..",
+  "Not a member yet!": "Not a member yet!",
+  "Sign up to check out faster, keep more than one addresses, track orders and more..": "Sign up to check out faster, keep more than one addresses, track orders and more..",
+
+  "Please enter a valid email address": "Please enter a valid email address",
+  "Please enter a valid password": "Please enter a valid password",
+  "You are already logged in": "You are already logged in",
+  "E-mail": "E-mail",
+  "Password": "Password",
+
+  "Please enter a valid name": "Please enter a valid name",
+  "Password must contain minimum eight characters, at least one letter and one number": "Password must contain minimum eight characters, at least one letter and one number",
+  "Password Confirm": "Password Confirm",
+  "Passwords do not match": "Passwords do not match",
+  "first name": "First Name",
+  "last name": "Last Name"
 }
