@@ -37,7 +37,6 @@ export class ResponsiveBoxesService {
    */
   onUpdateColorActiveStatus(index: number | null, chipValue?: string) {
     if (!index && chipValue) {
-      console.log(index, chipValue);
       index = this.getElementArrayIndex(chipValue, this.colorArr);
     }
     // fill the array with false value
@@ -60,7 +59,6 @@ export class ResponsiveBoxesService {
    */
   onUpdateSizeActiveStatus(index: number | null, chipValue?: string) {
     if (!index && chipValue) {
-      console.log(index, chipValue);
       index = this.getElementArrayIndex(chipValue, this.sizeArr);
     }
     // fill the array with false value

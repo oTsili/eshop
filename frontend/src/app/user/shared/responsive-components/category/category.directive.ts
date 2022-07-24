@@ -4,7 +4,5 @@ import { Directive, ElementRef } from '@angular/core';
   selector: '[appCategory]',
 })
 export class CategoryDirective {
-  constructor(private elementRef: ElementRef) {
-    console.log(this.elementRef.nativeElement.offsetWidth);
-  }
+  constructor(private elementRef: ElementRef) {}
 }

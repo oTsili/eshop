@@ -85,7 +85,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     // get the paginator change page listener
     this.productsService.getChangePageListener().subscribe((response) => {
-      console.log(response);
       const { productsPerPage, currentPage } = response;
 
       this.productsPerPage = productsPerPage;
@@ -103,7 +102,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.updateProductsSubscription = this.productsService
       .getProductsUpdateListener()
       .subscribe((response) => {
-        console.log(response);
         this.getProducts(response.queryParams);
       });
   }

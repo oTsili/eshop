@@ -13,6 +13,7 @@ import { UserAppService } from './user-app.service';
 import defaultLanguage from 'src/assets/i18n/en.json';
 import greekLanguage from 'src/assets/i18n/el.json';
 import { HeaderService } from './header/header.service';
+import { SignupService } from './header/signup/signup.service';
 
 @Component({
   selector: 'app-user-app',
@@ -27,7 +28,8 @@ export class UserAppComponent implements OnInit {
     private userAppService: UserAppService,
     private renderer: Renderer2,
     private translate: TranslateService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private signupService: SignupService
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
@@ -37,9 +39,12 @@ export class UserAppComponent implements OnInit {
 
   ngOnInit(): void {
     this.userAppService.getModalListener().subscribe((response) => {
-      console.log(response);
       this.toggleModal();
     });
+  }
+
+  onSubmit() {
+    this.signupService.onSubmit();
   }
 
   toggleModal() {

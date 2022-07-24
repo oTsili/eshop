@@ -51,5 +51,14 @@
         >{{ "Passwords do not match" | translate }}</mat-error
       >
     </mat-form-field>
+    <button
+      #submitButton
+      [style.opacity]="0"
+      mat-raised-button
+      color="accent"
+      type="submit"
+    >
+      Signup
+    </button>
   </div>
 </form>

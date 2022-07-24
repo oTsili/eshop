@@ -48,7 +48,6 @@ export class FooterComponent implements OnInit, OnDestroy {
     this.changeLanguageSubscription = this.footerService
       .getLanguageChangeListener()
       .subscribe((response) => {
-        console.log(response);
         this.translate.use(response);
       });
 

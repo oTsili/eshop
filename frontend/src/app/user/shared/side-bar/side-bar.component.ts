@@ -77,7 +77,6 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
     this.changeLanguageSubscription = this.sideBarService
       .getLanguageChangeListener()
       .subscribe((response) => {
-        console.log(response);
         this.translate.use(response);
       });
   }
@@ -90,7 +89,6 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
   remove(chip: Chip): void {
     const index = this.chipsList.indexOf(chip);
 
-    console.log(index);
     if (index >= 0) {
       // this.chipsList.splice(index, 1);
       this.productsService.removeChip(index);

@@ -106,9 +106,7 @@ export class ContentListComponent implements OnInit, OnDestroy {
 
     // compose the chip view
     const chip = { key: chipKey, value: chipValue };
-    console.log(chip);
 
-    console.log({ queryParams: urlTree.queryParams });
     // call the method to update the products
     this.productsService.onProductsUpdate(urlTree.queryParams, chip);
   }

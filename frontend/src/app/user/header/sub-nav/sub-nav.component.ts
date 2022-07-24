@@ -34,7 +34,6 @@ export class SubNavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data);
   }
 
   isExpandable(node: navBarElement): boolean {

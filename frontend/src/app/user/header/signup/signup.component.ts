@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { imgMimeType } from '../../shared/validators/img-mime-type-validator';
@@ -8,6 +8,7 @@ import defaultLanguage from 'src/assets/i18n/en.json';
 import greekLanguage from 'src/assets/i18n/el.json';
 import { Subscription } from 'rxjs';
 import { HeaderService } from '../header.service';
+import { SignupService } from './signup.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,10 +19,13 @@ export class SignupComponent implements OnInit, OnDestroy {
   isLoading = false;
   theSignupForm: FormGroup;
   signupDate: string;
+  submitSubscription: Subscription;
+  @ViewChild('submitButton') submitButton;
 
   constructor(
     private translate: TranslateService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private signupService: SignupService
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
@@ -30,6 +34,14 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.submitSubscription = this.signupService
+      .getSubmitListener()
+      .subscribe((response) => {
+        // console.log(this.signupForm.nativeElement);
+        // this.signupForm.nativeElement.submit();
+        this.submitButton.nativeElement.click();
+      });
+
     // get translate language and subscribe
     const selectedLanguage = this.headerService.selectedLanguage;
     this.translate.use(selectedLanguage);
@@ -76,6 +88,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     )}:${m.getUTCMinutes()}:${m.getUTCSeconds()}`;
 
     this.signupDate = dateString;
+    console.log(this.signupDate);
 
     this.isLoading = true;
 
@@ -83,13 +96,12 @@ export class SignupComponent implements OnInit, OnDestroy {
       email: form.value.email,
       firstName: form.value.firstName,
       lastName: form.value.lastName,
-      // file: form.value.photoPath,
       signupDate: this.signupDate,
       password: form.value.passwordsForm.password,
       passwordConfirm: form.value.passwordsForm.passwordConfirm,
     };
 
-    // this.authService.createUser(user);
+    this.signupService.createUser(user);
 
     this.isLoading = false;
   }

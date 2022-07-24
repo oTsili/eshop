@@ -45,13 +45,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.activeLanguage = this.translate.currentLang;
     this.headerService.selectedLanguage = this.activeLanguage;
-    console.log(this.activeLanguage);
 
     // get translate language and subscribe
     this.changeLanguageSubscription = this.headerService
       .getLanguageChangeListener()
       .subscribe((response) => {
-        console.log(response);
         this.translate.use(response);
         this.headerService.selectedLanguage = response;
       });
@@ -72,7 +70,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.navBarElementsSubsciption = this.headerService
       .getNavBarElements()
       .subscribe((response) => {
-        console.log(response);
         this.initialData = response.navBarElement;
         this.dynamicDatabase.navBarElements = this.initialData;
       });

@@ -13,7 +13,6 @@ export class PaginatorService {
   }
 
   onProductsLoaded(totalProducts: number, productsPerPage: number) {
-    console.log(totalProducts, productsPerPage);
     this.productsLoadedListener.next({ totalProducts, productsPerPage });
   }
 }

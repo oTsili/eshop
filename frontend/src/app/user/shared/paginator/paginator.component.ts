@@ -22,14 +22,12 @@ export class PaginatorComponent implements OnInit {
 
   ngOnInit(): void {
     this.paginatorService.getProductsLoadedListener().subscribe((response) => {
-      console.log(response);
       this.totalProducts = response.totalProducts;
       this.productsPerPage = response.productsPerPage;
     });
   }
 
   onChangePage(pageData: PageEvent) {
-    console.log(pageData);
     this.currentPage = pageData.pageIndex + 1;
     this.productsPerPage = pageData.pageSize;
     this.productsService.onChangePage(this.productsPerPage, this.currentPage);

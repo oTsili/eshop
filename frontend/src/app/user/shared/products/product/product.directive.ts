@@ -5,6 +5,5 @@ import { Directive, ElementRef } from '@angular/core';
 })
 export class ProductDirective {
   constructor(private elementRef: ElementRef) {
-    console.log(this.elementRef.nativeElement.offsetWidth);
   }
 }

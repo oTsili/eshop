@@ -79,12 +79,10 @@ export class ProductsService {
   }
 
   onProductsUpdate(queryParams: Params, chip?: Chip) {
-    console.log(queryParams);
     // update the chipsList
     if (chip) {
       // get the index of the chip to be replaced
       const chipIndex = this.getChipIndex(chip.key);
-      console.log(chip);
       // if there is already a same chip
       if (chipIndex >= 0) {
         // remove the chip
