@@ -3,7 +3,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 // import * as path from 'path';
+import { APP_GUARD } from '@nestjs/core';
 
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { ProductsModule } from './products/products.module';
 import { CarouselSlidesModule } from './carousel-slides/carousel-slides.module';
 import { NavbarModule } from './navbar/navbar.module';
@@ -16,8 +18,13 @@ import { UserModule } from './users/user.module';
 @Module({
   // connect to the demo Database
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'static'),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'static'),
+    // }),
+    // A common technique to protect applications from brute-force attacks is rate-limiting. Implemented with @nestjs/throttler package
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
     }),
     MongooseModule.forRoot(
       `${process.env['ME_CONFIG_MONGODB_URL']}/eshop?authSource=admin`,
@@ -48,6 +55,12 @@ import { UserModule } from './users/user.module';
     // ColorsModule,
   ],
   controllers: [TestController],
-  providers: [],
+  providers: [
+    //  protection from brute-force attacks with rate-limiting. Implemented with @nestjs/throttler and Throttler guard on all routes
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}
