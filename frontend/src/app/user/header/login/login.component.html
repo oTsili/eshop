@@ -1,19 +1,15 @@
 <app-spinner *ngIf="isLoading"></app-spinner>
 <div *ngIf="!userIsAuthenticated">
-  <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+  <form
+    [formGroup]="theLoginForm"
+    (submit)="onLogin(theLoginForm)"
+    *ngIf="!isLoading"
+  >
     <mat-form-field color="accent">
       <mat-label>{{ "E-mail" | translate }}</mat-label>
 
-      <input
-        matInput
-        name="email"
-        ngModel
-        type="email"
-        #emailInput="ngModel"
-        required
-        email
-      />
-      <mat-error *ngIf="emailInput.invalid">{{
+      <input formControlName="email" matInput name="email" type="email" />
+      <mat-error *ngIf="theLoginForm.get('email')!.invalid">{{
         "Please enter a valid email address" | translate
       }}</mat-error>
     </mat-form-field>
@@ -21,16 +17,16 @@
       <mat-label>{{ "Password" | translate }}</mat-label>
       <input
         matInput
+        formControlName="password"
         name="password"
-        ngModel
         type="password"
-        #passwordInput="ngModel"
         required
       />
-      <mat-error *ngIf="passwordInput.invalid">{{
+      <mat-error *ngIf="theLoginForm.get('password')!.invalid">{{
         "Please enter a valid password" | translate
       }}</mat-error>
     </mat-form-field>
+    <button #submitButton [style.opacity]="0" type="submit">Login</button>
   </form>
 </div>
 <div *ngIf="userIsAuthenticated">

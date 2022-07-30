@@ -4,8 +4,11 @@ import { join } from 'path';
 import helmet from 'helmet';
 import * as cookieParser from 'cookie-parser';
 import * as csurf from 'csurf';
+import * as bodyParser from 'body-parser';
+import * as session from 'express-session';
 
 import { AppModule } from './app.module';
+import { Session } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -17,6 +20,18 @@ async function bootstrap() {
 
   app.useStaticAssets(join(__dirname, '..', 'static'));
 
+  // app.use(bodyParser.urlencoded({ extended: true }));
+  // app.use(bodyParser.json());
+  // app.use(cookieParser());
+
+  app.use(
+    session({
+      secret: 'my-secret',
+      resave: false,
+      saveUninitialized: false,
+    }),
+  );
+
   app.enableCors({
     origin: 'http://localhost:4200',
     methods: 'GET, PUT, POST, DELETE, PATCH, OPTIONS',
@@ -25,10 +40,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  app.use(cookieParser());
-
-  // Cross-site request forgery (also known as CSRF or XSRF) is a type of malicious exploit of a website where unauthorized commands are transmitted from a user that the web application trusts
-  app.use(csurf({ cookie: true }));
+  // this.app.use(validator());
 
   await app.listen(3000);
   console.log(`Application is running on: ${await app.getUrl()}`);

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
@@ -13,7 +13,8 @@ import { GridCategoriesModule } from './grid-categories/grid-categories.module';
 import { FooterModule } from './footer/footer.module';
 // import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
 import { TestController } from './test/test.controller';
-import { UserModule } from './users/user.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   // connect to the demo Database
@@ -52,6 +53,7 @@ import { UserModule } from './users/user.module';
     GridCategoriesModule,
     FooterModule,
     UserModule,
+    AuthModule,
     // ColorsModule,
   ],
   controllers: [TestController],

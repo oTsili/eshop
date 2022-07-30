@@ -31,7 +31,7 @@ export class SignupService {
 
     this.httpClient
       .post<{ existingUser: UserAttrs; expiresIn: string }>(
-        BACKEND_URL,
+        `${BACKEND_URL}/signup`,
         authData,
         {
           withCredentials: true,

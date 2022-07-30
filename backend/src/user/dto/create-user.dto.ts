@@ -15,6 +15,8 @@ export class CreateUserDto {
   @IsNotEmpty()
   password: string;
 
-  @IsNotEmpty()
-  passwordConfirm: string;
+  // @IsNotEmpty()
+  // passwordConfirm: string;
+
+  // _id?: string;
 }

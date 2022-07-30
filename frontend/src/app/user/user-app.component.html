@@ -52,6 +52,7 @@
         mat-button
         mat-raised-button
         color="accent"
+        (click)="onSubmitLogin()"
       >
         {{ "login" | translate }}
       </button>
@@ -60,7 +61,7 @@
         mat-button
         mat-raised-button
         color="accent"
-        (click)="onSubmit()"
+        (click)="onSubmitSignup()"
       >
         {{ "signup" | translate }}
       </button>

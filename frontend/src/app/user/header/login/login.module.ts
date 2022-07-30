@@ -4,7 +4,11 @@ import { LoginComponent } from './login.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpinnerModule } from '../../shared/spinner/spinner.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpClientXsrfModule,
+} from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../shared/loader-factory';
 
@@ -12,8 +16,9 @@ import { HttpLoaderFactory } from '../../shared/loader-factory';
   declarations: [LoginComponent],
   imports: [
     CommonModule,
+
     MatInputModule,
-    FormsModule,
+    ReactiveFormsModule,
     SpinnerModule,
     CommonModule,
     // ngx-translate and the loader module

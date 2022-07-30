@@ -11,7 +11,7 @@ export class HeaderService {
   private languageChangeListener = new Subject<string>();
   private selectedLang: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   set selectedLanguage(language: string) {
     this.selectedLang = language;
@@ -30,7 +30,7 @@ export class HeaderService {
   }
 
   getNavBarElements() {
-    return this.http
+    return this.httpClient
       .get<any>(`${BACKEND_URL}`, {
         withCredentials: true,
       })
@@ -47,5 +47,25 @@ export class HeaderService {
     });
 
     return array;
+  }
+
+  onTest() {
+    const authData = new FormData();
+
+    this.httpClient
+      .post(`${environment.BASE_URL}user/test`, authData, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((userData) => {
+          console.log(userData);
+          return userData;
+        })
+      )
+      .subscribe({
+        next: (c) => {
+          console.log(c);
+        },
+      });
   }
 }

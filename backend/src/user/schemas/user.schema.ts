@@ -19,8 +19,10 @@ export class User {
   @Prop()
   password: string;
 
-  @Prop()
-  passwordConfirm: string;
+  // @Prop()
+  // passwordConfirm: string;
+
+  _id: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

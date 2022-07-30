@@ -92,4 +92,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.searchService.onLanguageChange(language);
     this.footerService.onLanguageChange(language);
   }
+
+  onTest() {
+    this.headerService.onTest();
+  }
 }
