@@ -93,5 +93,7 @@
   "Password Confirm": "Password Confirm",
   "Passwords do not match": "Passwords do not match",
   "first name": "First Name",
-  "last name": "Last Name"
+  "last name": "Last Name",
+
+  "Email or Password Incorrect": "Email or Password Incorrect"
 }

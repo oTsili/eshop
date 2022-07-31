@@ -11,12 +11,13 @@ import {
 } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../shared/loader-factory';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [LoginComponent],
   imports: [
     CommonModule,
-
+    MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
     SpinnerModule,

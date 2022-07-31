@@ -1,6 +1,8 @@
 <div class="container">
   <app-header></app-header>
-  <router-outlet></router-outlet>
+  <div class="ui segment">
+    <router-outlet></router-outlet>
+  </div>
   <app-footer></app-footer>
 
   <!-- app-modal -->
@@ -49,37 +51,24 @@
       </span>
     </div>
     <ng-container modalFooter>
-      <div class="modal-footer">
-        <button
-          *ngIf="mainActive"
-          mat-button
-          mat-raised-button
-          color="accent"
-          (click)="onSubmitLogin()"
-        >
-          {{ "login" | translate }}
-        </button>
-        <button
-          *ngIf="!mainActive"
-          mat-button
-          mat-raised-button
-          color="accent"
-          (click)="onSubmitSignup()"
-        >
-          {{ "signup" | translate }}
-        </button>
-        <div
-          class="warning"
-          [ngStyle]="{ display: isErrorMessageOpen ? 'block' : 'none' }"
-        >
-          <div class="icon-container">
-            <mat-icon class="link" (click)="toggleMessage()" matSuffix
-              >close</mat-icon
-            >
-          </div>
-          <div class="message">{{ errorMessage }}</div>
-        </div>
-      </div>
+      <button
+        *ngIf="mainActive"
+        mat-button
+        mat-raised-button
+        color="accent"
+        (click)="onSubmitLogin()"
+      >
+        {{ "login" | translate }}
+      </button>
+      <button
+        *ngIf="!mainActive"
+        mat-button
+        mat-raised-button
+        color="accent"
+        (click)="onSubmitSignup()"
+      >
+        {{ "signup" | translate }}
+      </button>
     </ng-container>
   </app-modal>
   <!-- app-modal -->

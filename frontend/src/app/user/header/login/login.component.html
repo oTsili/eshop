@@ -28,7 +28,21 @@
     </mat-form-field>
     <button #submitButton [style.opacity]="0" type="submit">Login</button>
   </form>
+  <div class="message-container">
+    <div
+      class="warning"
+      [ngStyle]="{ display: isErrorMessageOpen ? 'block' : 'none' }"
+    >
+      <div class="icon-container">
+        <mat-icon class="link" (click)="toggleMessage()" matSuffix
+          >close</mat-icon
+        >
+      </div>
+      <div class="message">{{ errorMessage | translate }}</div>
+    </div>
+  </div>
 </div>
+
 <div *ngIf="userIsAuthenticated">
   <h5>{{ "You are already logged in" | translate }}</h5>
 </div>

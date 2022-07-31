@@ -12,9 +12,20 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { HttpLoaderFactory } from '../shared/loader-factory';
+import { DropdownMenuOpenDirective } from './directives/dropdown-menu-open.directive';
+import { DropdownSubmenuOpenDirective } from './directives/dropdown-submenu-open.directive';
+import { DropDownSubmenuCloseDirective } from './directives/dropdown-submenu-close.directive';
+import { DropDownMenuCloseDirective } from './directives/dropdown-menu-close.directive';
 
 @NgModule({
-  declarations: [HeaderComponent, SubNavComponent],
+  declarations: [
+    HeaderComponent,
+    SubNavComponent,
+    DropdownMenuOpenDirective,
+    DropdownSubmenuOpenDirective,
+    DropDownSubmenuCloseDirective,
+    DropDownMenuCloseDirective,
+  ],
   imports: [
     CommonModule,
     MatToolbarModule,

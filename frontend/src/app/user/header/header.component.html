@@ -1,120 +1,41 @@
 <header>
-  <mat-toolbar color="primary">
-    <mat-toolbar-row
-      [ngStyle.lt-sm]="{ padding: '0 2rem' }"
-      class="toolbar-container"
+  <div class="ui menu"></div>
+  <div class="ui pointing menu">
+    <a class="item"> Home </a>
+    <div
+      dropdownMenuOpen
+      dropdownMenuClose
+      class="ui pointing dropdown link item"
     >
-      <app-sub-nav
-        class="link"
-        fxHide
-        fxShow.gt-md="false"
-        fxShow.lt-md="true"
-        [data]="initialData"
-        [isRootNode]="true"
-      >
-        <ng-template>
-          <i class="ph-list"></i>
-        </ng-template>
-      </app-sub-nav>
-
-      <div
-        style="padding-bottom: 1%"
-        clas="language-selector"
-        fxFlexOrder.gt-md="-1"
-        fxFlexOrder.lt-md="1"
-        [ngStyle.lt-md]="{ 'margin-left': '3%' }"
-        [ngStyle.lt-sm]="{ 'padding-bottom': '1.4%', 'margin-left': '3%' }"
-      >
-        <a
-          [ngStyle]="{ 'font-weight': activeLanguage === 'el' ? 700 : 400 }"
-          (click)="useLanguage('el')"
-          class="link text--medium language"
-        >
-          ΕΛ
-        </a>
-        &#124;
-        <a
-          [ngStyle]="{ 'font-weight': activeLanguage === 'en' ? 700 : 400 }"
-          (click)="useLanguage('en')"
-          class="link text--medium language"
-          >EN
-        </a>
+      <span class="text">Shopping</span>
+      <i class="dropdown icon"></i>
+      <div dropdownSubmenuClose class="menu">
+        <div class="header">Categories</div>
+        <div dropdownSubmenuOpen class="item">
+          <i class="dropdown icon"></i>
+          <span class="text">Clothing</span>
+          <div dropdownSubmenuClose class="menu">
+            <div class="header">Mens</div>
+            <div class="item">Shirts</div>
+            <div class="item">Pants</div>
+            <div class="item">Jeans</div>
+            <div class="item">Shoes</div>
+            <div class="divider"></div>
+            <div class="header">Womens</div>
+            <div class="item">Dresses</div>
+            <div class="item">Shoes</div>
+            <div class="item">Bags</div>
+          </div>
+        </div>
+        <div class="item">Home Goods</div>
+        <div class="item">Bedroom</div>
+        <div class="divider"></div>
+        <div class="header">Order</div>
+        <div class="item">Status</div>
+        <div class="item">Cancellations</div>
       </div>
-      <a
-        (click)="toggleActiveClass()"
-        class="link icon--medium left-spacer--mini"
-      >
-        <i class="ph-magnifying-glass"></i>
-      </a>
-      <span class="spacer"></span>
-      <span>My App</span>
-      <span class="spacer"></span>
-      <a class="link icon--medium" (click)="onTest()">
-        <mat-icon>person</mat-icon>
-      </a>
-      <a
-        fxShow.lt-sm="false"
-        (click)="openLoginModal()"
-        class="link icon--medium"
-      >
-        <i class="ph-user"></i>
-      </a>
-      <a fxShow.lt-sm="false" class="link icon--medium">
-        <i class="ph-heart"></i>
-      </a>
-      <a class="link icon--medium">
-        <i class="ph-shopping-bag"></i>
-      </a>
-    </mat-toolbar-row>
-    <mat-toolbar-row fxShow fxHide.lt-md="true" fxHide.gt-md="false">
-      <span class="spacer"></span>
-      <ul class="main-nav-list">
-        <li
-          class="main-nav-link"
-          *ngFor="let navBarElement of initialData; let i = index"
-        >
-          <a
-            *ngIf="initialData[i].subNavBarElements!.length === 0"
-            href="{{ initialData[i].href }}"
-            class="hyperlink text--large"
-          >
-            {{ initialData[i].text | translate }}</a
-          >
-
-          <a
-            *ngIf="initialData[i].subNavBarElements!.length > 0"
-            class="text--large"
-          >
-            <app-sub-nav
-              [data]="initialData[i].subNavBarElements"
-              [isRootNode]="true"
-            >
-              <ng-template>
-                <a class="hyperlink link text--large">
-                  {{ initialData[i].text | translate }}
-                </a>
-              </ng-template>
-            </app-sub-nav></a
-          >
-        </li>
-      </ul>
-      <span class="spacer"></span>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  <mat-form-field
-    [ngClass]="{ active: isActiveClassEnabled }"
-    class="search-box"
-    appearance="fill"
-  >
-    <mat-icon class="search-icon" matPrefix>search</mat-icon>
-    <input
-      matInput
-      type="text"
-      aria-label="Search"
-      placeholder="Αναζήτηση σε όλο το κατάστημα"
-    />
-    <mat-icon class="link" (click)="toggleActiveClass()" matSuffix
-      >close</mat-icon
-    >
-  </mat-form-field>
+    </div>
+    <a class="item active"> Forums </a>
+    <a class="item"> Contact Us </a>
+  </div>
 </header>

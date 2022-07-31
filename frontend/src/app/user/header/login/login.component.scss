@@ -1,3 +1,46 @@
 :ng-deep .mat-input-element {
   padding-bottom: 4%;
 }
+
+.message-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.warning {
+  background-color: #ffb0b040;
+  color: #573a08;
+  padding: 0.6% 4.5%;
+  display: block;
+  transition: display 0.5s ease-in-out;
+}
+
+.message {
+  padding: 1.5%;
+  font-size: 1.5rem;
+  font-weight: 600;
+  width: max-content;
+  padding-bottom: 10%;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.link {
+  cursor: pointer;
+}
+
+::ng-deep .mat-icon {
+  width: 0.8rem !important;
+}
+
+::ng-deep .material-icons {
+  font-size: 1.8rem !important;
+}
+::ng-deep .mat-button {
+  height: fit-content;
+}

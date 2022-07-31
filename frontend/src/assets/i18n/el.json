@@ -94,5 +94,7 @@
   "Password Confirm": "Επιβεβαίωση κωδικού",
   "Passwords do not match": "Οι κωδικοί πρόσβασης δεν ταιριάζουν",
   "first name": "Όνομα",
-  "last name": "Επίθετο"
+  "last name": "Επίθετο",
+
+  "Email or Password Incorrect": "Λάθος Email ή Κωδικός Πρόσβασης"
 }

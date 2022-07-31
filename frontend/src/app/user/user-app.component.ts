@@ -24,8 +24,6 @@ import { LoginService } from './header/login/login.service';
 export class UserAppComponent implements OnInit {
   modalOpen = false;
   mainActive = true;
-  isErrorMessageOpen = false;
-  errorMessage: string;
 
   constructor(
     private userAppService: UserAppService,
@@ -45,16 +43,8 @@ export class UserAppComponent implements OnInit {
     this.userAppService.getModalListener().subscribe((response) => {
       this.toggleModal();
     });
-
-    this.userAppService.getMessageListener().subscribe((message) => {
-      this.toggleMessage();
-      this.errorMessage = message;
-    });
   }
 
-  toggleMessage() {
-    this.isErrorMessageOpen = !this.isErrorMessageOpen;
-  }
   /**
    * toggle between modal states (i.e. open, closed) and set some styles
    */

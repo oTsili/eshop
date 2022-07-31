@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   submitSubscription: Subscription;
   theLoginForm: FormGroup;
+  isErrorMessageOpen = false;
+  errorMessage: string;
   @ViewChild('submitButton') submitButton;
 
   constructor(
@@ -59,6 +61,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.submitSubscription.unsubscribe();
   }
 
+  toggleMessage() {
+    this.isErrorMessageOpen = !this.isErrorMessageOpen;
+  }
+
   onLogin(form: FormGroup) {
     if (form.invalid) {
       console.log('form invalid');
@@ -71,10 +77,15 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.userAppService.onToggleModal();
       },
       error: (error) => {
-        const errorMessage = error.error.message.split(':')[1];
+        let errorMessage = error.error.message.split(':')[1].trim();
         console.log(errorMessage);
 
-        this.userAppService.onMessageUpdate(errorMessage);
+        this.translate.get(errorMessage).subscribe((translation) => {
+          errorMessage = translation;
+          console.log(errorMessage);
+          this.errorMessage = errorMessage;
+          this.toggleMessage();
+        });
       },
     });
     this.isLoading = false;

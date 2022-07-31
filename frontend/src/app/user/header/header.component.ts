@@ -15,18 +15,47 @@ import greekLanguage from 'src/assets/i18n/el.json';
 import { SearchService } from '../search/search.service';
 import { FooterService } from '../footer/footer.service';
 import { UserAppService } from '../user-app.service';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  animations: [
+    trigger('openClose', [
+      // ...
+      state(
+        'open',
+        style({
+          visibility: 'visible',
+          display: 'block',
+        })
+      ),
+      state(
+        'closed',
+        style({
+          visibility: 'hidden',
+          display: 'none',
+        })
+      ),
+      transition('* => closed', [animate('1s')]),
+      transition('* => open', [animate('0.5s')]),
+    ]),
+  ],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  isActiveClassEnabled = false;
+  isOpenSearchBox = false;
   initialData: navBarElement[];
   navBarElementsSubsciption: Subscription;
   changeLanguageSubscription: Subscription;
   activeLanguage: string;
+  isOverList = false;
 
   constructor(
     private userAppService: UserAppService,
@@ -75,8 +104,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       });
   }
 
-  toggleActiveClass() {
-    this.isActiveClassEnabled = !this.isActiveClassEnabled;
+  toggleSearchBox() {
+    this.isOpenSearchBox = !this.isOpenSearchBox;
   }
   /**
    * calls service functions of each component that needs translation, and wich have
