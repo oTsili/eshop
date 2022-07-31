@@ -2,6 +2,8 @@
   <app-header></app-header>
   <router-outlet></router-outlet>
   <app-footer></app-footer>
+
+  <!-- app-modal -->
   <app-modal (close)="toggleModal(); mainActive = true" *ngIf="modalOpen">
     <div modalTitle>{{ "register" | translate }}</div>
     <div class="wrapper">
@@ -47,24 +49,38 @@
       </span>
     </div>
     <ng-container modalFooter>
-      <button
-        [ngStyle]="{ opacity: mainActive ? 1 : 0 }"
-        mat-button
-        mat-raised-button
-        color="accent"
-        (click)="onSubmitLogin()"
-      >
-        {{ "login" | translate }}
-      </button>
-      <button
-        [ngStyle]="{ opacity: mainActive ? 0 : 1 }"
-        mat-button
-        mat-raised-button
-        color="accent"
-        (click)="onSubmitSignup()"
-      >
-        {{ "signup" | translate }}
-      </button>
+      <div class="modal-footer">
+        <button
+          *ngIf="mainActive"
+          mat-button
+          mat-raised-button
+          color="accent"
+          (click)="onSubmitLogin()"
+        >
+          {{ "login" | translate }}
+        </button>
+        <button
+          *ngIf="!mainActive"
+          mat-button
+          mat-raised-button
+          color="accent"
+          (click)="onSubmitSignup()"
+        >
+          {{ "signup" | translate }}
+        </button>
+        <div
+          class="warning"
+          [ngStyle]="{ display: isErrorMessageOpen ? 'block' : 'none' }"
+        >
+          <div class="icon-container">
+            <mat-icon class="link" (click)="toggleMessage()" matSuffix
+              >close</mat-icon
+            >
+          </div>
+          <div class="message">{{ errorMessage }}</div>
+        </div>
+      </div>
     </ng-container>
   </app-modal>
+  <!-- app-modal -->
 </div>

@@ -24,6 +24,8 @@ import { LoginService } from './header/login/login.service';
 export class UserAppComponent implements OnInit {
   modalOpen = false;
   mainActive = true;
+  isErrorMessageOpen = false;
+  errorMessage: string;
 
   constructor(
     private userAppService: UserAppService,
@@ -43,15 +45,19 @@ export class UserAppComponent implements OnInit {
     this.userAppService.getModalListener().subscribe((response) => {
       this.toggleModal();
     });
+
+    this.userAppService.getMessageListener().subscribe((message) => {
+      this.toggleMessage();
+      this.errorMessage = message;
+    });
   }
 
-  onSubmitSignup() {
-    this.signupService.onSubmit();
+  toggleMessage() {
+    this.isErrorMessageOpen = !this.isErrorMessageOpen;
   }
-  onSubmitLogin() {
-    this.loginService.onSubmit();
-  }
-
+  /**
+   * toggle between modal states (i.e. open, closed) and set some styles
+   */
   toggleModal() {
     this.modalOpen = !this.modalOpen;
 
@@ -72,7 +78,10 @@ export class UserAppComponent implements OnInit {
     }
     this.cd.detectChanges();
   }
-
+  /**
+   * toggle between signup and login form in the modal and change
+   * their corrsponding style (e.g. style)
+   */
   toggleActive() {
     this.mainActive = !this.mainActive;
 
@@ -92,5 +101,16 @@ export class UserAppComponent implements OnInit {
       this.renderer.setStyle(modalFooterButton, 'margin-left', '0');
       this.renderer.setStyle(modalFooterButton, 'margin-right', '3%');
     }
+  }
+  /**
+   * onClick methods to submit the forms, because these buttons, are
+   * outside the form and more specifically outside the component where
+   * the form has put.
+   */
+  onSubmitSignup() {
+    this.signupService.onSubmit();
+  }
+  onSubmitLogin() {
+    this.loginService.onSubmit();
   }
 }

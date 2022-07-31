@@ -9,6 +9,8 @@ import greekLanguage from 'src/assets/i18n/el.json';
 import { Subscription } from 'rxjs';
 import { HeaderService } from '../header.service';
 import { SignupService } from './signup.service';
+import { AuthService } from '../../auth/auth.service';
+import { UserAppService } from '../../user-app.service';
 
 @Component({
   selector: 'app-signup',
@@ -25,7 +27,9 @@ export class SignupComponent implements OnInit, OnDestroy {
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService,
-    private signupService: SignupService
+    private signupService: SignupService,
+    private authService: AuthService,
+    private userAppService: UserAppService
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
@@ -101,7 +105,25 @@ export class SignupComponent implements OnInit, OnDestroy {
       passwordConfirm: form.value.passwordsForm.passwordConfirm,
     };
 
-    this.signupService.createUser(user);
+    this.authService.onSignup(user).subscribe(
+      {
+        next: (c) => {
+          console.log(c);
+          this.userAppService.onToggleModal();
+        },
+      }
+      // (data) => {
+      //   this.router.navigate(['/']);
+      //   let duration = parseInt(data.expiresIn);
+      //   this.setAuthTimer(duration);
+      //   const now = new Date();
+      //   const expirationDate = new Date(now.getTime() + duration * 1000);
+      //   this.saveToStorage(expirationDate);
+      // },
+      // (error) => {
+      //   this.authStatusListener.next(false);
+      // }
+    );
 
     this.isLoading = false;
   }

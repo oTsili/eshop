@@ -16,7 +16,8 @@ import { CsurfMiddleware } from 'src/middlewares/csurf.middleware';
     NestjsFormDataModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '2 days' },
+      // signOptions: { expiresIn: '60s' },
     }),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],

@@ -18,6 +18,7 @@ import { LoginPromoModule } from './header/login-promo/login-promo.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpLoaderFactory } from './shared/loader-factory';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [UserAppComponent],
@@ -28,6 +29,7 @@ import { HttpLoaderFactory } from './shared/loader-factory';
     HeaderModule,
     HomeModule,
     MatButtonModule,
+    MatIconModule,
     ModalModule,
     LoginModule,
     SignupModule,

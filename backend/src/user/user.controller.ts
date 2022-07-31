@@ -12,6 +12,7 @@ import {
   // Response,
   Res,
   Session,
+  UseFilters,
   UseGuards,
   UseInterceptors,
   UsePipes,
@@ -26,6 +27,7 @@ import { User } from './schemas/user.schema';
 import { UserService } from './user.service';
 import * as bcrypt from 'bcrypt';
 import { AuthGuard } from '@nestjs/passport';
+import { HttpExceptionFilter } from 'src/exception-filters/http-exception.filter';
 
 @Controller('user')
 export class UserController {
@@ -42,6 +44,7 @@ export class UserController {
   }
 
   // @UseGuards(AuthGuard('local'))
+  @UseFilters(new HttpExceptionFilter())
   @UseGuards(LocalAuthGuard)
   @FormDataRequest()
   @Post('/login')

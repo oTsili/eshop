@@ -6,6 +6,8 @@ import greekLanguage from 'src/assets/i18n/el.json';
 import { Subscription } from 'rxjs';
 import { HeaderService } from '../header.service';
 import { LoginService } from './login.service';
+import { AuthService } from '../../auth/auth.service';
+import { UserAppService } from '../../user-app.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +24,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private authService: AuthService,
+    private userAppService: UserAppService
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
@@ -37,7 +41,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         // console.log(this.signupForm.nativeElement);
         // this.signupForm.nativeElement.submit();
         this.submitButton.nativeElement.click();
-    
       });
     this.theLoginForm = new FormGroup({
       email: new FormControl(null, {
@@ -62,7 +65,18 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
     this.isLoading = true;
-    this.loginService.onLogin(form.value.email, form.value.password);
+    this.authService.onLogin(form.value.email, form.value.password).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.userAppService.onToggleModal();
+      },
+      error: (error) => {
+        const errorMessage = error.error.message.split(':')[1];
+        console.log(errorMessage);
+
+        this.userAppService.onMessageUpdate(errorMessage);
+      },
+    });
     this.isLoading = false;
   }
 }

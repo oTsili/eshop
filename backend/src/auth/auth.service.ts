@@ -18,9 +18,11 @@ export class AuthService {
     console.log({ username }, { pass });
     const user = await this.userService.findUserByEmail(username);
     console.log({ user });
-    const comparison = await bcrypt.compare(pass, user.password);
-    console.log({ comparison });
-
+    let comparison;
+    if (user) {
+      comparison = await bcrypt.compare(pass, user.password);
+      console.log({ comparison });
+    }
     if (user && comparison) {
       const { password, ...result } = user;
       console.log('paok');

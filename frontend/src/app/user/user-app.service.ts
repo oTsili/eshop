@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 export class UserAppService {
   modalListener = new Subject<void>();
   languageChangeListener = new Subject<string>();
+  messageListener = new Subject<string>();
 
   getLanguageChangeListener() {
     return this.languageChangeListener.asObservable();
@@ -21,4 +22,13 @@ export class UserAppService {
   onToggleModal() {
     this.modalListener.next();
   }
+
+  getMessageListener(){
+    return this.messageListener.asObservable()
+  }
+
+  onMessageUpdate(message:string){
+    this.messageListener.next(message);
+  }
+
 }
