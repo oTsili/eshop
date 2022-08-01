@@ -56,6 +56,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   changeLanguageSubscription: Subscription;
   activeLanguage: string;
   isOverList = false;
+  numOfLinks: string;
 
   constructor(
     private userAppService: UserAppService,
@@ -100,6 +101,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .getNavBarElements()
       .subscribe((response) => {
         this.initialData = response.navBarElement;
+        // save the class for the header links to be added as class
+        this.numOfLinks = this.numToWord(this.initialData.length);
+        // save to the local dynamic "db"
         this.dynamicDatabase.navBarElements = this.initialData;
       });
   }
@@ -124,5 +128,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onTest() {
     this.headerService.onTest();
+  }
+
+  isExpandable(node: navBarElement): boolean {
+    if (node.subNavBarElements?.length! > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  numToWord(num: number): string {
+    const library = {
+      1: 'one',
+      2: 'two',
+      3: 'three',
+      4: 'four',
+      5: 'five',
+      6: 'six',
+      7: 'seven',
+      8: 'eight',
+      9: 'nine',
+      10: 'ten',
+    };
+
+    return library[num];
   }
 }

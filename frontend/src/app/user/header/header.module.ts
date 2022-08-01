@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { SubNavComponent } from './sub-nav/sub-nav.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 // import ngx-translate and the http loader
@@ -20,7 +19,6 @@ import { DropDownMenuCloseDirective } from './directives/dropdown-menu-close.dir
 @NgModule({
   declarations: [
     HeaderComponent,
-    SubNavComponent,
     DropdownMenuOpenDirective,
     DropdownSubmenuOpenDirective,
     DropDownSubmenuCloseDirective,

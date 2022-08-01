@@ -3,9 +3,46 @@
 .ui.menu {
   font-weight: 500 !important;
   font-size: 1.8rem !important;
+  border: none !important;
+}
+
+.ui.menu:not(.vertical) .item {
+  align-items: flex-end !important;
+}
+
+.ui.menu.upper {
+  box-shadow: 0px 1px 2px 0 #ffffff;
 }
 
 header {
   box-shadow: 0 1.2rem 3.2rem rgb(0 0 0 / 10%);
   position: relative;
+}
+
+a,
+a:hover,
+a:visited,
+a:link,
+a:active {
+  // text-decoration: none !important;
+  color: #000000f2 !important;
+  cursor: pointer;
+}
+
+// .ui.menu > .language-selector {
+//   // display: flex;
+//   // flex-direction: column;
+//   align-items: flex-end;
+//   justify-content: center;
+// }
+
+.ui.dropdown.link {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  width: 3rem;
+  margin-left: 2%;
+}
+.ph-list {
+  font-size: 2.5rem;
 }
