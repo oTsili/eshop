@@ -2,8 +2,12 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
   OnInit,
   Output,
+  SimpleChanges,
 } from '@angular/core';
 
 @Component({
@@ -11,9 +15,9 @@ import {
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit, OnDestroy, OnChanges {
   @Output() close = new EventEmitter();
-
+  @Input() mainActive: boolean;
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
@@ -22,6 +26,11 @@ export class ModalComponent implements OnInit {
 
   ngOnDestroy() {
     this.el.nativeElement.remove();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    this.mainActive = changes['mainActive'].currentValue;
   }
 
   onCloseClick() {

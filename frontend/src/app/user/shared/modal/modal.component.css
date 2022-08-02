@@ -23,3 +23,19 @@ i.icon {
   font-size: 1.5rem;
 }
 
+.content-mainActive {
+  height: auto;
+}
+
+.content-mainNonActive {
+  height: 36rem;
+}
+
+.content-lt-sm-mainNonActive {
+  height: 50rem;
+}
+
+.content-default {
+  padding: 2%;
+  font-size: 1.5rem;
+}

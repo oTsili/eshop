@@ -6,16 +6,27 @@
   <app-footer></app-footer>
 
   <!-- app-modal -->
-  <app-modal (close)="toggleModal(); mainActive = true" *ngIf="modalOpen">
+  <app-modal
+    [mainActive]="mainActive"
+    (close)="toggleModal(); mainActive = true"
+    *ngIf="modalOpen"
+  >
     <div modalTitle>{{ "register" | translate }}</div>
-    <div class="wrapper">
+    <div
+      ngClass="wrapper--row"
+      [ngClass.lt-sm]="{
+        'wrapper--col-rev': mainActive,
+        'wrapper--col': !mainActive
+      }"
+    >
       <span class="modal-item">
         <app-login
           [ngStyle]="{
             opacity: mainActive ? 1 : 0,
             'z-index': mainActive ? 1000 : -1000
           }"
-          class="main"
+          ngClass="main"
+          [ngClass.lt-sm]="{ top50: !mainActive, bottom50: mainActive }"
         ></app-login>
         <app-login-promo
           [ngStyle]="{
@@ -29,20 +40,25 @@
           </button>
         </app-login-promo>
       </span>
-      <span class="modal-item">
+      <span
+        ngClass="modal-item"
+        [ngClass.lt-sm]="{ 'signup-promo': mainActive }"
+      >
         <app-signup
           [ngStyle]="{
             opacity: mainActive ? 0 : 1,
             'z-index': mainActive ? -1000 : 1000
           }"
-          class="secondary"
+          ngClass="secondary"
+          [ngClass.lt-sm]="{ bottom5: !mainActive }"
         ></app-signup>
         <app-signup-promo
           [ngStyle]="{
             opacity: mainActive ? 1 : 0,
             'z-index': mainActive ? 1000 : -1000
           }"
-          class="main"
+          ngClass="main"
+          [ngClass.lt-sm]="{ top11: mainActive }"
         >
           <button (click)="toggleActive()" mat-raised-button color="accent">
             {{ "Open Signup Form" | translate }}
@@ -52,6 +68,7 @@
     </div>
     <ng-container modalFooter>
       <button
+        class="footer-button"
         *ngIf="mainActive"
         mat-button
         mat-raised-button
@@ -61,6 +78,7 @@
         {{ "login" | translate }}
       </button>
       <button
+        class="footer-button"
         *ngIf="!mainActive"
         mat-button
         mat-raised-button

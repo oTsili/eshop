@@ -76,17 +76,18 @@ export class UserAppComponent implements OnInit {
     this.mainActive = !this.mainActive;
 
     // select modal and change height, so that it contains signup form too
-    const modalContent =
-      document.body.querySelector<HTMLElement>('.ui.modal .content');
+    const modalContent = document.body.querySelector<HTMLElement>(
+      '.ui.modal .content-default'
+    );
     const modalFooterButton = document.body.querySelector<HTMLElement>(
       '.ui.modal .actions:not(.actions-default)'
     );
     if (this.mainActive) {
-      this.renderer.setStyle(modalContent, 'height', 'auto');
+      // this.renderer.setStyle(modalContent, 'height', 'auto');
       this.renderer.setStyle(modalFooterButton, 'text-align', 'left');
       this.renderer.setStyle(modalFooterButton, 'margin-left', '3%');
     } else {
-      this.renderer.setStyle(modalContent, 'height', '36rem');
+      // this.renderer.setStyle(modalContent, 'height', '36rem');
       this.renderer.setStyle(modalFooterButton, 'text-align', 'right');
       this.renderer.setStyle(modalFooterButton, 'margin-left', '0');
       this.renderer.setStyle(modalFooterButton, 'margin-right', '3%');

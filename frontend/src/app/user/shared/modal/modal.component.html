@@ -4,7 +4,19 @@
       <i (click)="onCloseClick()" class="close icon"></i>
       <ng-content select="[modalTitle]"></ng-content>
     </div>
-    <div class="content">
+    <div
+      [ngClass]="{
+        'content-default': true,
+        'content-mainNonActive': !mainActive,
+        'content-mainActive': mainActive
+      }"
+      [ngClass.lt-sm]="{
+        'content-default': true,
+        'content-lt-sm-mainNonActive': !mainActive,
+        'content-mainNonActive': !mainActive,
+        'content-mainActive': false
+      }"
+    >
       <ng-content></ng-content>
     </div>
     <div class="actions actions-default">
