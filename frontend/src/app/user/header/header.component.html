@@ -2,6 +2,7 @@
   <!-- first row menu header -->
   <div class="ui borderless menu upper">
     <!-- hamburger dropdown -->
+
     <div
       fxHide
       fxShow.gt-md="false"
@@ -12,6 +13,21 @@
     >
       <i class="ph-list"></i>
       <div dropdownSubmenuClose class="menu">
+        <!-- START icons for mobile -->
+        <div fxHide fxShow.lt-sm="true" class="hamburger item">
+          <a
+            (click)="openLoginModal()"
+            class="link icon--medium hamburger-icon"
+          >
+            <i class="ph-user"></i>
+          </a>
+          <a class="link icon--medium hamburger-icon">
+            <i class="ph-heart"></i>
+          </a>
+        </div>
+        <div fxHide fxShow.lt-sm="true" class="divider"></div>
+        <!-- END icons for mobile -->
+
         <ng-container *ngFor="let link of initialData">
           <div
             *ngIf="isExpandable(link)"
@@ -34,7 +50,7 @@
       </div>
     </div>
     <!-- END hamburger dropdown -->
-    <a class="item"> Home </a>
+    <!-- START language selector -->
     <div
       class="language-selector item"
       fxFlexOrder.gt-md="-1"
@@ -43,22 +59,55 @@
       <a
         [ngStyle]="{ 'font-weight': activeLanguage === 'el' ? 700 : 400 }"
         (click)="useLanguage('el')"
-        class="link text--medium language"
+        class="link language"
       >
-        ΕΛ
+        ΕΛ&nbsp;
       </a>
       &#124;
       <a
         [ngStyle]="{ 'font-weight': activeLanguage === 'en' ? 700 : 400 }"
         (click)="useLanguage('en')"
-        class="link text--medium language"
-        >EN
+        class="link language"
+        >&nbsp;EN
       </a>
     </div>
+    <!-- END language selector -->
+    <div
+      ngClass="spacer"
+      [ngClass.gt-md]="{ spacer: true, 'spacer--left': false }"
+      [ngClass.lt-md]="{ 'spacer--left': true, spacer: false }"
+    ></div>
+    <span class="item title">My App</span>
+    <div class="spacer"></div>
+    <!-- START icons -->
+    <div class="item">
+      <div class="ui icon borderless menu upper">
+        <a
+          fxShow.lt-sm="false"
+          (click)="openLoginModal()"
+          class="item link icon--medium"
+        >
+          <i class="ph-user"></i>
+        </a>
+        <a fxShow.lt-sm="false" class="item link icon--medium">
+          <i class="ph-heart"></i>
+        </a>
+        <a class="item link icon--medium">
+          <i class="ph-shopping-bag"></i>
+        </a>
+      </div>
+    </div>
+    <!-- END icons -->
   </div>
   <!-- end first row menu header -->
   <!-- second row menu header -->
-  <div [ngClass]="numOfLinks" class="ui pointing fluid item menu borderless">
+  <div
+    fxShow
+    fxHide.lt-md="true"
+    fxHide.gt-md="false"
+    [ngClass]="numOfLinks"
+    class="ui pointing fluid item menu borderless"
+  >
     <ng-container *ngFor="let link of initialData">
       <a *ngIf="!isExpandable(link)" class="item">{{
         link.text | translate | uppercase

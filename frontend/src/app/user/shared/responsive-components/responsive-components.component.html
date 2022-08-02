@@ -2,7 +2,6 @@
   <ng-container *ngIf="arrOfRows">
     <div class="row" *ngFor="let row of arrOfRows; let i = index">
       <div class="col" *ngFor="let col of arrOfCols; let j = index">
-        {{ i * arrOfCols.length + j }}
         <div
           *ngIf="responsiveComponents[i * arrOfCols.length + j]"
           class="wrapper"

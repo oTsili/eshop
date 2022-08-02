@@ -94,12 +94,16 @@ body {
   font-size: 1rem;
 }
 
-.text--large {
-  font-size: 1.7rem;
+.text--lg {
+  font-size: 1.4rem;
+}
+
+.text--xlarge {
+  font-size: 1.6rem;
 }
 
 .icon--medium {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .icon--medium:link,

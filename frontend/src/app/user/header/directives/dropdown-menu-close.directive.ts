@@ -32,6 +32,7 @@ export class DropDownMenuCloseDirective implements OnInit {
   }
 
   @HostListener('mouseleave', ['$event'])
+  @HostListener('click', ['$event'])
   //   @HostListener('mousemove', ['$event'])
   disableDisplay(event: MouseEvent) {
     var mouseX = event.pageX;

@@ -57,6 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   activeLanguage: string;
   isOverList = false;
   numOfLinks: string;
+  hamIsOpen = false;
 
   constructor(
     private userAppService: UserAppService,
