@@ -10,7 +10,7 @@ const BACKEND_URL = environment.BASE_URL + 'user';
   providedIn: 'root',
 })
 export class AuthService {
-  signedInListener = new BehaviorSubject(false);
+  private authenticatedListener = new BehaviorSubject(false);
 
   constructor(private httpClient: HttpClient) {}
 
@@ -25,7 +25,7 @@ export class AuthService {
       )
       .pipe(
         tap(() => {
-          this.signedInListener.next(true);
+          this.onUpdateAuthStatus(true);
         })
       )
       .pipe(
@@ -55,7 +55,7 @@ export class AuthService {
       )
       .pipe(
         tap(() => {
-          this.signedInListener.next(true);
+          this.onUpdateAuthStatus(true);
         })
       )
       .pipe(
@@ -64,6 +64,14 @@ export class AuthService {
           return userData;
         })
       );
+  }
+
+  getAuthStatusListener() {
+    return this.authenticatedListener.asObservable();
+  }
+
+  onUpdateAuthStatus(status: boolean) {
+    this.authenticatedListener.next(status);
   }
 
   isAuthenticated() {

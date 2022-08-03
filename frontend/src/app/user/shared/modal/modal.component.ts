@@ -29,7 +29,6 @@ export class ModalComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     this.mainActive = changes['mainActive'].currentValue;
   }
 

@@ -29,37 +29,63 @@ import { AuthService } from '../auth/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   animations: [
-    trigger('openClose', [
-      // ...
-      state(
-        'open',
-        style({
-          visibility: 'visible',
-          display: 'block',
-        })
-      ),
-      state(
-        'closed',
-        style({
-          visibility: 'hidden',
-          display: 'none',
-        })
-      ),
-      transition('* => closed', [animate('1s')]),
-      transition('* => open', [animate('0.5s')]),
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('.2s', style({ transform: 'translateX(0%)' })),
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateX(0%)' }),
+        animate('.2s', style({ transform: 'translateX(-100%)' })),
+      ]),
+    ]),
+    trigger('slideOutIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(0%)' }),
+        animate('.2s', style({ transform: 'translateX(-100%)' })),
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('.2s', style({ transform: 'translateX(0%)' })),
+      ]),
     ]),
   ],
+  // animations: [
+  //   trigger('openClose', [
+  //     // ...
+  //     state(
+  //       'open',
+  //       style({
+  //         opacity: 1,
+  //         // visibility: 'visible',
+  //         // display: 'block',
+  //       })
+  //     ),
+  //     state(
+  //       'closed',
+  //       style({
+  //         opacity: 0,
+  //         // visibility: 'hidden',
+  //         // display: 'none',
+  //       })
+  //     ),
+  //     transition('* => closed', [animate('1s')]),
+  //     transition('* => open', [animate('0.5s')]),
+  //   ]),
+  // ],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isOpenSearchBox = false;
   initialData: navBarElement[];
   navBarElementsSubsciption: Subscription;
   changeLanguageSubscription: Subscription;
+  authStatusListenerSubscription: Subscription;
   activeLanguage: string;
   isOverList = false;
   numOfLinks: string;
   hamIsOpen = false;
   isOpenHamburgerMenu = false;
+  isAuthenticated = false;
 
   constructor(
     private userAppService: UserAppService,
@@ -77,6 +103,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // subscribe to authStatus listener
+    this.authStatusListenerSubscription = this.authService
+      .getAuthStatusListener()
+      .subscribe((response) => {
+        console.log({ isAuth: response });
+        this.isAuthenticated = response;
+      });
+
+    // save current language
     this.activeLanguage = this.translate.currentLang;
     this.headerService.selectedLanguage = this.activeLanguage;
 
@@ -143,7 +178,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onTestAuth() {
-    console.log('paok');
+    console.log('testAuth');
     this.authService.isAuthenticated().subscribe((response) => {
       console.log(response);
     });

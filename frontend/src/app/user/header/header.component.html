@@ -7,12 +7,18 @@
       fxHide
       fxShow.gt-md="false"
       fxShow.lt-md="true"
-      dropdownMenuOpen
       class="ui dropdown link"
+      hamburgerMenuOpen
       (click)="updateHamburgerStatus($event)"
     >
-      <i hamburgerMenuClose class="ph-list"></i>
-      <div dropdownSubmenuClose class="menu">
+      <i [@slideInOut] *ngIf="!isOpenHamburgerMenu" class="ph-list"></i>
+      <i
+        [@slideOutIn]
+        *ngIf="isOpenHamburgerMenu"
+        hamburgerMenuClose
+        class="ph-x"
+      ></i>
+      <div class="menu" id="hamburger-menu">
         <!-- START icons for mobile -->
         <div fxHide fxShow.lt-sm="true" class="hamburger item">
           <a
@@ -83,13 +89,28 @@
     <!-- START icons -->
     <div class="item">
       <div class="ui icon borderless menu upper">
+        <!-- if not loggedin open login/signup modal -->
         <a
+          *ngIf="!isAuthenticated"
           fxShow.lt-sm="false"
           (click)="openLoginModal()"
           class="item link icon--medium"
         >
           <i class="ph-user"></i>
         </a>
+        <!-- if loggedIn open profile options -->
+        <div *ngIf="isAuthenticated" IconMenuOpen class="ui dropdown link">
+          <a fxShow.lt-sm="false" class="item link icon--medium">
+            <i class="ph-user"></i>
+          </a>
+          <div class="ui pointing menu">
+            <div class="item">logout</div>
+            <div class="item">logout</div>
+            <div class="item">logout</div>
+            <div class="item">logout</div>
+          </div>
+        </div>
+
         <a fxShow.lt-sm="false" class="item link icon--medium">
           <i class="ph-heart"></i>
         </a>
@@ -100,8 +121,8 @@
     </div>
     <!-- END icons -->
   </div>
-  <!-- end first row menu header -->
-  <!-- second row menu header -->
+  <!--END first row menu header -->
+  <!-- START second row menu header -->
   <div
     fxShow
     fxHide.lt-md="true"
@@ -129,5 +150,5 @@
       </div>
     </ng-container>
   </div>
-  <!--end second row menu header -->
+  <!--END second row menu header -->
 </header>

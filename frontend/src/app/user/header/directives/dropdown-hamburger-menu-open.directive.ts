@@ -9,9 +9,9 @@ import { Subscription } from 'rxjs';
 import { HeaderService } from '../header.service';
 
 @Directive({
-  selector: '[dropdownMenuOpen]',
+  selector: '[hamburgerMenuOpen]',
 })
-export class DropdownMenuOpenDirective implements OnInit {
+export class HamburgerMenuOpenDirective implements OnInit {
   menuElement: HTMLElement;
   changeHamburgerStatusSubscription: Subscription;
 
@@ -33,10 +33,10 @@ export class DropdownMenuOpenDirective implements OnInit {
 
     this.menuElement = this.elementRef.nativeElement.querySelector('.menu');
   }
-  @HostListener('mouseover', ['$event'])
+  // @HostListener('mouseover', ['$event'])
   // @HostListener('click', ['$event'])
   activateDisplay(event: MouseEvent): void {
-    console.log('menuOpen');
+    console.log('hamburgerOpen');
     this.renderer.addClass(this.elementRef.nativeElement, 'active');
     this.renderer.addClass(this.elementRef.nativeElement, 'visible');
     // this.renderer.setStyle(
