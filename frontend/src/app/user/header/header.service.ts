@@ -9,9 +9,22 @@ const BACKEND_URL = environment.BASE_URL + 'navbar';
 @Injectable({ providedIn: 'root' })
 export class HeaderService {
   private languageChangeListener = new Subject<string>();
+  private hamburgerOpenCloseListener = new Subject<{
+    isOpen: boolean;
+    event: MouseEvent;
+  }>();
   private selectedLang: string;
+  private isHamburgerOpen: boolean;
 
   constructor(private httpClient: HttpClient) {}
+
+  getHamburgerStatusListener() {
+    return this.hamburgerOpenCloseListener.asObservable();
+  }
+
+  onHamburgerStatusChange(isOpen: boolean, event: MouseEvent) {
+    this.hamburgerOpenCloseListener.next({ isOpen, event });
+  }
 
   set selectedLanguage(language: string) {
     this.selectedLang = language;

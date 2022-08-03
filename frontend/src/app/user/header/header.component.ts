@@ -59,6 +59,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isOverList = false;
   numOfLinks: string;
   hamIsOpen = false;
+  isOpenHamburgerMenu = false;
 
   constructor(
     private userAppService: UserAppService,
@@ -93,6 +94,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.navBarElementsSubsciption.unsubscribe();
     this.changeLanguageSubscription.unsubscribe();
+  }
+
+  updateHamburgerStatus(event: MouseEvent) {
+    console.log(event);
+    this.isOpenHamburgerMenu = !this.isOpenHamburgerMenu;
+    console.log(this.isOpenHamburgerMenu);
+
+    this.headerService.onHamburgerStatusChange(this.isOpenHamburgerMenu, event);
   }
 
   openLoginModal() {

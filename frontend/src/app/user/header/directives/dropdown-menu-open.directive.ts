@@ -5,20 +5,37 @@ import {
   OnInit,
   Renderer2,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { HeaderService } from '../header.service';
 
 @Directive({
   selector: '[dropdownMenuOpen]',
 })
 export class DropdownMenuOpenDirective implements OnInit {
   menuElement: HTMLElement;
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  changeHamburgerStatusSubscription: Subscription;
+
+  constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    private headerService: HeaderService
+  ) {}
 
   ngOnInit(): void {
+    this.changeHamburgerStatusSubscription = this.headerService
+      .getHamburgerStatusListener()
+      .subscribe((response) => {
+        // this.isOpenHamburgerMenu = isOpenHamburgerMenu;
+        if (response.isOpen) {
+          this.activateDisplay(response.event);
+        }
+      });
+
     this.menuElement = this.elementRef.nativeElement.querySelector('.menu');
   }
   @HostListener('mouseover', ['$event'])
-  @HostListener('click', ['$event'])
-  activateDisplay(): void {
+  // @HostListener('click', ['$event'])
+  activateDisplay(event: MouseEvent): void {
     this.renderer.addClass(this.elementRef.nativeElement, 'active');
     this.renderer.addClass(this.elementRef.nativeElement, 'visible');
     // this.renderer.setStyle(

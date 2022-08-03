@@ -15,6 +15,7 @@ import { DropdownMenuOpenDirective } from './directives/dropdown-menu-open.direc
 import { DropdownSubmenuOpenDirective } from './directives/dropdown-submenu-open.directive';
 import { DropDownSubmenuCloseDirective } from './directives/dropdown-submenu-close.directive';
 import { DropDownMenuCloseDirective } from './directives/dropdown-menu-close.directive';
+import { HamburgerMenuCloseDirective } from './directives/dropdown-hamburger-menu-close.directive';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DropDownMenuCloseDirective } from './directives/dropdown-menu-close.dir
     DropdownSubmenuOpenDirective,
     DropDownSubmenuCloseDirective,
     DropDownMenuCloseDirective,
+    HamburgerMenuCloseDirective,
   ],
   imports: [
     CommonModule,

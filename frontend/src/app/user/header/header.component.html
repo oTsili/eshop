@@ -8,10 +8,10 @@
       fxShow.gt-md="false"
       fxShow.lt-md="true"
       dropdownMenuOpen
-      dropdownMenuClose
       class="ui dropdown link"
+      (click)="updateHamburgerStatus($event)"
     >
-      <i class="ph-list"></i>
+      <i hamburgerMenuClose class="ph-list"></i>
       <div dropdownSubmenuClose class="menu">
         <!-- START icons for mobile -->
         <div fxHide fxShow.lt-sm="true" class="hamburger item">
