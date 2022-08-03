@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
     this.isLoading = true;
-    this.authService.onLogin(form.value.email, form.value.password).subscribe({
+    this.authService.login(form.value.email, form.value.password).subscribe({
       next: (response) => {
         console.log(response);
         this.userAppService.onToggleModal();

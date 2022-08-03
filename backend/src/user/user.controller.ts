@@ -28,20 +28,15 @@ import { UserService } from './user.service';
 import * as bcrypt from 'bcrypt';
 import { AuthGuard } from '@nestjs/passport';
 import { HttpExceptionFilter } from 'src/exception-filters/http-exception.filter';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller('user')
 export class UserController {
   constructor(
     private readonly userService: UserService,
     private authService: AuthService,
+    private jwtService: JwtService,
   ) {}
-  @Get('signout')
-  async logout(@Res({ passthrough: true }) res: Response, @Session() session) {
-    // Some internal checks
-    session = null;
-    // res.cookie('token', '', { expires: new Date() });
-    res.status(HttpStatus.ACCEPTED).json({});
-  }
 
   // @UseGuards(AuthGuard('local'))
   @UseFilters(new HttpExceptionFilter())
@@ -60,6 +55,8 @@ export class UserController {
     console.log(dbUser);
     const { access_token } = await this.authService.login(dbUser);
     // console.log({ userDB });
+    const expiresIn = this.jwtService.decode(access_token)['exp'];
+    console.log({ expiresIn });
 
     // // store jwt in the express-session
     session.jwt = access_token;
@@ -99,32 +96,53 @@ export class UserController {
     // return res.status(HttpStatus.CREATED).json({ access_token });
   }
 
-  @Get('')
-  async fetchAll(@Res() response) {
-    let users = await this.userService.findAll();
+  // @Get('')
+  // async fetchAll(@Res() response) {
+  //   let users = await this.userService.findAll();
 
-    const totalUsers = users.length;
+  //   const totalUsers = users.length;
 
-    const message = 'users fetched';
+  //   const message = 'users fetched';
 
-    return response.status(HttpStatus.OK).json({ message, users, totalUsers });
+  //   return response.status(HttpStatus.OK).json({ message, users, totalUsers });
+  // }
+  @Get('signout')
+  async logout(@Res({ passthrough: true }) res: Response, @Session() session) {
+    // Some internal checks
+    session = null;
+    // res.cookie('token', '', { expires: new Date() });
+    res.status(HttpStatus.ACCEPTED).json({});
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('isAuth')
+  async validateAuth(@Req() req, @Res() res) {
+    return await res.status(HttpStatus.OK).json({ message: 'ok' });
+  }
+  // empty get request controller must be the last in the order (in cardinal order)
   @Get(':email')
   async fetchUser(@Res() response, @Param('email') email: string) {
     let users = await this.userService.findUserByEmail(email);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Post('test')
-  async fetchTest(
-    @Res() response,
-    @Req() req,
-    @Param('email') email: string,
-    @Session() session: Record<string, any>,
-  ) {
-    let users = await this.userService.findUserByEmail('test@test.com');
-    console.log(users);
-    return response.status(HttpStatus.OK).json({ users });
-  }
+  // @UseGuards(JwtAuthGuard)
+  // @Post('test')
+  // async fetchTest(
+  //   @Res() response,
+  //   @Req() req,
+  //   @Param('email') email: string,
+  //   @Session() session: Record<string, any>,
+  // ) {
+  //   let users = await this.userService.findUserByEmail('test@test.com');
+  //   console.log(users);
+  //   return response.status(HttpStatus.OK).json({ users });
+  // }
+
+  // @Get('test')
+  // async validateAuth(@Res() response, @Session() session: Record<string, any>) {
+  //   // console.log(req.user);
+  //   // return response.status(HttpStatus.OK).json({ user: req.user });
+
+  //   return response.status(HttpStatus.OK).json({ user: 'paok' });
+  // }
 }

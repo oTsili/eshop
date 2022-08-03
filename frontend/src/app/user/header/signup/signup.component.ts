@@ -105,7 +105,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       passwordConfirm: form.value.passwordsForm.passwordConfirm,
     };
 
-    this.authService.onSignup(user).subscribe(
+    this.authService.signup(user).subscribe(
       {
         next: (c) => {
           console.log(c);

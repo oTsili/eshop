@@ -25,8 +25,6 @@ export class AuthService {
     }
     if (user && comparison) {
       const { password, ...result } = user;
-      console.log('paok');
-      console.log({ result });
       return result;
     }
     return null;

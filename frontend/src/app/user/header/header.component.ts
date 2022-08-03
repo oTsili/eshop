@@ -22,6 +22,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -65,7 +66,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private headerService: HeaderService,
     private translate: TranslateService,
     private searchService: SearchService,
-    private footerService: FooterService
+    private footerService: FooterService,
+    private authService: AuthService
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
@@ -129,6 +131,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onTest() {
     this.headerService.onTest();
+  }
+
+  onTestAuth() {
+    console.log('paok');
+    this.authService.isAuthenticated().subscribe((response) => {
+      console.log(response);
+    });
   }
 
   isExpandable(node: navBarElement): boolean {

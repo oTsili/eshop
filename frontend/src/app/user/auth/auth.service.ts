@@ -14,7 +14,7 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) {}
 
-  onLogin(email: string, password: string) {
+  login(email: string, password: string) {
     return this.httpClient
       .post<{ existingUser: UserAttrs; expiresIn: string }>(
         `${BACKEND_URL}/login`,
@@ -36,7 +36,7 @@ export class AuthService {
       );
   }
 
-  onSignup(signupAuthData: SignupAuthData) {
+  signup(signupAuthData: SignupAuthData) {
     const authData = new FormData();
     authData.append('email', signupAuthData.email);
     authData.append('firstName', signupAuthData.firstName);
@@ -64,5 +64,11 @@ export class AuthService {
           return userData;
         })
       );
+  }
+
+  isAuthenticated() {
+    return this.httpClient.get<{ message: string }>(`${BACKEND_URL}/isAuth`, {
+      withCredentials: true,
+    });
   }
 }
