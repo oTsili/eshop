@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         // this.signupForm.nativeElement.submit();
         this.submitButton.nativeElement.click();
       });
+
     this.theLoginForm = new FormGroup({
       email: new FormControl(null, {
         validators: [Validators.required, Validators.email],

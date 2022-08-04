@@ -121,3 +121,14 @@ a:active {
 #user-icon {
   display: flex;
 }
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-infix {
+  padding-left: 3rem !important;
+}
+.search-icon {
+  cursor: pointer;
+}
+
+::ng-deep .mat-input-element {
+  caret-color: black;
+}

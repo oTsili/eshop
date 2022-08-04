@@ -21,6 +21,7 @@ import { IconMenuOpenDirective } from './directives/dropdown-icon-menu-open.dire
 import { RouterModule } from '@angular/router';
 import { TestComponent } from './test/test.component';
 import { HeaderRoutingModule } from './header-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { HeaderRoutingModule } from './header-routing.module';
     MatInputModule,
     RouterModule,
     HeaderRoutingModule,
+    FormsModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({

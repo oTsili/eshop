@@ -23,6 +23,13 @@ import {
   trigger,
 } from '@angular/animations';
 import { AuthService } from '../auth/auth.service';
+import {
+  FormControl,
+  FormControlName,
+  FormGroup,
+  NgForm,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -97,6 +104,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   hamIsOpen = false;
   isOpenHamburgerMenu = false;
   isAuthenticated = false;
+  search: string;
 
   constructor(
     private userAppService: UserAppService,
@@ -105,7 +113,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private searchService: SearchService,
     private footerService: FooterService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
@@ -114,6 +123,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // this.theSearchForm = new FormGroup({
+    //   search: new FormControl(null),
+    // });
+
     // subscribe to authStatus listener
     this.authStatusListenerSubscription = this.authService
       .getAuthStatusListener()
@@ -164,6 +177,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.changeLanguageSubscription.unsubscribe();
     this.authStatusListenerSubscription.unsubscribe();
     this.isLoggedInListener.unsubscribe();
+  }
+
+  onSubmitSearch() {
+    console.log({ input: this.search });
+    this.router.navigate(['/search'], {
+      queryParams: { search: this.search },
+      queryParamsHandling: 'merge',
+    });
   }
 
   updateHamburgerStatus(event: MouseEvent) {

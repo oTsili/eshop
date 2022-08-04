@@ -114,10 +114,9 @@
             <i class="ph-user"></i>
           </a>
           <div class="ui icon pointing menu">
+            <div class="item">my profile</div>
+            <div class="item">orders</div>
             <div (click)="onLogout()" class="item">logout</div>
-            <div class="item">logout</div>
-            <div class="item">logout</div>
-            <div class="item">logout</div>
           </div>
         </div>
 
@@ -177,22 +176,34 @@
   </div>
   <!--END second row menu header -->
   <!-- START search input element box -->
-  <mat-form-field
-    [@slideUpDown]
-    *ngIf="isOpenSearchBox"
-    class="search-box"
-    appearance="fill"
+  <form
+    (keydown.enter)="onSubmitSearch()"
+    #theSearchForm="ngForm"
+    (ngSbmint)="onSubmitSearch()"
   >
-    <mat-icon class="search-icon" matPrefix>search</mat-icon>
-    <input
-      matInput
-      type="text"
-      aria-label="Search"
-      placeholder="Αναζήτηση σε όλο το κατάστημα"
-    />
-    <mat-icon class="link" (click)="toggleSearchBox()" matSuffix
-      >close</mat-icon
+    <mat-form-field
+      [@slideUpDown]
+      *ngIf="isOpenSearchBox"
+      class="search-box"
+      appearance="fill"
     >
-  </mat-form-field>
+      <mat-icon (click)="onSubmitSearch()" class="search-icon" matPrefix
+        >search</mat-icon
+      >
+      <input
+        matInput
+        [(ngModel)]="search"
+        #searchInput="ngModel"
+        name="search"
+        type="text"
+        aria-label="Search"
+        placeholder="{{ 'search all over the store' | translate }}"
+      />
+      <mat-icon class="link" (click)="toggleSearchBox()" matSuffix
+        >close</mat-icon
+      >
+    </mat-form-field>
+  </form>
+
   <!-- END search input element box -->
 </header>
