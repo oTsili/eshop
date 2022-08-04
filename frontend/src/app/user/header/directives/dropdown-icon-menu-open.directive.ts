@@ -19,7 +19,7 @@ export class IconMenuOpenDirective implements OnInit {
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit(): void {
-    console.log({ isOpen: this.isOpen });
+    // console.log({ isOpen: this.isOpen });
     this.menuElement = this.elementRef.nativeElement.querySelector('.menu');
     this.parentElement = this.elementRef.nativeElement.parentElement;
     this.menuElements =

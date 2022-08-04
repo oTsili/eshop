@@ -65,6 +65,12 @@ export class UserController {
     return res.status(HttpStatus.OK).json(dbUser);
   }
 
+  @Get('/logout')
+  async signout(@Res() res: Response, @Session() session: Record<string, any>) {
+    session.jwt = null;
+    return res.status(HttpStatus.OK).json();
+  }
+
   // @UsePipes(new ValidationPipe())
 
   @Post('/signup')
@@ -106,18 +112,20 @@ export class UserController {
 
   //   return response.status(HttpStatus.OK).json({ message, users, totalUsers });
   // }
-  @Get('signout')
-  async logout(@Res({ passthrough: true }) res: Response, @Session() session) {
-    // Some internal checks
-    session = null;
-    // res.cookie('token', '', { expires: new Date() });
-    res.status(HttpStatus.ACCEPTED).json({});
-  }
 
   @UseGuards(JwtAuthGuard)
   @Get('isAuth')
-  async validateAuth(@Req() req, @Res() res) {
-    return await res.status(HttpStatus.OK).json({ message: 'ok' });
+  async validateAuth(
+    @Req() req,
+    @Res() res,
+    @Session() session: Record<string, any>,
+  ) {
+    console.log(session);
+    let isAuth = true;
+    if (!session.jwt) {
+      isAuth = false;
+    }
+    return await res.status(HttpStatus.OK).json(isAuth);
   }
   // empty get request controller must be the last in the order (in cardinal order)
   @Get(':email')

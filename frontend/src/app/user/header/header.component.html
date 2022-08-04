@@ -1,8 +1,7 @@
 <header>
-  <!-- first row menu header -->
+  <!-- START first row menu header -->
   <div class="ui borderless menu upper">
-    <!-- hamburger dropdown -->
-
+    <!-- START hamburger dropdown -->
     <div
       fxHide
       fxShow.gt-md="false"
@@ -76,15 +75,21 @@
         class="link language"
         >&nbsp;EN
       </a>
+      <!-- END language selector -->
+      <!-- START search box -->
+      <a (click)="toggleSearchBox()" class="item link icon--medium">
+        <i class="ph-magnifying-glass"></i>
+      </a>
+      <!-- END search box -->
     </div>
-    <!-- END language selector -->
+
     <div (click)="onTestAuth()" class="item">test</div>
     <div
       ngClass="spacer"
       [ngClass.gt-md]="{ spacer: true, 'spacer--left': false }"
       [ngClass.lt-md]="{ 'spacer--left': true, spacer: false }"
     ></div>
-    <span class="item title">My App</span>
+    <span routerLink="" class="item title">My App</span>
     <div class="spacer"></div>
     <!-- START icons -->
     <div class="item">
@@ -99,12 +104,17 @@
           <i class="ph-user"></i>
         </a>
         <!-- if loggedIn open profile options -->
-        <div *ngIf="isAuthenticated" IconMenuOpen class="ui dropdown link">
+        <div
+          *ngIf="isAuthenticated"
+          IconMenuOpen
+          class="ui dropdown"
+          id="user-icon"
+        >
           <a fxShow.lt-sm="false" class="item link icon--medium">
             <i class="ph-user"></i>
           </a>
-          <div class="ui pointing menu">
-            <div class="item">logout</div>
+          <div class="ui icon pointing menu">
+            <div (click)="onLogout()" class="item">logout</div>
             <div class="item">logout</div>
             <div class="item">logout</div>
             <div class="item">logout</div>
@@ -131,24 +141,58 @@
     class="ui pointing fluid item menu borderless"
   >
     <ng-container *ngFor="let link of initialData">
-      <a *ngIf="!isExpandable(link)" class="item">{{
-        link.text | translate | uppercase
-      }}</a>
+      <!---- START main menu links ----->
+      <!------ START  menu links no expandables ------>
+      <a
+        *ngIf="!isExpandable(link)"
+        routerLink="{{ link.text }}"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active"
+        class="item"
+        >{{ link.text | translate | uppercase }}</a
+      >
+      <!------ END  menu links no expandables ------>
+      <!------ START  menu links expandables ------>
       <div
         *ngIf="isExpandable(link)"
         dropdownMenuOpen
         dropdownMenuClose
         class="ui pointing dropdown link item"
       >
-        <span class="text">{{ link.text | translate | uppercase }}</span>
+        <span class="text">
+          {{ link.text | translate | uppercase }}
+        </span>
         <i class="dropdown icon"></i>
+        <!------ END  menu links expandables ------>
+        <!---- END main menu links ---->
+        <!---- START secondary dropdown menu links  for each main link ---->
         <div dropdownSubmenuClose class="menu">
           <div *ngFor="let sublink of link.subNavBarElements" class="item">
             {{ sublink.text | translate | uppercase }}
           </div>
         </div>
+        <!---- END secondary dropdown menu links for each main link ---->
       </div>
     </ng-container>
   </div>
   <!--END second row menu header -->
+  <!-- START search input element box -->
+  <mat-form-field
+    [@slideUpDown]
+    *ngIf="isOpenSearchBox"
+    class="search-box"
+    appearance="fill"
+  >
+    <mat-icon class="search-icon" matPrefix>search</mat-icon>
+    <input
+      matInput
+      type="text"
+      aria-label="Search"
+      placeholder="Αναζήτηση σε όλο το κατάστημα"
+    />
+    <mat-icon class="link" (click)="toggleSearchBox()" matSuffix
+      >close</mat-icon
+    >
+  </mat-form-field>
+  <!-- END search input element box -->
 </header>

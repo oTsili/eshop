@@ -49,6 +49,16 @@ import { AuthService } from '../auth/auth.service';
         animate('.2s', style({ transform: 'translateX(0%)' })),
       ]),
     ]),
+    trigger('slideUpDown', [
+      transition(':enter', [
+        style({ transform: 'translateY(-100%)' }),
+        animate('.3s', style({ transform: 'translateY(0%)' })),
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateY(0%)' }),
+        animate('.3s', style({ transform: 'translateY(-100%)' })),
+      ]),
+    ]),
   ],
   // animations: [
   //   trigger('openClose', [
@@ -80,6 +90,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navBarElementsSubsciption: Subscription;
   changeLanguageSubscription: Subscription;
   authStatusListenerSubscription: Subscription;
+  isLoggedInListener: Subscription;
   activeLanguage: string;
   isOverList = false;
   numOfLinks: string;
@@ -106,9 +117,31 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // subscribe to authStatus listener
     this.authStatusListenerSubscription = this.authService
       .getAuthStatusListener()
-      .subscribe((response) => {
-        console.log({ isAuth: response });
-        this.isAuthenticated = response;
+      .subscribe({
+        next: (response) => {
+          console.log('logout listener');
+          // http request to get auth status
+          this.isLoggedInListener = this.authService
+            .isAuthenticated()
+            .subscribe({
+              next: (response) => {
+                this.isAuthenticated = response;
+                console.log({ isAuth: this.isAuthenticated });
+              },
+              error: (response) => {
+                console.log(response);
+                if (response.error.statusCode === 401) {
+                  this.isAuthenticated = false;
+                }
+                console.log({ isAuth: this.isAuthenticated });
+              },
+            });
+        },
+        error: (error) => {
+          console.error(error);
+          this.isAuthenticated = false;
+          console.log({ isAuth: this.isAuthenticated });
+        },
       });
 
     // save current language
@@ -129,6 +162,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.navBarElementsSubsciption.unsubscribe();
     this.changeLanguageSubscription.unsubscribe();
+    this.authStatusListenerSubscription.unsubscribe();
+    this.isLoggedInListener.unsubscribe();
   }
 
   updateHamburgerStatus(event: MouseEvent) {
@@ -181,6 +216,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     console.log('testAuth');
     this.authService.isAuthenticated().subscribe((response) => {
       console.log(response);
+    });
+  }
+
+  onLogout() {
+    console.log('logout');
+    this.authService.logout().subscribe({
+      next: (response) => console.log(response),
+      error: (error) => console.log(error),
     });
   }
 

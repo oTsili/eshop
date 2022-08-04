@@ -18,6 +18,9 @@ import { DropDownMenuCloseDirective } from './directives/dropdown-menu-close.dir
 import { HamburgerMenuCloseDirective } from './directives/dropdown-hamburger-menu-close.directive';
 import { HamburgerMenuOpenDirective } from './directives/dropdown-hamburger-menu-open.directive';
 import { IconMenuOpenDirective } from './directives/dropdown-icon-menu-open.directive';
+import { RouterModule } from '@angular/router';
+import { TestComponent } from './test/test.component';
+import { HeaderRoutingModule } from './header-routing.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { IconMenuOpenDirective } from './directives/dropdown-icon-menu-open.dire
     HamburgerMenuCloseDirective,
     HamburgerMenuOpenDirective,
     IconMenuOpenDirective,
+    TestComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +41,8 @@ import { IconMenuOpenDirective } from './directives/dropdown-icon-menu-open.dire
     MatMenuModule,
     MatIconModule,
     MatInputModule,
+    RouterModule,
+    HeaderRoutingModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({

@@ -59,7 +59,8 @@ a:active {
 
 .link.language:hover,
 .ui.menu.icon .link.item:hover,
-.ui.menu.icon a.item:hover {
+.ui.menu.icon a.item:hover,
+.item.link.icon--medium:hover {
   background: none;
   opacity: 0.4;
 }
@@ -89,4 +90,34 @@ a:active {
 
 #hamburger-menu {
   margin-top: -50%;
+}
+
+.title {
+  cursor: pointer;
+}
+
+.search-box {
+  position: absolute;
+  top: 100%;
+  z-index: 100;
+  background-color: ghostwhite;
+  font-size: 1.5rem;
+  // opacity: 0;
+  // transition: opacity 0.5s ease-in-out;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.ui.pointing.dropdown.link.item {
+  z-index: 2000;
+}
+
+.icon.menu {
+  z-index: 3000;
+}
+
+#user-icon {
+  display: flex;
 }

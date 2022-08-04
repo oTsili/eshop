@@ -4,6 +4,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 // import * as path from 'path';
 import { APP_GUARD } from '@nestjs/core';
+import { ConfigModule } from '@nestjs/config';
 
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { ProductsModule } from './products/products.module';
@@ -19,6 +20,7 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   // connect to the demo Database
   imports: [
+    ConfigModule.forRoot(),
     // ServeStaticModule.forRoot({
     //   rootPath: join(__dirname, '..', 'static'),
     // }),

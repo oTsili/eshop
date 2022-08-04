@@ -30,7 +30,25 @@ export class AuthService {
       )
       .pipe(
         map((userData) => {
-          console.log(userData);
+          console.log({ userData });
+          return userData;
+        })
+      );
+  }
+
+  logout() {
+    return this.httpClient
+      .get<void>(`${BACKEND_URL}/logout`, {
+        withCredentials: true,
+      })
+      .pipe(
+        tap(() => {
+          this.onUpdateAuthStatus(false);
+        })
+      )
+      .pipe(
+        map((userData) => {
+          console.log({ userData });
           return userData;
         })
       );
@@ -60,7 +78,7 @@ export class AuthService {
       )
       .pipe(
         map((userData) => {
-          console.log(userData);
+          console.log({ userData });
           return userData;
         })
       );
@@ -75,7 +93,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return this.httpClient.get<{ message: string }>(`${BACKEND_URL}/isAuth`, {
+    return this.httpClient.get<boolean>(`${BACKEND_URL}/isAuth`, {
       withCredentials: true,
     });
   }

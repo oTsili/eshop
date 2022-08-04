@@ -29,6 +29,9 @@ async function bootstrap() {
       secret: 'my-secret',
       resave: false,
       saveUninitialized: false,
+      // cookie: {
+      //   maxAge: parseInt(process.env.MAX_AGE),
+      // },
     }),
   );
 
