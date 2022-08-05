@@ -23,6 +23,17 @@
     </div>
   </ng-container>
 </div>
-<div [style.width]="pageWidth + 'px'" class="paginator" *ngIf="pageWidth">
+<div
+  *ngIf="totalProducts === 0 && isOpenErrorMessage"
+  class="ui warning message"
+>
+  <i (click)="toggleErrorMessage()" class="close icon"></i>
+  <div class="header">No Results!</div>
+</div>
+<div
+  [style.width]="pageWidth + 'px'"
+  class="paginator"
+  *ngIf="pageWidth && totalProducts > 0"
+>
   <app-paginator></app-paginator>
 </div>

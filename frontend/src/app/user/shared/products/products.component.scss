@@ -1,3 +1,5 @@
+@import "semantic-ui-css/semantic.css";
+
 $base-width: 25rem;
 
 .products {
@@ -60,4 +62,10 @@ $base-width: 25rem;
 .paginator {
   display: flex;
   justify-content: flex-end;
+}
+
+.ui.warning.message {
+  display: flex;
+  justify-content: center;
+  margin-right: 25%;
 }

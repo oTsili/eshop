@@ -36,6 +36,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   currentPage = environment.CURRENT_PAGE;
   totalProducts = environment.TOTAL_PRODUCTS;
   productsPerPage = environment.PRODUCTS_PER_PAGE;
+  isOpenErrorMessage = true;
 
   @HostListener('window:resize', ['$event'])
   updateRowsCols() {
@@ -141,5 +142,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.productWidth = productWidth;
     this.updateRowsCols();
     this.cd.detectChanges();
+  }
+
+  toggleErrorMessage() {
+    this.isOpenErrorMessage = !this.isOpenErrorMessage;
   }
 }

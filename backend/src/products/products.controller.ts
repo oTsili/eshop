@@ -57,8 +57,8 @@ export class ProductsController {
 
     @Query('pageSize') pageSize: number,
     @Query('currentPage') currentPage: number,
-    @Query('sort') sort,
-    @Query('filter') filter,
+    @Query('sort') sort: string,
+    @Query('name') name: string,
 
     @Query('heel height') heel_height: string,
     @Query('sales') sales: string,
@@ -69,9 +69,14 @@ export class ProductsController {
      * non-numeral characters, refactor mongodb queryies, by stripping those
      * non-numeral characters, and parsing the strings to numbers
      */
-    console.log({ pageSize }, { currentPage }, { sort }, { filter });
+    console.log({ pageSize }, { currentPage }, { sort }, { name });
+
     let query = request.query;
     console.log({ query });
+
+    if (name) {
+      query.name = { $regex: name, $options: 'i' };
+    }
     if (sales) {
       const [min, max] = sales
         .split('-')
@@ -99,7 +104,7 @@ export class ProductsController {
       pageSize,
       currentPage,
       sort,
-      filter,
+      name,
     );
 
     // get the number of the products, so that the paginator is informed (e.g. page 1 of ...._)

@@ -59,6 +59,8 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
 
     // get the url from the browser
     let urlTree = this.router.parseUrl(this.router.url);
+    this.searchQuery = urlTree.queryParams['name'];
+
     // update the products on Products component
     this.productsService.onProductsUpdate(urlTree.queryParams);
   }
