@@ -33,7 +33,10 @@
 <div
   [style.width]="pageWidth + 'px'"
   class="paginator"
-  *ngIf="pageWidth && totalProducts > 0"
+  *ngIf="pageWidth && !isOpenErrorMessage && totalProducts > productsPerPage"
 >
-  <app-paginator></app-paginator>
+  <app-paginator
+    [totalProducts]="totalProducts"
+    [productsPerPage]="productsPerPage"
+  ></app-paginator>
 </div>

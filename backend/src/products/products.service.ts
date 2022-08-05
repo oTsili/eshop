@@ -23,12 +23,15 @@ export class ProductsService {
     return this.productModel.find(query).countDocuments();
   }
 
-  async findFromQuery(query, pageSize, currentPage, sort, filter) {
-    return this.productModel
-      .find(query)
-      .skip(pageSize * (currentPage - 1))
-      .limit(pageSize)
-      .exec();
+  async findFromQuery(query, pageSize, currentPage, sort, description_query) {
+    return (
+      this.productModel
+        .find(query)
+        // .find(description_query)
+        .skip(pageSize * (currentPage - 1))
+        .limit(pageSize)
+        .exec()
+    );
   }
 
   async findPrice(price): Promise<Product[]> {

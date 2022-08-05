@@ -25,6 +25,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   productsSubscription: Subscription;
   updateProductsSubscription: Subscription;
   sideBarWidthSubscription: Subscription;
+  noProductErrorMessageSubscription: Subscription;
+  changePagePaginatorListener: Subscription;
   products: Product[];
   numOfCols: number = 3;
   arrOfCols: number[];
@@ -36,7 +38,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   currentPage = environment.CURRENT_PAGE;
   totalProducts = environment.TOTAL_PRODUCTS;
   productsPerPage = environment.PRODUCTS_PER_PAGE;
-  isOpenErrorMessage = true;
+  isOpenErrorMessage = false;
 
   @HostListener('window:resize', ['$event'])
   updateRowsCols() {
@@ -45,7 +47,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     let windowWidth = window.innerWidth;
     this.pageWidth = windowWidth - this.sideBarWidth;
     if (this.productWidth) {
-      let element = this.elementRef.nativeElement.querySelector('.wrapper');
+      let element = this.elementRef.nativeElement.querySelector('.products');
       let marginRight = window
         .getComputedStyle(element)
         .getPropertyValue('margin-right');
@@ -53,9 +55,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
         .getComputedStyle(element)
         .getPropertyValue('margin-left');
       let totalMargin = parseInt(marginLeft) + parseInt(marginRight);
-      this.numOfCols = Math.floor(
-        this.pageWidth / (this.productWidth + totalMargin)
-      );
+      this.numOfCols =
+        Math.floor(this.pageWidth / (this.productWidth + totalMargin)) - 1;
       // compute the width of the container containing the products, so that
       // the paginator has the exactly same widht (and is put just below it)
       this.pageWidth = this.numOfCols * (this.productWidth + totalMargin);
@@ -77,6 +78,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // subscribe to noProducts message listener
+    this.noProductErrorMessageSubscription =
+      this.productsService.noProductsMesageListener.subscribe((response) => {
+        this.isOpenErrorMessage = response;
+      });
+
     // get the sideber width, so that it can be subtra
     this.sideBarWidthSubscription = this.productsService
       .getSideBarWidthListener()
@@ -85,15 +92,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
       });
 
     // get the paginator change page listener
-    this.productsService.getChangePageListener().subscribe((response) => {
-      const { productsPerPage, currentPage } = response;
+    this.changePagePaginatorListener = this.productsService
+      .getChangePageListener()
+      .subscribe((response) => {
+        const { productsPerPage, currentPage } = response;
 
-      this.productsPerPage = productsPerPage;
-      this.currentPage = currentPage;
+        this.productsPerPage = productsPerPage;
+        this.currentPage = currentPage;
 
-      let queryParams = this.router.parseUrl(this.router.url).queryParams;
-      this.productsService.onProductsUpdate(queryParams);
-    });
+        let queryParams = this.router.parseUrl(this.router.url).queryParams;
+        this.productsService.onProductsUpdate(queryParams);
+      });
 
     // get the products on page initialization
     let queryParams = this.router.parseUrl(this.router.url).queryParams;
@@ -103,6 +112,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.updateProductsSubscription = this.productsService
       .getProductsUpdateListener()
       .subscribe((response) => {
+        console.log('products update');
         this.getProducts(response.queryParams);
       });
   }
@@ -111,6 +121,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.sideBarWidthSubscription.unsubscribe();
     this.updateProductsSubscription.unsubscribe();
     this.productsSubscription.unsubscribe();
+    this.noProductErrorMessageSubscription.unsubscribe();
+    this.changePagePaginatorListener.unsubscribe();
   }
   /**
    * gets the products from the db and updates the paginator
@@ -123,8 +135,19 @@ export class ProductsComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         const { totalProducts, products, message } = response;
         this.products = products;
+        this.totalProducts = totalProducts;
         this.paginatorService.onProductsLoaded(
           totalProducts,
+          this.productsPerPage
+        );
+
+        // show the no results message in case of no products
+        if (totalProducts === 0) {
+          this.productsService.onUpdateNoProductsMessage(true);
+        }
+
+        this.paginatorService.onProductsLoaded(
+          this.totalProducts,
           this.productsPerPage
         );
 

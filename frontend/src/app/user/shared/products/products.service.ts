@@ -20,9 +20,18 @@ export class ProductsService {
     productsPerPage: number;
     currentPage: number;
   }>();
+  noProductsMesageListener = new Subject<boolean>();
   chipsList: Chip[] = [];
-
+  showNoProductsMessage = false;
   constructor(private httpClient: HttpClient) {}
+
+  getErrorMessageListener() {
+    return this.noProductsMesageListener.asObservable();
+  }
+
+  onUpdateNoProductsMessage(show: boolean) {
+    this.noProductsMesageListener.next(show);
+  }
 
   getChangePageListener() {
     return this.changePageListener.asObservable();

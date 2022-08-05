@@ -25,8 +25,9 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   price: string | null;
   sales: string | null;
   page = this.dynamicDatabase.searchPage;
-  queryParamMapSubscription: Subscription;
+  // queryParamMapSubscription: Subscription;
   changeLanguageSubscription: Subscription;
+  queryHeaderSubscription: Subscription;
   queryArr;
 
   constructor(
@@ -44,6 +45,27 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     translate.use('el');
   }
 
+  ngOnInit(): void {
+    this.queryHeaderSubscription = this.searchService
+      .getSearchQueryHeaderListener()
+      .subscribe((response) => {
+        this.searchQuery = response;
+      });
+
+    // get translate language and subscribe
+    this.changeLanguageSubscription = this.searchService
+      .getLanguageChangeListener()
+      .subscribe((response) => {
+        console.log(response);
+        this.translate.use(response);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.changeLanguageSubscription.unsubscribe();
+    this.queryHeaderSubscription.unsubscribe();
+  }
+
   ngAfterViewInit(): void {
     // fill the chips array with the chips gained from the url
     this.queryArr = this.getChipValuesFromUrlQueries();
@@ -57,9 +79,9 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     this.updateMaterialActiveStatus();
     this.updateSalesActiveStatus();
 
-    // get the url from the browser
+    // pass the query parameter description value to the header "Search for .."
     let urlTree = this.router.parseUrl(this.router.url);
-    this.searchQuery = urlTree.queryParams['name'];
+    this.searchQuery = urlTree.queryParams['description'];
 
     // update the products on Products component
     this.productsService.onProductsUpdate(urlTree.queryParams);
@@ -119,19 +141,6 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
-  ngOnInit(): void {
-    // get translate language and subscribe
-    this.changeLanguageSubscription = this.searchService
-      .getLanguageChangeListener()
-      .subscribe((response) => {
-        console.log(response);
-        this.translate.use(response);
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.changeLanguageSubscription.unsubscribe();
-  }
   /**
    * Gets the current url and returns an array of the query parameters values
    * @returns an array of the query parameters values

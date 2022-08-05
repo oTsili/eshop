@@ -33,4 +33,9 @@
       text-transform: uppercase;
     }
   }
+
+  ::ng-deep .mat-chip.mat-standard-chip .mat-chip-remove {
+    display: flex;
+    align-items: center;
+  }
 }

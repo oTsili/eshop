@@ -30,6 +30,7 @@ import {
   NgForm,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProductsService } from '../shared/products/products.service';
 
 @Component({
   selector: 'app-header',
@@ -114,6 +115,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private searchService: SearchService,
     private footerService: FooterService,
     private authService: AuthService,
+    private productService: ProductsService,
     private router: Router
   ) {
     translate.setTranslation('en', defaultLanguage);
@@ -179,12 +181,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.isLoggedInListener.unsubscribe();
   }
 
-  onSubmitSearch() {
+  async onSubmitSearch() {
     console.log({ input: this.search });
-    this.router.navigate(['/search'], {
-      queryParams: { name: this.search },
+    await this.router.navigate(['/search'], {
+      queryParams: { description: this.search },
       queryParamsHandling: 'merge',
     });
+    // const search = this.search
+    //   .normalize('NFD')
+    //   .replace(/[\u0300-\u036f]/g, '');
+    // console.log({ search });
+
+    // initialize the state of the no products message
+    this.productService.onUpdateNoProductsMessage(false);
+    // update the page header "Search For ..."
+    this.searchService.onUpdateSearchQueryHeader(this.search);
+    // update the products in the catalog
+    this.productService.onProductsUpdate(
+      { description: this.search },
+      { key: 'description', value: this.search }
+    );
   }
 
   updateHamburgerStatus(event: MouseEvent) {

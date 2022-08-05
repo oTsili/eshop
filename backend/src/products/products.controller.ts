@@ -58,24 +58,39 @@ export class ProductsController {
     @Query('pageSize') pageSize: number,
     @Query('currentPage') currentPage: number,
     @Query('sort') sort: string,
-    @Query('name') name: string,
+    @Query('description') description: string,
 
     @Query('heel height') heel_height: string,
     @Query('sales') sales: string,
     @Query('price') price: string,
   ) {
+    let query = request.query;
+    let description_query;
     /**
      * for the query parameters heel_height, sales and price, which contain
      * non-numeral characters, refactor mongodb queryies, by stripping those
      * non-numeral characters, and parsing the strings to numbers
      */
-    console.log({ pageSize }, { currentPage }, { sort }, { name });
+    console.log({ pageSize }, { currentPage }, { sort }, { description });
 
-    let query = request.query;
     console.log({ query });
 
-    if (name) {
-      query.name = { $regex: name, $options: 'i' };
+    if (description) {
+      query.description = { $regex: description, $options: 'i' };
+      console.log(query.description);
+
+      // description_query = {
+      //   $description: {
+      //     $search: { $regex: description, $options: 'i' },
+      //     $diacriticSensitive: false,
+      //     $caseSensitive: false,
+      //   },
+      // };
+
+      // delete query.description;
+    }
+    if (description === '') {
+      delete query.description;
     }
     if (sales) {
       const [min, max] = sales
@@ -104,8 +119,10 @@ export class ProductsController {
       pageSize,
       currentPage,
       sort,
-      name,
+      description,
     );
+
+    console.log(products);
 
     // get the number of the products, so that the paginator is informed (e.g. page 1 of ...._)
     const totalProducts = await this.productService.countProducts(query);

@@ -39,3 +39,10 @@ i.icon {
   padding: 2%;
   font-size: 1.5rem;
 }
+.ui.active.dimmer {
+  z-index: 5000;
+}
+
+.ui.dimmer {
+  background-color: #0000009e;
+}

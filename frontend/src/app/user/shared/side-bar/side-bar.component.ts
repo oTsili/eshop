@@ -21,6 +21,7 @@ import { SideBarService } from './side-bar.service';
 import defaultLanguage from 'src/assets/i18n/en.json';
 import greekLanguage from 'src/assets/i18n/el.json';
 import { HttpParams } from '@angular/common/http';
+import { SearchService } from '../../search/search.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -44,6 +45,7 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
     private cd: ChangeDetectorRef,
     private responsiveBoxesService: ResponsiveBoxesService,
     private contentListService: ContentListService,
+    private searchService: SearchService,
     private translate: TranslateService,
     private sideBarService: SideBarService,
     private elementRef: ElementRef
@@ -104,6 +106,9 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
       } else if (chip.key === 'material') {
         this.contentListService.initializeMaterialActiveStatusArray();
       }
+
+      // update the search page header "Serarch for.."
+      this.searchService.onUpdateSearchQueryHeader('');
 
       this.updateProducts(chip);
     }
