@@ -1,0 +1,67 @@
+@import "semantic-ui-css/semantic.css";
+
+/* Default toggle button styles */
+.accordion__toggle-btn {
+  cursor: pointer;
+  border: none;
+  transition: transform 0.3s ease-in;
+  background: none;
+}
+
+/* Manage disabled state of the Accordion item */
+.ttile.disabled .accordion__header {
+  color: var(--accordion-disabled);
+  cursor: not-allowed;
+}
+.accordion__toggle-btn:disabled {
+  cursor: not-allowed;
+}
+.accordion__toggle-btn:disabled svg path:nth-child(2) {
+  fill: var(--accordion-disabled);
+}
+.accordion__toggle-btn.active {
+  transform: rotate(180deg);
+}
+
+/*** Rewrite semantic css rules that do not apply by itself 
+(but only when the "semantic-ui-css" is imported globally) ***/
+.title {
+  display: flex;
+  justify-content: space-between;
+  margin: 0em;
+  padding: 0.75em 1em;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: bold;
+  border-top: 1px solid rgba(34, 36, 38, 0.15);
+  transition: background 0.1s ease, color 0.1s ease;
+}
+.active.title {
+  background: transparent;
+  color: rgba(0, 0, 0, 0.95);
+}
+
+button {
+  -webkit-appearance: button;
+  text-transform: none;
+  overflow: visible;
+  font-family: sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.active.content {
+  display: block;
+}
+
+.content {
+  margin: 0em;
+  padding: 0.5em 1em 1.5em;
+}
+
+.wrapper {
+  font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.4285em;
+  color: rgba(0, 0, 0, 0.87);
+}

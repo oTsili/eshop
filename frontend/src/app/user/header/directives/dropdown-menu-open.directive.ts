@@ -2,6 +2,7 @@ import {
   Directive,
   ElementRef,
   HostListener,
+  OnDestroy,
   OnInit,
   Renderer2,
 } from '@angular/core';
@@ -11,7 +12,7 @@ import { HeaderService } from '../header.service';
 @Directive({
   selector: '[dropdownMenuOpen]',
 })
-export class DropdownMenuOpenDirective implements OnInit {
+export class DropdownMenuOpenDirective implements OnInit, OnDestroy {
   menuElement: HTMLElement;
   changeHamburgerStatusSubscription: Subscription;
 
@@ -33,6 +34,11 @@ export class DropdownMenuOpenDirective implements OnInit {
 
     this.menuElement = this.elementRef.nativeElement.querySelector('.menu');
   }
+
+  ngOnDestroy(): void {
+    this.changeHamburgerStatusSubscription.unsubscribe();
+  }
+
   @HostListener('mouseover', ['$event'])
   // @HostListener('click', ['$event'])
   activateDisplay(event: MouseEvent): void {

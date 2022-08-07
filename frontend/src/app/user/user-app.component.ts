@@ -1,9 +1,7 @@
 import {
-  AfterContentInit,
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
-  ElementRef,
+  OnDestroy,
   OnInit,
   Renderer2,
 } from '@angular/core';
@@ -15,15 +13,17 @@ import greekLanguage from 'src/assets/i18n/el.json';
 import { HeaderService } from './header/header.service';
 import { SignupService } from './header/signup/signup.service';
 import { LoginService } from './header/login/login.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-app',
   templateUrl: './user-app.component.html',
   styleUrls: ['./user-app.component.scss'],
 })
-export class UserAppComponent implements OnInit {
+export class UserAppComponent implements OnInit, OnDestroy {
   modalOpen = false;
   mainActive = true;
+  modalSubsciption: Subscription;
 
   constructor(
     private userAppService: UserAppService,
@@ -40,9 +40,15 @@ export class UserAppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userAppService.getModalListener().subscribe((response) => {
-      this.toggleModal();
-    });
+    this.modalSubsciption = this.userAppService
+      .getModalListener()
+      .subscribe((response) => {
+        this.toggleModal();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.modalSubsciption.unsubscribe();
   }
 
   /**

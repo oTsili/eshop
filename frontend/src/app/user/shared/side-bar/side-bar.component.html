@@ -15,18 +15,25 @@
   </div>
 
   <!-- Accordion Start -->
-  <app-accordion [collapsing]="collapsing">
-    <ng-container *ngFor="let panel of panels">
-      <accordion-item
-        title="{{ panel.data.header.replace('_', ' ') | translate }}"
-      >
-        <ng-template accordionContent>
-          <!-- Panel Start -->
-          <app-accordion [panels]="panels"></app-accordion>
-          <!-- Panel end -->
-        </ng-template>
-      </accordion-item>
-    </ng-container>
-  </app-accordion>
-  <!-- Accordion End -->
+  <div class="ui styled fluid accordion">
+    <app-accordion isCollapsed="false">
+      <ng-container *ngFor="let panel of accordionPanels; let i = index">
+        <panel-item>
+          <ng-template panelHeader>
+            {{ panel.data.header | translate | uppercase }}
+            <!-- {{
+            'I will be displayed in the [ngTemplateOutlet]="item.panelHeader.templateRef"'
+          }} -->
+          </ng-template>
+          <ng-template panelContent>
+            <!-- {{
+            'I will be displayed in the [ngTemplateOutlet]="item.panelContent.templateRef"'
+          }} -->
+            <app-accordion [index]="i"></app-accordion>
+          </ng-template>
+        </panel-item>
+      </ng-container>
+    </app-accordion>
+  </div>
 </div>
+<!-- Accordion End -->

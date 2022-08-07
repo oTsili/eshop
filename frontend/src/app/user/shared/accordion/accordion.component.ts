@@ -1,108 +1,65 @@
 import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
-import {
-  ChangeDetectionStrategy,
   Component,
   ContentChildren,
-  ElementRef,
   Input,
+  OnChanges,
   OnInit,
   QueryList,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { Panel } from './accordion.interfaces';
 import { AccordionService } from './accordion.service';
-
-import { AccordionItem } from './directives/accordion-item.directive';
-import { AccordionDirective } from './directives/accordion.directive';
-import { PanelItem } from './panel/panel-item';
-import { Panel } from './panel/panel-item.interface';
+import { PanelHostDirective } from './directives/panel-host.directive';
+import { PanelItemDirective } from './directives/panel-item-directives/panel-template-item.directive';
+import { PanelItem } from './host-panel/host-panel-item.class';
 
 @Component({
   selector: 'app-accordion',
   templateUrl: './accordion.component.html',
-  styleUrls: ['./accordion.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('contentExpansion', [
-      state(
-        'expanded',
-        style({ height: '*', opacity: 1, visibility: 'visible' })
-      ),
-      state(
-        'collapsed',
-        style({ height: '0px', opacity: 0, visibility: 'hidden' })
-      ),
-      transition(
-        'expanded <=> collapsed',
-        animate('200ms cubic-bezier(.37,1.04,.68,.98)')
-      ),
-    ]),
-  ],
+  styleUrls: ['./accordion.component.scss'],
 })
-export class AccordionComponent implements OnInit {
-  @Input() panels: PanelItem[] = [];
-  @ViewChild(AccordionDirective, { static: true })
-  panelHost!: AccordionDirective;
-  panelIdx = 0;
-  panelIndex = -1;
-
-  // @ViewChild('accordion_item') accordion_item: ElementRef;
-  expanded = new Set<number>();
-  /**
-   * Decides if the single item will be open at once or not.
-   * In collapsing mode, toggling one would collapse others
-   */
-  @Input() collapsing = true;
-
-  @ContentChildren(AccordionItem) items: QueryList<AccordionItem>;
+export class AccordionComponent implements OnInit, OnChanges {
+  @Input() index: number;
+  accordionPanels: PanelItem[] = [];
+  // Keep track of the view from the elements queried with panelHost directive
+  @ViewChild(PanelHostDirective, { static: true })
+  panelHost!: PanelHostDirective;
+  // because we use *ngFor, and keep track of the vewChanges of ContentChildren
+  @ContentChildren(PanelItemDirective)
+  items!: QueryList<PanelItemDirective>;
 
   constructor(private accordionService: AccordionService) {}
 
   ngOnInit(): void {
-    this.loadComponent();
+    this.accordionService.panels = this.accordionService.getAccordionPanels();
   }
-  /**
-   * Make the toggle function available to be called from
-   * outside.
-   * Memoize to prevent extra calls
-   * @param index - index of the accordion item
-   */
-  getToggleState = (index: number) => {
-    return this.toggleState.bind(this, index);
-  };
 
-  toggleState = (index: number) => {
-    if (this.expanded.has(index)) {
-      this.expanded.delete(index);
-    } else {
-      if (this.collapsing) {
-        this.expanded.clear();
-      }
-      this.expanded.add(index);
-    }
-  };
+  ngOnChanges(changes: SimpleChanges): void {
+    const index = changes['index'].currentValue;
+    this.loadComponent(index);
+  }
 
-  loadComponent() {
-    // this.panelIndex = (this.panelIndex + 1) % this.panels.length;
-    // this.panelIndex = this.index;
-    this.panelIndex = this.accordionService.getIndex();
-    this.accordionService.increaseIndex();
-
-    const panelItem = this.panels[this.panelIndex];
+  loadComponent(index: number) {
+    /**
+     * Create a view container where we will insert our
+     * newlly created compnent
+     */
+    const panelItem = this.accordionService.panels[index];
     const viewContainerRef = this.panelHost.viewContainerRef;
 
-    viewContainerRef.clear();
-    if (panelItem) {
-      const componentRef = viewContainerRef.createComponent<Panel>(
-        panelItem.component
-      );
+    /**
+     * Here we do not want to clear the viewContainerRef because we do not want to take
+     * the place of the previous component, but stack one on another
+     */
 
-      componentRef.instance.data = panelItem.data;
-    }
+    // viewContainerRef.clear();
+
+    // create the new component
+    const componentRef = viewContainerRef.createComponent<Panel>(
+      panelItem.component
+    );
+    // pass the data from provided from the accordion service
+    componentRef.instance.data = panelItem.data;
   }
 }

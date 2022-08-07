@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../shared/products/products.service';
@@ -37,7 +43,8 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     private responsiveBoxesService: ResponsiveBoxesService,
     private contentListService: ContentListService,
     private translate: TranslateService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
@@ -50,6 +57,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
       .getSearchQueryHeaderListener()
       .subscribe((response) => {
         this.searchQuery = response;
+        this.changeDetectorRef.detectChanges();
       });
 
     // get translate language and subscribe
@@ -85,6 +93,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
 
     // update the products on Products component
     this.productsService.onProductsUpdate(urlTree.queryParams);
+    this.changeDetectorRef.detectChanges();
   }
 
   updateColorActiveStatus() {

@@ -22,6 +22,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   theSignupForm: FormGroup;
   signupDate: string;
   submitSubscription: Subscription;
+  signupSubscription: Subscription;
   @ViewChild('submitButton') submitButton;
 
   constructor(
@@ -75,7 +76,10 @@ export class SignupComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.submitSubscription.unsubscribe();
+    this.signupSubscription.unsubscribe();
+  }
 
   onSignup(form: FormGroup) {
     if (form.invalid) {
@@ -105,7 +109,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       passwordConfirm: form.value.passwordsForm.passwordConfirm,
     };
 
-    this.authService.signup(user).subscribe(
+    this.signupSubscription = this.authService.signup(user).subscribe(
       {
         next: (c) => {
           console.log(c);

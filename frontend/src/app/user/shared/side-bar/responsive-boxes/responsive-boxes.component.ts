@@ -88,8 +88,12 @@ export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.colorActiveStatusSubscription.unsubscribe();
-    this.sizeActiveStatusSubscription.unsubscribe();
+    if (this.colorActiveStatusSubscription) {
+      this.colorActiveStatusSubscription.unsubscribe();
+    }
+    if (this.sizeActiveStatusSubscription) {
+      this.sizeActiveStatusSubscription.unsubscribe();
+    }
   }
 
   toggleActiveClass(index: number) {

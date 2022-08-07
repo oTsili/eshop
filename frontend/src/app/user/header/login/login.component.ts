@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   isLoading = false;
   userIsAuthenticated = false;
   submitSubscription: Subscription;
+  loginSubscription: Subscription;
+  translateSubscription: Subscription;
   theLoginForm: FormGroup;
   isErrorMessageOpen = false;
   errorMessage: string;
@@ -60,6 +62,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.submitSubscription.unsubscribe();
+    this.loginSubscription.unsubscribe();
+    this.translateSubscription.unsubscribe();
   }
 
   toggleMessage() {
@@ -72,23 +76,27 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
     this.isLoading = true;
-    this.authService.login(form.value.email, form.value.password).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.userAppService.onToggleModal();
-      },
-      error: (error) => {
-        let errorMessage = error.error.message.split(':')[1].trim();
-        console.log(errorMessage);
-
-        this.translate.get(errorMessage).subscribe((translation) => {
-          errorMessage = translation;
+    this.loginSubscription = this.authService
+      .login(form.value.email, form.value.password)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.userAppService.onToggleModal();
+        },
+        error: (error) => {
+          let errorMessage = error.error.message.split(':')[1].trim();
           console.log(errorMessage);
-          this.errorMessage = errorMessage;
-          this.toggleMessage();
-        });
-      },
-    });
+
+          this.translateSubscription = this.translate
+            .get(errorMessage)
+            .subscribe((translation) => {
+              errorMessage = translation;
+              console.log(errorMessage);
+              this.errorMessage = errorMessage;
+              this.toggleMessage();
+            });
+        },
+      });
     this.isLoading = false;
   }
 }

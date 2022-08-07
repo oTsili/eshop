@@ -1,8 +1,8 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-  selector: '[accordionHeader]',
+  selector: '[panelHeader]',
 })
-export class AccordionHeader {
+export class PanelHeaderDirective {
   constructor(public templateRef: TemplateRef<any>) {}
 }

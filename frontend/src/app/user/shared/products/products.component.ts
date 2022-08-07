@@ -118,11 +118,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.noProductErrorMessageSubscription.unsubscribe();
     this.sideBarWidthSubscription.unsubscribe();
+    this.changePagePaginatorListener.unsubscribe();
     this.updateProductsSubscription.unsubscribe();
     this.productsSubscription.unsubscribe();
-    this.noProductErrorMessageSubscription.unsubscribe();
-    this.changePagePaginatorListener.unsubscribe();
   }
   /**
    * gets the products from the db and updates the paginator

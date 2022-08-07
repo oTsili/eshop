@@ -5,10 +5,10 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { AccordionService } from '../accordion/accordion.service';
-import { PanelItem } from '../accordion/panel/panel-item';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ProductsService } from '../products/products.service';
 import { ActivatedRoute, Params, Router, UrlSerializer } from '@angular/router';
@@ -22,6 +22,9 @@ import defaultLanguage from 'src/assets/i18n/en.json';
 import greekLanguage from 'src/assets/i18n/el.json';
 import { HttpParams } from '@angular/common/http';
 import { SearchService } from '../../search/search.service';
+import { PanelItem } from '../accordion/host-panel/host-panel-item.class';
+import { PanelHostDirective } from '../accordion/directives/panel-host.directive';
+import { Panel } from '../accordion/accordion.interfaces';
 
 @Component({
   selector: 'app-side-bar',
@@ -30,12 +33,15 @@ import { SearchService } from '../../search/search.service';
 })
 export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
   collapsing = false;
-  panels: PanelItem[] = [];
   mainHeader = 'filters';
   chipsList: Chip[] = [];
   chipListSubscription: Subscription;
   changeLanguageSubscription: Subscription;
   separatorKeysCodes: number[] = [ENTER, COMMA];
+  accordionPanels: PanelItem[] = [];
+  // Keep track of the view from the elements queried with panelHost directive
+  @ViewChild(PanelHostDirective, { static: true })
+  panelHost!: PanelHostDirective;
 
   constructor(
     private router: Router,
@@ -63,9 +69,9 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // get the accordion panels
-    this.panels = this.accordionService.getPanels();
+    this.accordionPanels = this.accordionService.getAccordionPanels();
 
+    // this.loadComponent(0);
     // get the chiplist and subscribe
     this.chipListSubscription = this.productsService
       .getChipsListUpdateListener()
@@ -84,8 +90,40 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    this.chipListSubscription.unsubscribe();
-    this.changeLanguageSubscription.unsubscribe();
+    if (this.chipListSubscription) {
+      this.chipListSubscription.unsubscribe();
+    }
+    if (this.changeLanguageSubscription) {
+      this.changeLanguageSubscription.unsubscribe();
+    }
+
+    // if any chip is open remove it before leaving the page
+    for (let chip of this.chipsList) {
+      this.remove(chip);
+    }
+  }
+
+  loadComponent(index: number) {
+    /**
+     * Create a view container where we will insert our
+     * newlly created compnent
+     */
+    const panelItem = this.accordionPanels[index];
+    const viewContainerRef = this.panelHost.viewContainerRef;
+
+    /**
+     * Here we do not want to clear the viewContainerRef because we do not want to take
+     * the place of the previous component, but stack one on another
+     */
+
+    // viewContainerRef.clear();
+
+    // create the new component
+    const componentRef = viewContainerRef.createComponent<Panel>(
+      panelItem.component
+    );
+    // pass the data from provided from the accordion service
+    componentRef.instance.data = panelItem.data;
   }
 
   remove(chip: Chip): void {
@@ -107,10 +145,10 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
         this.contentListService.initializeMaterialActiveStatusArray();
       }
 
+      this.updateProducts(chip);
+
       // update the search page header "Serarch for.."
       this.searchService.onUpdateSearchQueryHeader('');
-
-      this.updateProducts(chip);
     }
   }
 

@@ -1,44 +1,29 @@
-<section class="accordion">
-  <div
-    *ngFor="let item of items; index as i"
-    class="accordion__item"
-    [class.disabled]="item.disabled"
-    [class.active]="expanded.has(i)"
-    clickAccordionHeader
-  >
+<ng-container *ngFor="let item of items; let i = index">
+  <div class="wrapper">
     <ng-container
-      [ngTemplateOutlet]="item?.customHeader?.templateRef || defaultHeader"
-      [ngTemplateOutletContext]="{
-        $implicit: item,
-        index: i,
-        toggle: getToggleState(i)
-      }"
+      [ngTemplateOutlet]="header"
+      [ngTemplateOutletContext]="{ $implicit: item, index: i }"
     ></ng-container>
 
-    <div
-      class="accordion__content"
-      [class.expanded]="expanded.has(i)"
-      [@contentExpansion]="expanded.has(i) ? 'collapsed' : 'expanded'"
-    >
-      <ng-container
-        *ngTemplateOutlet="
-          item?.content?.templateRef!;
-          context: { $implicit: item, index: i }
-        "
-      ></ng-container>
+    <div class="content active">
+      <p class="trasition visible">
+        <ng-container
+          [ngTemplateOutlet]="item.panelContent.templateRef"
+        ></ng-container>
+      </p>
     </div>
   </div>
-</section>
+</ng-container>
 
-<ng-template #defaultHeader let-item let-index="index">
-  <header
-    class="accordion__header"
-    (click)="item.disabled ? {} : toggleState(index)"
-  >
+<ng-template panelHost></ng-template>
+
+<ng-template #header let-item let-index="index">
+  <div class="title active" toggleAccordion>
+    <!-- title -->
     <ng-container
-      *ngTemplateOutlet="item?.customTitle?.templateRef || defaultTitle"
+      [ngTemplateOutlet]="item.panelHeader.templateRef"
     ></ng-container>
-    <button class="accordion__toggle-btn" [disabled]="item.disabled">
+    <button class="accordion__toggle-btn">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -51,9 +36,5 @@
         />
       </svg>
     </button>
-  </header>
-  <ng-template #defaultTitle>
-    <p class="accordion__title">{{ item?.title }}</p>
-  </ng-template>
+  </div>
 </ng-template>
-<ng-template panelHost let-item let-index="index"> </ng-template>

@@ -63,9 +63,16 @@ export class ContentListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.salesActiveStatusSubscription.unsubscribe();
-    this.materialActiveStatusSubscription.unsubscribe();
-    this.heelHeightActiveStatusSubscription.unsubscribe();
+    if (this.salesActiveStatusSubscription) {
+      this.salesActiveStatusSubscription.unsubscribe();
+    }
+    if (this.materialActiveStatusSubscription) {
+      this.materialActiveStatusSubscription.unsubscribe();
+    }
+
+    if (this.heelHeightActiveStatusSubscription) {
+      this.heelHeightActiveStatusSubscription.unsubscribe();
+    }
   }
 
   /**

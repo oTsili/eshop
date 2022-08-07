@@ -90,23 +90,27 @@ export class ProductsService {
   onProductsUpdate(queryParams: Params, chip?: Chip) {
     // update the chipsList
     if (chip) {
-      // get the index of the chip to be replaced
-      const chipIndex = this.getChipIndex(chip.key);
-      // if there is already a same chip
-      if (chipIndex >= 0) {
-        // remove the chip
-        this.removeChip(chipIndex);
-      }
-      // add the new(updated) chip
-      this.addChip(chip);
-      // inform the app for the chipList update
-      this.chipsListUpdateListener.next({ chipsList: this.chipsList });
+      this.updateChip(chip);
     }
 
     // inform the app for the products list update
     this.productUdateListener.next({
       queryParams,
     });
+  }
+
+  updateChip(chip: Chip) {
+    // get the index of the chip to be replaced
+    const chipIndex = this.getChipIndex(chip.key);
+    // if there is already a same chip
+    if (chipIndex >= 0) {
+      // remove the chip
+      this.removeChip(chipIndex);
+    }
+    // add the new(updated) chip
+    this.addChip(chip);
+    // inform the app for the chipList update
+    this.chipsListUpdateListener.next({ chipsList: this.chipsList });
   }
 
   chipsListInitialize(chipsList: Chip[]) {

@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
+import { Subscription } from 'rxjs';
 
 @Injectable()
 export class PaginatorTranslateService extends MatPaginatorIntl {
   translate: TranslateService;
+  translateSubscription: Subscription;
 
   override getRangeLabel = (page: number, pageSize: number, length: number) => {
     let returnString = '';
@@ -15,10 +17,12 @@ export class PaginatorTranslateService extends MatPaginatorIntl {
       });
     }
     const amountPages = Math.ceil(length / pageSize);
-    this.translate.get('paginator').subscribe((res: string) => {
-      returnString = `${res['Page']} ${page + 1} ${res['of']} ${amountPages}`;
-      this.changes.next();
-    });
+    this.translateSubscription = this.translate
+      .get('paginator')
+      .subscribe((res: string) => {
+        returnString = `${res['Page']} ${page + 1} ${res['of']} ${amountPages}`;
+        this.changes.next();
+      });
     return returnString;
   };
 

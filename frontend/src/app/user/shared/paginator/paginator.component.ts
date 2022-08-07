@@ -3,10 +3,12 @@ import {
   Component,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ProductsService } from '../products/products.service';
 import { PaginatorService } from './paginator.service';
@@ -16,24 +18,29 @@ import { PaginatorService } from './paginator.service';
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.css'],
 })
-export class PaginatorComponent implements OnInit, OnChanges {
+export class PaginatorComponent implements OnInit, OnChanges, OnDestroy {
   pageSizeOptions = environment.PAGE_SIZE_OPTIONS;
   currentPage = environment.CURRENT_PAGE;
   @Input() totalProducts = environment.TOTAL_PRODUCTS;
   @Input() productsPerPage = environment.PRODUCTS_PER_PAGE;
+  productsLoadedSubscription: Subscription;
 
   constructor(
     private productsService: ProductsService,
-    private paginatorService: PaginatorService,
-    private changeDetectorRef: ChangeDetectorRef
+    private paginatorService: PaginatorService
   ) {}
 
   ngOnInit(): void {
-    this.paginatorService.getProductsLoadedListener().subscribe((response) => {
-      this.totalProducts = response.totalProducts;
-      this.productsPerPage = response.productsPerPage;
-      this.changeDetectorRef.detectChanges();
-    });
+    this.productsLoadedSubscription = this.paginatorService
+      .getProductsLoadedListener()
+      .subscribe((response) => {
+        this.totalProducts = response.totalProducts;
+        this.productsPerPage = response.productsPerPage;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.productsLoadedSubscription.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

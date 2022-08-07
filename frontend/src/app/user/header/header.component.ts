@@ -98,7 +98,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navBarElementsSubsciption: Subscription;
   changeLanguageSubscription: Subscription;
   authStatusListenerSubscription: Subscription;
-  isLoggedInListener: Subscription;
+  isLoggedInListenerSubscription: Subscription;
   activeLanguage: string;
   isOverList = false;
   numOfLinks: string;
@@ -136,7 +136,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         next: (response) => {
           console.log('logout listener');
           // http request to get auth status
-          this.isLoggedInListener = this.authService
+          this.isLoggedInListenerSubscription = this.authService
             .isAuthenticated()
             .subscribe({
               next: (response) => {
@@ -175,15 +175,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.navBarElementsSubsciption.unsubscribe();
-    this.changeLanguageSubscription.unsubscribe();
     this.authStatusListenerSubscription.unsubscribe();
-    this.isLoggedInListener.unsubscribe();
+    this.isLoggedInListenerSubscription.unsubscribe();
+    this.changeLanguageSubscription.unsubscribe();
+    this.navBarElementsSubsciption.unsubscribe();
   }
 
-  async onSubmitSearch() {
+  onSubmitSearch() {
     console.log({ input: this.search });
-    await this.router.navigate(['/search'], {
+    this.router.navigate(['/search'], {
       queryParams: { description: this.search },
       queryParamsHandling: 'merge',
     });
@@ -196,11 +196,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.productService.onUpdateNoProductsMessage(false);
     // update the page header "Search For ..."
     this.searchService.onUpdateSearchQueryHeader(this.search);
-    // update the products in the catalog
-    this.productService.onProductsUpdate(
-      { description: this.search },
-      { key: 'description', value: this.search }
-    );
+
+    // update the products in the catalog if already in the page and
+    // not navigated by the code in the beggining.
+    const url = this.router.url.split('/')[1];
+    console.log({ url });
+    if (url === 'search') {
+      console.log('paok');
+      this.productService.onProductsUpdate(
+        { description: this.search },
+        { key: 'description', value: this.search }
+      );
+    }
   }
 
   updateHamburgerStatus(event: MouseEvent) {

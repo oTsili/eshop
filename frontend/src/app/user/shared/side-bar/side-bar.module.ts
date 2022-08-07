@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { AccordionModule } from '../accordion/accordion.module';
 import { SideBarComponent } from './side-bar.component';
 import { ResponsiveBoxesComponent } from './responsive-boxes/responsive-boxes.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -18,6 +17,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ResponsiveBoxesModule } from './responsive-boxes/responsive-boxes.module';
 import { HttpLoaderFactory } from '../loader-factory';
+import { AccordionModule } from '../accordion/accordion.module';
+import { DoubleSliderModule } from './double-slider/double-slider.module';
 @NgModule({
   declarations: [SideBarComponent, ContentListComponent],
   imports: [
@@ -32,6 +33,7 @@ import { HttpLoaderFactory } from '../loader-factory';
     MatChipsModule,
     MatIconModule,
     ResponsiveBoxesModule,
+    DoubleSliderModule,
     // FormsModule,
     // ngx-translate and the loader module
     HttpClientModule,
