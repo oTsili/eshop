@@ -1,4 +1,3 @@
-import { HttpParams } from '@angular/common/http';
 import {
   ChangeDetectorRef,
   Component,
@@ -6,9 +5,8 @@ import {
   HostListener,
   OnDestroy,
   OnInit,
-  ViewChild,
 } from '@angular/core';
-import { Params, Router, UrlSerializer } from '@angular/router';
+import { Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PaginatorService } from '../paginator/paginator.service';

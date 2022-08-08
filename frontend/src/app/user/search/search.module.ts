@@ -15,14 +15,21 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpLoaderFactory } from '../shared/loader-factory';
 
+import { ResponsiveCatalogModule } from '../shared/responsive-catalog/responsive-catalog.module';
+import { ProductModule } from '../product/product.module';
+import { PaginatorModule } from '../shared/paginator/paginator.module';
+
 @NgModule({
   declarations: [SearchComponent],
   imports: [
     CommonModule,
     SearchRoutingModule,
-    ProductsModule,
+    ResponsiveCatalogModule,
+    // ProductsModule,
+    ProductModule,
     ReactiveFormsModule,
     SideBarModule,
+    PaginatorModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({

@@ -1,0 +1,17 @@
+<div class="elements">
+  <div class="row" *ngFor="let row of arrOfRows; let i = index">
+    <ng-container *ngFor="let item of items; let j = index">
+      <div class="col" *ngIf="j >= i * numOfCols && j < (i + 1) * numOfCols">
+        <div class="wrapper">
+          <ng-container
+            [ngTemplateOutlet]="item.firstElement.templateRef"
+          ></ng-container>
+          <ng-container
+            *ngIf="item.secondElement"
+            [ngTemplateOutlet]="item.secondElement.templateRef"
+          ></ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -2,10 +2,11 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../shared/products/products.service';
 import { ResponsiveBoxesService } from '../shared/side-bar/responsive-boxes/responsive-boxes.service';
@@ -17,11 +18,14 @@ import defaultLanguage from 'src/assets/i18n/en.json';
 import greekLanguage from 'src/assets/i18n/el.json';
 import { SearchService } from './search.service';
 import { AppService } from 'src/app/app.service';
+import { environment } from 'src/environments/environment';
+import { Product } from '../shared/products/product/product.interface';
+import { PaginatorService } from '../shared/paginator/paginator.service';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css'],
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   searchQuery: string | null;
@@ -35,8 +39,19 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   // queryParamMapSubscription: Subscription;
   changeLanguageSubscription: Subscription;
   queryHeaderSubscription: Subscription;
+  productsSubscription: Subscription;
+  changePagePaginatorSubscription: Subscription;
+  updateProductsSubscription: Subscription;
   queryArr;
-
+  testArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  pageSizeOptions = environment.PAGE_SIZE_OPTIONS;
+  currentPage = environment.CURRENT_PAGE;
+  totalProducts = environment.TOTAL_PRODUCTS;
+  productsPerPage = environment.PRODUCTS_PER_PAGE;
+  products: Product[];
+  isOpenErrorMessage = false;
+  productsContainerWidth: number;
+  isLoading = false;
   constructor(
     public dynamicDatabase: DynamicDatabase,
     private router: Router,
@@ -46,7 +61,9 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     private translate: TranslateService,
     private searchService: SearchService,
     private appService: AppService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private elementRef: ElementRef,
+    private paginatorService: PaginatorService
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
@@ -55,6 +72,9 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.productsContainerWidth =
+      this.elementRef.nativeElement.querySelector('.elements').offsetWidth;
+
     this.queryHeaderSubscription = this.searchService
       .getSearchQueryHeaderListener()
       .subscribe((response) => {
@@ -68,11 +88,74 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe((response) => {
         this.translate.use(response);
       });
+
+    // get the paginator change page listener
+    this.changePagePaginatorSubscription = this.productsService
+      .getChangePageListener()
+      .subscribe((response) => {
+        const { productsPerPage, currentPage } = response;
+
+        this.productsPerPage = productsPerPage;
+        this.currentPage = currentPage;
+
+        let queryParams = this.router.parseUrl(this.router.url).queryParams;
+        this.productsService.onProductsUpdate(queryParams);
+      });
+
+    // get the products on page initialization
+    let queryParams = this.router.parseUrl(this.router.url).queryParams;
+    this.getProducts(queryParams);
+
+    // subsribe to events that update the products in the page
+    this.updateProductsSubscription = this.productsService
+      .getProductsUpdateListener()
+      .subscribe((response) => {
+        console.log('products update');
+        this.getProducts(response.queryParams);
+      });
   }
 
   ngOnDestroy(): void {
     this.changeLanguageSubscription.unsubscribe();
     this.queryHeaderSubscription.unsubscribe();
+    this.productsSubscription.unsubscribe();
+    this.changePagePaginatorSubscription.unsubscribe();
+    this.updateProductsSubscription.unsubscribe();
+  }
+
+  /**
+   * gets the products from the db and updates the paginator
+   * @param query: query parameters to the http request
+   */
+  getProducts(query?: Params) {
+    this.isLoading = true;
+    this.productsSubscription = this.productsService
+      .getProducts(this.productsPerPage, this.currentPage, query)
+      .subscribe((response) => {
+        const { totalProducts, products, message } = response;
+        this.products = products;
+
+        this.totalProducts = totalProducts;
+
+        console.log({ totalProducts: this.totalProducts });
+
+        this.paginatorService.onProductsLoaded(
+          totalProducts,
+          this.productsPerPage
+        );
+
+        // show the no results message in case of no products
+        if (totalProducts === 0) {
+          this.isOpenErrorMessage = true;
+        }
+
+        this.paginatorService.onProductsLoaded(
+          this.totalProducts,
+          this.productsPerPage
+        );
+
+        this.isLoading = false;
+      });
   }
 
   ngAfterViewInit(): void {

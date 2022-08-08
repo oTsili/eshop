@@ -10,7 +10,57 @@
       <app-side-bar></app-side-bar>
     </div>
     <div class="results-show">
-      <app-products></app-products>
+      <app-responsive-catalog [elements]="testArray">
+        <parent-element *ngFor="let product of products">
+          <ng-template firstElement>
+            <!-- <img src="assets/images/clickAndDrag/1.jpeg" /> -->
+            <div class="product main-product">
+              <app-product
+                [img_width]="'100%'"
+                [product]="product"
+                [source]="product.src"
+              ></app-product>
+            </div>
+          </ng-template>
+          <ng-template secondElement="">
+            <!-- <img src="assets/images/clickAndDrag/1.jpeg" /> -->
+            <div class="product hover-product">
+              <app-product
+                [img_width]="'100%'"
+                [product]="product"
+                [source]="product.altSrc"
+              ></app-product>
+            </div>
+          </ng-template>
+        </parent-element>
+      </app-responsive-catalog>
+      <!-- START Error Message for no products -->
+      <div
+        *ngIf="totalProducts === 0 && isOpenErrorMessage"
+        class="ui warning message"
+      >
+        <i (click)="isOpenErrorMessage = false" class="close icon"></i>
+        <div class="header">{{ "no results" | translate }} !</div>
+      </div>
+      <!-- START Error Message for no products -->
+
+      <!--  START paginator -->
+      <div
+        [style.width]="productsContainerWidth + 'px'"
+        class="paginator"
+        *ngIf="
+          productsContainerWidth &&
+          !isOpenErrorMessage &&
+          totalProducts > productsPerPage
+        "
+      >
+        <app-paginator
+          [totalProducts]="totalProducts"
+          [productsPerPage]="productsPerPage"
+        ></app-paginator>
+      </div>
+      <!--  END paginator -->
+      <!-- <app-products></app-products> -->
       <!-- <app-catalog></app-catalog> -->
     </div>
   </div>
