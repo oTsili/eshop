@@ -12,6 +12,7 @@ import { FooterContent } from './footer.interface';
 import { FooterService } from './footer.service';
 import defaultLanguage from 'src/assets/i18n/en.json';
 import greekLanguage from 'src/assets/i18n/el.json';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-footer',
@@ -35,7 +36,8 @@ export class FooterComponent implements OnInit, OnDestroy {
   constructor(
     private sharedService: SharedService,
     private footerService: FooterService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private appService: AppService
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
@@ -45,7 +47,7 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // get translate language and subscribe
-    this.changeLanguageSubscription = this.footerService
+    this.changeLanguageSubscription = this.appService
       .getLanguageChangeListener()
       .subscribe((response) => {
         this.translate.use(response);

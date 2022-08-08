@@ -23,13 +23,17 @@
     </div>
   </ng-container>
 </div>
+<!-- START Error Message for no products -->
 <div
   *ngIf="totalProducts === 0 && isOpenErrorMessage"
   class="ui warning message"
 >
-  <i (click)="toggleErrorMessage()" class="close icon"></i>
-  <div class="header">No Results!</div>
+  <i (click)="isOpenErrorMessage = false" class="close icon"></i>
+  <div class="header">{{ "no results" | translate }} !</div>
 </div>
+<!-- START Error Message for no products -->
+
+<!--  START paginator -->
 <div
   [style.width]="pageWidth + 'px'"
   class="paginator"
@@ -40,3 +44,4 @@
     [productsPerPage]="productsPerPage"
   ></app-paginator>
 </div>
+<!--  END paginator -->

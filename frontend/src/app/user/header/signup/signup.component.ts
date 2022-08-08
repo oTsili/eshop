@@ -11,6 +11,7 @@ import { HeaderService } from '../header.service';
 import { SignupService } from './signup.service';
 import { AuthService } from '../../auth/auth.service';
 import { UserAppService } from '../../user-app.service';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-signup',
@@ -30,6 +31,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     private headerService: HeaderService,
     private signupService: SignupService,
     private authService: AuthService,
+    private appService: AppService,
     private userAppService: UserAppService
   ) {
     translate.setTranslation('en', defaultLanguage);
@@ -48,7 +50,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       });
 
     // get translate language and subscribe
-    const selectedLanguage = this.headerService.selectedLanguage;
+    const selectedLanguage = this.appService.selectedLanguage;
     this.translate.use(selectedLanguage);
 
     this.theSignupForm = new FormGroup({

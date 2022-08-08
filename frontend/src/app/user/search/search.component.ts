@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 import defaultLanguage from 'src/assets/i18n/en.json';
 import greekLanguage from 'src/assets/i18n/el.json';
 import { SearchService } from './search.service';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-search',
@@ -44,6 +45,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     private contentListService: ContentListService,
     private translate: TranslateService,
     private searchService: SearchService,
+    private appService: AppService,
     private changeDetectorRef: ChangeDetectorRef
   ) {
     translate.setTranslation('en', defaultLanguage);
@@ -61,10 +63,9 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
       });
 
     // get translate language and subscribe
-    this.changeLanguageSubscription = this.searchService
+    this.changeLanguageSubscription = this.appService
       .getLanguageChangeListener()
       .subscribe((response) => {
-        console.log(response);
         this.translate.use(response);
       });
   }

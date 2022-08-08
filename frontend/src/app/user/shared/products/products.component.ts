@@ -14,6 +14,10 @@ import { environment } from 'src/environments/environment';
 import { PaginatorService } from '../paginator/paginator.service';
 import { Product } from './product/product.interface';
 import { ProductsService } from './products.service';
+import defaultLanguage from 'src/assets/i18n/en.json';
+import greekLanguage from 'src/assets/i18n/el.json';
+import { TranslateService } from '@ngx-translate/core';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-products',
@@ -25,8 +29,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   productsSubscription: Subscription;
   updateProductsSubscription: Subscription;
   sideBarWidthSubscription: Subscription;
-  noProductErrorMessageSubscription: Subscription;
   changePagePaginatorListener: Subscription;
+  changeLanguageSubscription: Subscription;
   products: Product[];
   numOfCols: number = 3;
   arrOfCols: number[];
@@ -72,16 +76,24 @@ export class ProductsComponent implements OnInit, OnDestroy {
   constructor(
     private productsService: ProductsService,
     private paginatorService: PaginatorService,
+    private appService: AppService,
     private elementRef: ElementRef,
     private cd: ChangeDetectorRef,
-    private router: Router
-  ) {}
+    private router: Router,
+    private translate: TranslateService
+  ) {
+    translate.setTranslation('en', defaultLanguage);
+    translate.setTranslation('el', greekLanguage);
+    translate.setDefaultLang('en');
+    translate.use('el');
+  }
 
   ngOnInit(): void {
-    // subscribe to noProducts message listener
-    this.noProductErrorMessageSubscription =
-      this.productsService.noProductsMesageListener.subscribe((response) => {
-        this.isOpenErrorMessage = response;
+    // get translate language and subscribe
+    this.changeLanguageSubscription = this.appService
+      .getLanguageChangeListener()
+      .subscribe((response) => {
+        this.translate.use(response);
       });
 
     // get the sideber width, so that it can be subtra
@@ -118,7 +130,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.noProductErrorMessageSubscription.unsubscribe();
     this.sideBarWidthSubscription.unsubscribe();
     this.changePagePaginatorListener.unsubscribe();
     this.updateProductsSubscription.unsubscribe();
@@ -143,7 +154,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
         // show the no results message in case of no products
         if (totalProducts === 0) {
-          this.productsService.onUpdateNoProductsMessage(true);
+          this.isOpenErrorMessage = true;
         }
 
         this.paginatorService.onProductsLoaded(
@@ -165,9 +176,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.productWidth = productWidth;
     this.updateRowsCols();
     this.cd.detectChanges();
-  }
-
-  toggleErrorMessage() {
-    this.isOpenErrorMessage = !this.isOpenErrorMessage;
   }
 }

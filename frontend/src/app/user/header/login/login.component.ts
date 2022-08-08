@@ -8,6 +8,7 @@ import { HeaderService } from '../header.service';
 import { LoginService } from './login.service';
 import { AuthService } from '../../auth/auth.service';
 import { UserAppService } from '../../user-app.service';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private headerService: HeaderService,
     private loginService: LoginService,
     private authService: AuthService,
+    private appService: AppService,
     private userAppService: UserAppService
   ) {
     translate.setTranslation('en', defaultLanguage);
@@ -56,7 +58,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       }),
     });
     // get translate language and subscribe
-    const selectedLanguage = this.headerService.selectedLanguage;
+    const selectedLanguage = this.appService.selectedLanguage;
     this.translate.use(selectedLanguage);
   }
 

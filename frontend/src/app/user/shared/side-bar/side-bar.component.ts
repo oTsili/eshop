@@ -25,6 +25,7 @@ import { SearchService } from '../../search/search.service';
 import { PanelItem } from '../accordion/host-panel/host-panel-item.class';
 import { PanelHostDirective } from '../accordion/directives/panel-host.directive';
 import { Panel } from '../accordion/accordion.interfaces';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -54,6 +55,7 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
     private searchService: SearchService,
     private translate: TranslateService,
     private sideBarService: SideBarService,
+    private appService: AppService,
     private elementRef: ElementRef
   ) {
     translate.setTranslation('en', defaultLanguage);
@@ -71,7 +73,6 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     this.accordionPanels = this.accordionService.getAccordionPanels();
 
-    // this.loadComponent(0);
     // get the chiplist and subscribe
     this.chipListSubscription = this.productsService
       .getChipsListUpdateListener()
@@ -82,7 +83,7 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
       });
 
     // get translate language and subscribe
-    this.changeLanguageSubscription = this.sideBarService
+    this.changeLanguageSubscription = this.appService
       .getLanguageChangeListener()
       .subscribe((response) => {
         this.translate.use(response);
@@ -101,29 +102,6 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
     for (let chip of this.chipsList) {
       this.remove(chip);
     }
-  }
-
-  loadComponent(index: number) {
-    /**
-     * Create a view container where we will insert our
-     * newlly created compnent
-     */
-    const panelItem = this.accordionPanels[index];
-    const viewContainerRef = this.panelHost.viewContainerRef;
-
-    /**
-     * Here we do not want to clear the viewContainerRef because we do not want to take
-     * the place of the previous component, but stack one on another
-     */
-
-    // viewContainerRef.clear();
-
-    // create the new component
-    const componentRef = viewContainerRef.createComponent<Panel>(
-      panelItem.component
-    );
-    // pass the data from provided from the accordion service
-    componentRef.instance.data = panelItem.data;
   }
 
   remove(chip: Chip): void {

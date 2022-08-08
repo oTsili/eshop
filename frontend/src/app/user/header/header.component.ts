@@ -31,6 +31,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductsService } from '../shared/products/products.service';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-header',
@@ -116,6 +117,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private footerService: FooterService,
     private authService: AuthService,
     private productService: ProductsService,
+    private appService: AppService,
     private router: Router
   ) {
     translate.setTranslation('en', defaultLanguage);
@@ -161,14 +163,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     // save current language
     this.activeLanguage = this.translate.currentLang;
-    this.headerService.selectedLanguage = this.activeLanguage;
+    this.appService.selectedLanguage = this.activeLanguage;
 
     // get translate language and subscribe
-    this.changeLanguageSubscription = this.headerService
+    this.changeLanguageSubscription = this.appService
       .getLanguageChangeListener()
       .subscribe((response) => {
         this.translate.use(response);
-        this.headerService.selectedLanguage = response;
+        this.appService.selectedLanguage = response;
       });
 
     this.preloadNavBarElements();
@@ -202,7 +204,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const url = this.router.url.split('/')[1];
     console.log({ url });
     if (url === 'search') {
-      console.log('paok');
       this.productService.onProductsUpdate(
         { description: this.search },
         { key: 'description', value: this.search }
@@ -247,9 +248,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.activeLanguage = language;
 
     // inform the listeners for language change
-    this.headerService.onLanguageChange(language);
-    this.searchService.onLanguageChange(language);
-    this.footerService.onLanguageChange(language);
+    this.appService.onLanguageChange(language);
   }
 
   onTest() {

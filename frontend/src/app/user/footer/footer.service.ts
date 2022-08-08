@@ -9,20 +9,10 @@ const BACKEND_URL = environment.BASE_URL + 'footer';
   providedIn: 'root',
 })
 export class FooterService {
-  private languageChangeListener = new Subject<string>();
-
-  constructor(private http: HttpClient) {}
-
-  getLanguageChangeListener() {
-    return this.languageChangeListener.asObservable();
-  }
-
-  onLanguageChange(lang: string) {
-    this.languageChangeListener.next(lang);
-  }
+  constructor(private httpClient: HttpClient) {}
 
   getLinks() {
-    return this.http.get<any>(`${BACKEND_URL}`, {
+    return this.httpClient.get<any>(`${BACKEND_URL}`, {
       withCredentials: true,
     });
   }
