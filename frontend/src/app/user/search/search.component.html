@@ -1,14 +1,23 @@
 <div class="container">
+  <app-breadcrumb [breadcrumbs]="breadcrumbItems"></app-breadcrumb>
+
+  <!-- START search header UPPER DIVISION -->
   <div class="header-wrapper">
     <span class="header">
       {{ page.header | translate }} "{{ searchQuery }}"
     </span>
   </div>
+  <!-- END search header  UPPER DIVISION-->
 
+  <!-- START search body LOWER DIVISION-->
   <div class="results-wrapper">
+    <!---- START side-bar LOWER DIVISION ---->
     <div class="results-sidebar">
       <app-side-bar></app-side-bar>
     </div>
+    <!---- END side-bar LOWER DIVISION ---->
+
+    <!---- START products catalog LOWER DIVISION ---->
     <div class="results-show">
       <app-responsive-catalog [elements]="products">
         <parent-element *ngFor="let product of products">
@@ -63,5 +72,7 @@
       <!-- <app-products></app-products> -->
       <!-- <app-catalog></app-catalog> -->
     </div>
+    <!---- END products catalog LOWER DIVISION ---->
   </div>
+  <!-- END search body LOWER DIVISION-->
 </div>

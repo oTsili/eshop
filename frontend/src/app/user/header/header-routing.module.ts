@@ -6,6 +6,15 @@ const routes: Routes = [
   {
     path: 'contact',
     component: TestComponent,
+    data: {
+      title: 'contact',
+      breadcrumb: [
+        {
+          label: 'contact',
+          url: 'contact',
+        },
+      ],
+    },
   },
 ];
 

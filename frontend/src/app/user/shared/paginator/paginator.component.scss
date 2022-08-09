@@ -1,3 +1,7 @@
-:ng-dee .mat-paginator-container {
-  justify-content: center !important;
+:host {
+  ::ng-deep {
+    .mat-paginator-container {
+      justify-content: center !important;
+    }
+  }
 }

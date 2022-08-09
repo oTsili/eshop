@@ -181,7 +181,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onSubmitSearch() {
     console.log({ input: this.search });
-    this.router.navigate(['/search'], {
+    this.router.navigate(['/home/search'], {
       queryParams: { description: this.search },
       queryParamsHandling: 'merge',
     });

@@ -11,17 +11,21 @@ const userRoutes: Routes = [
       {
         path: '',
         pathMatch: 'full',
+        redirectTo: 'home',
+      },
+      {
+        path: 'home',
         loadChildren: () =>
           import('./home/home.module').then((m) => m.HomeModule),
-      },
-      {
-        path: 'search',
-        loadChildren: () =>
-          import('./search/search.module').then((m) => m.SearchModule),
-      },
-      {
-        path: 'contact',
-        component: TestComponent,
+        data: {
+          title: 'home',
+          breadcrumb: [
+            {
+              label: 'Home',
+              url: '',
+            },
+          ],
+        },
       },
     ],
   },

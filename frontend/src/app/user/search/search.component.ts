@@ -51,6 +51,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   isOpenErrorMessage = false;
   productsContainerWidth: number;
   isLoading = false;
+  breadcrumbItems: string[];
 
   constructor(
     public dynamicDatabase: DynamicDatabase,
@@ -72,6 +73,9 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.breadcrumbItems = this.router.routerState.snapshot.url.split('/');
+    console.log(this.breadcrumbItems);
+
     this.productsContainerWidth =
       this.elementRef.nativeElement.querySelector('.elements').offsetWidth;
 

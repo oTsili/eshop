@@ -17,6 +17,7 @@ import { HttpLoaderFactory } from '../shared/loader-factory';
 import { ResponsiveCatalogModule } from '../shared/responsive-catalog/responsive-catalog.module';
 import { ProductModule } from '../product/product.module';
 import { PaginatorModule } from '../shared/paginator/paginator.module';
+import { BreadcrumbModule } from '../shared/breadcrumb/breadcrumb.module';
 
 @NgModule({
   declarations: [SearchComponent],
@@ -29,6 +30,8 @@ import { PaginatorModule } from '../shared/paginator/paginator.module';
     ReactiveFormsModule,
     SideBarModule,
     PaginatorModule,
+    BreadcrumbModule,
+
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({
