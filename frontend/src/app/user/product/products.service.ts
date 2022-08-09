@@ -1,18 +1,17 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Params, UrlTree } from '@angular/router';
-import { filter, Subject } from 'rxjs';
-
+import { Params } from '@angular/router';
+import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Chip } from '../side-bar/side-bar.interfaces';
-import { Product } from './product/product.interface';
+import { Chip } from '../shared/side-bar/side-bar.interfaces';
+import { Product } from './product.interface';
 
 const BACKEND_URL = environment.BASE_URL + 'products';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class ProductsService {
+  chipsList: Chip[] = [];
+  noProductsMesageListener = new Subject<boolean>();
   productUdateListener = new Subject<{ queryParams: Params }>();
   chipsListUpdateListener = new Subject<{ chipsList: Chip[] }>();
   sideBarWidthListener = new Subject<number>();
@@ -20,26 +19,8 @@ export class ProductsService {
     productsPerPage: number;
     currentPage: number;
   }>();
-  noProductsMesageListener = new Subject<boolean>();
-  chipsList: Chip[] = [];
-  showNoProductsMessage = false;
+
   constructor(private httpClient: HttpClient) {}
-
-  getErrorMessageListener() {
-    return this.noProductsMesageListener.asObservable();
-  }
-
-  onUpdateNoProductsMessage(show: boolean) {
-    this.noProductsMesageListener.next(show);
-  }
-
-  getChangePageListener() {
-    return this.changePageListener.asObservable();
-  }
-
-  onChangePage(productsPerPage: number, currentPage: number) {
-    this.changePageListener.next({ productsPerPage, currentPage });
-  }
 
   getProducts(
     porductsPerPage: number,
@@ -67,22 +48,6 @@ export class ProductsService {
     }>(`${BACKEND_URL}/query`, { params: queryParams, withCredentials: true });
   }
 
-  getSideBarWidthListener() {
-    return this.sideBarWidthListener.asObservable();
-  }
-
-  updateSideBarWidth(width: number) {
-    this.sideBarWidthListener.next(width);
-  }
-
-  getChipsListUpdateListener() {
-    return this.chipsListUpdateListener.asObservable();
-  }
-
-  onChipsListUpdate(chipsList: Chip[]) {
-    this.chipsListUpdateListener.next({ chipsList });
-  }
-
   getProductsUpdateListener() {
     return this.productUdateListener.asObservable();
   }
@@ -99,6 +64,15 @@ export class ProductsService {
     });
   }
 
+  chipsListInitialize(chipsList: Chip[]) {
+    if (chipsList) {
+      for (let chip of chipsList) {
+        this.chipsList.push(chip);
+      }
+      this.chipsListUpdateListener.next({ chipsList: this.chipsList });
+    }
+  }
+
   updateChip(chip: Chip) {
     // get the index of the chip to be replaced
     const chipIndex = this.getChipIndex(chip.key);
@@ -111,15 +85,6 @@ export class ProductsService {
     this.addChip(chip);
     // inform the app for the chipList update
     this.chipsListUpdateListener.next({ chipsList: this.chipsList });
-  }
-
-  chipsListInitialize(chipsList: Chip[]) {
-    if (chipsList) {
-      for (let chip of chipsList) {
-        this.chipsList.push(chip);
-      }
-      this.chipsListUpdateListener.next({ chipsList: this.chipsList });
-    }
   }
 
   removeChip(chipIndex: number): void {
@@ -140,22 +105,30 @@ export class ProductsService {
     }
   }
 
-  // updateProductsList(query: string) {
-  //   let url = '';
-  //   if (query !== '') {
-  //     url = `${BACKEND_URL}/query?${query}`;
-  //   } else {
-  //     url = `${BACKEND_URL}`;
-  //   }
-  //   return this.httpClient.get<any>(url, {
-  //     withCredentials: true,
-  //   });
-  // }
-
   getChipIndex(chipKey: string) {
     const chipIndex = this.chipsList.findIndex((chip) => {
       return chip.key === chipKey;
     });
     return chipIndex;
+  }
+
+  getChipsListUpdateListener() {
+    return this.chipsListUpdateListener.asObservable();
+  }
+
+  updateSideBarWidth(width: number) {
+    this.sideBarWidthListener.next(width);
+  }
+
+  onChangePage(productsPerPage: number, currentPage: number) {
+    this.changePageListener.next({ productsPerPage, currentPage });
+  }
+
+  getChangePageListener() {
+    return this.changePageListener.asObservable();
+  }
+
+  onUpdateNoProductsMessage(show: boolean) {
+    this.noProductsMesageListener.next(show);
   }
 }

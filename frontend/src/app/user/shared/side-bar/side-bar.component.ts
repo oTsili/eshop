@@ -9,23 +9,19 @@ import {
 } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { AccordionService } from '../accordion/accordion.service';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { ProductsService } from '../products/products.service';
-import { ActivatedRoute, Params, Router, UrlSerializer } from '@angular/router';
+import { Router } from '@angular/router';
 import { Chip } from './side-bar.interfaces';
 import { ResponsiveBoxesService } from './responsive-boxes/responsive-boxes.service';
 import { Subscription } from 'rxjs';
 import { ContentListService } from './content-list/content-list.service';
 import { TranslateService } from '@ngx-translate/core';
-import { SideBarService } from './side-bar.service';
 import defaultLanguage from 'src/assets/i18n/en.json';
 import greekLanguage from 'src/assets/i18n/el.json';
-import { HttpParams } from '@angular/common/http';
 import { SearchService } from '../../search/search.service';
 import { PanelItem } from '../accordion/host-panel/host-panel-item.class';
 import { PanelHostDirective } from '../accordion/directives/panel-host.directive';
-import { Panel } from '../accordion/accordion.interfaces';
 import { AppService } from 'src/app/app.service';
+import { ProductsService } from '../../product/products.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -47,14 +43,14 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private router: Router,
     private accordionService: AccordionService,
-    private productsService: ProductsService,
     private cd: ChangeDetectorRef,
     private responsiveBoxesService: ResponsiveBoxesService,
     private contentListService: ContentListService,
     private searchService: SearchService,
     private translate: TranslateService,
     private appService: AppService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private productsService: ProductsService
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);

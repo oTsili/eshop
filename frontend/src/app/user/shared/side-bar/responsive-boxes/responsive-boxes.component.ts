@@ -7,9 +7,9 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Router, UrlSerializer } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ProductsService } from '../../products/products.service';
+import { ProductsService } from 'src/app/user/product/products.service';
 import { ResponsiveBox } from './responsive-boxes.interfaces';
 import { ResponsiveBoxesService } from './responsive-boxes.service';
 
@@ -56,7 +56,6 @@ export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
     private elementRef: ElementRef,
     private productsService: ProductsService,
     private router: Router,
-    private urlSerializer: UrlSerializer,
     private responsiveBoxesService: ResponsiveBoxesService,
     private cdr: ChangeDetectorRef
   ) {}

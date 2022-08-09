@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Router, UrlSerializer } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ProductsService } from '../../products/products.service';
+import { ProductsService } from 'src/app/user/product/products.service';
 import { ContentListService } from './content-list.service';
 
 @Component({

@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { SearchComponent } from './search.component';
 import { SideBarModule } from '../shared/side-bar/side-bar.module';
 import { SearchRoutingModule } from './search-routing.module';
-import { ProductsModule } from '../shared/products/products.module';
 // import { ProductsModule } from '../products/products.module'
 
 import { ReactiveFormsModule } from '@angular/forms';

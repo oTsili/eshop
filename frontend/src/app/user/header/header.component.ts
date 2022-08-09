@@ -30,8 +30,8 @@ import {
   NgForm,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProductsService } from '../shared/products/products.service';
 import { AppService } from 'src/app/app.service';
+import { ProductsService } from '../product/products.service';
 
 @Component({
   selector: 'app-header',

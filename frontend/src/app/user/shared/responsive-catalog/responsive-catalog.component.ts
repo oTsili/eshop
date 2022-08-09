@@ -33,17 +33,17 @@ export class ResponsiveCatalogComponent implements OnInit, OnChanges {
   updateRowsCols() {
     // get the sidebar offset(px), convert to rem(*0.1), divide with
     // the box width plus the margin (3rem + .6rem + .6rem = 4.2rem)
-    // let windowWidth = window.innerWidth;
     this.pageWidth = this.elementRef.nativeElement.offsetWidth;
 
     if (this.elementWidth) {
       console.log(this.elementWidth);
-      let elements = this.elementRef.nativeElement.querySelector('.elements');
+      let rootElement =
+        this.elementRef.nativeElement.querySelector('.elements');
       let marginRight = window
-        .getComputedStyle(elements)
+        .getComputedStyle(rootElement)
         .getPropertyValue('margin-right');
       let marginLeft = window
-        .getComputedStyle(elements)
+        .getComputedStyle(rootElement)
         .getPropertyValue('margin-left');
       let totalMargin = parseInt(marginLeft) + parseInt(marginRight);
       this.numOfCols =
@@ -53,12 +53,16 @@ export class ResponsiveCatalogComponent implements OnInit, OnChanges {
       this.pageWidth = this.numOfCols * (this.elementWidth + totalMargin);
       this.changeDetectorRef.detectChanges();
     }
+
     this.arrOfCols = Array(this.numOfCols).fill(1);
 
-    this.arrOfRows = Array(
-      Math.ceil(this.elements.length / this.numOfCols)
-    ).fill(1);
+    if (this.elements) {
+      this.arrOfRows = Array(
+        Math.ceil(this.elements.length / this.numOfCols)
+      ).fill(1);
+    }
   }
+
   constructor(
     private elementRef: ElementRef,
     private changeDetectorRef: ChangeDetectorRef
@@ -66,18 +70,20 @@ export class ResponsiveCatalogComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.updateRowsCols();
-    let element = this.elementRef.nativeElement;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.elements = changes['elements'].currentValue;
+    this.updateRowsCols();
   }
 
   updateElementWidth(width: number, index: number) {
     if (index === 0) {
-      console.log(width);
       this.elementWidth = width;
-      this.updateRowsCols();
+
+      if (this.elements) {
+        this.updateRowsCols();
+      }
     }
   }
 }

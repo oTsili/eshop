@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, UrlSerializer } from '@angular/router';
-import { ProductsService } from '../../products/products.service';
+import { ProductsService } from 'src/app/user/product/products.service';
 
 @Component({
   selector: 'app-double-slider',

@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ProductsService } from '../shared/products/products.service';
 import { ResponsiveBoxesService } from '../shared/side-bar/responsive-boxes/responsive-boxes.service';
 import { ContentListService } from '../shared/side-bar/content-list/content-list.service';
 import { Chip } from '../shared/side-bar/side-bar.interfaces';
@@ -19,8 +18,9 @@ import greekLanguage from 'src/assets/i18n/el.json';
 import { SearchService } from './search.service';
 import { AppService } from 'src/app/app.service';
 import { environment } from 'src/environments/environment';
-import { Product } from '../shared/products/product/product.interface';
 import { PaginatorService } from '../shared/paginator/paginator.service';
+import { Product } from '../product/product.interface';
+import { ProductsService } from '../product/products.service';
 
 @Component({
   selector: 'app-search',
@@ -36,7 +36,6 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   price: string | null;
   sales: string | null;
   page = this.dynamicDatabase.searchPage;
-  // queryParamMapSubscription: Subscription;
   changeLanguageSubscription: Subscription;
   queryHeaderSubscription: Subscription;
   productsSubscription: Subscription;
@@ -44,7 +43,6 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   updateProductsSubscription: Subscription;
   isOpenErrorMessageSubscription: Subscription;
   queryArr;
-  testArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   pageSizeOptions = environment.PAGE_SIZE_OPTIONS;
   currentPage = environment.CURRENT_PAGE;
   totalProducts = environment.TOTAL_PRODUCTS;

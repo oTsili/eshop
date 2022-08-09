@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
@@ -10,13 +9,13 @@ import {
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ProductsService } from '../products/products.service';
+import { ProductsService } from '../../product/products.service';
 import { PaginatorService } from './paginator.service';
 
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
-  styleUrls: ['./paginator.component.css'],
+  styleUrls: ['./paginator.component.scss'],
 })
 export class PaginatorComponent implements OnInit, OnChanges, OnDestroy {
   pageSizeOptions = environment.PAGE_SIZE_OPTIONS;
@@ -25,10 +24,7 @@ export class PaginatorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() productsPerPage = environment.PRODUCTS_PER_PAGE;
   productsLoadedSubscription: Subscription;
 
-  constructor(
-    private productsService: ProductsService,
-    private paginatorService: PaginatorService
-  ) {}
+  constructor(private paginatorService: PaginatorService, private productsService: ProductsService) {}
 
   ngOnInit(): void {
     this.productsLoadedSubscription = this.paginatorService
