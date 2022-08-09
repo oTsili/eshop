@@ -127,10 +127,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.theSearchForm = new FormGroup({
-    //   search: new FormControl(null),
-    // });
-
     // subscribe to authStatus listener
     this.authStatusListenerSubscription = this.authService
       .getAuthStatusListener()
@@ -202,7 +198,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // update the products in the catalog if already in the page and
     // not navigated by the code in the beggining.
     const url = this.router.url.split('/')[1];
-    console.log({ url });
+    // console.log({ url });
     if (url === 'search') {
       this.productService.onProductsUpdate(
         { description: this.search },

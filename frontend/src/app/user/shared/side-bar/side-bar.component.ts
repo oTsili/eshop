@@ -46,7 +46,6 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute,
     private accordionService: AccordionService,
     private productsService: ProductsService,
     private cd: ChangeDetectorRef,
@@ -54,7 +53,6 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
     private contentListService: ContentListService,
     private searchService: SearchService,
     private translate: TranslateService,
-    private sideBarService: SideBarService,
     private appService: AppService,
     private elementRef: ElementRef
   ) {
@@ -124,6 +122,9 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
       }
 
       this.updateProducts(chip);
+
+      // close the error message if it is open
+      this.searchService.onUpdateIsOpenErrorMessage(false);
 
       // update the search page header "Serarch for.."
       this.searchService.onUpdateSearchQueryHeader('');

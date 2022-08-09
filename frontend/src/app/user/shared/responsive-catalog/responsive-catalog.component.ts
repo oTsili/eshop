@@ -35,7 +35,6 @@ export class ResponsiveCatalogComponent implements OnInit, OnChanges {
     // the box width plus the margin (3rem + .6rem + .6rem = 4.2rem)
     // let windowWidth = window.innerWidth;
     this.pageWidth = this.elementRef.nativeElement.offsetWidth;
-    console.log(this.pageWidth);
 
     if (this.elementWidth) {
       console.log(this.elementWidth);
@@ -59,8 +58,6 @@ export class ResponsiveCatalogComponent implements OnInit, OnChanges {
     this.arrOfRows = Array(
       Math.ceil(this.elements.length / this.numOfCols)
     ).fill(1);
-
-    console.log(this.arrOfCols.length, this.arrOfRows.length);
   }
   constructor(
     private elementRef: ElementRef,
@@ -70,7 +67,6 @@ export class ResponsiveCatalogComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.updateRowsCols();
     let element = this.elementRef.nativeElement;
-    console.log(element);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

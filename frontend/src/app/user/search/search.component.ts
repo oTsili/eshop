@@ -42,6 +42,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   productsSubscription: Subscription;
   changePagePaginatorSubscription: Subscription;
   updateProductsSubscription: Subscription;
+  isOpenErrorMessageSubscription: Subscription;
   queryArr;
   testArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   pageSizeOptions = environment.PAGE_SIZE_OPTIONS;
@@ -52,6 +53,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   isOpenErrorMessage = false;
   productsContainerWidth: number;
   isLoading = false;
+
   constructor(
     public dynamicDatabase: DynamicDatabase,
     private router: Router,
@@ -75,6 +77,13 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     this.productsContainerWidth =
       this.elementRef.nativeElement.querySelector('.elements').offsetWidth;
 
+    this.isOpenErrorMessageSubscription = this.searchService
+      .getIsOpenErrorMessageListener()
+      .subscribe((response) => {
+        this.isOpenErrorMessage = response;
+      });
+
+    // get query header listener
     this.queryHeaderSubscription = this.searchService
       .getSearchQueryHeaderListener()
       .subscribe((response) => {
@@ -137,7 +146,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
 
         this.totalProducts = totalProducts;
 
-        console.log({ totalProducts: this.totalProducts });
+        // console.log({ totalProducts: this.totalProducts });
 
         this.paginatorService.onProductsLoaded(
           totalProducts,
@@ -179,7 +188,10 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     this.productsService.onProductsUpdate(urlTree.queryParams);
     this.changeDetectorRef.detectChanges();
   }
-
+  /**
+   * Methods to update the panels, and specifically the items inside, if there is any
+   * active to be highlighted.
+   */
   updateColorActiveStatus() {
     const colorIndex = this.productsService.getChipIndex('color');
     let colorValue = '';
@@ -233,6 +245,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
       );
     }
   }
+  /************************************************************************/
 
   /**
    * Gets the current url and returns an array of the query parameters values
