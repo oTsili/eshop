@@ -1,11 +1,13 @@
 <div class="ui massive breadcrumb">
   <ng-container *ngFor="let breadcrumb of breadcrumbs; let i = index">
-    <ng-container *ngIf="i < breadcrumbs.length">
-      <a class="section">{{ breadcrumb }}</a>
+    <ng-container *ngIf="i < breadcrumbs.length - 1">
+      <a [routerLink]="breadcrumb.url" class="section">{{
+        breadcrumb.text | translate
+      }}</a>
       <i class="right chevron icon divider"></i>
     </ng-container>
-    <div *ngIf="i === breadcrumbs.length" class="active section">
-      Personal Information
+    <div *ngIf="i === breadcrumbs.length - 1" class="active section">
+      {{ breadcrumb.text | translate }}
     </div>
   </ng-container>
 </div>

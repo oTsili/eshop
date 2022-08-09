@@ -98,5 +98,9 @@
 
   "Email or Password Incorrect": "Email or Password Incorrect",
   "search all over the store": "Search All Over the Store",
-  "no results": "No Results"
+  "no results": "No Results",
+
+  "home":"Home",
+  "search":"Search"
+
 }

@@ -5,6 +5,12 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import defaultLanguage from 'src/assets/i18n/en.json';
+import greekLanguage from 'src/assets/i18n/el.json';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
+import { AppService } from 'src/app/app.service';
+import { Breadcrumb } from './breadcrumb.interfaces';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -12,17 +18,34 @@ import {
   styleUrls: ['./breadcrumb.component.css'],
 })
 export class BreadcrumbComponent implements OnInit, OnChanges {
-  @Input() breadcrumbs: string[];
+  @Input() breadcrumbs: Breadcrumb[];
+  changeLanguageSubscription: Subscription;
 
-  constructor() {}
+  constructor(
+    private translate: TranslateService,
+    private appService: AppService
+  ) {
+    translate.setTranslation('en', defaultLanguage);
+    translate.setTranslation('el', greekLanguage);
+    translate.setDefaultLang('en');
+    translate.use('el');
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // get translate language and subscribe
+    this.changeLanguageSubscription = this.appService
+      .getLanguageChangeListener()
+      .subscribe((response) => {
+        this.translate.use(response);
+      });
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.breadcrumbs = changes['breadcrumbs'].currentValue;
-    this.breadcrumbs.shift();
-    this.breadcrumbs = this.breadcrumbs.map(
-      (breadcrumb) => breadcrumb.split('?')[0]
-    );
+    // this.breadcrumbs.shift();
+    // this.breadcrumbs = this.breadcrumbs.map(
+    //   (breadcrumb) => breadcrumb.split('?')[0]
+    // );
     console.log(this.breadcrumbs);
   }
 }

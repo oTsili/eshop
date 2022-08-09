@@ -1,1 +1,6 @@
 @import "semantic-ui-css/semantic.css";
+
+.ui.massive.breadcrumb {
+  display: flex;
+  justify-content: center;
+}

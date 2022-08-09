@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { AppService } from 'src/app/app.service';
 import { ContentList } from './content-list.interfaces';
 
 @Injectable({ providedIn: 'root' })
@@ -14,6 +15,8 @@ export class ContentListService {
   private heelHeightArr: ContentList[] = [];
   private salesArr: ContentList[] = [];
   private materialArr: ContentList[] = [];
+
+  constructor(private appService: AppService) {}
 
   set heelHeighArray(heelHeighArr: ContentList[]) {
     this.heelHeightArr = heelHeighArr;
@@ -68,7 +71,7 @@ export class ContentListService {
   onUpdateHeelHeighActiveStatusArray(index: number | null, chipValue?: string) {
     //   calling from search component and from different component than content-list
     if (!index && chipValue) {
-      index = this.getArrayIndex(chipValue, this.heelHeightArr);
+      index = this.appService.getArrayIndex(chipValue, this.heelHeightArr);
     }
     // fill the array with false value
     this.initializeHeelHeightActiveStatusArray();
@@ -91,7 +94,7 @@ export class ContentListService {
   onUpdateSalesActiveStatusArray(index: number | null, chipValue?: string) {
     //   calling from search component and from different component than content-list
     if (!index && chipValue) {
-      index = this.getArrayIndex(chipValue, this.salesArr);
+      index = this.appService.getArrayIndex(chipValue, this.salesArr);
     }
     // fill the array with false value
     this.initializeSalesActiveStatusArray();
@@ -115,7 +118,7 @@ export class ContentListService {
   onUpdateMaterialActiveStatusArray(index: number | null, chipValue?: string) {
     //   calling from search component and from different component than content-list
     if (!index && chipValue) {
-      index = this.getArrayIndex(chipValue, this.materialArr);
+      index = this.appService.getArrayIndex(chipValue, this.materialArr);
     }
     // fill the array with false value
     this.initializeMaterialActiveStatusArray();
@@ -125,36 +128,5 @@ export class ContentListService {
     }
     // inform the app about the change
     this.materialActiveStatusListener.next(this.materialActiveStatusArray);
-  }
-  /**
-   * Returns a substring of string between provided start string
-   * and end string
-   * @param str the initial string
-   * @param start the character/string from which the substring wil begin
-   * @param end the character/string from which the substring will end
-   * @returns the substring between start and end strings
-   */
-  getSubstring(str: string, start: string, end: string): string {
-    const startIndex = str.indexOf(start);
-    const endIndex = str.indexOf(end);
-    if (startIndex != -1 && endIndex != -1 && endIndex >= startIndex) {
-      return str.substring(startIndex, endIndex);
-    } else {
-      return '';
-    }
-  }
-
-  /**
-   * Gets a string and an array and returns the index of
-   * the string inside the array
-   * @param text a string
-   * @param array of strings
-   * @returns the index of the string inside the array
-   */
-  getArrayIndex(text: string, array: ContentList[]) {
-    const colorIndex = array.findIndex((item) => {
-      return item.text === text;
-    });
-    return colorIndex;
   }
 }

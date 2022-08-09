@@ -7,7 +7,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 // import ngx-translate and the http loader
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { HttpLoaderFactory } from '../shared/loader-factory';
@@ -21,7 +20,7 @@ import { IconMenuOpenDirective } from './directives/dropdown-icon-menu-open.dire
 import { RouterModule } from '@angular/router';
 import { TestComponent } from './test/test.component';
 import { HeaderRoutingModule } from './header-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [

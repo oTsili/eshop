@@ -6,7 +6,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ResponsiveBoxesService } from '../shared/side-bar/responsive-boxes/responsive-boxes.service';
 import { ContentListService } from '../shared/side-bar/content-list/content-list.service';
@@ -21,6 +21,8 @@ import { environment } from 'src/environments/environment';
 import { PaginatorService } from '../shared/paginator/paginator.service';
 import { Product } from '../product/product.interface';
 import { ProductsService } from '../product/products.service';
+import { Breadcrumb } from '../shared/breadcrumb/breadcrumb.interfaces';
+import { BreadcrumbService } from '../shared/breadcrumb/breadcrumb.service';
 
 @Component({
   selector: 'app-search',
@@ -51,11 +53,12 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   isOpenErrorMessage = false;
   productsContainerWidth: number;
   isLoading = false;
-  breadcrumbItems: string[];
+  breadcrumbItems: Breadcrumb[];
 
   constructor(
     public dynamicDatabase: DynamicDatabase,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private productsService: ProductsService,
     private responsiveBoxesService: ResponsiveBoxesService,
     private contentListService: ContentListService,
@@ -64,7 +67,8 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     private appService: AppService,
     private changeDetectorRef: ChangeDetectorRef,
     private elementRef: ElementRef,
-    private paginatorService: PaginatorService
+    private paginatorService: PaginatorService,
+    private breadcrumbService: BreadcrumbService
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
@@ -73,8 +77,16 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.breadcrumbItems = this.router.routerState.snapshot.url.split('/');
-    console.log(this.breadcrumbItems);
+    console.log(this.activatedRoute);
+    console.log(this.router.url);
+    let routes = this.router.url.split('/');
+    routes.shift();
+    console.log(routes);
+
+    this.breadcrumbItems = this.breadcrumbService.getBreadcrumbs(
+      routes,
+      this.router.url
+    );
 
     this.productsContainerWidth =
       this.elementRef.nativeElement.querySelector('.elements').offsetWidth;

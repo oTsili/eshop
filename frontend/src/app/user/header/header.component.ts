@@ -1,37 +1,19 @@
-import {
-  Component,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+
 import { DynamicDatabase } from './dynamic-database';
 import { navBarElement } from './header.interfaces';
 import { HeaderService } from './header.service';
-import defaultLanguage from 'src/assets/i18n/en.json';
-import greekLanguage from 'src/assets/i18n/el.json';
 import { SearchService } from '../search/search.service';
-import { FooterService } from '../footer/footer.service';
 import { UserAppService } from '../user-app.service';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { AuthService } from '../auth/auth.service';
-import {
-  FormControl,
-  FormControlName,
-  FormGroup,
-  NgForm,
-} from '@angular/forms';
-import { Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 import { ProductsService } from '../product/products.service';
+import defaultLanguage from 'src/assets/i18n/en.json';
+import greekLanguage from 'src/assets/i18n/el.json';
 
 @Component({
   selector: 'app-header',
@@ -114,7 +96,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private headerService: HeaderService,
     private translate: TranslateService,
     private searchService: SearchService,
-    private footerService: FooterService,
     private authService: AuthService,
     private productService: ProductsService,
     private appService: AppService,
