@@ -12,6 +12,8 @@ export class BreadcrumbService {
     let breadcrumbs: Breadcrumb[] = [];
 
     for (let route of routes) {
+      route = route.split('?')[0];
+
       let active_route = `${this.appService.getSubstring(
         url,
         '/',

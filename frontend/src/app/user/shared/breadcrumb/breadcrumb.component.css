@@ -4,3 +4,34 @@
   display: flex;
   justify-content: center;
 }
+
+.ui.breadcrumb a,
+a {
+  color: #555;
+  position: relative;
+}
+
+.ui.breadcrumb a:hover,
+a:hover {
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+}
+
+.ui.breadcrumb a::after {
+  content: "";
+  width: -webkit-fill-available;
+  height: 0.1rem;
+  background-color: #c8c8c8;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: -7%;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.ui.breadcrumb a:hover::after,
+a:hover::after {
+  background-color: rgb(0, 0, 0);
+  opacity: 1;
+}
