@@ -57,21 +57,6 @@ export class UserAppComponent implements OnInit, OnDestroy {
   toggleModal() {
     this.modalOpen = !this.modalOpen;
 
-    // if the modal is open set some styling to the footer button
-    if (this.modalOpen) {
-      setTimeout(
-        () => {
-          const modalActions = document.body.querySelector<HTMLElement>(
-            '.ui.modal .actions:not(.actions-default)'
-          );
-
-          this.renderer.setStyle(modalActions, 'text-align', 'left');
-          this.renderer.setStyle(modalActions, 'margin-left', '3%');
-        },
-
-        10
-      );
-    }
     this.cd.detectChanges();
   }
   /**

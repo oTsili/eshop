@@ -46,3 +46,7 @@ i.icon {
 .ui.dimmer {
   background-color: #0000009e;
 }
+
+.ui.modal > .actions {
+  text-align: left;
+}
