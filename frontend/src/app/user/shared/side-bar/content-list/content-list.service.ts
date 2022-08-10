@@ -15,6 +15,7 @@ export class ContentListService {
   private heelHeightArr: ContentList[] = [];
   private salesArr: ContentList[] = [];
   private materialArr: ContentList[] = [];
+  private currentIndex: number;
 
   constructor(private appService: AppService) {}
 
@@ -26,6 +27,14 @@ export class ContentListService {
   }
   set materialArray(matArr: ContentList[]) {
     this.materialArr = matArr;
+  }
+
+  get index() {
+    return this.currentIndex;
+  }
+
+  set index(index: number) {
+    this.currentIndex = index;
   }
 
   getHeelHeighActiveStatusListener() {

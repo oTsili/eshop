@@ -27,8 +27,6 @@ export class ResponsiveCatalogComponent implements OnInit, OnChanges {
   @Input() elements: any[];
   @Input() justify_content: string;
   @Input() margin: string;
-  @Input() background_color_on_hover: boolean;
-  hover = -1;
   @ContentChildren(ParentElementDirective)
   items!: QueryList<ParentElementDirective>;
 

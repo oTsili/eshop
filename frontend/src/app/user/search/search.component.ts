@@ -122,7 +122,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
         this.currentPage = currentPage;
 
         let queryParams = this.router.parseUrl(this.router.url).queryParams;
-        this.productsService.onProductsUpdate(queryParams);
+        this.productsService.toUpdateProducts(queryParams);
       });
 
     // get the products on page initialization
@@ -131,7 +131,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
 
     // subsribe to events that update the products in the page
     this.updateProductsSubscription = this.productsService
-      .getProductsUpdateListener()
+      .getToUpdateProductsListener()
       .subscribe((response) => {
         console.log('products update');
         this.getProducts(response.queryParams);
@@ -154,30 +154,38 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     this.isLoading = true;
     this.productsSubscription = this.productsService
       .getProducts(this.productsPerPage, this.currentPage, query)
-      .subscribe((response) => {
-        const { totalProducts, products, message } = response;
-        this.products = products;
+      .subscribe({
+        next: (response) => {
+          const { totalProducts, products, message } = response;
+          this.products = products;
 
-        this.totalProducts = totalProducts;
+          this.totalProducts = totalProducts;
 
-        // console.log({ totalProducts: this.totalProducts });
+          // console.log({ totalProducts: this.totalProducts });
 
-        this.paginatorService.onProductsLoaded(
-          totalProducts,
-          this.productsPerPage
-        );
+          this.paginatorService.onProductsLoaded(
+            totalProducts,
+            this.productsPerPage
+          );
 
-        // show the no results message in case of no products
-        if (totalProducts === 0) {
-          this.isOpenErrorMessage = true;
-        }
+          // show the no results message in case of no products
+          if (totalProducts === 0) {
+            this.isOpenErrorMessage = true;
+          }
 
-        this.paginatorService.onProductsLoaded(
-          this.totalProducts,
-          this.productsPerPage
-        );
+          this.paginatorService.onProductsLoaded(
+            this.totalProducts,
+            this.productsPerPage
+          );
 
-        this.isLoading = false;
+          this.isLoading = false;
+
+          this.productsService.onProductsUpdated(true);
+        },
+        error: (response) => {
+          console.log(response);
+          this.productsService.onProductsNotUpdated(response);
+        },
       });
   }
 
@@ -199,7 +207,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     this.searchQuery = urlTree.queryParams['description'];
 
     // update the products on Products component
-    this.productsService.onProductsUpdate(urlTree.queryParams);
+    this.productsService.toUpdateProducts(urlTree.queryParams);
     this.changeDetectorRef.detectChanges();
   }
   /**

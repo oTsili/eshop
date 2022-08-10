@@ -5,7 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Router, UrlSerializer } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductsService } from 'src/app/user/product/products.service';
 import { ContentListService } from './content-list.service';
@@ -21,13 +21,14 @@ export class ContentListComponent implements OnInit, OnDestroy {
   private heelHeightActiveStatusSubscription: Subscription;
   private salesActiveStatusSubscription: Subscription;
   private materialActiveStatusSubscription: Subscription;
+  private onProductsUpdatedSubscription: Subscription;
+  isSubmitted = false;
 
   activeStatusArray: boolean[] = [];
 
   constructor(
     private contentListService: ContentListService,
     private router: Router,
-    private urlSerializer: UrlSerializer,
     private productsService: ProductsService,
     private cdr: ChangeDetectorRef
   ) {}
@@ -73,6 +74,10 @@ export class ContentListComponent implements OnInit, OnDestroy {
     if (this.heelHeightActiveStatusSubscription) {
       this.heelHeightActiveStatusSubscription.unsubscribe();
     }
+
+    if (this.onProductsUpdatedSubscription) {
+      this.onProductsUpdatedSubscription.unsubscribe();
+    }
   }
 
   /**
@@ -82,6 +87,8 @@ export class ContentListComponent implements OnInit, OnDestroy {
    */
   toggleActiveClass(index: number) {
     let elHeader = this.data.header;
+
+    console.log({ elHeader });
     if (elHeader === 'heel height') {
       this.contentListService.initializeHeelHeightActiveStatusArray();
       this.contentListService.onUpdateHeelHeighActiveStatusArray(index);
@@ -99,22 +106,47 @@ export class ContentListComponent implements OnInit, OnDestroy {
    * @param index
    */
   onSubmit(index: number) {
+    // save temporarily the index
+    this.contentListService.index = index;
+
+    // toggle the isSubmitted value
+    this.isSubmitted = true;
+
     // get the chip key from the element provided from the products Service
     const chipKey = this.data.header;
+
     // get the chip value from the element list provided (initially) from the products Service
     const chipValue = this.elementList[index].text;
 
     // deserialize the url
     const urlTree = this.router.parseUrl(this.router.url);
-    // update the color query param
-    urlTree.queryParams[chipKey] = chipValue;
-    // navigate to the updated url
-    this.router.navigateByUrl(urlTree);
 
-    // compose the chip view
-    const chip = { key: chipKey, value: chipValue };
+    // update the query param that holds the chip.key parameter
+    urlTree.queryParams[chipKey] = chipValue;
 
     // call the method to update the products
-    this.productsService.onProductsUpdate(urlTree.queryParams, chip);
+    this.productsService.toUpdateProducts(urlTree.queryParams).subscribe({
+      next: (response) => {
+        if (this.isSubmitted) {
+          // navigate to the updated url
+          this.router.navigateByUrl(urlTree);
+          // compose the chip view
+          const chip = { key: chipKey, value: chipValue };
+
+          // add a chip in the sidebar
+          this.productsService.addChip(chip);
+
+          // update the style of the selected element (focused)
+          this.toggleActiveClass(this.contentListService.index);
+
+          // reset the isSubmitted value
+          this.isSubmitted = false;
+        }
+      },
+      error: (response) => {
+        console.log(response);
+        console.log('something went wrong');
+      },
+    });
   }
 }

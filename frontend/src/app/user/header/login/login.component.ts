@@ -65,7 +65,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.submitSubscription.unsubscribe();
     this.loginSubscription.unsubscribe();
-    this.translateSubscription.unsubscribe();
+    if (this.translateSubscription) {
+      this.translateSubscription.unsubscribe();
+    }
   }
 
   toggleMessage() {

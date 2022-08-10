@@ -131,6 +131,8 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
     // get the url from the browser
     let urlTree = this.router.parseUrl(this.router.url);
 
+    console.log(urlTree.queryParams[chip.key]);
+
     // delete the query parameter came from the chip
     delete urlTree.queryParams[chip.key];
 
@@ -138,6 +140,6 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigateByUrl(urlTree);
 
     // call the method to update the products
-    this.productsService.onProductsUpdate(urlTree.queryParams);
+    this.productsService.toUpdateProducts(urlTree.queryParams);
   }
 }

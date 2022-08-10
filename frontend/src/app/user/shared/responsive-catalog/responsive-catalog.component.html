@@ -5,18 +5,7 @@
     [ngStyle]="{ 'justify-content': justify_content }"
   >
     <ng-container *ngFor="let item of items; let j = index">
-      <div
-        class="col"
-        *ngIf="j >= i * numOfCols && j < (i + 1) * numOfCols"
-        (mouseover)="hover = i * numOfCols + j"
-        (mouseout)="hover = -1"
-        [ngStyle]="{
-          'background-color':
-            background_color_on_hover && hover === i * numOfCols + j
-              ? '#00000045'
-              : 'transparent'
-        }"
-      >
+      <div class="col" *ngIf="j >= i * numOfCols && j < (i + 1) * numOfCols">
         <div class="wrapper" [ngStyle]="{ margin: margin }">
           <ng-container
             [ngTemplateOutlet]="item.firstElement.templateRef"

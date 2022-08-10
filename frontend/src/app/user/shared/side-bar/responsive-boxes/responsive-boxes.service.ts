@@ -11,6 +11,7 @@ export class ResponsiveBoxesService {
   private sizeArr: ResponsiveBox[] = [];
   private colorActiveStatusArray: boolean[] = [];
   private sizeActiveStatusArray: boolean[] = [];
+  private currentIndex: number;
 
   set colorArray(colorArr: ResponsiveBox[]) {
     this.colorArr = colorArr;
@@ -18,6 +19,14 @@ export class ResponsiveBoxesService {
 
   set sizeArray(sizeArr: ResponsiveBox[]) {
     this.sizeArr = sizeArr;
+  }
+
+  set index(index: number) {
+    this.currentIndex = index;
+  }
+
+  get index() {
+    return this.currentIndex;
   }
 
   getColorActiveStatusListener() {

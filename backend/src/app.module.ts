@@ -27,7 +27,7 @@ import { AuthModule } from './auth/auth.module';
     // A common technique to protect applications from brute-force attacks is rate-limiting. Implemented with @nestjs/throttler package
     ThrottlerModule.forRoot({
       ttl: 60,
-      limit: 10,
+      limit: 100,
     }),
     MongooseModule.forRoot(
       `${process.env['ME_CONFIG_MONGODB_URL']}/eshop?authSource=admin`,

@@ -11,7 +11,7 @@ import { ProductsService } from 'src/app/user/product/products.service';
 export class DoubleSliderComponent implements OnInit {
   @ViewChild('fromSlider', { static: true }) fromSlider: ElementRef;
   @ViewChild('toSlider', { static: true }) toSlider: ElementRef;
-
+  isSubmitted = false;
   from = 15;
   to = 75;
 
@@ -46,14 +46,25 @@ export class DoubleSliderComponent implements OnInit {
     let price = `${this.from}\u20AC	-${this.to}\u20AC	`;
     // update the color query param
     urlTree.queryParams['price'] = price;
-    // navigate to the updated url
-    this.router.navigateByUrl(urlTree);
-
-    // compose the chip view
-    let chip = { key: 'price', value: price };
 
     // call the method to update the products
-    this.productsService.onProductsUpdate(urlTree.queryParams, chip);
+    this.productsService.toUpdateProducts(urlTree.queryParams).subscribe({
+      next: (response) => {
+        if (this.isSubmitted) {
+          // navigate to the updated url
+          this.router.navigateByUrl(urlTree);
+
+          // compose the chip view
+          let chip = { key: 'price', value: price };
+
+          // add a chip in the sidebar
+          this.productsService.addChip(chip);
+
+          // reset the isSubmitted value
+          this.isSubmitted = false;
+        }
+      },
+    });
   }
 
   onRegister(form: FormGroup) {

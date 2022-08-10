@@ -1,11 +1,7 @@
 <div class="container">
   <ul class="list">
     <ng-container *ngFor="let element of elementList; let i = index">
-      <li
-        (click)="toggleActiveClass(i)"
-        class="element"
-        [ngClass]="{ active: activeStatusArray[i] }"
-      >
+      <li class="element" [ngClass]="{ active: activeStatusArray[i] }">
         <a (click)="onSubmit(i)">
           {{ element.text | translate }}
         </a>

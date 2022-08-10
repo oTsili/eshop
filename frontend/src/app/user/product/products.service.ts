@@ -12,13 +12,14 @@ const BACKEND_URL = environment.BASE_URL + 'products';
 export class ProductsService {
   chipsList: Chip[] = [];
   noProductsMesageListener = new Subject<boolean>();
-  productUdateListener = new Subject<{ queryParams: Params }>();
+  toUpdateProductsListener = new Subject<{ queryParams: Params }>();
   chipsListUpdateListener = new Subject<{ chipsList: Chip[] }>();
   sideBarWidthListener = new Subject<number>();
   changePageListener = new Subject<{
     productsPerPage: number;
     currentPage: number;
   }>();
+  onProductsUpdatedListener = new Subject<boolean>();
 
   constructor(private httpClient: HttpClient) {}
 
@@ -48,20 +49,24 @@ export class ProductsService {
     }>(`${BACKEND_URL}/query`, { params: queryParams, withCredentials: true });
   }
 
-  getProductsUpdateListener() {
-    return this.productUdateListener.asObservable();
+  getToUpdateProductsListener() {
+    return this.toUpdateProductsListener.asObservable();
   }
 
-  onProductsUpdate(queryParams: Params, chip?: Chip) {
-    // update the chipsList
-    if (chip) {
-      this.updateChip(chip);
-    }
-
+  toUpdateProducts(queryParams: Params) {
     // inform the app for the products list update
-    this.productUdateListener.next({
+    this.toUpdateProductsListener.next({
       queryParams,
     });
+
+    return this.onProductsUpdatedListener.asObservable();
+  }
+
+  onProductsUpdated(updated: boolean) {
+    this.onProductsUpdatedListener.next(updated);
+  }
+  onProductsNotUpdated(error: string) {
+    this.onProductsUpdatedListener.error(error);
   }
 
   chipsListInitialize(chipsList: Chip[]) {

@@ -180,12 +180,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // not navigated by the code in the beggining.
     const url = this.router.url.split('/')[1];
     // console.log({ url });
-    if (url === 'search') {
-      this.productService.onProductsUpdate(
-        { description: this.search },
-        { key: 'description', value: this.search }
-      );
-    }
+    // if (url === 'search') {
+    //   this.productService.toUpdateProducts(
+    //     { description: this.search },
+    //     { key: 'description', value: this.search }
+    //   );
+    // }
   }
 
   updateHamburgerStatus(event: MouseEvent) {

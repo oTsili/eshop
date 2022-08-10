@@ -2,7 +2,6 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  HostListener,
   Input,
   OnDestroy,
   OnInit,
@@ -30,11 +29,13 @@ export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
   activeStatusArray: boolean[] = [];
   queryParam: string;
   show_text = false;
+  isSubmitted = false;
 
   constructor(
     private productsService: ProductsService,
     private router: Router,
     private responsiveBoxesService: ResponsiveBoxesService,
+    private elementRef: ElementRef,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -93,6 +94,11 @@ export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
    * @param index:number
    */
   onSubmit(index: number) {
+    this.responsiveBoxesService.index = index;
+
+    // toggle the isSubmitted value
+    this.isSubmitted = true;
+
     // deserialize
     let urlTree = this.router.parseUrl(this.router.url);
 
@@ -100,15 +106,29 @@ export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
     let text = this.elementList[index].text;
     urlTree.queryParams[this.queryParam] = text;
 
-    // navigate to the updated url
-    this.router.navigateByUrl(urlTree);
-
-    // compose the chip view
-    const chipValue = this.elementList[index].text;
-    let chip = { key: this.queryParam, value: chipValue };
-
     // call the method to update the products
-    this.productsService.onProductsUpdate(urlTree.queryParams, chip);
+    this.productsService.toUpdateProducts(urlTree.queryParams).subscribe({
+      next: (response) => {
+        if (this.isSubmitted) {
+          // navigate to the updated url
+          this.router.navigateByUrl(urlTree);
+
+          // compose the chip view
+          const chipValue =
+            this.elementList[this.responsiveBoxesService.index].text;
+          let chip = { key: this.queryParam, value: chipValue };
+
+          // add a chip in the sidebar
+          this.productsService.addChip(chip);
+
+          // update the style of the selected element (focused)
+          this.toggleActiveClass(this.responsiveBoxesService.index);
+
+          // reset the isSubmitted value
+          this.isSubmitted = false;
+        }
+      },
+    });
   }
 
   // /**
