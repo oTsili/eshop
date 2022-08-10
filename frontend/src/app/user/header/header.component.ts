@@ -161,11 +161,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onSubmitSearch() {
-    console.log({ input: this.search });
-    this.router.navigate(['/home/search'], {
-      queryParams: { description: this.search },
-      queryParamsHandling: 'merge',
-    });
     // const search = this.search
     //   .normalize('NFD')
     //   .replace(/[\u0300-\u036f]/g, '');
@@ -173,19 +168,35 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     // initialize the state of the no products message
     this.productService.onUpdateNoProductsMessage(false);
-    // update the page header "Search For ..."
-    this.searchService.onUpdateSearchQueryHeader(this.search);
 
     // update the products in the catalog if already in the page and
     // not navigated by the code in the beggining.
-    const url = this.router.url.split('/')[1];
-    // console.log({ url });
-    // if (url === 'search') {
-    //   this.productService.toUpdateProducts(
-    //     { description: this.search },
-    //     { key: 'description', value: this.search }
-    //   );
-    // }
+    const url = this.router.url.split('/')[2];
+
+    console.log(url);
+
+    if (url === 'search') {
+      this.productService
+        .toUpdateProducts({ description: this.search })
+        .subscribe({
+          next: (response) => {
+            // update the page header "Search For ..."
+            this.searchService.onUpdateSearchQueryHeader(this.search);
+
+            // update url
+            this.router.navigate(['/home/search'], {
+              queryParams: { description: this.search },
+              queryParamsHandling: 'merge',
+            });
+
+            // add the chip
+            this.productService.addChip({
+              key: 'description',
+              value: this.search,
+            });
+          },
+        });
+    }
   }
 
   updateHamburgerStatus(event: MouseEvent) {
