@@ -161,6 +161,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onSubmitSearch() {
+    // update url and navigate if in other page
+    this.router.navigate(['/home/search'], {
+      queryParams: { description: this.search },
+      queryParamsHandling: 'merge',
+    });
     // const search = this.search
     //   .normalize('NFD')
     //   .replace(/[\u0300-\u036f]/g, '');
@@ -182,12 +187,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
           next: (response) => {
             // update the page header "Search For ..."
             this.searchService.onUpdateSearchQueryHeader(this.search);
-
-            // update url
-            this.router.navigate(['/home/search'], {
-              queryParams: { description: this.search },
-              queryParamsHandling: 'merge',
-            });
 
             // add the chip
             this.productService.addChip({
