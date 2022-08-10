@@ -7,14 +7,14 @@
       fxShow.gt-md="false"
       fxShow.lt-md="true"
       class="ui dropdown link"
-      hamburgerMenuOpen
+      iconMenuOpenClose
       (click)="updateHamburgerStatus($event)"
     >
       <i [@slideInOut] *ngIf="!isOpenHamburgerMenu" class="ph-list"></i>
       <i
         [@slideOutIn]
         *ngIf="isOpenHamburgerMenu"
-        hamburgerMenuClose
+        iconMenuOpenClose
         class="ph-x"
       ></i>
       <div class="menu" id="hamburger-menu">
@@ -106,7 +106,7 @@
         <!-- if loggedIn open profile options -->
         <div
           *ngIf="isAuthenticated"
-          IconMenuOpen
+          iconMenuOpenClose
           class="ui dropdown"
           id="user-icon"
         >
@@ -154,9 +154,8 @@
       <!------ START  menu links expandables ------>
       <div
         *ngIf="isExpandable(link)"
-        dropdownMenuOpen
-        dropdownMenuClose
-        class="ui pointing dropdown link item"
+        menuOpenClose
+        class="ui dropdown link item"
       >
         <span class="text">
           {{ link.text | translate | uppercase }}

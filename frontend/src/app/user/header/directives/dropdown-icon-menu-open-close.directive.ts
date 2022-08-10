@@ -8,9 +8,9 @@ import {
 import { HeaderService } from '../header.service';
 
 @Directive({
-  selector: '[IconMenuOpen]',
+  selector: '[iconMenuOpenClose]',
 })
-export class IconMenuOpenDirective implements OnInit {
+export class IconMenuOpenCloseDirective implements OnInit {
   menuElement: HTMLElement;
   parentElement: HTMLElement;
   menuElements: HTMLElement[];

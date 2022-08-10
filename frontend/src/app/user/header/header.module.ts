@@ -10,28 +10,22 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { HttpLoaderFactory } from '../shared/loader-factory';
-import { DropdownMenuOpenDirective } from './directives/dropdown-menu-open.directive';
 import { DropdownSubmenuOpenDirective } from './directives/dropdown-submenu-open.directive';
 import { DropDownSubmenuCloseDirective } from './directives/dropdown-submenu-close.directive';
-import { DropDownMenuCloseDirective } from './directives/dropdown-menu-close.directive';
-import { HamburgerMenuCloseDirective } from './directives/dropdown-hamburger-menu-close.directive';
-import { HamburgerMenuOpenDirective } from './directives/dropdown-hamburger-menu-open.directive';
-import { IconMenuOpenDirective } from './directives/dropdown-icon-menu-open.directive';
 import { RouterModule } from '@angular/router';
 import { TestComponent } from './test/test.component';
 import { HeaderRoutingModule } from './header-routing.module';
 import { FormsModule } from '@angular/forms';
+import { IconMenuOpenCloseDirective } from './directives/dropdown-icon-menu-open-close.directive';
+import { DropdownMenuOpenCloseDirective } from './directives/dropdown-menu-open-close.directive';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    DropdownMenuOpenDirective,
     DropdownSubmenuOpenDirective,
     DropDownSubmenuCloseDirective,
-    DropDownMenuCloseDirective,
-    HamburgerMenuCloseDirective,
-    HamburgerMenuOpenDirective,
-    IconMenuOpenDirective,
+    IconMenuOpenCloseDirective,
+    DropdownMenuOpenCloseDirective,
     TestComponent,
   ],
   imports: [
