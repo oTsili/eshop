@@ -40,6 +40,9 @@ export class DoubleSliderComponent implements OnInit {
   });
 
   onSubmit() {
+    // toggle the isSubmitted value
+    this.isSubmitted = true;
+
     // deserialize
     let urlTree = this.router.parseUrl(this.router.url);
 
