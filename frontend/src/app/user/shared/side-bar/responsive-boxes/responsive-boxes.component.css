@@ -2,17 +2,6 @@
   cursor: pointer;
 }
 
-.col {
-  display: flex;
-  flex-direction: column;
-  /* width: 100%; */
-}
-
-.col:hover {
-  border-radius: 25%;
-  background-color: #00000045;
-}
-
 .element {
   display: flex;
   justify-content: center;

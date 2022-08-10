@@ -19,7 +19,12 @@
 
     <!---- START products catalog LOWER DIVISION ---->
     <div class="results-show">
-      <app-responsive-catalog [elements]="products">
+      <app-responsive-catalog
+        [elements]="products"
+        [justify_content]="'center'"
+        [margin]="'2rem'"
+        [background_color_on_hover]="false"
+      >
         <parent-element *ngFor="let product of products">
           <ng-template firstElement>
             <!-- <img src="assets/images/clickAndDrag/1.jpeg" /> -->

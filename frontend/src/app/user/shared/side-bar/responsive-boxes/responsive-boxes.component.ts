@@ -31,29 +31,7 @@ export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
   queryParam: string;
   show_text = false;
 
-  /**
-   * updates the number of colors, the array of Cols and
-   * array of Rows, to be used in the grid of elements,
-   * when window is resized.
-   */
-  @HostListener('window:resize', ['$event'])
-  updateRowsCols() {
-    // get the sidebar offset(px), convert to rem(*0.1), divide with
-    // the box width plus the margin (3rem + .6rem + .6rem = 4.2rem)
-    this.numberOfCols = Math.floor(
-      (this.elementRef.nativeElement.offsetWidth * 0.1) / 4.2
-    );
-    this.arrOfCols = Array(this.numberOfCols).fill(1);
-    // .map((x, i) => i + 1);
-
-    this.arrOfRows = Array(
-      Math.ceil(this.elementList.length / this.numberOfCols)
-    ).fill(1);
-    // .map((x, i) => i + 1);
-  }
-
   constructor(
-    private elementRef: ElementRef,
     private productsService: ProductsService,
     private router: Router,
     private responsiveBoxesService: ResponsiveBoxesService,
@@ -64,7 +42,6 @@ export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
     this.elementList = this.data.elementList;
     this.queryParam = this.data.header;
     this.show_text = this.data.show_text;
-    this.updateRowsCols();
 
     let elHeader = this.data.header;
     if (elHeader === 'color') {

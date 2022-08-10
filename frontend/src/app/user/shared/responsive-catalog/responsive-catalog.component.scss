@@ -8,7 +8,7 @@ $base-width: 20rem;
 
 .wrapper {
   position: relative;
-  margin: 2rem;
+  // margin: 2rem;
   height: 100%;
   transition: scrollLeft 0.5s ease-in-out;
 }
@@ -19,12 +19,16 @@ $base-width: 20rem;
   margin-bottom: 1%;
 }
 
+.col:hover {
+  border-radius: 25%;
+}
+
 .row {
   /* justify-content: center; */
   align-content: center;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  // justify-content: center;
   gap: 3%;
 }
 
