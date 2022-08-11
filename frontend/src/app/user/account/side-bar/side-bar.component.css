@@ -1,0 +1,25 @@
+@import "semantic-ui-css/semantic.css";
+
+.ui.vertical.menu {
+  border: 0;
+  box-shadow: none;
+
+  font-size: 1.4rem;
+}
+
+.ui.vertical.menu a.item:hover {
+  background-color: #00000008;
+}
+
+/* .active {
+  border-left: 0.2rem solid black;
+  font-weight: 600;
+  background-color: white;
+} */
+
+.ui.vertical.menu .active.item {
+  border-left: 0.2rem solid black;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background-color: white;
+}

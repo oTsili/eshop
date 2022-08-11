@@ -1,0 +1,17 @@
+@import "semantic-ui-css/semantic.css";
+
+.header-wrapper {
+  position: relative;
+  text-align: center;
+  padding: 1.5rem 0;
+  margin: 1rem 0;
+}
+
+.header {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.wrapper {
+  display: flex;
+}

@@ -77,11 +77,8 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.activatedRoute);
-    console.log(this.router.url);
     let routes = this.router.url.split('/');
     routes.shift();
-    console.log(routes);
 
     this.breadcrumbItems = this.breadcrumbService.getBreadcrumbs(
       routes,
