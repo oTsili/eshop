@@ -48,7 +48,11 @@
               </div>
             </div>
           </div>
-          <div *ngIf="!isExpandable(link)" class="item">
+          <div
+            routerLink="home/{{ link.text }}"
+            *ngIf="!isExpandable(link)"
+            class="item"
+          >
             {{ link.text | translate | uppercase }}
           </div>
         </ng-container>
@@ -144,7 +148,7 @@
       <!------ START  menu links no expandables ------>
       <a
         *ngIf="!isExpandable(link)"
-        routerLink="{{ link.text }}"
+        routerLink="home/{{ link.text }}"
         [routerLinkActiveOptions]="{ exact: true }"
         routerLinkActive="active"
         class="item"

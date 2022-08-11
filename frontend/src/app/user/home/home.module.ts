@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
-import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LandingPageModule } from './landing-page/landing-page.module';
 
 @NgModule({
@@ -12,7 +11,7 @@ import { LandingPageModule } from './landing-page/landing-page.module';
   imports: [
     CommonModule,
     HomeRoutingModule,
-
+    LandingPageModule,
     RouterModule.forChild([
       {
         path: '',

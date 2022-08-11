@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomDragCarouselComponent } from './custom-drag-carousel.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { CustomDragCarouselComponent } from './custom-drag-carousel.component';
 import { SpinnerModule } from '../spinner/spinner.module';
 import { ProductModule } from '../../product/product.module';
 
