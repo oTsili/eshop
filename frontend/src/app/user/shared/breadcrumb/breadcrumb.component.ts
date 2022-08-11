@@ -42,7 +42,5 @@ export class BreadcrumbComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.breadcrumbs = changes['breadcrumbs'].currentValue;
-
-    console.log(this.breadcrumbs);
   }
 }

@@ -86,8 +86,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       .login(form.value.email, form.value.password)
       .subscribe({
         next: (response) => {
-          console.log(response);
+          console.log({ response });
           this.userAppService.onToggleModal();
+          localStorage.setItem('user', JSON.stringify(response));
         },
         error: (error) => {
           let errorMessage = error.error.message.split(':')[1].trim();

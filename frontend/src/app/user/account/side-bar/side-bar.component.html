@@ -1,5 +1,12 @@
 <div class="ui vertical menu">
-  <a class="item"> {{ "addressbook" }} </a><a class="item"> {{ "orders" }} </a
-  ><a class="item"> {{ "profile" }}</a
-  ><a class="item"> {{ "whishlist" }} </a>
+  <a
+    *ngFor="let element of sidebarElements"
+    (click)="onNavigate(element.text)"
+    routerLink="../../home/account/{{ element.text }}"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLinkActive="active"
+    class="item"
+  >
+    {{ element.text }}
+  </a>
 </div>

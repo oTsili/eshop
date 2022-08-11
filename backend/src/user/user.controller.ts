@@ -7,6 +7,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
   Req,
   Request,
   // Response,
@@ -49,18 +50,18 @@ export class UserController {
     @Body() user: { username: string; password: string },
     @Session() session: Record<string, any>,
   ) {
-    // console.log(session.id);
-    let dbUser = req.user._doc;
-    delete dbUser.password;
-    console.log(dbUser);
-    const { access_token } = await this.authService.login(dbUser);
-    // console.log({ userDB });
-    const expiresIn = this.jwtService.decode(access_token)['exp'];
-    console.log({ expiresIn });
+    let dbUser = req.user;
 
-    // // store jwt in the express-session
+    // login with jwt and get the jwt token
+    const { access_token } = await this.authService.login(dbUser);
+
+    // inspect the expiresIn property
+    // const expiresIn = this.jwtService.decode(access_token)['exp'];
+    // console.log({ expiresIn });
+
+    // store jwt in the express-session
     session.jwt = access_token;
-    console.log({ session });
+    // console.log({ session });
 
     return res.status(HttpStatus.OK).json(dbUser);
   }
@@ -81,25 +82,28 @@ export class UserController {
     @Body() user: User,
     @Session() session: Record<string, any>,
   ) {
-    // console.log(req.csrfToken());
-
+    // generate a salt for the password hash
     const salt = await bcrypt.genSalt();
 
+    // get the password hash
     const hash = await bcrypt.hash(user.password, salt);
+    // save the password hash to the user password property
     user.password = hash;
 
-    const newUser = await this.userService.create(user);
+    // save the new user to the db and get the user mongoose document
+    let newUser = await this.userService.create(user);
 
-    console.log({ newUser });
+    // get rid of the extra added properties by mongoose
+    newUser = newUser._doc;
+    // delete  the password from the object we will send to the client
+    delete newUser.password;
 
-    // const { access_token } = await this.authService.login({user.email, user.password});
+    const { access_token } = await this.authService.login(newUser);
 
-    // console.log({ access_token });
+    // store jwt in the express-session
+    session.jwt = access_token;
 
-    // // store jwt in the express-session
-    // session.jwt = access_token;
-
-    // return res.status(HttpStatus.CREATED).json({ access_token });
+    return res.status(HttpStatus.CREATED).json({ newUser });
   }
 
   // @Get('')
@@ -120,17 +124,27 @@ export class UserController {
     @Res() res,
     @Session() session: Record<string, any>,
   ) {
-    console.log(session);
+    // console.log(session);
     let isAuth = true;
     if (!session.jwt) {
       isAuth = false;
     }
     return await res.status(HttpStatus.OK).json(isAuth);
   }
+
   // empty get request controller must be the last in the order (in cardinal order)
   @Get(':email')
   async fetchUser(@Res() response, @Param('email') email: string) {
-    let users = await this.userService.findUserByEmail(email);
+    let user = await this.userService.findUserByEmail(email);
+
+    return await response.status(HttpStatus.OK).json({ user });
+  }
+
+  @Put('/:id')
+  async update(@Res() response, @Param('id') id, @Body() user: User) {
+    const updatedUser = await this.userService.update(id, user);
+    console.log({ updatedUser });
+    return response.status(HttpStatus.OK).json({ updatedUser });
   }
 
   // @UseGuards(JwtAuthGuard)

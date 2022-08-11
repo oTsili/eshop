@@ -1,1 +1,26 @@
-<p>wishlist works!</p>
+<app-responsive-catalog
+  [elements]="whishlistItems"
+  [justify_content]="'center'"
+  [margin]="'2rem'"
+>
+  <parent-element *ngFor="let whishItem of whishlistItems">
+    <ng-template firstElement>
+      <div class="product main-product">
+        <app-product
+          [img_width]="'100%'"
+          [product]="whishItem.product"
+          [source]="whishItem.product.src"
+        ></app-product>
+      </div>
+    </ng-template>
+    <ng-template secondElement="">
+      <div class="product hover-product">
+        <app-product
+          [img_width]="'100%'"
+          [product]="whishItem.product"
+          [source]="whishItem.product.altSrc"
+        ></app-product>
+      </div>
+    </ng-template>
+  </parent-element>
+</app-responsive-catalog>

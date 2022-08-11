@@ -1,3 +1,5 @@
+import { Account } from '../../account/account.interfaces';
+
 export interface SignupAuthData {
   email: string;
   firstName: string;
@@ -20,4 +22,12 @@ export interface UserAttrs {
   passwordChangedAt?: Date;
   passwordResetToken?: string;
   passwordResetExpires?: Date;
+}
+
+export interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  signupDate: string;
+  account: Account;
 }

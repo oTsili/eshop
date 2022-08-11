@@ -16,8 +16,26 @@ export class UserService {
   async findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }
+  // lean true instructs mongoose to not return a mongoose document (with extra properties)
+  // but the exact object.
 
   async findUserByEmail(email: string): Promise<User> {
-    return this.userModel.findOne({ email }).exec();
+    return this.userModel
+      .findOne({ email }, {}, { lean: true })
+      .populate({
+        path: 'account',
+        populate: {
+          path: 'whishlist',
+          populate: {
+            path: 'product',
+            model: 'Product',
+          },
+        },
+      })
+      .exec();
+  }
+
+  async update(id, user: User): Promise<User> {
+    return await this.userModel.findByIdAndUpdate(id, user, { new: true });
   }
 }
