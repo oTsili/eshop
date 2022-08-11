@@ -5,6 +5,8 @@ import { OrdersModule } from './orders/orders.module';
 import { WishlistModule } from './wishlist/wishlist.module';
 import { AccountComponent } from './account.component';
 import { AccountRoutingModule } from './account-routing.module';
+import { RouterModule } from '@angular/router';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   declarations: [AccountComponent],
@@ -15,6 +17,13 @@ import { AccountRoutingModule } from './account-routing.module';
     ProfileModule,
     WishlistModule,
     AccountRoutingModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        pathMatch: 'full',
+        component: AccountComponent,
+      },
+    ]),
   ],
 })
-export class ProfileModule {}
+export class AccountModule {}

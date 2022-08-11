@@ -26,6 +26,20 @@ const homeRoutes: Routes = [
         },
       },
       {
+        path: 'account',
+        loadChildren: () =>
+          import('../account/account.module').then((m) => m.AccountModule),
+        data: {
+          title: 'account',
+          breadcrumb: [
+            {
+              label: 'account',
+              url: 'account',
+            },
+          ],
+        },
+      },
+      {
         path: 'contact',
         component: TestComponent,
         data: {
