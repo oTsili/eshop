@@ -1,0 +1,25 @@
+<div [ngStyle.lt-md]="{ 'font-size': '1.6rem' }" class="product product-name">
+  {{ product.name }}
+</div>
+<div
+  [ngStyle.lt-md]="{ 'font-size': '1.3rem' }"
+  class="product product-description"
+>
+  {{ product.description }}
+</div>
+<div class="product product-actions">
+  <a href="#" class="icon--medium">
+    <i class="ph-heart"></i>
+  </a>
+  <a href="#" class="icon--medium">
+    <i class="ph-shopping-bag"></i>
+  </a>
+</div>
+<div class="product product-price--wrapper">
+  <span *ngIf="product.sales" class="product-price product-price-old">
+    {{ oldPrice }}
+  </span>
+  <span class="product-price product-price-new">
+    {{ product.price }}
+  </span>
+</div>

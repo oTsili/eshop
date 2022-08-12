@@ -1,7 +1,6 @@
 $base-width: 20rem;
 
 .elements {
-  cursor: move;
   user-select: none;
   height: auto !important;
 }
@@ -30,10 +29,6 @@ $base-width: 20rem;
   flex-direction: row;
   // justify-content: center;
   gap: 3%;
-}
-
-.element {
-  width: $base-width;
 }
 
 .element:nth-child(1) {

@@ -7,7 +7,10 @@
     <ng-template firstElement>
       <div class="product main-product">
         <app-product
-          [img_width]="'100%'"
+          [whishlist]="true"
+          img_container_width="20rem"
+          img_height="30rem"
+          img_width="100%"
           [product]="whishItem.product"
           [source]="whishItem.product.src"
         ></app-product>
@@ -16,7 +19,10 @@
     <ng-template secondElement="">
       <div class="product hover-product">
         <app-product
-          [img_width]="'100%'"
+          [whishlist]="true"
+          img_container_width="20rem"
+          img_height="30rem"
+          img_width="100%"
           [product]="whishItem.product"
           [source]="whishItem.product.altSrc"
         ></app-product>

@@ -1,37 +1,25 @@
-<img
-  [style.height]="img_height ? img_height : '40rem'"
-  [style.width]="img_width ? img_width : 'auto'"
-  class="image"
-  src="{{ source }}"
-/>
-<div *ngIf="product.sales" class="sales-text--wrapper">
-  <div class="sales-text">-{{ product.sales }}%</div>
-  <hr />
-</div>
-<div class="product-details">
-  <div [ngStyle.lt-md]="{ 'font-size': '1.6rem' }" class="product product-name">
-    {{ product.name }}
+<div class="product-wrapper" [style.width]="img_container_width" j>
+  <img
+    [ngStyle]="{
+      cursor: isMouseDown ? 'move' : 'pointer'
+    }"
+    [style.height]="img_height ? img_height : '40rem'"
+    [style.width]="img_width ? img_width : 'auto'"
+    class="image"
+    src="{{ source }}"
+  />
+  <div *ngIf="product.sales" class="sales-text--wrapper">
+    <div class="sales-text">-{{ product.sales }}%</div>
+    <hr />
   </div>
-  <div
-    [ngStyle.lt-md]="{ 'font-size': '1.3rem' }"
-    class="product product-description"
-  >
-    {{ product.description }}
-  </div>
-  <div class="product product-actions">
-    <a href="#" class="icon--medium">
-      <i class="ph-heart"></i>
-    </a>
-    <a href="#" class="icon--medium">
-      <i class="ph-shopping-bag"></i>
-    </a>
-  </div>
-  <div class="product product-price--wrapper">
-    <span *ngIf="product.sales" class="product-price product-price-old">
-      {{ oldPrice }}
-    </span>
-    <span class="product-price product-price-new">
-      {{ product.price }}
-    </span>
+  <div class="product-details">
+    <app-catalog-details
+      [product]="product"
+      *ngIf="!whishlist"
+    ></app-catalog-details>
+    <app-whishlist-details
+      [product]="product"
+      *ngIf="whishlist"
+    ></app-whishlist-details>
   </div>
 </div>

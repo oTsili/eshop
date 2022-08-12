@@ -1,0 +1,37 @@
+.container {
+  font-size: 1.5rem;
+}
+
+.product {
+  padding: 2% 0;
+}
+
+.product-price-new {
+  color: black;
+}
+
+.product-price::after {
+  content: "\20AC";
+}
+
+.cart-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.7rem;
+}
+
+.quantity {
+  width: 4rem;
+  height: 4rem;
+  border: 0.2px solid black;
+  border-radius: 50%;
+}
+
+.icon-control {
+  padding: 0 1rem;
+}
+
+.line {
+  margin-top: 0.5rem;
+}

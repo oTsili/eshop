@@ -15,7 +15,6 @@
   </div>
 
   <div
-    [ngStyle]="{ cursor: isMouseDown ? 'grabbing' : 'grab' }"
     (mousedown)="mouseDownHandler($event)"
     (mousemove)="mouseMoveHandler($event)"
     (mouseup)="mouseUpHandler($event)"
@@ -29,6 +28,8 @@
       <div #mainSlide class="wrapper" *ngFor="let product of products">
         <div class="slide main-slide">
           <app-product
+            img_container_width="22rem"
+            [isMouseDown]="isMouseDown"
             [img_height]="'33rem'"
             [product]="product"
             [source]="product.src"
@@ -36,6 +37,8 @@
         </div>
         <div class="slide hover-slide">
           <app-product
+            img_container_width="22rem"
+            [isMouseDown]="isMouseDown"
             [img_height]="'33rem'"
             [product]="product"
             [source]="product.altSrc"
