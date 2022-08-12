@@ -7,22 +7,33 @@
       {{ whishlistItem.product.price }}
     </div>
   </div>
-  <div class="line cart-controls">
-    <span class="icon-control">
-      <a>
-        <i class="ph-minus"></i>
-      </a>
-    </span>
-    <span class="icon-control">
-      <div class="quantity"></div>
-    </span>
-    <span class="icon-control">
-      <a>
-        <i class="ph-plus"></i>
-      </a>
-    </span>
-  </div>
-  <div class="line button">
-    <a class="button-text">add to cart</a>
-  </div>
+  <form (ngSubmit)="onSubmitCart(cartForm)" #cartForm="ngForm">
+    <div class="line cart-controls">
+      <span class="icon-control control">
+        <a (click)="decreaseQuantity()">
+          <i class="ph-minus"></i>
+        </a>
+      </span>
+      <span class="icon-control">
+        <div class="quantity">{{ quantity }}</div>
+      </span>
+      <span class="icon-control control">
+        <a (click)="increaseQuantity()">
+          <i class="ph-plus"></i>
+        </a>
+      </span>
+    </div>
+    <div class="button-wrapper">
+      <div class="line button">
+        <button type="submit" class="button-text">add to cart</button>
+      </div>
+      <div class="line button">
+        <a class="button-text">edit</a>
+      </div>
+      <div class="line button">
+        <a class="button-text">remove item</a>
+      </div>
+      <input type="hidden" name="quantity" [(ngModel)]="quantity" />
+    </div>
+  </form>
 </div>

@@ -30,4 +30,5 @@ export interface User {
   email: string;
   signupDate: string;
   account: Account;
+  _id?: string;
 }

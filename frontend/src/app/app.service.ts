@@ -56,4 +56,17 @@ export class AppService {
     });
     return colorIndex;
   }
+
+  getDateString(): string {
+    // get the current date
+    const m = new Date();
+    // convert
+    const dateString = `${m.getUTCFullYear()}/${
+      m.getUTCMonth() + 1
+    }/${m.getUTCDate()} ${String(
+      m.getUTCHours() + 2
+    )}:${m.getUTCMinutes()}:${m.getUTCSeconds()}`;
+
+    return dateString;
+  }
 }

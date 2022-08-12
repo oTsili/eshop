@@ -186,7 +186,7 @@
   <form
     (keydown.enter)="onSubmitSearch()"
     #theSearchForm="ngForm"
-    (ngSbmint)="onSubmitSearch()"
+    (ngSubmit)="onSubmitSearch()"
   >
     <mat-form-field
       [@slideUpDown]
@@ -198,10 +198,10 @@
         >search</mat-icon
       >
       <input
-        matInput
+        name="search"
         [(ngModel)]="search"
         #searchInput="ngModel"
-        name="search"
+        matInput
         type="text"
         aria-label="Search"
         placeholder="{{ 'search all over the store' | translate }}"

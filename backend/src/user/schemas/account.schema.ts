@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { CartItem } from './cart.schema';
 import { Order } from './order.schema';
 import { WhishItem } from './whishlist.schema';
 
@@ -10,6 +11,9 @@ export class Account {
 
   @Prop()
   whishlist: WhishItem[];
+
+  @Prop()
+  cart: CartItem[];
 
   //   @Prop()
   //   profile: string;

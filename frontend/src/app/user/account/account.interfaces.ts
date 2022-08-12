@@ -1,20 +1,21 @@
-import { Product } from '../product/product.interface';
-
 export interface Account {
-  orders: Order[];
-  whishlist: WhishlistItem[];
-  addressBook: AddressBook[];
-  Profile: Profile;
+  orders?: Order[];
+  whishlist?: WhishlistItem[];
+  addressBook?: AddressBook[];
+  Profile?: Profile;
+  cart?: CartProduct[];
 }
 
 export interface Order {}
 
 export interface WhishlistItem {
   date: string;
-  product: Product;
+  product: any;
   quantity: number;
 }
 
 export interface AddressBook {}
 
 export interface Profile {}
+
+export interface CartProduct {}

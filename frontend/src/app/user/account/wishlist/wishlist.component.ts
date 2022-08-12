@@ -26,8 +26,10 @@ export class WishlistComponent implements OnInit {
       this.whishlistService.getUser(newUser.email).subscribe({
         next: (response) => {
           console.log({ response });
-          this.whishlistItems = response.user.account.whishlist;
-          console.log(this.whishlistItems);
+          if (response.user.account.whishlist) {
+            this.whishlistItems = response.user.account.whishlist;
+            console.log(this.whishlistItems);
+          }
         },
       });
     }

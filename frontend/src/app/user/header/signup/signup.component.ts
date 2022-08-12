@@ -28,7 +28,6 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   constructor(
     private translate: TranslateService,
-    private headerService: HeaderService,
     private signupService: SignupService,
     private authService: AuthService,
     private appService: AppService,
@@ -91,15 +90,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // get the current date
-    var m = new Date();
-    var dateString = `${m.getUTCFullYear()}/${
-      m.getUTCMonth() + 1
-    }/${m.getUTCDate()} ${String(
-      m.getUTCHours() + 2
-    )}:${m.getUTCMinutes()}:${m.getUTCSeconds()}`;
-
-    this.signupDate = dateString;
+    this.signupDate = this.appService.getDateString();
     console.log(this.signupDate);
 
     this.isLoading = true;

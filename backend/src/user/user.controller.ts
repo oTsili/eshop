@@ -142,6 +142,8 @@ export class UserController {
 
   @Put('/:id')
   async update(@Res() response, @Param('id') id, @Body() user: User) {
+    console.log(user);
+    console.log(id);
     const updatedUser = await this.userService.update(id, user);
     console.log({ updatedUser });
     return response.status(HttpStatus.OK).json({ updatedUser });

@@ -40,13 +40,18 @@ a {
   cursor: pointer;
 }
 
-.button {
+.button-wrapper {
   margin-top: 3rem;
+}
+
+.button {
+  margin-top: 1rem;
   border: 0.1rem solid black;
   height: 3.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .button:hover {
@@ -56,4 +61,19 @@ a {
 
 .button-text {
   padding: 0.2rem 0;
+}
+
+.quantity {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.control:hover {
+  color: black;
+}
+
+button {
+  all: unset;
 }
