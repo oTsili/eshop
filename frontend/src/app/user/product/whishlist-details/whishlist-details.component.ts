@@ -5,6 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { WhishlistItem } from '../../account/account.interfaces';
 import { Product } from '../product.interface';
 
 @Component({
@@ -13,7 +14,7 @@ import { Product } from '../product.interface';
   styleUrls: ['./whishlist-details.component.css'],
 })
 export class WhishlistDetailsComponent implements OnInit, OnChanges {
-  @Input() product: Product;
+  @Input() whishlistItem: WhishlistItem;
   oldPrice: number;
 
   constructor() {}
@@ -21,11 +22,12 @@ export class WhishlistDetailsComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.product = changes['product'].currentValue;
+    this.whishlistItem.product = changes['product'].currentValue;
 
     // compute the pre-sales(old) price from the sales percentage
     this.oldPrice =
-      parseInt(this.product.price) +
-      parseInt(this.product.price) * (parseInt(this.product.sales) / 100);
+      parseInt(this.whishlistItem.product.price) +
+      parseInt(this.whishlistItem.product.price) *
+        (parseInt(this.whishlistItem.product.sales) / 100);
   }
 }

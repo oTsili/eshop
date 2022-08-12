@@ -141,3 +141,12 @@
   opacity: 1;
   // visibility: visible;
 }
+
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-weight: 600;
+  white-space: pre-wrap !important;
+}

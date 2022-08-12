@@ -18,6 +18,7 @@ import { ResponsiveCatalogModule } from '../shared/responsive-catalog/responsive
 import { ProductModule } from '../product/product.module';
 import { PaginatorModule } from '../shared/paginator/paginator.module';
 import { BreadcrumbModule } from '../shared/breadcrumb/breadcrumb.module';
+import { CatalogDetailsModule } from '../product/catalog-details/catalog-details.module';
 
 @NgModule({
   declarations: [SearchComponent],
@@ -27,6 +28,7 @@ import { BreadcrumbModule } from '../shared/breadcrumb/breadcrumb.module';
     ResponsiveCatalogModule,
     // ProductsModule,
     ProductModule,
+    CatalogDetailsModule,
     ReactiveFormsModule,
     SideBarModule,
     PaginatorModule,

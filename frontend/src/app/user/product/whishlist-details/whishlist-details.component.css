@@ -35,3 +35,25 @@
 .line {
   margin-top: 0.5rem;
 }
+
+a {
+  cursor: pointer;
+}
+
+.button {
+  margin-top: 3rem;
+  border: 0.1rem solid black;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:hover {
+  color: white;
+  background-color: black;
+}
+
+.button-text {
+  padding: 0.2rem 0;
+}

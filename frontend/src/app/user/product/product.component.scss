@@ -4,18 +4,6 @@ img {
   width: 100%;
 }
 
-.main-slide {
-  opacity: 1;
-  // visibility: visible;
-  // transition: opacity 0.5s ease-in-out, visibility 1.2s;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.main-slide:hover {
-  opacity: 0;
-  // visibility: hidden;
-}
-
 .sales-text--wrapper {
   width: 30%;
   top: 0.8rem;
@@ -37,12 +25,4 @@ img {
   /* border-bottom: solid 5px #c8c8c8; */
   justify-self: end;
   padding: 5%;
-}
-
-.product-details {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  font-weight: 600;
-  white-space: pre-wrap !important;
 }

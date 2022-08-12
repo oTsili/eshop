@@ -1,4 +1,4 @@
-<div class="product-wrapper" [style.width]="img_container_width" j>
+<div class="product-wrapper" [style.width]="img_container_width">
   <img
     [ngStyle]="{
       cursor: isMouseDown ? 'move' : 'pointer'
@@ -12,14 +12,5 @@
     <div class="sales-text">-{{ product.sales }}%</div>
     <hr />
   </div>
-  <div class="product-details">
-    <app-catalog-details
-      [product]="product"
-      *ngIf="!whishlist"
-    ></app-catalog-details>
-    <app-whishlist-details
-      [product]="product"
-      *ngIf="whishlist"
-    ></app-whishlist-details>
-  </div>
+
 </div>

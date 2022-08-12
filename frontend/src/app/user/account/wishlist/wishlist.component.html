@@ -15,6 +15,11 @@
           [source]="whishItem.product.src"
         ></app-product>
       </div>
+      <div class="product-details">
+        <app-whishlist-details
+          [whishlistItem]="whishItem"
+        ></app-whishlist-details>
+      </div>
     </ng-template>
     <ng-template secondElement="">
       <div class="product hover-product">
