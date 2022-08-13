@@ -1,0 +1,76 @@
+<div class="container">
+  <!-- START search header UPPER DIVISION -->
+  <div class="header-wrapper">
+    <span class="header">{{ pageHeader }} </span>
+  </div>
+  <!-- END search header  UPPER DIVISION-->
+
+  <app-breadcrumb [breadcrumbs]="breadcrumbItems"></app-breadcrumb>
+  <div class="external-wrapper">
+    <div class="orders">
+      <table class="ui table">
+        <thead>
+          <tr>
+            <th>products</th>
+            <th>qty</th>
+            <th>price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cart">
+            <td>
+              <div class="wrapper">
+                <div class="product main-product">
+                  <app-product
+                    img_container_width="11rem"
+                    img_height="16rem"
+                    img_width="100%"
+                    [product]="item.product"
+                    [source]="item.product.src"
+                  ></app-product>
+                </div>
+                <div class="product hover-product">
+                  <app-product
+                    img_container_width="11rem"
+                    img_height="16rem"
+                    img_width="100%"
+                    [product]="item.product"
+                    [source]="item.product.altSrc"
+                  ></app-product>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="line cart-controls">
+                <span class="icon-control control">
+                  <a (click)="decreaseQuantity(item)">
+                    <i class="ph-minus"></i>
+                  </a>
+                </span>
+                <span class="icon-control">
+                  <div class="quantity">{{ item.quantity }}</div>
+                </span>
+                <span class="icon-control control">
+                  <a (click)="increaseQuantity(item)">
+                    <i class="ph-plus"></i>
+                  </a>
+                </span>
+              </div>
+            </td>
+            <td>
+              <div class="product-price product-price-new">
+                {{ item.product.price }}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="summary">
+      <div class="header">SUMMARY</div>
+      <div class="ui divider"></div>
+      <app-tax-shipping></app-tax-shipping>
+    </div>
+  </div>
+</div>

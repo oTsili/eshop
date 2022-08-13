@@ -26,6 +26,7 @@ import { PanelContentDirective } from './directives/panel-item-directives/panel-
     PanelItemDirective,
     PanelHeaderDirective,
     PanelContentDirective,
+    ToggleAccordionDirective,
   ],
 })
 export class AccordionModule {}

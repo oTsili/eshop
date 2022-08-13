@@ -53,7 +53,7 @@ export class AccordionComponent implements OnInit, OnChanges {
      * the place of the previous component, but stack one on another
      */
 
-    // viewContainerRef.clear();
+    viewContainerRef.clear();
 
     // create the new component
     const componentRef = viewContainerRef.createComponent<Panel>(

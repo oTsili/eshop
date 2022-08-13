@@ -14,7 +14,6 @@ import { AccountService } from './account.service';
 export class AccountComponent implements OnInit {
   breadcrumbItems: Breadcrumb[];
   pageHeader: string;
-  user: User;
 
   constructor(
     private router: Router,

@@ -42,6 +42,21 @@ const homeRoutes: Routes = [
         },
       },
       {
+        path: 'cart',
+        canLoad: [AuthGuard],
+        loadChildren: () =>
+          import('../cart/cart.module').then((m) => m.CartModule),
+        data: {
+          title: 'cart',
+          breadcrumb: [
+            {
+              label: 'cart',
+              url: 'cart',
+            },
+          ],
+        },
+      },
+      {
         path: 'contact',
         component: TestComponent,
         data: {

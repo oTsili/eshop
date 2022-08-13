@@ -3,7 +3,7 @@ export interface Account {
   whishlist?: WhishlistItem[];
   addressBook?: AddressBook[];
   Profile?: Profile;
-  cart?: CartProduct[];
+  cart?: CartItem[];
 }
 
 export interface Order {}
@@ -18,4 +18,8 @@ export interface AddressBook {}
 
 export interface Profile {}
 
-export interface CartProduct {}
+export interface CartItem {
+  date: string;
+  product: any;
+  quantity: number;
+}

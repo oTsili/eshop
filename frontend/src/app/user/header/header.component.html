@@ -134,7 +134,7 @@
             {{ account.whishlist.length }}
           </div>
         </a>
-        <a class="item link icon--medium">
+        <a class="item link icon--medium" routerLink="home/cart">
           <i class="ph-shopping-bag"></i>
           <div *ngIf="isAuthenticated && account.cart" class="badge">
             {{ account.cart.length }}
