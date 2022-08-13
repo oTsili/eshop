@@ -11,7 +11,10 @@
     (close)="toggleModal(); mainActive = true"
     *ngIf="modalOpen"
   >
-    <div modalTitle>{{ "register" | translate }}</div>
+    <div modalTitle *ngIf="!withWarning">{{ "register" | translate }}</div>
+    <div modalTitle *ngIf="withWarning" class="ui warning message">
+      <div class="header">{{ "you must login first" | translate }}!</div>
+    </div>
     <div
       ngClass="wrapper--row"
       [ngClass.lt-sm]="{

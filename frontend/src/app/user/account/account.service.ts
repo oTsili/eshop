@@ -8,17 +8,17 @@ const BACKEND_URL = environment.BASE_URL + 'user';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-  private prLocaclUser: User;
+  // private prLocaclUser: User;
   private authStatusListener = new BehaviorSubject<any>(null);
   constructor(private httpClient: HttpClient) {}
 
-  set localUser(user: User) {
-    this.prLocaclUser = user;
-  }
+  // set localUser(user: User) {
+  //   this.prLocaclUser = user;
+  // }
 
-  get localUser() {
-    return this.prLocaclUser;
-  }
+  // get localUser() {
+  //   return this.prLocaclUser;
+  // }
 
   getauthStatusListener() {
     return this.authStatusListener.asObservable();

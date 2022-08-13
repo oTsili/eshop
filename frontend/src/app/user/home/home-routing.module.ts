@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 import { TestComponent } from '../header/test/test.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 
@@ -27,6 +28,7 @@ const homeRoutes: Routes = [
       },
       {
         path: 'account',
+        canLoad: [AuthGuard],
         loadChildren: () =>
           import('../account/account.module').then((m) => m.AccountModule),
         data: {

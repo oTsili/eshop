@@ -24,6 +24,7 @@ export class UserAppComponent implements OnInit, OnDestroy {
   modalOpen = false;
   mainActive = true;
   modalSubsciption: Subscription;
+  withWarning=false;
 
   constructor(
     private userAppService: UserAppService,
@@ -43,6 +44,7 @@ export class UserAppComponent implements OnInit, OnDestroy {
     this.modalSubsciption = this.userAppService
       .getModalListener()
       .subscribe((response) => {
+        this.withWarning = response;
         this.toggleModal();
       });
   }

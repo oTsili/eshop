@@ -3,15 +3,15 @@ import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UserAppService {
-  modalListener = new Subject<void>();
+  modalListener = new Subject<boolean>();
   messageListener = new Subject<string>();
 
   getModalListener() {
     return this.modalListener.asObservable();
   }
 
-  onToggleModal() {
-    this.modalListener.next();
+  onToggleModal(withWarning = false) {
+    this.modalListener.next(withWarning);
   }
 
   getMessageListener() {

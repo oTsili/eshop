@@ -74,7 +74,7 @@ export class WhishlistDetailsComponent implements OnInit, OnChanges {
       this.user.account.cart = cart;
 
       this.whishlistDetailsService
-        .addtoCart(this.user.id!, this.user.account)
+        .addtoCart(this.user._id!, this.user.account)
         .subscribe({
           next: (response) => {
             console.log(response);

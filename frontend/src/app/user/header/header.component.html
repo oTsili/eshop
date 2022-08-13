@@ -130,9 +130,15 @@
           class="item link icon--medium"
         >
           <i class="ph-heart"></i>
+          <div *ngIf="isAuthenticated && account.whishlist" class="badge">
+            {{ account.whishlist.length }}
+          </div>
         </a>
         <a class="item link icon--medium">
           <i class="ph-shopping-bag"></i>
+          <div *ngIf="isAuthenticated && account.cart" class="badge">
+            {{ account.cart.length }}
+          </div>
         </a>
       </div>
     </div>

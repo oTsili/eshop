@@ -100,7 +100,8 @@
   "search all over the store": "Search All Over the Store",
   "no results": "No Results",
 
-  "home":"Home",
-  "search":"Search"
+  "home": "Home",
+  "search": "Search",
 
+  "you must login first": "You Must Login First"
 }

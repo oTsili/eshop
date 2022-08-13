@@ -158,7 +158,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
         next: (response) => {
           console.log({ whishlist: response });
 
-          if (response.email) {
+          if (response && response.email) {
             this.accountService.getUser(response.email).subscribe({
               next: (response) => {
                 console.log({ whishlistItem: response });

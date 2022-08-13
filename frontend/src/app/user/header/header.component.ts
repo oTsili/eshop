@@ -15,6 +15,7 @@ import { ProductsService } from '../product/products.service';
 import defaultLanguage from 'src/assets/i18n/en.json';
 import greekLanguage from 'src/assets/i18n/el.json';
 import { AccountService } from '../account/account.service';
+import { Account } from '../account/account.interfaces';
 
 @Component({
   selector: 'app-header',
@@ -90,6 +91,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isOpenHamburgerMenu = false;
   isAuthenticated = false;
   search: string;
+  account: Account;
 
   constructor(
     private userAppService: UserAppService,
@@ -123,7 +125,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               this.isAuthenticated = true;
               console.log({ isAuth: this.isAuthenticated });
               console.log({ response });
-              this.accountService.localUser = response;
+              this.account = response.account;
             },
             error: (response) => {
               console.log(response);

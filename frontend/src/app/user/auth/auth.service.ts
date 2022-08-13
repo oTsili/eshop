@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Account } from '../account/account.interfaces';
 import { AccountService } from '../account/account.service';
 import {
   SignupAuthData,
@@ -105,12 +106,17 @@ export class AuthService {
       .get<{
         userId: string;
         email: string;
+        account: Account;
       }>(`${BACKEND_URL}/isAuth`, {
         withCredentials: true,
       })
       .pipe(
         map((userData) => {
-          const user = { id: userData.userId, email: userData.email };
+          const user = {
+            id: userData.userId,
+            email: userData.email,
+            account: userData.account,
+          };
           this.accountService.onUpdateAuthStatus(user);
 
           return user;
