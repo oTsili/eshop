@@ -14,6 +14,10 @@
             *ngIf="item.secondElement"
             [ngTemplateOutlet]="item.secondElement.templateRef"
           ></ng-container>
+          <ng-container
+            *ngIf="item.thirdElement"
+            [ngTemplateOutlet]="item.thirdElement.templateRef"
+          ></ng-container>
         </div>
       </div>
     </ng-container>

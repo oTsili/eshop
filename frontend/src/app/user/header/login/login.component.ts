@@ -9,6 +9,7 @@ import { LoginService } from './login.service';
 import { AuthService } from '../../auth/auth.service';
 import { UserAppService } from '../../user-app.service';
 import { AppService } from 'src/app/app.service';
+import { AccountService } from '../../account/account.service';
 
 @Component({
   selector: 'app-login',
@@ -28,11 +29,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private translate: TranslateService,
-    private headerService: HeaderService,
     private loginService: LoginService,
     private authService: AuthService,
     private appService: AppService,
-    private userAppService: UserAppService
+    private userAppService: UserAppService,
+    private accountService: AccountService
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
@@ -88,7 +89,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         next: (response) => {
           console.log({ response });
           this.userAppService.onToggleModal();
-          localStorage.setItem('user', JSON.stringify(response));
+          // this.accountService.localUser = response.existingUser;
+          // localStorage.setItem('user', JSON.stringify(response));
         },
         error: (error) => {
           let errorMessage = error.error.message.split(':')[1].trim();

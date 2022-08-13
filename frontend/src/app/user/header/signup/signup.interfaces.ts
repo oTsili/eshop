@@ -25,10 +25,11 @@ export interface UserAttrs {
 }
 
 export interface User {
-  firstName: string;
-  lastName: string;
-  email: string;
-  signupDate: string;
-  account: Account;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  signupDate?: string;
+  account?: Account;
+  id?: string;
   _id?: string;
 }

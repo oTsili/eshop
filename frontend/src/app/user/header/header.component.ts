@@ -14,6 +14,7 @@ import { AppService } from 'src/app/app.service';
 import { ProductsService } from '../product/products.service';
 import defaultLanguage from 'src/assets/i18n/en.json';
 import greekLanguage from 'src/assets/i18n/el.json';
+import { AccountService } from '../account/account.service';
 
 @Component({
   selector: 'app-header',
@@ -99,6 +100,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private productService: ProductsService,
     private appService: AppService,
+    private accountService: AccountService,
     private router: Router
   ) {
     translate.setTranslation('en', defaultLanguage);
@@ -108,33 +110,33 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // subscribe to authStatus listener
+    // when triggered will reach out the backend to check auth status
     this.authStatusListenerSubscription = this.authService
       .getAuthStatusListener()
       .subscribe({
         next: (response) => {
-          console.log('logout listener');
-          // http request to get auth status
-          this.isLoggedInListenerSubscription = this.authService
-            .isAuthenticated()
-            .subscribe({
-              next: (response) => {
-                this.isAuthenticated = response;
-                console.log({ isAuth: this.isAuthenticated });
-              },
-              error: (response) => {
-                console.log(response);
-                if (response.error.statusCode === 401) {
-                  this.isAuthenticated = false;
-                }
-                console.log({ isAuth: this.isAuthenticated });
-              },
-            });
+          console.log('checkout auth-status');
+
+          // http request to get auth status (Destroy is implemented on httpClient)
+          this.authService.isAuthenticated().subscribe({
+            next: (response) => {
+              this.isAuthenticated = true;
+              console.log({ isAuth: this.isAuthenticated });
+              console.log({ response });
+              this.accountService.localUser = response;
+            },
+            error: (response) => {
+              console.log(response);
+              if (response.error.statusCode === 401) {
+                this.isAuthenticated = false;
+              }
+              console.log({ isAuth: this.isAuthenticated });
+            },
+          });
         },
         error: (error) => {
           console.error(error);
-          this.isAuthenticated = false;
-          console.log({ isAuth: this.isAuthenticated });
+          console.log('could not trigger the auth-status listener');
         },
       });
 
@@ -155,7 +157,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.authStatusListenerSubscription.unsubscribe();
-    this.isLoggedInListenerSubscription.unsubscribe();
     this.changeLanguageSubscription.unsubscribe();
     this.navBarElementsSubsciption.unsubscribe();
   }

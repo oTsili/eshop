@@ -4,6 +4,7 @@
   [margin]="'2rem'"
 >
   <parent-element *ngFor="let whishItem of whishlistItems">
+    <!-- START product image -->
     <ng-template firstElement>
       <div class="product main-product">
         <app-product
@@ -14,11 +15,6 @@
           [product]="whishItem.product"
           [source]="whishItem.product.src"
         ></app-product>
-      </div>
-      <div class="product-details">
-        <app-whishlist-details
-          [whishlistItem]="whishItem"
-        ></app-whishlist-details>
       </div>
     </ng-template>
     <ng-template secondElement="">
@@ -33,5 +29,16 @@
         ></app-product>
       </div>
     </ng-template>
+    <!-- END product image -->
+    <!-- START product details -->
+    <ng-template thirdElement>
+      <div class="product-details">
+        <app-whishlist-details
+          [whishlistItem]="whishItem"
+          [user]="user"
+        ></app-whishlist-details>
+      </div>
+    </ng-template>
+    <!-- END product details -->
   </parent-element>
 </app-responsive-catalog>

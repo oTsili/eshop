@@ -35,9 +35,6 @@
             [source]="product.src"
           ></app-product>
         </div>
-        <div class="product-details">
-          <app-catalog-details [product]="product"></app-catalog-details>
-        </div>
         <div class="slide hover-slide">
           <app-product
             img_container_width="22rem"
@@ -46,6 +43,9 @@
             [product]="product"
             [source]="product.altSrc"
           ></app-product>
+        </div>
+        <div class="product-details">
+          <app-catalog-details [product]="product"></app-catalog-details>
         </div>
       </div>
     </div>

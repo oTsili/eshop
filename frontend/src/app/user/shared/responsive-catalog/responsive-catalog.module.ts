@@ -5,12 +5,14 @@ import { FirstElementDirective } from './directives/first-element.directive';
 import { SecondElementDirective } from './directives/second-element.directive';
 import { ParentElementDirective } from './directives/parent-element.directive';
 import { ElementWidthDirective } from './directives/element-width.directive';
+import { ThirdElementDirective } from './directives/third-element.directive';
 
 @NgModule({
   declarations: [
     ResponsiveCatalogComponent,
     FirstElementDirective,
     SecondElementDirective,
+    ThirdElementDirective,
     ParentElementDirective,
     ElementWidthDirective,
   ],
@@ -19,6 +21,7 @@ import { ElementWidthDirective } from './directives/element-width.directive';
     ResponsiveCatalogComponent,
     FirstElementDirective,
     SecondElementDirective,
+    ThirdElementDirective,
     ParentElementDirective,
   ],
 })

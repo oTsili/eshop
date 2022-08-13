@@ -26,7 +26,6 @@
       >
         <parent-element *ngFor="let product of products">
           <ng-template firstElement>
-            <!-- <img src="assets/images/clickAndDrag/1.jpeg" /> -->
             <div class="product main-product">
               <app-product
                 [img_width]="'100%'"
@@ -34,18 +33,22 @@
                 [source]="product.src"
               ></app-product>
             </div>
-            <div class="product-details">
-              <app-catalog-details [product]="product"></app-catalog-details>
-            </div>
           </ng-template>
-          <ng-template secondElement="">
-            <!-- <img src="assets/images/clickAndDrag/1.jpeg" /> -->
+          <ng-template secondElement>
             <div class="product hover-product">
               <app-product
                 [img_width]="'100%'"
                 [product]="product"
                 [source]="product.altSrc"
               ></app-product>
+            </div>
+          </ng-template>
+          <ng-template thirdElement>
+            <div class="product-details">
+              <app-catalog-details
+                [user]="user"
+                [product]="product"
+              ></app-catalog-details>
             </div>
           </ng-template>
         </parent-element>

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { User } from '../header/signup/signup.interfaces';
 import { Breadcrumb } from '../shared/breadcrumb/breadcrumb.interfaces';
 import { BreadcrumbService } from '../shared/breadcrumb/breadcrumb.service';
+import { AccountService } from './account.service';
 
 @Component({
   selector: 'app-account',
@@ -11,10 +14,11 @@ import { BreadcrumbService } from '../shared/breadcrumb/breadcrumb.service';
 export class AccountComponent implements OnInit {
   breadcrumbItems: Breadcrumb[];
   pageHeader: string;
+  user: User;
 
   constructor(
-    private breadcrumbService: BreadcrumbService,
-    private router: Router
+    private router: Router,
+    private breadcrumbService: BreadcrumbService
   ) {}
 
   ngOnInit(): void {

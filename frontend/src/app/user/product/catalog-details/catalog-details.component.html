@@ -7,15 +7,15 @@
 >
   {{ product.description }}
 </div>
-<div class="product product-actions">
-  <a href="#" class="icon--medium">
+<div class="product product-actions link">
+  <a (click)="onUpdateWhishlist()" class="icon--medium">
     <i class="ph-heart"></i>
   </a>
   <a href="#" class="icon--medium">
     <i class="ph-shopping-bag"></i>
   </a>
 </div>
-<div class="product product-price--wrapper">
+<div class="product product-price--wrapper link">
   <span *ngIf="product.sales" class="product-price product-price-old">
     {{ oldPrice }}
   </span>

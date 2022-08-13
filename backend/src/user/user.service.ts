@@ -24,13 +24,43 @@ export class UserService {
       .findOne({ email }, {}, { lean: true })
       .populate({
         path: 'account',
-        populate: {
-          path: 'whishlist',
-          populate: {
-            path: 'product',
-            model: 'Product',
+        populate: [
+          {
+            path: 'whishlist',
+            populate: {
+              path: 'product',
+              model: 'Product',
+            },
           },
-        },
+          {
+            path: 'cart',
+            populate: {
+              path: 'product',
+              model: 'Product',
+            },
+          },
+          {
+            path: 'orders',
+            populate: {
+              path: 'product',
+              model: 'Product',
+            },
+          },
+          {
+            path: 'profile',
+            populate: {
+              path: 'product',
+              model: 'Product',
+            },
+          },
+          {
+            path: 'addressbool',
+            populate: {
+              path: 'product',
+              model: 'Product',
+            },
+          },
+        ],
       })
       .exec();
   }

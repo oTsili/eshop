@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { User } from '../../header/signup/signup.interfaces';
 import { WhishlistItem } from '../account.interfaces';
+import { AccountService } from '../account.service';
 import { WhishlistService } from './whishlist.service';
 
 @Component({
@@ -8,30 +10,43 @@ import { WhishlistService } from './whishlist.service';
   templateUrl: './wishlist.component.html',
   styleUrls: ['./wishlist.component.scss'],
 })
-export class WishlistComponent implements OnInit {
+export class WishlistComponent implements OnInit, OnDestroy {
   user: User;
   whishlistItems: WhishlistItem[];
-  constructor(private whishlistService: WhishlistService) {}
+  authStatusSubscription: Subscription;
+
+  constructor(
+    private whishlistService: WhishlistService,
+    private accountService: AccountService
+  ) {}
 
   ngOnInit(): void {
     this.getUser();
   }
 
-  getUser() {
-    const user = localStorage.getItem('user');
+  ngOnDestroy(): void {
+    this.authStatusSubscription.unsubscribe();
+  }
 
-    if (user) {
-      const newUser = JSON.parse(user);
-      console.log(newUser);
-      this.whishlistService.getUser(newUser.email).subscribe({
+  getUser() {
+    this.authStatusSubscription = this.accountService
+      .getauthStatusListener()
+      .subscribe({
         next: (response) => {
-          console.log({ response });
-          if (response.user.account.whishlist) {
-            this.whishlistItems = response.user.account.whishlist;
-            console.log(this.whishlistItems);
+          console.log({ whishlist: response });
+
+          if (response.email) {
+            this.accountService.getUser(response.email).subscribe({
+              next: (response) => {
+                console.log({ whishlistItem: response });
+                this.user = response.user;
+                if (this.user.account && this.user.account.whishlist) {
+                  this.whishlistItems = this.user.account.whishlist;
+                }
+              },
+            });
           }
         },
       });
-    }
   }
 }

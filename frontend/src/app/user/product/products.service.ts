@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
-import { Subject } from 'rxjs';
+import { map, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Chip } from '../shared/side-bar/side-bar.interfaces';
 import { Product } from './product.interface';
@@ -42,11 +42,21 @@ export class ProductsService {
       });
     }
 
-    return this.httpClient.get<{
-      message: string;
-      products: Product[];
-      totalProducts: number;
-    }>(`${BACKEND_URL}/query`, { params: queryParams, withCredentials: true });
+    return this.httpClient
+      .get<{
+        message: string;
+        products: Product[];
+        totalProducts: number;
+      }>(`${BACKEND_URL}/query`, { params: queryParams, withCredentials: true })
+      .pipe(
+        map((userData) => {
+          console.log({ userData });
+          userData.products.forEach((product) => {
+            product.id = product._id;
+          });
+          return userData;
+        })
+      );
   }
 
   getToUpdateProductsListener() {

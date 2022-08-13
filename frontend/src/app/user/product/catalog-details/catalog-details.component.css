@@ -36,3 +36,7 @@
 .product-price-new {
   color: black;
 }
+
+.link {
+  cursor: pointer;
+}

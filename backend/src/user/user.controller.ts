@@ -129,21 +129,27 @@ export class UserController {
     if (!session.jwt) {
       isAuth = false;
     }
-    return await res.status(HttpStatus.OK).json(isAuth);
+
+    console.log({ user: req.user });
+
+    return await res.status(HttpStatus.OK).json(req.user);
   }
 
   // empty get request controller must be the last in the order (in cardinal order)
+  @UseGuards(JwtAuthGuard)
   @Get(':email')
   async fetchUser(@Res() response, @Param('email') email: string) {
     let user = await this.userService.findUserByEmail(email);
 
+    console.log({ userFromEmail: user });
     return await response.status(HttpStatus.OK).json({ user });
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('/:id')
   async update(@Res() response, @Param('id') id, @Body() user: User) {
-    console.log(user);
-    console.log(id);
+    console.log({ user });
+    console.log({ id });
     const updatedUser = await this.userService.update(id, user);
     console.log({ updatedUser });
     return response.status(HttpStatus.OK).json({ updatedUser });

@@ -23,6 +23,8 @@ import { Product } from '../product/product.interface';
 import { ProductsService } from '../product/products.service';
 import { Breadcrumb } from '../shared/breadcrumb/breadcrumb.interfaces';
 import { BreadcrumbService } from '../shared/breadcrumb/breadcrumb.service';
+import { AccountService } from '../account/account.service';
+import { User } from '../header/signup/signup.interfaces';
 
 @Component({
   selector: 'app-search',
@@ -44,6 +46,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   changePagePaginatorSubscription: Subscription;
   updateProductsSubscription: Subscription;
   isOpenErrorMessageSubscription: Subscription;
+  authStatusSubscription: Subscription;
   queryArr;
   pageSizeOptions = environment.PAGE_SIZE_OPTIONS;
   currentPage = environment.CURRENT_PAGE;
@@ -54,11 +57,11 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   productsContainerWidth: number;
   isLoading = false;
   breadcrumbItems: Breadcrumb[];
+  user: User;
 
   constructor(
     public dynamicDatabase: DynamicDatabase,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
     private productsService: ProductsService,
     private responsiveBoxesService: ResponsiveBoxesService,
     private contentListService: ContentListService,
@@ -68,6 +71,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
     private elementRef: ElementRef,
     private paginatorService: PaginatorService,
+    private accountService: AccountService,
     private breadcrumbService: BreadcrumbService
   ) {
     translate.setTranslation('en', defaultLanguage);
@@ -77,6 +81,9 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // get user and subscribe to any auth-status changes
+    this.getUser();
+
     let routes = this.router.url.split('/');
     routes.shift();
 
@@ -141,6 +148,26 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     this.productsSubscription.unsubscribe();
     this.changePagePaginatorSubscription.unsubscribe();
     this.updateProductsSubscription.unsubscribe();
+    this.authStatusSubscription.unsubscribe();
+  }
+
+  getUser() {
+    this.authStatusSubscription = this.accountService
+      .getauthStatusListener()
+      .subscribe({
+        next: (response) => {
+          console.log({ whishlist: response });
+
+          if (response.email) {
+            this.accountService.getUser(response.email).subscribe({
+              next: (response) => {
+                console.log({ whishlistItem: response });
+                this.user = response.user;
+              },
+            });
+          }
+        },
+      });
   }
 
   /**

@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { SignupAuthData, UserAttrs } from '../header/signup/signup.interfaces';
+import { AccountService } from '../account/account.service';
+import {
+  SignupAuthData,
+  User,
+  UserAttrs,
+} from '../header/signup/signup.interfaces';
 
 const BACKEND_URL = environment.BASE_URL + 'user';
 
@@ -12,11 +17,14 @@ const BACKEND_URL = environment.BASE_URL + 'user';
 export class AuthService {
   private authenticatedListener = new BehaviorSubject(false);
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private accountService: AccountService
+  ) {}
 
   login(email: string, password: string) {
     return this.httpClient
-      .post<{ existingUser: UserAttrs; expiresIn: string }>(
+      .post<{ existingUser: User; expiresIn: string }>(
         `${BACKEND_URL}/login`,
         { username: email, password },
         {
@@ -64,7 +72,7 @@ export class AuthService {
     authData.append('passwordConfirm', signupAuthData.passwordConfirm);
 
     return this.httpClient
-      .post<{ existingUser: UserAttrs; expiresIn: string }>(
+      .post<{ existingUser: User; expiresIn: string }>(
         `${BACKEND_URL}/signup`,
         authData,
         {
@@ -93,8 +101,20 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return this.httpClient.get<boolean>(`${BACKEND_URL}/isAuth`, {
-      withCredentials: true,
-    });
+    return this.httpClient
+      .get<{
+        userId: string;
+        email: string;
+      }>(`${BACKEND_URL}/isAuth`, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((userData) => {
+          const user = { id: userData.userId, email: userData.email };
+          this.accountService.onUpdateAuthStatus(user);
+
+          return user;
+        })
+      );
   }
 }
