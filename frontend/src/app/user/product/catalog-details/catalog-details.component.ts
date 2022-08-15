@@ -3,11 +3,13 @@ import {
   Input,
   OnChanges,
   OnInit,
+  Renderer2,
   SimpleChanges,
 } from '@angular/core';
 import { AppService } from 'src/app/app.service';
-import { AccountService } from 'src/app/user/account/account.service';
 import { User } from 'src/app/user/header/signup/signup.interfaces';
+import { Account, WhishlistItem } from '../../account/account.interfaces';
+import { UserAppService } from '../../user-app.service';
 import { Product } from '../product.interface';
 import { CatalogDetailsService } from './catalog-details.service';
 
@@ -17,25 +19,42 @@ import { CatalogDetailsService } from './catalog-details.service';
   styleUrls: ['./catalog-details.component.css'],
 })
 export class CatalogDetailsComponent implements OnInit, OnChanges {
-  @Input() user: User;
+  @Input() account: Account;
+  @Input() isAuthenticated = false;
   @Input() product: Product;
   oldPrice: number;
+  isAddedToWhishlist = false;
+  isAddedToCart = false;
 
   constructor(
     private appService: AppService,
+    private userAppService: UserAppService,
     private catalogDetailsService: CatalogDetailsService,
-    private accountService: AccountService
+    private renderer: Renderer2
   ) {}
 
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     if (changes['product']) {
       this.product = changes['product'].currentValue;
     }
     if (changes['user']) {
-      this.user = changes['user'].currentValue;
+      this.account = changes['account'].currentValue;
+    }
+
+    if (this.account?.whishlist && this.account?.whishlist?.length > 0) {
+      this.account?.whishlist?.forEach((item) => {
+        if (item.product._id == this.product._id) {
+          this.isAddedToWhishlist = true;
+        }
+      });
+
+      this.account?.cart?.forEach((item) => {
+        if (item.product._id == this.product._id) {
+          this.isAddedToCart = true;
+        }
+      });
     }
 
     // compute the pre-sales(old) price from the sales percentage
@@ -45,38 +64,35 @@ export class CatalogDetailsComponent implements OnInit, OnChanges {
   }
 
   onUpdateWhishlist() {
-    const product = this.product;
-    const user = this.user;
+    if (this.isAuthenticated) {
+      // get the user id
+      let userString = localStorage.getItem('user');
+      let user: User;
+      if (userString) {
+        user = JSON.parse(userString);
+        if (user && user.id) {
+          const whishlistItem: WhishlistItem = {
+            user: user.id,
+            date: this.appService.getDateString(),
+            product: this.product,
+            quantity: 1,
+          };
 
-    console.log({ product });
-    console.log({ user });
-
-    if (user && user.account) {
-      let whishlist = user.account.whishlist;
-
-      if (!whishlist) {
-        whishlist = [];
+          this.catalogDetailsService.addtoWhishlist(whishlistItem).subscribe({
+            next: (response) => {
+              console.log(response);
+              this.isAddedToWhishlist = true;
+            },
+            error: (response) => {
+              console.log('whishlist update was not possible');
+            },
+          });
+        }
       }
-
-      whishlist.push({
-        product: product.id,
-        quantity: 1,
-        date: this.appService.getDateString(),
-      });
-
-      user.account.whishlist = whishlist;
-
-      console.log(whishlist);
-
-      this.catalogDetailsService
-        .addtoWhishlist(user._id!, user.account)
-        .subscribe({
-          next: (response) => {
-            console.log(response);
-          },
-        });
     } else {
-      console.log('please login');
+      // prompt the login modal with error message
+      this.userAppService.onToggleModal(true);
+      console.log('please login first');
     }
   }
 }

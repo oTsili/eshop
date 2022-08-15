@@ -11,7 +11,9 @@ export interface Order {}
 export interface WhishlistItem {
   date: string;
   product: any;
-  quantity: number;
+  quantity?: number;
+  user: string;
+  id?: string;
 }
 
 export interface AddressBook {}
@@ -22,4 +24,6 @@ export interface CartItem {
   date: string;
   product: any;
   quantity: number;
+  user: string;
+  _id?: string;
 }

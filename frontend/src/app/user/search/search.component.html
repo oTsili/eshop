@@ -46,7 +46,8 @@
           <ng-template thirdElement>
             <div class="product-details">
               <app-catalog-details
-                [user]="user"
+                [isAuthenticated]="isAuthenticated"
+                [account]="account"
                 [product]="product"
               ></app-catalog-details>
             </div>
@@ -79,8 +80,6 @@
         ></app-paginator>
       </div>
       <!--  END paginator -->
-      <!-- <app-products></app-products> -->
-      <!-- <app-catalog></app-catalog> -->
     </div>
     <!---- END products catalog LOWER DIVISION ---->
   </div>

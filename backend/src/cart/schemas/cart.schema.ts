@@ -1,10 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema, Types } from 'mongoose';
-import { Product } from 'src/products/schemas/product.schema';
+
+export type CartItemDocument = CartItem & Document;
 
 // Nested Schema
 @Schema()
-export class WhishItem {
+export class CartItem {
   @Prop()
   date: string;
 
@@ -12,6 +13,9 @@ export class WhishItem {
   product: Types.ObjectId;
 
   @Prop()
-  quantity: number;
+  quantity: string;
+
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User' })
+  user: Types.ObjectId;
 }
-export const WhishItemSchema = SchemaFactory.createForClass(WhishItem);
+export const CartItemSchema = SchemaFactory.createForClass(CartItem);

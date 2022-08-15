@@ -30,22 +30,44 @@
   left: 50%;
 }
 
-.orders {
-  flex: 30 1 auto;
+.cart {
+  flex: 3 1 auto;
 }
 
 .summary {
   flex: 1 1 auto;
+  border: 0.3rem solid black;
 }
 
-.orders,
+.cart,
 .summary {
-  margin: 2rem 1rem;
+  margin: 2rem 2rem;
+}
+
+.summary-container {
+  padding: 10% 7%;
+}
+
+.summary-header {
+  margin-bottom: 4%;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 .ui.table thead th {
   background: none;
   text-align: center;
+  font-size: 1.5rem;
+  font-weight: 100;
+  letter-spacing: 0.3rem;
+}
+
+.ui.table thead th:nth-child(1) {
+  text-align: left;
+}
+
+.ui.table body td {
+  border-top: 1px solid rgba(34, 36, 38, 0.1);
 }
 
 .ui.table {
@@ -54,11 +76,21 @@
   border-right: none;
 }
 
+.col {
+  display: flex;
+  align-items: center;
+}
+
+.product-description {
+  margin-left: 4%;
+  white-space: nowrap;
+  font-size: 1.3rem;
+}
+
 .wrapper {
   position: relative;
   height: 100%;
   width: fit-content;
-
   transition: scrollLeft 0.5s ease-in-out;
 }
 
@@ -91,14 +123,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2.7rem;
+  font-size: 2.2rem;
 }
 
 .quantity {
-  width: 4rem;
-  height: 4rem;
+  width: 3.2rem;
+  height: 3.2rem;
   border: 0.2px solid black;
-  font-size: 2rem;
+  font-size: 1.8rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,22 +140,27 @@
   padding: 0 1rem;
 }
 
-.line {
-  margin-top: 0.5rem;
-}
-
 button {
   all: unset;
 }
 
 a {
   color: #555;
+  opacity: 1;
+  cursor: pointer;
 }
+
+a:hover {
+  color: #555;
+  opacity: 0.4;
+}
+
 .product-price-new {
   color: black;
   text-align: center;
+  font-size: 1.8rem;
 }
 
-.product-price::after {
+.product-price::before {
   content: "\20AC";
 }

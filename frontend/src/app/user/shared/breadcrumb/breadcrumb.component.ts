@@ -1,8 +1,10 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import defaultLanguage from 'src/assets/i18n/en.json';
@@ -20,6 +22,7 @@ import { Breadcrumb } from './breadcrumb.interfaces';
 export class BreadcrumbComponent implements OnInit, OnChanges {
   @Input() breadcrumbs: Breadcrumb[];
   changeLanguageSubscription: Subscription;
+  @Output() breadcrumbUpdate: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private translate: TranslateService,
@@ -42,5 +45,9 @@ export class BreadcrumbComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.breadcrumbs = changes['breadcrumbs'].currentValue;
+  }
+
+  onBreadcrumbNavigate(url: string) {
+    this.breadcrumbUpdate.emit(url);
   }
 }

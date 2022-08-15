@@ -30,28 +30,40 @@ import * as bcrypt from 'bcrypt';
 import { AuthGuard } from '@nestjs/passport';
 import { HttpExceptionFilter } from 'src/exception-filters/http-exception.filter';
 import { JwtService } from '@nestjs/jwt';
+import { CartService } from 'src/cart/cart.service';
+import { WhishlistService } from 'src/whishlist/whishlist.service';
 
 @Controller('user')
 export class UserController {
   constructor(
     private readonly userService: UserService,
     private authService: AuthService,
-    private jwtService: JwtService,
+    private readonly cartService: CartService,
+    private readonly whishlistService: WhishlistService,
   ) {}
 
   // @UseGuards(AuthGuard('local'))
-  @UseFilters(new HttpExceptionFilter())
+  // @UseFilters(new HttpExceptionFilter())
   @UseGuards(LocalAuthGuard)
   @FormDataRequest()
   @Post('/login')
   async login(
     @Request() req,
     @Res() res,
-    @Body() user: { username: string; password: string },
+    @Body() body,
     @Session() session: Record<string, any>,
   ) {
+    // console.log({ body });
+    // console.log({ user: dbUser });
     let dbUser = req.user;
 
+    const whishlist = await this.whishlistService.findWhishlistByUserId(
+      dbUser._id,
+    );
+
+    const cart = await this.cartService.findCartItemsByUserId(dbUser._id);
+
+    dbUser.account = { whishlist, cart };
     // login with jwt and get the jwt token
     const { access_token } = await this.authService.login(dbUser);
 
@@ -130,7 +142,7 @@ export class UserController {
       isAuth = false;
     }
 
-    console.log({ user: req.user });
+    // console.log({ user: req.user });
 
     return await res.status(HttpStatus.OK).json(req.user);
   }
@@ -141,16 +153,16 @@ export class UserController {
   async fetchUser(@Res() response, @Param('email') email: string) {
     let user = await this.userService.findUserByEmail(email);
 
-    console.log({ userFromEmail: user });
+    // console.log({ userFromEmail: user });
     return await response.status(HttpStatus.OK).json({ user });
   }
 
   @UseGuards(JwtAuthGuard)
   @Put('/:id')
-  async update(@Res() response, @Param('id') id, @Body() user: User) {
-    console.log({ user });
+  async update(@Res() response, @Param('id') id, @Body() body: any) {
+    console.log({ body });
     console.log({ id });
-    const updatedUser = await this.userService.update(id, user);
+    const updatedUser = await this.userService.update(id, body);
     console.log({ updatedUser });
     return response.status(HttpStatus.OK).json({ updatedUser });
   }

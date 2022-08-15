@@ -39,7 +39,7 @@ export class AccountComponent implements OnInit {
     );
   }
 
-  updateBreadcrumbs(event: string) {
+  updateBreadcrumbsFromSideBar(event: string) {
     // udate the page header
     this.pageHeader = event;
     // save temporarily the old breadcrumb
@@ -48,5 +48,34 @@ export class AccountComponent implements OnInit {
     this.breadcrumbItems[this.breadcrumbItems.length - 1].url =
       breadcrumb.url.replace(breadcrumb.text, event);
     this.breadcrumbItems[this.breadcrumbItems.length - 1].text = event;
+  }
+
+  updateBreadcrumbsFromBreadcrumbs(event: string) {
+    console.log(event);
+
+    // get each intermediate route from the url
+    let routes = event.split('/');
+    // delete the first (which is an empty string)
+    routes.shift();
+    // ths last route becomes the page header
+    this.pageHeader = routes[routes.length - 1];
+
+    // get an array of Breadcrumb items from the routes above
+    this.breadcrumbItems = this.breadcrumbService.getBreadcrumbs(
+      routes,
+      this.router.url
+    );
+    console.log(this.breadcrumbItems);
+
+    // if account is clicked it will be navigated to profile,
+    // and that's why breadcrumbs have to be updated
+    if (
+      this.breadcrumbItems[this.breadcrumbItems.length - 1].text === 'account'
+    ) {
+      this.breadcrumbItems.push({
+        text: 'profile',
+        url: '/home/account/profile',
+      });
+    }
   }
 }

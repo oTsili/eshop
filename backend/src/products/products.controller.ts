@@ -71,13 +71,13 @@ export class ProductsController {
      * non-numeral characters, refactor mongodb queryies, by stripping those
      * non-numeral characters, and parsing the strings to numbers
      */
-    console.log({ pageSize }, { currentPage }, { sort }, { description });
+    // console.log({ pageSize }, { currentPage }, { sort }, { description });
 
-    console.log({ query });
+    // console.log({ query });
 
     if (description) {
       query.description = { $regex: description, $options: 'i' };
-      console.log(query.description);
+      // console.log(query.description);
 
       // description_query = {
       //   $description: {
@@ -109,7 +109,7 @@ export class ProductsController {
         .split('-')
         .map((num: string) => parseInt(num.replace(/\D/g, '')));
 
-      console.log({ min }, { max });
+      // console.log({ min }, { max });
       query.heel_height = { $gte: min, $lte: max };
     }
 
@@ -122,7 +122,7 @@ export class ProductsController {
       description,
     );
 
-    console.log(products);
+    // console.log(products);
 
     // get the number of the products, so that the paginator is informed (e.g. page 1 of ...._)
     const totalProducts = await this.productService.countProducts(query);

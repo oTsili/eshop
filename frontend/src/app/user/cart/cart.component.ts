@@ -25,12 +25,13 @@ export class CartComponent implements OnInit {
   constructor(
     private router: Router,
     private breadcrumbService: BreadcrumbService,
+    private cartService: CartService,
     private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
     this.initializeBreadcrumbs();
-    this.getUser();
+    // this.getUser();
   }
 
   initializeBreadcrumbs() {
@@ -48,27 +49,27 @@ export class CartComponent implements OnInit {
     );
   }
 
-  getUser() {
-    this.authStatusSubscription = this.accountService
-      .getauthStatusListener()
-      .subscribe({
-        next: (response) => {
-          console.log({ whishlist: response });
+  // getUser() {
+  //   this.authStatusSubscription = this.accountService
+  //     .getauthStatusListener()
+  //     .subscribe({
+  //       next: (user) => {
+  //         console.log({ whishlist: user });
 
-          if (response.email) {
-            this.accountService.getUser(response.email).subscribe({
-              next: (response) => {
-                console.log({ cart: response });
-                this.user = response.user;
-                if (this.user.account && this.user.account.cart) {
-                  this.cart = this.user.account.cart;
-                }
-              },
-            });
-          }
-        },
-      });
-  }
+  //         if (user.email) {
+  //           // this.accountService.getUser(user.email).subscribe({
+  //           //   next: (response) => {
+  //           //     console.log({ cart: response });
+  //           //     this.user = response.user;
+  //           //     if (this.user.account && this.user.account.cart) {
+  //           //       this.cart = this.user.account.cart;
+  //           //     }
+  //           //   },
+  //           // });
+  //         }
+  //       },
+  //     });
+  // }
 
   increaseQuantity(item: CartItem) {
     item.quantity++;
@@ -78,5 +79,9 @@ export class CartComponent implements OnInit {
     if (item.quantity > 1) {
       item.quantity--;
     }
+  }
+
+  deleteCartItem(id) {
+    this.cartService.deleteCartItem(id);
   }
 }

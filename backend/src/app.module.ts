@@ -16,6 +16,10 @@ import { FooterModule } from './footer/footer.module';
 import { TestController } from './test/test.controller';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { CartModule } from './cart/cart.module';
+import { WhishlistModule } from './whishlist/whishlist.module';
+import { AccountModule } from './account/account.module';
+import { SharedModule } from './shared/shared.module';
 
 @Module({
   // connect to the demo Database
@@ -56,6 +60,10 @@ import { AuthModule } from './auth/auth.module';
     FooterModule,
     UserModule,
     AuthModule,
+    CartModule,
+    WhishlistModule,
+    AccountModule,
+    SharedModule,
     // ColorsModule,
   ],
   controllers: [TestController],

@@ -34,12 +34,14 @@ export class AuthService {
       )
       .pipe(
         tap(() => {
+          // inform the observers that the user's account information are now available
           this.onUpdateAuthStatus(true);
         })
       )
       .pipe(
         map((userData) => {
           console.log({ userData });
+
           return userData;
         })
       );
@@ -52,6 +54,8 @@ export class AuthService {
       })
       .pipe(
         tap(() => {
+          // update the isAuthenticated variable with false (LOGOUT)
+          // inform the observers that the user's account information are NOT available
           this.onUpdateAuthStatus(false);
         })
       )
@@ -82,25 +86,33 @@ export class AuthService {
       )
       .pipe(
         tap(() => {
+          // inform the observers that the user's account information are now available
           this.onUpdateAuthStatus(true);
         })
       )
       .pipe(
         map((userData) => {
           console.log({ userData });
+
           return userData;
         })
       );
   }
 
+  // get the listenr which updates the isAuthenticated variable whitout reaching the backend
   getAuthStatusListener() {
     return this.authenticatedListener.asObservable();
   }
 
+  // update the isAuthenticated variable whitout reaching the backend
   onUpdateAuthStatus(status: boolean) {
     this.authenticatedListener.next(status);
   }
 
+  /**
+   * @returns User object if isAuthenticated is true or 401 error status
+   * if the isAuthenticated is false, after reaching the backend
+   */
   isAuthenticated() {
     return this.httpClient
       .get<{
@@ -117,7 +129,8 @@ export class AuthService {
             email: userData.email,
             account: userData.account,
           };
-          this.accountService.onUpdateAuthStatus(user);
+          // save user info to the browser's storage
+          localStorage.setItem('user', JSON.stringify(user));
 
           return user;
         })

@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { CartItem } from './cart.schema';
+import { CartItem } from '../../cart/schemas/cart.schema';
 import { Order } from './order.schema';
-import { WhishItem } from './whishlist.schema';
+import { WhishlistItem } from '../../whishlist/schemas/whishlist.schema';
 
 // Nested Schema
 @Schema()
@@ -10,7 +10,7 @@ export class Account {
   orders: Order[];
 
   @Prop()
-  whishlist: WhishItem[];
+  whishlist: WhishlistItem[];
 
   @Prop()
   cart: CartItem[];

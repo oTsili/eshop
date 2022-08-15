@@ -1,6 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PanelItem } from '../shared/accordion/host-panel/host-panel-item.class';
-import { TaxShippingComponent } from './tax-shipping/tax-shipping.component';
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = environment.BASE_URL + 'cart';
 
 @Injectable({ providedIn: 'root' })
-export class CartService {}
+export class CartService {
+  constructor(private httpClient: HttpClient) {}
+
+  deleteCartItem(id: string) {
+    return this.httpClient.delete(`${BACKEND_URL}/${id}`, {
+      withCredentials: true,
+    });
+  }
+}

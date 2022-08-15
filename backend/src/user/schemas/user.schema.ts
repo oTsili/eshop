@@ -1,5 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { CartItem } from 'src/cart/schemas/cart.schema';
+import { WhishlistItem } from 'src/whishlist/schemas/whishlist.schema';
 import { Account, AccountSchema } from './account.schema';
+import { Order } from './order.schema';
 
 // export type AccountDocument = User & Document;
 

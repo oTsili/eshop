@@ -10,6 +10,9 @@ import { AccountRoutingModule } from './account-routing.module';
 import { ProfileModule } from './profile/profile.module';
 import { BreadcrumbModule } from '../shared/breadcrumb/breadcrumb.module';
 import { SideBarModule } from './side-bar/side-bar.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../shared/loader-factory';
 
 @NgModule({
   declarations: [AccountComponent],
@@ -22,6 +25,15 @@ import { SideBarModule } from './side-bar/side-bar.module';
     AccountRoutingModule,
     SideBarModule,
     BreadcrumbModule,
+    // ngx-translate and the loader module
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     RouterModule.forChild([
       {
         path: '',

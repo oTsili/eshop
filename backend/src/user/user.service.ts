@@ -65,7 +65,60 @@ export class UserService {
       .exec();
   }
 
-  async update(id, user: User): Promise<User> {
+  async findUserById(id): Promise<User> {
+    return this.userModel
+      .findById(id, {}, { lean: true })
+      .populate({
+        path: 'account',
+        populate: [
+          {
+            path: 'whishlist',
+            populate: {
+              path: 'product',
+              model: 'Product',
+            },
+          },
+          {
+            path: 'cart',
+            populate: {
+              path: 'product',
+              model: 'Product',
+            },
+          },
+          {
+            path: 'orders',
+            populate: {
+              path: 'product',
+              model: 'Product',
+            },
+          },
+          {
+            path: 'profile',
+            populate: {
+              path: 'product',
+              model: 'Product',
+            },
+          },
+          {
+            path: 'addressbool',
+            populate: {
+              path: 'product',
+              model: 'Product',
+            },
+          },
+        ],
+      })
+      .exec();
+  }
+
+  async update(id, user): Promise<User> {
     return await this.userModel.findByIdAndUpdate(id, user, { new: true });
+  }
+  async updateProperty(id, property): Promise<User> {
+    return await this.userModel.findByIdAndUpdate(
+      id,
+      { $set: property },
+      { upsert: true, new: true },
+    );
   }
 }

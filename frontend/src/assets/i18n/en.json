@@ -102,6 +102,12 @@
 
   "home": "Home",
   "search": "Search",
+  "cart": "Cart",
+  "account": "Account",
+  "whishlist": "Whishlist",
 
-  "you must login first": "You Must Login First"
+  "you must login first": "You Must Login First",
+  "products": "products",
+  "qty": "qty",
+  "summary": "summary"
 }

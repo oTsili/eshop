@@ -1,15 +1,20 @@
-import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { NestjsFormDataModule } from 'nestjs-form-data';
-import { AuthModule } from 'src/auth/auth.module';
 import { AuthService } from 'src/auth/auth.service';
 import { jwtConstants } from 'src/auth/constants';
 import { JwtStrategy } from 'src/auth/strategies/jwt-auth.strategy';
 import { User, UserSchema } from './schemas/user.schema';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
-import { CsurfMiddleware } from 'src/middlewares/csurf.middleware';
+import { CartService } from 'src/cart/cart.service';
+import { WhishlistService } from 'src/whishlist/whishlist.service';
+import { CartItem, CartItemSchema } from 'src/cart/schemas/cart.schema';
+import {
+  WhishlistItem,
+  WhishlistItemSchema,
+} from 'src/whishlist/schemas/whishlist.schema';
 
 @Module({
   imports: [
@@ -20,9 +25,21 @@ import { CsurfMiddleware } from 'src/middlewares/csurf.middleware';
       // signOptions: { expiresIn: '60s' },
     }),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    MongooseModule.forFeature([
+      { name: CartItem.name, schema: CartItemSchema },
+    ]),
+    MongooseModule.forFeature([
+      { name: WhishlistItem.name, schema: WhishlistItemSchema },
+    ]),
   ],
   controllers: [UserController],
-  providers: [UserService, AuthService, JwtStrategy],
+  providers: [
+    UserService,
+    AuthService,
+    JwtStrategy,
+    CartService,
+    WhishlistService,
+  ],
   exports: [UserService],
 })
 export class UserModule {

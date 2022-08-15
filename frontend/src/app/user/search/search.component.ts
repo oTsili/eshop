@@ -25,6 +25,8 @@ import { Breadcrumb } from '../shared/breadcrumb/breadcrumb.interfaces';
 import { BreadcrumbService } from '../shared/breadcrumb/breadcrumb.service';
 import { AccountService } from '../account/account.service';
 import { User } from '../header/signup/signup.interfaces';
+import { Account } from '../account/account.interfaces';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-search',
@@ -57,7 +59,8 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   productsContainerWidth: number;
   isLoading = false;
   breadcrumbItems: Breadcrumb[];
-  user: User;
+  account: Account;
+  isAuthenticated = false;
 
   constructor(
     public dynamicDatabase: DynamicDatabase,
@@ -72,6 +75,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     private elementRef: ElementRef,
     private paginatorService: PaginatorService,
     private accountService: AccountService,
+    private authService: AuthService,
     private breadcrumbService: BreadcrumbService
   ) {
     translate.setTranslation('en', defaultLanguage);
@@ -81,9 +85,8 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // get user and subscribe to any auth-status changes
-    this.getUser();
-
+    // get account and subscribe to any auth-status changes
+    this.subscribeToAuthStatusAndGetAccount();
     let routes = this.router.url.split('/');
     routes.shift();
 
@@ -151,21 +154,32 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     this.authStatusSubscription.unsubscribe();
   }
 
-  getUser() {
-    this.authStatusSubscription = this.accountService
-      .getauthStatusListener()
+  subscribeToAuthStatusAndGetAccount() {
+    /**
+     * update the authStatus without reaching out the backend.
+     * Mostly for the logout functionality. Next get the account
+     * info from the backend
+     */
+    this.authStatusSubscription = this.authService
+      .getAuthStatusListener()
       .subscribe({
         next: (response) => {
-          console.log({ whishlist: response });
-
-          if (response && response.email) {
-            this.accountService.getUser(response.email).subscribe({
-              next: (response) => {
-                console.log({ whishlistItem: response });
-                this.user = response.user;
-              },
-            });
+          console.log({ 'auth update: ': response });
+          this.isAuthenticated = response;
+          let userString = localStorage.getItem('user');
+          if (userString) {
+            let user: User = JSON.parse(userString);
+            if (user.id)
+              this.accountService.getAccount(user.id).subscribe({
+                next: (response) => {
+                  this.account = response.account;
+                },
+              });
           }
+        },
+        error: (error) => {
+          console.error(error);
+          console.log('could not trigger the auth-status listener');
         },
       });
   }

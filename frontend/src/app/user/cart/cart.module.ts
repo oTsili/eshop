@@ -5,6 +5,9 @@ import { BreadcrumbModule } from '../shared/breadcrumb/breadcrumb.module';
 import { RouterModule } from '@angular/router';
 import { TaxShippingModule } from './tax-shipping/tax-shipping.module';
 import { ProductModule } from '../product/product.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../shared/loader-factory';
 
 @NgModule({
   declarations: [CartComponent],
@@ -13,6 +16,15 @@ import { ProductModule } from '../product/product.module';
     BreadcrumbModule,
     TaxShippingModule,
     ProductModule,
+    // ngx-translate and the loader module
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     RouterModule.forChild([
       {
         path: '',

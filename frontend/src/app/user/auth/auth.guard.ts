@@ -32,12 +32,13 @@ export class AuthGuard implements CanLoad {
         error: (response) => {
           // if not authenticated response with false
           // trigger the false authentication status
-          if (response.error.statusCode === 401) {
-            observer.next(false);
+          if (response.status === 401) {
             // navigae to the home page
             this.router.navigateByUrl('/');
 
-            // prompt the login modal
+            observer.next(false);
+
+            // prompt the login modal with error message
             this.userAppService.onToggleModal(true);
           }
         },
