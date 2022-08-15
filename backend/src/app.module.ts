@@ -31,7 +31,7 @@ import { SharedModule } from './shared/shared.module';
     // A common technique to protect applications from brute-force attacks is rate-limiting. Implemented with @nestjs/throttler package
     ThrottlerModule.forRoot({
       ttl: 60,
-      limit: 100,
+      limit: 1000,
     }),
     MongooseModule.forRoot(
       `${process.env['ME_CONFIG_MONGODB_URL']}/eshop?authSource=admin`,

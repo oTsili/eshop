@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { DynamicDatabase } from './dynamic-database';
 import { navBarElement } from './header.interfaces';
@@ -83,13 +83,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   initialData: navBarElement[];
   navBarElementsSubsciption: Subscription;
   changeLanguageSubscription: Subscription;
-  authStatusSubscription: Subscription;
+  accountSubscription: Subscription;
+  authStatusSubsciption: Subscription;
   activeLanguage: string;
   isOverList = false;
   numOfLinks: string;
   hamIsOpen = false;
   isOpenHamburgerMenu = false;
-  isAuthenticated = false;
+  isAuthenticated$: BehaviorSubject<boolean>;
   search: string;
   account: Account;
 
@@ -105,6 +106,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private accountService: AccountService,
     private router: Router
   ) {
+    // get a reference to the isAuthenticated$ listener
+    this.isAuthenticated$ = this.authService.isAuthenticated$;
+
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
     translate.setDefaultLang('en');
@@ -112,50 +116,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // http request to get auth status (Destroy is implemented on httpClient)
-    this.authService.isAuthenticated().subscribe({
-      next: (response) => {
-        this.isAuthenticated = true;
-        console.log({ isAuth: this.isAuthenticated });
-        console.log({ response });
-        // this.account = response.account;
-      },
-      error: (response) => {
-        if (response.status === 401) {
-          this.isAuthenticated = false;
-          // this.router.navigateByUrl('/');
-        }
-        console.log({ isAuth: this.isAuthenticated });
-      },
-    });
 
-    /**
-     * update the authStatus without reaching out the backend.
-     * Mostly for the logout functionality. Next get the account
-     * info from the backend
-     */
-    this.authStatusSubscription = this.authService
-      .getAuthStatusListener()
-      .subscribe({
-        next: (response) => {
-          console.log({ 'auth update: ': response });
-          this.isAuthenticated = response;
-          let userString = localStorage.getItem('user');
-          if (userString) {
-            let user: User = JSON.parse(userString);
-            if (user.id)
-              this.accountService.getAccount(user.id).subscribe({
-                next: (response) => {
-                  this.account = response.account;
-                },
-              });
-          }
-        },
-        error: (error) => {
-          console.error(error);
-          console.log('could not trigger the auth-status listener');
-        },
-      });
+    this.subscribeToAccountUpdates();
+
+    // this.checkAuthenticationStatus();
 
     // save current language
     this.activeLanguage = this.translate.currentLang;
@@ -173,10 +137,55 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.authStatusSubscription.unsubscribe();
+    this.accountSubscription.unsubscribe();
     this.changeLanguageSubscription.unsubscribe();
     this.navBarElementsSubsciption.unsubscribe();
+    this.authStatusSubsciption.unsubscribe();
   }
+
+  // checkAuthenticationStatus() {
+  //   // http request to get auth status (Destroy is implemented on httpClient)
+  //   this.authService.isAuthenticated().subscribe({
+  //     next: (response) => {
+  //       this.isAuthenticated = true;
+  //       console.log({ isAuth: this.isAuthenticated });
+  //       console.log({ response });
+  //     },
+  //     error: (response) => {
+  //       if (response.status === 401) {
+  //         this.isAuthenticated = false;
+  //         // this.router.navigateByUrl('/');
+  //       }
+  //       console.log({ isAuth: this.isAuthenticated });
+  //     },
+  //   });
+  // }
+
+  subscribeToAccountUpdates() {
+    this.accountSubscription = this.accountService
+      .getAccountListener()
+      .subscribe({
+        next: (response) => {
+          console.log({ 'auth update: ': response });
+          let userString = localStorage.getItem('user');
+          if (userString) {
+            let user: User = JSON.parse(userString);
+            if (user.id)
+              this.accountService.getAccount(user.id).subscribe({
+                next: (response) => {
+                  this.account = response.account;
+                },
+              });
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          console.log('could not trigger the account listener');
+        },
+      });
+  }
+
+
 
   onSubmitSearch() {
     // update url and navigate if in other page

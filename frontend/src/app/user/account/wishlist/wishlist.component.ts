@@ -13,7 +13,6 @@ import { WhishlistService } from './whishlist.service';
 })
 export class WishlistComponent implements OnInit, OnDestroy {
   whishlistItems: WhishlistItem[];
-  authStatusSubscription: Subscription;
   accountSubscription: Subscription;
   isAuthenticated = false;
   account: Account;
@@ -23,30 +22,32 @@ export class WishlistComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscribeToAuthStatusAndGetAccount();
+    this.subscribeToAccountUpdates();
   }
 
   ngOnDestroy(): void {
-    this.authStatusSubscription.unsubscribe();
+    this.accountSubscription.unsubscribe();
   }
 
-  subscribeToAuthStatusAndGetAccount() {
+  subscribeToAccountUpdates() {
     /**
      * update the authStatus without reaching out the backend.
      * Mostly for the logout functionality. Next get the account
      * info from the backend
      */
-    this.authStatusSubscription = this.authService
-      .getAuthStatusListener()
+    this.accountSubscription = this.accountService
+      .getAccountListener()
       .subscribe({
         next: (response) => {
-          console.log({ 'auth update: ': response });
-          this.isAuthenticated = response;
+          console.log({ account: response });
+          // this.isAuthenticated = response;
+          // get user basic info from the browser's storage
           let userString = localStorage.getItem('user');
           if (userString) {
+            // convert to object from string
             let user: User = JSON.parse(userString);
-            console.log(user);
             if (user.id)
+              // get the account from the db
               this.accountService.getAccount(user.id).subscribe({
                 next: (response) => {
                   console.log({ my: response });
@@ -60,7 +61,7 @@ export class WishlistComponent implements OnInit, OnDestroy {
         },
         error: (error) => {
           console.error(error);
-          console.log('could not trigger the auth-status listener');
+          console.log('could not trigger the account listener');
         },
       });
   }

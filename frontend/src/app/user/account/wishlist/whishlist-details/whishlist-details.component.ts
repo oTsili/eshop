@@ -26,7 +26,8 @@ export class WhishlistDetailsComponent implements OnInit, OnChanges {
 
   constructor(
     private whishlistDetailsService: WhishlistDetailsService,
-    private appService: AppService
+    private appService: AppService,
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
@@ -81,7 +82,8 @@ export class WhishlistDetailsComponent implements OnInit, OnChanges {
           // http requetst to add the cart item to the db
           this.whishlistDetailsService.addtoCart(cartItem).subscribe({
             next: (response) => {
-              console.log(response);
+              console.log({ cartAdd: response });
+              this.accountService.onUpdateAccount();
             },
             error: (response) => {
               console.log('cart update was not possible');

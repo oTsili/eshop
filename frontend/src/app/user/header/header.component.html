@@ -100,7 +100,7 @@
       <div class="ui icon borderless menu upper">
         <!-- if not loggedin open login/signup modal -->
         <a
-          *ngIf="!isAuthenticated"
+          *ngIf="!(isAuthenticated$ | async)"
           fxShow.lt-sm="false"
           (click)="openLoginModal()"
           class="item link icon--medium"
@@ -109,7 +109,7 @@
         </a>
         <!-- if loggedIn open profile options -->
         <div
-          *ngIf="isAuthenticated"
+          *ngIf="isAuthenticated$ | async"
           iconMenuOpenClose
           class="ui dropdown"
           id="user-icon"
@@ -132,7 +132,7 @@
           <i class="ph-heart"></i>
           <div
             *ngIf="
-              isAuthenticated &&
+              (isAuthenticated$ | async) &&
               account &&
               account.whishlist &&
               account.whishlist.length > 0
@@ -146,7 +146,7 @@
           <i class="ph-shopping-bag"></i>
           <div
             *ngIf="
-              isAuthenticated &&
+              (isAuthenticated$ | async) &&
               account &&
               account.cart &&
               account.cart.length > 0

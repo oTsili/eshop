@@ -9,15 +9,15 @@ const BACKEND_URL = environment.BASE_URL + 'account';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-  private accountListener = new BehaviorSubject<Account | null>(null);
+  private accountListener = new BehaviorSubject(null);
   constructor(private httpClient: HttpClient) {}
 
   getAccountListener() {
     return this.accountListener.asObservable();
   }
 
-  onUpdateAccount(account: Account) {
-    this.accountListener.next(account);
+  onUpdateAccount() {
+    this.accountListener.next(null);
   }
 
   getAccount(userId: string) {

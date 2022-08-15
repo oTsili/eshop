@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Account, CartItem, Order } from '../account/account.interfaces';
@@ -15,10 +15,10 @@ import { CartService } from './cart.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
   pageHeader: string;
   breadcrumbItems: Breadcrumb[];
-  authStatusSubscription: Subscription;
+  accountSubscription: Subscription;
   cart: CartItem[];
   isAuthenticated = false;
   account: Account;
@@ -34,7 +34,10 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeBreadcrumbs();
-    this.subscribeToAuthStatusAndGetAccount();
+    this.subscribeToAccountUpdates();
+  }
+  ngOnDestroy(): void {
+    this.accountSubscription.unsubscribe();
   }
 
   initializeBreadcrumbs() {
@@ -51,26 +54,29 @@ export class CartComponent implements OnInit {
       this.router.url
     );
   }
-  subscribeToAuthStatusAndGetAccount() {
+
+  subscribeToAccountUpdates() {
     /**
      * update the authStatus without reaching out the backend.
      * Mostly for the logout functionality. Next get the account
      * info from the backend
      */
-    this.authStatusSubscription = this.authService
-      .getAuthStatusListener()
+    this.accountSubscription = this.accountService
+      .getAccountListener()
       .subscribe({
         next: (response) => {
-          console.log({ 'auth update: ': response });
-          this.isAuthenticated = response;
+          console.log({ account: response });
+          // this.isAuthenticated = response;
+          // get user basic info from the browser's storage
           let userString = localStorage.getItem('user');
           if (userString) {
+            // convert to object from string
             let user: User = JSON.parse(userString);
-            console.log(user);
             if (user.id)
+              // get the account from the db
               this.accountService.getAccount(user.id).subscribe({
                 next: (response) => {
-                  console.log({ my: response });
+                  console.log({ myAccount: response });
                   this.account = response.account;
 
                   if (this.account && this.account.cart)
@@ -81,7 +87,7 @@ export class CartComponent implements OnInit {
         },
         error: (error) => {
           console.error(error);
-          console.log('could not trigger the auth-status listener');
+          console.log('could not trigger the account listener');
         },
       });
   }
@@ -97,6 +103,11 @@ export class CartComponent implements OnInit {
   }
 
   deleteCartItem(id) {
-    this.cartService.deleteCartItem(id);
+    this.cartService.deleteCartItem(id).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.accountService.onUpdateAccount();
+      },
+    });
   }
 }

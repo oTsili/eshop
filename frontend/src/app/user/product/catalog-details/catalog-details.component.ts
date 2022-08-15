@@ -3,12 +3,12 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Renderer2,
   SimpleChanges,
 } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { User } from 'src/app/user/header/signup/signup.interfaces';
 import { Account, WhishlistItem } from '../../account/account.interfaces';
+import { AccountService } from '../../account/account.service';
 import { UserAppService } from '../../user-app.service';
 import { Product } from '../product.interface';
 import { CatalogDetailsService } from './catalog-details.service';
@@ -30,7 +30,7 @@ export class CatalogDetailsComponent implements OnInit, OnChanges {
     private appService: AppService,
     private userAppService: UserAppService,
     private catalogDetailsService: CatalogDetailsService,
-    private renderer: Renderer2
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {}
@@ -80,7 +80,8 @@ export class CatalogDetailsComponent implements OnInit, OnChanges {
 
           this.catalogDetailsService.addtoWhishlist(whishlistItem).subscribe({
             next: (response) => {
-              console.log(response);
+              console.log({ addWhishlist: response });
+              this.accountService.onUpdateAccount();
               this.isAddedToWhishlist = true;
             },
             error: (response) => {

@@ -16,7 +16,7 @@ const BACKEND_URL = environment.BASE_URL + 'user';
   providedIn: 'root',
 })
 export class AuthService {
-  private authenticatedListener = new BehaviorSubject(false);
+  isAuthenticated$ = new BehaviorSubject(false);
   // private authenticatedListener = new Subject<boolean>();
 
   constructor(
@@ -26,7 +26,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.httpClient
-      .post<{ existingUser: User; expiresIn: string }>(
+      .post<User>(
         `${BACKEND_URL}/login`,
         { username: email, password },
         {
@@ -37,12 +37,12 @@ export class AuthService {
         tap(() => {
           // inform the observers that the user's account information are now available
           this.onUpdateAuthStatus(true);
+          // inform observers about account info availability
+          this.accountService.onUpdateAccount();
         })
       )
       .pipe(
         map((userData) => {
-          console.log({ userData });
-
           return userData;
         })
       );
@@ -78,23 +78,19 @@ export class AuthService {
     authData.append('passwordConfirm', signupAuthData.passwordConfirm);
 
     return this.httpClient
-      .post<{ existingUser: User; expiresIn: string }>(
-        `${BACKEND_URL}/signup`,
-        authData,
-        {
-          withCredentials: true,
-        }
-      )
+      .post<User>(`${BACKEND_URL}/signup`, authData, {
+        withCredentials: true,
+      })
       .pipe(
         tap(() => {
           // inform the observers that the user's account information are now available
           this.onUpdateAuthStatus(true);
+          // inform observers about account info availability
+          this.accountService.onUpdateAccount();
         })
       )
       .pipe(
         map((userData) => {
-          console.log({ userData });
-
           return userData;
         })
       );
@@ -102,13 +98,13 @@ export class AuthService {
 
   // get the listenr which updates the isAuthenticated variable whitout reaching the backend
   getAuthStatusListener() {
-    return this.authenticatedListener.asObservable();
+    return this.isAuthenticated$.asObservable();
   }
 
   // update the isAuthenticated variable whitout reaching the backend
   onUpdateAuthStatus(status: boolean) {
     console.log({ status });
-    this.authenticatedListener.next(status);
+    this.isAuthenticated$.next(status);
   }
 
   /**
@@ -124,6 +120,11 @@ export class AuthService {
       }>(`${BACKEND_URL}/isAuth`, {
         withCredentials: true,
       })
+      .pipe(
+        tap(() => {
+          this.onUpdateAuthStatus(true);
+        })
+      )
       .pipe(
         map((userData) => {
           const user = {
