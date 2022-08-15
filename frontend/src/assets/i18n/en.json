@@ -105,9 +105,16 @@
   "cart": "Cart",
   "account": "Account",
   "whishlist": "Whishlist",
+  "orders": "orders",
+  "profile": "profile",
+  "addressbook": "contact details",
 
   "you must login first": "You Must Login First",
   "products": "products",
   "qty": "qty",
-  "summary": "summary"
+  "summary": "summary",
+
+  "add to cart": "add to cart",
+  "edit": "edit",
+  "remove item": "remove item"
 }

@@ -14,6 +14,7 @@ export interface WhishlistItem {
   quantity?: number;
   user: string;
   id?: string;
+  _id?: string;
 }
 
 export interface AddressBook {}

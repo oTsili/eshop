@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
   Param,
@@ -50,5 +51,13 @@ export class WhishlistController {
 
     // send back the account
     return res.status(HttpStatus.CREATED).json({ account });
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('/:id')
+  async delete(@Res() response, @Param('id') id) {
+    const deletedWhishlistItem = await this.whishlistItemService.delete(id);
+
+    return response.status(HttpStatus.OK).json({ deletedWhishlistItem });
   }
 }

@@ -30,4 +30,8 @@ export class WhishlistService {
 
     return createWhishlistItem.save();
   }
+
+  async delete(id): Promise<any> {
+    return await this.whishlistItemModel.findByIdAndRemove(id);
+  }
 }

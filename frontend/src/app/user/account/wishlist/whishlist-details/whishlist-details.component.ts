@@ -11,6 +11,7 @@ import { Account, CartItem, WhishlistItem } from '../../account.interfaces';
 import { User } from '../../../header/signup/signup.interfaces';
 import { WhishlistDetailsService } from './whishlist-details.service';
 import { AccountService } from '../../account.service';
+import { WhishlistService } from '../whishlist.service';
 
 @Component({
   selector: 'app-whishlist-details',
@@ -25,6 +26,7 @@ export class WhishlistDetailsComponent implements OnInit, OnChanges {
   quantity: number;
 
   constructor(
+    private whishlistService: WhishlistService,
     private whishlistDetailsService: WhishlistDetailsService,
     private appService: AppService,
     private accountService: AccountService
@@ -94,5 +96,14 @@ export class WhishlistDetailsComponent implements OnInit, OnChanges {
         console.log('please login first');
       }
     }
+  }
+
+  deleteWhishlistItem(id) {
+    this.whishlistService.deleteWhishlistItem(id).subscribe({
+      next: (response) => {
+        console.log({ response });
+        this.accountService.onUpdateAccount();
+      },
+    });
   }
 }

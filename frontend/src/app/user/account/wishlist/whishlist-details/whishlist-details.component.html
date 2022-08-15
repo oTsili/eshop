@@ -1,10 +1,10 @@
 <div class="container">
   <div class="line name">
-    {{ whishlistItem.product.name }}
+    {{ whishlistItem.product.name | translate }}
   </div>
   <div class="line">
     <div class="product-price product-price-new">
-      {{ whishlistItem.product.price }}
+      {{ whishlistItem.product.price | translate }}
     </div>
   </div>
   <form (ngSubmit)="onSubmitCart(cartForm)" #cartForm="ngForm">
@@ -25,13 +25,19 @@
     </div>
     <div class="button-wrapper">
       <div class="line button">
-        <button type="submit" class="button-text">add to cart</button>
+        <button type="submit" class="button-text">
+          {{ "add to cart" | translate | titlecase }}
+        </button>
       </div>
       <div class="line button">
-        <a class="button-text">edit</a>
+        <a class="button-text">{{ "edit" | translate | titlecase }}</a>
       </div>
       <div class="line button">
-        <a class="button-text">remove item</a>
+        <a
+          class="button-text"
+          (click)="deleteWhishlistItem(whishlistItem._id)"
+          >{{ "remove item" | translate | titlecase }}</a
+        >
       </div>
       <input type="hidden" name="quantity" [(ngModel)]="quantity" />
     </div>
