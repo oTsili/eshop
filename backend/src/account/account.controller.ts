@@ -19,10 +19,10 @@ export class AccountController {
   ) {}
 
   @UseGuards(JwtAuthGuard)
-  @Get(':param')
+  @Get(':user')
   async fetchAccount(@Req() req, @Res() res, @Param() param) {
     const user = param.user;
-    const whislist = await this.whishlistItemService.findWhishlistByUserId(
+    const whishlist = await this.whishlistItemService.findWhishlistByUserId(
       user,
     );
 
@@ -35,7 +35,7 @@ export class AccountController {
     const addressbook = null;
 
     const account = {
-      whislist,
+      whishlist,
       cart,
       orders,
       addressbook,

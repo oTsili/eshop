@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, tap } from 'rxjs';
+import { BehaviorSubject, map, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Account } from '../account/account.interfaces';
 import { AccountService } from '../account/account.service';
@@ -17,6 +17,7 @@ const BACKEND_URL = environment.BASE_URL + 'user';
 })
 export class AuthService {
   private authenticatedListener = new BehaviorSubject(false);
+  // private authenticatedListener = new Subject<boolean>();
 
   constructor(
     private httpClient: HttpClient,
@@ -106,6 +107,7 @@ export class AuthService {
 
   // update the isAuthenticated variable whitout reaching the backend
   onUpdateAuthStatus(status: boolean) {
+    console.log({ status });
     this.authenticatedListener.next(status);
   }
 

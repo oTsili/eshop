@@ -12,13 +12,17 @@ import {
 } from '@nestjs/common';
 import { response } from 'express';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { SharedService } from 'src/shared/shared.service';
 import { UserService } from 'src/user/user.service';
 import { CartService } from './cart.service';
 import { CartItem } from './schemas/cart.schema';
 
 @Controller('cart')
 export class CartController {
-  constructor(private readonly cartService: CartService) {}
+  constructor(
+    private readonly cartService: CartService,
+    private readonly sharedService: SharedService,
+  ) {}
 
   @UseGuards(JwtAuthGuard)
   @Get(':userId')
@@ -37,18 +41,14 @@ export class CartController {
     // const userId = cartItem.user;
 
     const newCartItem = await this.cartService.create(cartItem);
-    // console.log({ newCartItem });
-    // let user = await this.userService.findUserById(userId);
+    console.log({ newCartItem });
 
-    // let updatedUser;
-    // if (user) {
-    //   user.account.cart.push(cartItem);
-    //   updatedUser = await this.userService.update(userId, user);
-    //   console.log({ updatedUser });
-    // }
-
+    // get the updated user's account
+    const userId = cartItem.user;
+    const account = await this.sharedService.fetchAccount(userId);
+    // console.log({ account });
     // return res.status(HttpStatus.CREATED).json(updatedUser);
-    return res.status(HttpStatus.CREATED).json(newCartItem);
+    return res.status(HttpStatus.CREATED).json({ account });
   }
 
   @UseGuards(JwtAuthGuard)

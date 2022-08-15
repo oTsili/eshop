@@ -22,7 +22,9 @@ export class WishlistComponent implements OnInit, OnDestroy {
     private authService: AuthService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscribeToAuthStatusAndGetAccount();
+  }
 
   ngOnDestroy(): void {
     this.authStatusSubscription.unsubscribe();
@@ -43,10 +45,15 @@ export class WishlistComponent implements OnInit, OnDestroy {
           let userString = localStorage.getItem('user');
           if (userString) {
             let user: User = JSON.parse(userString);
+            console.log(user);
             if (user.id)
               this.accountService.getAccount(user.id).subscribe({
                 next: (response) => {
+                  console.log({ my: response });
                   this.account = response.account;
+
+                  if (this.account && this.account.whishlist)
+                    this.whishlistItems = this.account.whishlist;
                 },
               });
           }

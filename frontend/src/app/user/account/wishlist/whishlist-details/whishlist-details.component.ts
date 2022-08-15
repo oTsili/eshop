@@ -35,8 +35,13 @@ export class WhishlistDetailsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.account = changes['account'].currentValue;
-    this.whishlistItem = changes['whishlistItem'].currentValue;
+    if (changes['account']) this.account = changes['account'].currentValue;
+
+    if (changes['whishlistItem'])
+      this.whishlistItem = changes['whishlistItem'].currentValue;
+
+    if (changes['isAuthenticated'])
+      this.isAuthenticated = changes['isAuthenticated'].currentValue;
 
     // compute the pre-sales(old) price from the sales percentage
     this.oldPrice =
@@ -56,8 +61,9 @@ export class WhishlistDetailsComponent implements OnInit, OnChanges {
   }
 
   onSubmitCart(form: NgForm) {
-    // console.log(form);
+    console.log(form);
     // if user id is available
+    console.log({ authenticated: this.isAuthenticated });
     if (this.isAuthenticated) {
       // get the user id
       let userString = localStorage.getItem('user');

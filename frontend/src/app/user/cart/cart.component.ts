@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CartItem, Order } from '../account/account.interfaces';
+import { Account, CartItem, Order } from '../account/account.interfaces';
 import { AccountService } from '../account/account.service';
+import { AuthService } from '../auth/auth.service';
 import { User } from '../header/signup/signup.interfaces';
 import { PanelItem } from '../shared/accordion/host-panel/host-panel-item.class';
 import { Breadcrumb } from '../shared/breadcrumb/breadcrumb.interfaces';
@@ -18,20 +19,22 @@ export class CartComponent implements OnInit {
   pageHeader: string;
   breadcrumbItems: Breadcrumb[];
   authStatusSubscription: Subscription;
-  user: User;
   cart: CartItem[];
+  isAuthenticated = false;
+  account: Account;
   // quantity: number;
 
   constructor(
     private router: Router,
     private breadcrumbService: BreadcrumbService,
     private cartService: CartService,
+    private authService: AuthService,
     private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
     this.initializeBreadcrumbs();
-    // this.getUser();
+    this.subscribeToAuthStatusAndGetAccount();
   }
 
   initializeBreadcrumbs() {
@@ -48,28 +51,40 @@ export class CartComponent implements OnInit {
       this.router.url
     );
   }
+  subscribeToAuthStatusAndGetAccount() {
+    /**
+     * update the authStatus without reaching out the backend.
+     * Mostly for the logout functionality. Next get the account
+     * info from the backend
+     */
+    this.authStatusSubscription = this.authService
+      .getAuthStatusListener()
+      .subscribe({
+        next: (response) => {
+          console.log({ 'auth update: ': response });
+          this.isAuthenticated = response;
+          let userString = localStorage.getItem('user');
+          if (userString) {
+            let user: User = JSON.parse(userString);
+            console.log(user);
+            if (user.id)
+              this.accountService.getAccount(user.id).subscribe({
+                next: (response) => {
+                  console.log({ my: response });
+                  this.account = response.account;
 
-  // getUser() {
-  //   this.authStatusSubscription = this.accountService
-  //     .getauthStatusListener()
-  //     .subscribe({
-  //       next: (user) => {
-  //         console.log({ whishlist: user });
-
-  //         if (user.email) {
-  //           // this.accountService.getUser(user.email).subscribe({
-  //           //   next: (response) => {
-  //           //     console.log({ cart: response });
-  //           //     this.user = response.user;
-  //           //     if (this.user.account && this.user.account.cart) {
-  //           //       this.cart = this.user.account.cart;
-  //           //     }
-  //           //   },
-  //           // });
-  //         }
-  //       },
-  //     });
-  // }
+                  if (this.account && this.account.cart)
+                    this.cart = this.account.cart;
+                },
+              });
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          console.log('could not trigger the auth-status listener');
+        },
+      });
+  }
 
   increaseQuantity(item: CartItem) {
     item.quantity++;
