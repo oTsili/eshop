@@ -1,0 +1,75 @@
+@import "semantic-ui-css/semantic.css";
+
+* {
+  font-size: 1.7rem;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.ui.vertical.menu {
+  height: 100vh;
+}
+
+.dashboard-container {
+  display: flex;
+}
+
+.ui.menu {
+  font-size: 1.5rem;
+}
+
+.icon-link {
+  color: #ffffffe6;
+}
+
+a,
+a:hover,
+.icon-link,
+.icon-link:hover,
+.icon-link:active,
+.icon-link:link {
+  text-decoration: none;
+  color: #ffffffe6;
+}
+
+.collapse-icon {
+  padding: 9%;
+}
+.expand-icon {
+  background: #1b1c1d;
+  padding: 0.9%;
+  font-size: 1.5rem;
+}
+
+.sideBar-header {
+  padding-bottom: 15%;
+}
+
+.icon-wrapper {
+  height: 2rem;
+}
+
+.icon-wrapper:hover {
+  border-bottom: 0.2rem solid #ffffffe6;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.right-align {
+  display: flex;
+  justify-content: right;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+}
+
+.logo img {
+  width: 9rem;
+  border-radius: 50%;
+}

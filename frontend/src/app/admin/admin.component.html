@@ -1,0 +1,49 @@
+<!-- <a class="link" toggleActive>Open SideBar</a> -->
+
+<div class="dashboard-container">
+  <div [@slideOutIn] *ngIf="!isOpenSideBar" class="link expand-icon">
+    <a (click)="isOpenSideBar = true" class="link icon-link right-align">
+      <div class="icon-wrapper">
+        <i class="angle double right icon"></i>
+      </div>
+    </a>
+  </div>
+  <div class="col-sidebar">
+    <div [@slideInOut] *ngIf="isOpenSideBar" class="ui inverted vertical menu">
+      <div class="sideBar-header">
+        <a
+          (click)="isOpenSideBar = false"
+          class="link icon-link right-align collapse-icon"
+        >
+          <div class="icon-wrapper">
+            <i class="angle double left icon"></i>
+          </div>
+        </a>
+        <a class="logo">
+          <img src="assets/images/admin/astronaut.webp" />
+        </a>
+      </div>
+      <a routerLink="home" class="item">
+        <i class="home icon"></i>
+        Home
+      </a>
+      <a class="item">
+        <i class="block layout icon"></i>
+        Topics
+      </a>
+      <a class="item">
+        <i class="smile icon"></i>
+        Friends
+      </a>
+      <a routerLink="add-products" class="item">
+        <i class="upload icon"></i>
+        Products
+      </a>
+    </div>
+  </div>
+
+  <div class="col-main">
+    paokara
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -57,6 +57,23 @@ const homeRoutes: Routes = [
         },
       },
       {
+        path: 'edit-product',
+        canLoad: [AuthGuard],
+        loadChildren: () =>
+          import('../edit-product/edit-product.module').then(
+            (m) => m.EditProductModule
+          ),
+        data: {
+          title: 'edit-product',
+          breadcrumb: [
+            {
+              label: 'edit-product',
+              url: 'edit-product',
+            },
+          ],
+        },
+      },
+      {
         path: 'contact',
         component: TestComponent,
         data: {
