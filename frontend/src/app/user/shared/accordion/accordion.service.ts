@@ -9,7 +9,7 @@ import { TextPanelComponent } from './panels/EXAMPLE-text-panel/text-panel.compo
   providedIn: 'root',
 })
 export class AccordionService {
-  accordionPanels;
+  private accordionPanels;
 
   constructor() {}
 
@@ -21,10 +21,10 @@ export class AccordionService {
     return this.accordionPanels;
   }
 
-  // /**
-  //  * A function to create an array of componnents
-  //  * @returns the array of components, that will be  used and rendered by accordion componnet
-  //  */
+  /**
+   * A function to create an array of componnents
+   * @returns the array of components, that will be  used and rendered by accordion componnet
+   */
 
   getAccordionPanels() {
     return [

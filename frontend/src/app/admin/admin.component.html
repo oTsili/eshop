@@ -42,7 +42,10 @@
     </div>
   </div>
 
-  <div class="col-main">
+  <div
+    class="col-main"
+    [ngStyle]="{ 'margin-left': isOpenSideBar ? '16rem' : '0' }"
+  >
     paokara
     <router-outlet></router-outlet>
   </div>

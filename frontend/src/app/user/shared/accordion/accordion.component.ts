@@ -21,7 +21,6 @@ import { PanelItem } from './host-panel/host-panel-item.class';
 })
 export class AccordionComponent implements OnInit, OnChanges {
   @Input() index: number;
-  accordionPanels: PanelItem[] = [];
   // Keep track of the view from the elements queried with panelHost directive
   @ViewChild(PanelHostDirective, { static: true })
   panelHost!: PanelHostDirective;

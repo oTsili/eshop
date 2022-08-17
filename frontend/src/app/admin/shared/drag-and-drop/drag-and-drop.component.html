@@ -1,1 +1,16 @@
-<p>drag-and-drop works!</p>
+<div class="container" dragAndDrop (fileDropped)="onFileDropped($event)">
+  <input
+    type="file"
+    id="fileDropRef"
+    multiple
+    (change)="fileBrowserHandle($event)"
+  />
+  <i class="upload icon"></i>
+  <h3>Drag and drop file here</h3>
+  <h3>or</h3>
+  <label class="label" for="fileDropRef">Browse for file</label>
+</div>
+
+<div class="files-list">
+  <ng-template imageContainerHost></ng-template>
+</div>

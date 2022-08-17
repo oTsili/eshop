@@ -1,0 +1,15 @@
+<div class="single-file">
+  <img src="{{ src }}" alt="Image preview..." />
+
+  <div class="info">
+    <h4 class="name">{{ data.file.name }}</h4>
+    <p class="size">
+      {{ formatBytes(data.file.size) }}
+    </p>
+    <app-progress-bar [progress]="data.file.progress"></app-progress-bar>
+  </div>
+
+  <div class="delete" (click)="deleteFile()">
+    <i class="trash alternate outline icon"></i>
+  </div>
+</div>
