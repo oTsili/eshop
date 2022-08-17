@@ -63,12 +63,6 @@ export class DragAndDropComponent implements OnInit {
     const imageItem = this.dragAndDropService.getImageComponent(file);
     const viewContainerRef = this.imageContainerHost.viewContainerRef;
 
-    /**
-     * Here we do not want to clear the viewContainerRef because we do not want to take
-     * the place of the previous component, but stack one on another
-     */
-    // viewContainerRef.clear();
-
     // create the new component
     const componentRef = viewContainerRef.createComponent<ImageContainer>(
       imageItem.component

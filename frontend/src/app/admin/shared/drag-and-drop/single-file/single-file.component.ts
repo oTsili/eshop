@@ -6,6 +6,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { AppService } from 'src/app/app.service';
 import { DragAndDropService } from '../drag-and-drop.service';
 
 @Component({
@@ -17,17 +18,18 @@ export class SingleFileComponent implements OnInit, OnChanges {
   @Input() data: any;
   private imageReader = new FileReader();
   src: string;
+  size: string;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, private appService: AppService) {}
 
   ngOnInit(): void {
-    console.log(this.data);
     this.imageReader.onloadend = (e) => {
       this.src = this.imageReader.result as string;
-      console.log(this.src);
     };
 
     this.imageReader.readAsDataURL(this.data.file);
+
+    this.size = this.appService.formatBytes(this.data.file.size);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -42,21 +44,5 @@ export class SingleFileComponent implements OnInit, OnChanges {
    */
   deleteFile() {
     this.elementRef.nativeElement.remove();
-  }
-
-  /**
-   * format bytes
-   * @param bytes (File size in bytes)
-   * @param decimals (Decimals point)
-   */
-  formatBytes(bytes, decimals = 2) {
-    if (bytes === 0) {
-      return '0 Bytes';
-    }
-    const k = 1024;
-    const dm = decimals <= 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 }
