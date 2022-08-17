@@ -8,7 +8,10 @@ import {
   Query,
   Req,
   Res,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { request } from 'http';
 import { getMaxListeners } from 'process';
 import { ProductsService } from './products.service';
@@ -17,6 +20,12 @@ import { Product } from './schemas/product.schema';
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productService: ProductsService) {}
+
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadFile(@UploadedFile() file: Express.Multer.File) {
+    console.log(file);
+  }
 
   @Post()
   async createProduct(@Res() response, @Body() product: Product) {

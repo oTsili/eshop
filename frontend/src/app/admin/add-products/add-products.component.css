@@ -1,0 +1,7 @@
+.container {
+  display: flex;
+  gap: 18%;
+}
+.form {
+  min-width: 80%;
+}

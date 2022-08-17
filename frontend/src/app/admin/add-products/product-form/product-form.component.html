@@ -1,0 +1,32 @@
+<form
+  [formGroup]="theProductForm"
+  (submit)="onSubmit(theProductForm)"
+  *ngIf="!isLoading"
+  class="col"
+>
+  <mat-form-field>
+    <mat-label>{{ "Product Name" | translate }}</mat-label>
+    <input formControlName="name" matInput type="text" required email />
+    <mat-error *ngIf="theProductForm.get('name')!.invalid">{{
+      "Please enter a name" | translate
+    }}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ "Colors" | translate }}</mat-label>
+    <input formControlName="colors" matInput type="text" required />
+    <mat-error *ngIf="theProductForm.get('colors')!.invalid">{{
+      "Please enter a valid name" | translate
+    }}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ "Sizes" | translate }}</mat-label>
+    <input formControlName="sizes" matInput type="text" />
+    <mat-error *ngIf="theProductForm.get('sizes')!.invalid">{{
+      "Please enter a valid name" | translate
+    }}</mat-error>
+  </mat-form-field>
+
+  <button #submitButton [style.opacity]="0" mat-raised-button type="submit">
+    Signup
+  </button>
+</form>
