@@ -1,8 +1,8 @@
 .container {
   display: flex;
-  gap: 3%;
 }
 .form {
   min-width: -webkit-fill-available;
-  margin-right: 40%;
+  padding: 0 3%;
+  padding-right: 10%;
 }

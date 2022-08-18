@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
+import { Element } from 'src/app/user/shared/accordion/accordion.interfaces';
 import { imgMimeType } from 'src/app/user/shared/validators/img-mime-type-validator';
+import { environment } from 'src/environments/environment';
 import { ProductFormService } from './product-form.service';
 import { UploadProduct } from './upload-product.interfaces';
 
@@ -14,6 +16,8 @@ export class ProductFormComponent implements OnInit {
   theProductForm: FormGroup;
   isLoading = false;
   sumbitDate: string;
+  colors: Element[];
+  heel_heights: Element[];
 
   constructor(
     private appService: AppService,
@@ -21,6 +25,9 @@ export class ProductFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.colors = environment.COLOR_LIST;
+    this.heel_heights = environment.HEEL_LIST;
+
     this.theProductForm = new FormGroup({
       name: new FormControl(null, {
         validators: [Validators.required],

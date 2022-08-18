@@ -116,7 +116,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.subscribeToAccountUpdates();
 
     // this.checkAuthenticationStatus();
@@ -143,24 +142,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authStatusSubsciption.unsubscribe();
   }
 
-  // checkAuthenticationStatus() {
-  //   // http request to get auth status (Destroy is implemented on httpClient)
-  //   this.authService.isAuthenticated().subscribe({
-  //     next: (response) => {
-  //       this.isAuthenticated = true;
-  //       console.log({ isAuth: this.isAuthenticated });
-  //       console.log({ response });
-  //     },
-  //     error: (response) => {
-  //       if (response.status === 401) {
-  //         this.isAuthenticated = false;
-  //         // this.router.navigateByUrl('/');
-  //       }
-  //       console.log({ isAuth: this.isAuthenticated });
-  //     },
-  //   });
-  // }
-
   subscribeToAccountUpdates() {
     this.accountSubscription = this.accountService
       .getAccountListener()
@@ -184,8 +165,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         },
       });
   }
-
-
 
   onSubmitSearch() {
     // update url and navigate if in other page

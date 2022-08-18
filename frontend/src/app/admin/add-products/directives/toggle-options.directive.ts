@@ -21,7 +21,6 @@ export class ToggleOptionsDirective implements OnInit {
 
   @HostListener('click', ['$event'])
   toggleOptions(event) {
-    console.log(this.isOpen);
     if (!this.isOpen) {
       this.renderer.addClass(this.element, 'active');
       this.renderer.addClass(this.element, 'visible');
@@ -37,5 +36,10 @@ export class ToggleOptionsDirective implements OnInit {
     }
 
     this.isOpen = !this.isOpen;
+  }
+
+  @HostListener('change', ['$event'])
+  onSelect(event) {
+    console.log(event);
   }
 }

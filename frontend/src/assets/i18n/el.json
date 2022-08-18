@@ -118,5 +118,10 @@
 
   "add to cart": "στο καλάθι",
   "edit": "επεξεργασία",
-  "remove item": "αφαίρεση"
+  "remove item": "αφαίρεση",
+
+  "product name": "όνομα προϊόντος",
+  "value required": "υποχρεωτικό πεδίο",
+  "select": "επιλογή",
+  "colors": "χρώματα"
 }

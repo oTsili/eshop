@@ -5,6 +5,9 @@ import { RouterModule } from '@angular/router';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AddProductsModule } from './add-products/add-products.module';
 import { HomeModule } from './home/home.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../user/shared/loader-factory';
 
 @NgModule({
   declarations: [AdminComponent],
@@ -14,6 +17,15 @@ import { HomeModule } from './home/home.module';
     AddProductsModule,
     HomeModule,
     RouterModule,
+    // ngx-translate and the loader module
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     RouterModule.forChild([
       {
         path: '',

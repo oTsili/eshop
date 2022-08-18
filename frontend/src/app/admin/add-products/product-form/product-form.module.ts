@@ -8,9 +8,16 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/user/shared/loader-factory';
 import { MatButtonModule } from '@angular/material/button';
 import { ToggleOptionsDirective } from '../directives/toggle-options.directive';
+import { SelectOptionDirective } from '../directives/select-option.directive';
+import { MultipleSelectOption } from '../directives/multiple-select-option.directive';
 
 @NgModule({
-  declarations: [ProductFormComponent, ToggleOptionsDirective],
+  declarations: [
+    ProductFormComponent,
+    ToggleOptionsDirective,
+    SelectOptionDirective,
+    MultipleSelectOption,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

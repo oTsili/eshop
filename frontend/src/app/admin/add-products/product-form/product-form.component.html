@@ -3,24 +3,46 @@
   (submit)="onSubmit(theProductForm)"
   *ngIf="!isLoading"
 >
-  <div class="ui form" [ngClass]="{ error: theProductForm.invalid }">
+  <div
+    class="ui form"
+    [ngClass]="{ error: theProductForm.invalid && theProductForm.touched }"
+  >
+    <!-- START two fields --name, price  -->
     <div class="two fields">
       <div
         class="field"
-        [ngClass]="{ error: theProductForm.get('name')!.invalid }"
+        [ngClass]="{
+          error:
+            theProductForm.get('name')!.invalid &&
+            theProductForm.get('name')!.touched
+        }"
       >
-        <label>product name</label>
-        <input placeholder="product name" type="text" />
+        <label>{{ "product name" | translate | uppercase }}</label>
+        <input
+          formControlName="name"
+          placeholder="{{ 'product name' | translate | titlecase }}"
+          type="text"
+        />
       </div>
 
       <div
         class="field"
-        [ngClass]="{ error: theProductForm.get('price')!.invalid }"
+        [ngClass]="{
+          error:
+            theProductForm.get('price')!.invalid &&
+            theProductForm.get('price')!.touched
+        }"
       >
-        <label>Price</label>
-        <input placeholder="price" type="text" />
+        <label>{{ "price" | translate | uppercase }}</label>
+        <input
+          formControlName="price"
+          placeholder="{{ 'price' | translate | titlecase }}"
+          type="text"
+        />
       </div>
     </div>
+    <!-- END two fields --name, price  -->
+    <!-- START error messages of two fields  -->
     <div
       *ngIf="
         theProductForm.get('name')!.invalid ||
@@ -28,68 +50,118 @@
       "
       class="error-message two fields"
     >
-      <div class="field" *ngIf="theProductForm.get('name')!.invalid">
-        <div class="ui error message">
-          <div class="header">Action Forbidden</div>
-          <p>
-            You can only sign up for an account once with a given e-mail
-            address.
-          </p>
+      <!---- START name error message ---->
+      <div class="field">
+        <div
+          *ngIf="
+            theProductForm.get('name')!.invalid &&
+            theProductForm.get('name')!.touched
+          "
+          class="error-message"
+        >
+          {{ "value required" | translate | titlecase }}
         </div>
       </div>
-      <div class="field" *ngIf="theProductForm.get('price')!.invalid">
-        <div class="ui error message">
-          <div class="header">Action Forbidden</div>
-          <p>
-            You can only sign up for an account once with a given e-mail
-            address.
-          </p>
+      <!---- END name error message ---->
+      <!---- START price error message ---->
+      <div class="field">
+        <div
+          *ngIf="
+            theProductForm.get('price')!.invalid &&
+            theProductForm.get('price')!.touched
+          "
+          class="header"
+        >
+          {{ "value required" | translate | titlecase }}
+        </div>
+      </div>
+      <!---- END price error message ---->
+    </div>
+    <!---- END error messages of two fields  ---->
+    <div class="two fields line">
+      <!-- START input of heel height -->
+      <div
+        class="field"
+        [ngClass]="{
+          error:
+            theProductForm.get('heel_height')!.invalid &&
+            theProductForm.get('heel_height')!.touched
+        }"
+      >
+        <label>{{ "heel height" | translate | uppercase }}</label>
+        <div openOptions class="ui selection dropdown">
+          <div class="default text">{{ "select" | translate | titlecase }}</div>
+          <i class="dropdown icon"></i>
+          <input
+            formControlName="heel_height"
+            type="hidden"
+            name="heel_height"
+          />
+          <div class="menu transition">
+            <div
+              *ngFor="let heel_height of heel_heights"
+              selectOption
+              class="item"
+              [attr.data-value]="heel_height.text"
+            >
+              {{ heel_height.text | translate | uppercase }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- START input of heel height -->
+      <div class="field">
+        <label>{{ "colors" | translate | uppercase }}</label>
+        <div openOptions class="ui dropdown selection multiple">
+          <select multiple="" class="ui dropdown">
+            <option value="">select colors</option>
+            <option *ngFor="let color of colors" value="{{ color.text }}">
+              {{ color.text }}
+            </option>
+          </select>
+          <div class="default text">
+            {{ "select colors" | translate | titlecase }}
+          </div>
+          <div class="menu transition">
+            <div
+              multipleSelectOption
+              *ngFor="let color of colors"
+              class="item"
+              [attr.data-value]="color.text"
+            >
+              <div class="row">
+                <div class="box {{ color.text }}"></div>
+                {{ color.text | translate | uppercase }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
+    <!-- START error message of heel height -->
     <div
-      class="field"
-      [ngClass]="{ error: theProductForm.get('name')!.invalid }"
+      *ngIf="
+        theProductForm.get('heel_height')!.invalid &&
+        theProductForm.get('heel_height')!.touched
+      "
+      class="ui error message"
     >
-      <label>heel height</label>
-      <div openOptions class="ui selection dropdown">
-        <div class="default text">Select</div>
-        <i class="dropdown icon"></i>
-        <input type="hidden" name="heel_height" />
-        <div class="menu transition">
-          <div class="item" data-value="male">
-            {{ "low (3-5CM)" | translate }}
-          </div>
-          <div class="item" data-value="male">
-            {{ "medium (6-9CM)" | translate }}
-          </div>
-          <div class="item" data-value="male">
-            {{ "high (10-12CM)" | translate }}
-          </div>
-        </div>
-      </div>
+      <div class="header">{{ "value required" | translate | titlecase }}</div>
     </div>
-    <div *ngIf="theProductForm.get('name')!.invalid" class="ui error message">
+    <!-- END error message of heel height -->
+
+    <!-- 
+    <div class="field">
+      <label>E-mail</label>
+      <input type="email" placeholder="joe@schmoe.com" />
+    </div>
+    <div class="ui error message">
       <div class="header">Action Forbidden</div>
       <p>
         You can only sign up for an account once with a given e-mail address.
       </p>
-    </div>
-
-    <div class="ui form error">
-      <div class="field">
-        <label>E-mail</label>
-        <input type="email" placeholder="joe@schmoe.com" />
-      </div>
-      <div class="ui error message">
-        <div class="header">Action Forbidden</div>
-        <p>
-          You can only sign up for an account once with a given e-mail address.
-        </p>
-      </div>
-      <div class="ui submit button">Submit</div>
-    </div>
+    </div> -->
+    <div class="ui submit button">{{ "submit" | translate | titlecase }}</div>
   </div>
 </form>
 

@@ -116,5 +116,9 @@
 
   "add to cart": "add to cart",
   "edit": "edit",
-  "remove item": "remove item"
+  "remove item": "remove item",
+  "product name": "product name",
+  "value required": "value required",
+  "select": "select",
+  "colors": "colors"
 }

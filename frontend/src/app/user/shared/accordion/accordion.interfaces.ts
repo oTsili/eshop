@@ -6,3 +6,7 @@
 export interface Panel {
   data: any;
 }
+
+export interface Element {
+  text: string;
+}
