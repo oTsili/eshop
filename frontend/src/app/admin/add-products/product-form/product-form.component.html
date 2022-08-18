@@ -2,6 +2,101 @@
   [formGroup]="theProductForm"
   (submit)="onSubmit(theProductForm)"
   *ngIf="!isLoading"
+>
+  <div class="ui form" [ngClass]="{ error: theProductForm.invalid }">
+    <div class="two fields">
+      <div
+        class="field"
+        [ngClass]="{ error: theProductForm.get('name')!.invalid }"
+      >
+        <label>product name</label>
+        <input placeholder="product name" type="text" />
+      </div>
+
+      <div
+        class="field"
+        [ngClass]="{ error: theProductForm.get('price')!.invalid }"
+      >
+        <label>Price</label>
+        <input placeholder="price" type="text" />
+      </div>
+    </div>
+    <div
+      *ngIf="
+        theProductForm.get('name')!.invalid ||
+        theProductForm.get('price')!.invalid
+      "
+      class="error-message two fields"
+    >
+      <div class="field" *ngIf="theProductForm.get('name')!.invalid">
+        <div class="ui error message">
+          <div class="header">Action Forbidden</div>
+          <p>
+            You can only sign up for an account once with a given e-mail
+            address.
+          </p>
+        </div>
+      </div>
+      <div class="field" *ngIf="theProductForm.get('price')!.invalid">
+        <div class="ui error message">
+          <div class="header">Action Forbidden</div>
+          <p>
+            You can only sign up for an account once with a given e-mail
+            address.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="field"
+      [ngClass]="{ error: theProductForm.get('name')!.invalid }"
+    >
+      <label>heel height</label>
+      <div openOptions class="ui selection dropdown">
+        <div class="default text">Select</div>
+        <i class="dropdown icon"></i>
+        <input type="hidden" name="heel_height" />
+        <div class="menu transition">
+          <div class="item" data-value="male">
+            {{ "low (3-5CM)" | translate }}
+          </div>
+          <div class="item" data-value="male">
+            {{ "medium (6-9CM)" | translate }}
+          </div>
+          <div class="item" data-value="male">
+            {{ "high (10-12CM)" | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="theProductForm.get('name')!.invalid" class="ui error message">
+      <div class="header">Action Forbidden</div>
+      <p>
+        You can only sign up for an account once with a given e-mail address.
+      </p>
+    </div>
+
+    <div class="ui form error">
+      <div class="field">
+        <label>E-mail</label>
+        <input type="email" placeholder="joe@schmoe.com" />
+      </div>
+      <div class="ui error message">
+        <div class="header">Action Forbidden</div>
+        <p>
+          You can only sign up for an account once with a given e-mail address.
+        </p>
+      </div>
+      <div class="ui submit button">Submit</div>
+    </div>
+  </div>
+</form>
+
+<!-- <form
+  [formGroup]="theProductForm"
+  (submit)="onSubmit(theProductForm)"
+  *ngIf="!isLoading"
   class="col"
 >
   <mat-form-field>
@@ -12,21 +107,63 @@
     }}</mat-error>
   </mat-form-field>
   <mat-form-field>
-    <mat-label>{{ "Colors" | translate }}</mat-label>
+    <mat-label>{{ "colors" | translate }}</mat-label>
     <input formControlName="colors" matInput type="text" required />
     <mat-error *ngIf="theProductForm.get('colors')!.invalid">{{
       "Please enter a valid name" | translate
     }}</mat-error>
   </mat-form-field>
   <mat-form-field>
-    <mat-label>{{ "Sizes" | translate }}</mat-label>
+    <mat-label>{{ "sizes" | translate }}</mat-label>
     <input formControlName="sizes" matInput type="text" />
     <mat-error *ngIf="theProductForm.get('sizes')!.invalid">{{
       "Please enter a valid name" | translate
     }}</mat-error>
   </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ "material" | translate }}</mat-label>
+    <input formControlName="material" matInput type="text" />
+    <mat-error *ngIf="theProductForm.get('material')!.invalid">{{
+      "Please enter a valid name" | translate
+    }}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ "price" | translate }}</mat-label>
+    <input formControlName="price" matInput type="text" />
+    <mat-error *ngIf="theProductForm.get('price')!.invalid">{{
+      "Please enter a valid name" | translate
+    }}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ "sales" | translate }}</mat-label>
+    <input formControlName="sales" matInput type="text" />
+    <mat-error *ngIf="theProductForm.get('sales')!.invalid">{{
+      "Please enter a valid name" | translate
+    }}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ "heel height" | translate }}</mat-label>
+    <input formControlName="heel_height" matInput type="text" />
+    <mat-error *ngIf="theProductForm.get('heel_height')!.invalid">{{
+      "Please enter a valid name" | translate
+    }}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ "description" | translate }}</mat-label>
+    <input formControlName="description" matInput type="text" />
+    <mat-error *ngIf="theProductForm.get('description')!.invalid">{{
+      "Please enter a valid name" | translate
+    }}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ "images" | translate }}</mat-label>
+    <input formControlName="images" matInput type="text" />
+    <mat-error *ngIf="theProductForm.get('images')!.invalid">{{
+      "Please enter a valid name" | translate
+    }}</mat-error>
+  </mat-form-field>
 
-  <button #submitButton [style.opacity]="0" mat-raised-button type="submit">
-    Signup
+  <button class="submit-button" #submitButton mat-raised-button type="submit">
+    submit
   </button>
-</form>
+</form> -->

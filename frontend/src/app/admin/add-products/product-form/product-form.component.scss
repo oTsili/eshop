@@ -1,22 +1,29 @@
-.col {
-  display: flex;
-  flex-direction: column;
-}
+@import "semantic-ui-css/semantic.css";
 
-:host {
-  ::ng-deep {
-    .mat-form-field.mat-focused .mat-form-field-label {
-      color: #555 !important;
-    }
-  }
-}
+// .col {
+//   display: flex;
+//   flex-direction: column;
+// }
 
-:host {
-  ::ng-deep {
-    .mat-form-field.mat-focused {
-      .mat-form-field-ripple {
-        background-color: #555;
-      }
-    }
-  }
-}
+// :host {
+//   ::ng-deep {
+//     .mat-form-field.mat-focused .mat-form-field-label {
+//       color: #555 !important;
+//     }
+//   }
+// }
+
+// :host {
+//   ::ng-deep {
+//     .mat-form-field.mat-focused {
+//       .mat-form-field-ripple {
+//         background-color: #555;
+//       }
+//     }
+//   }
+// }
+
+// .submit-button {
+//   background-color: #555;
+//   color: white;
+// }

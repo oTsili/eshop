@@ -54,10 +54,10 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup) {
-    if (form.invalid) {
-      console.log('invalid form');
-      return;
-    }
+    // if (form.invalid) {
+    //   console.log('invalid form');
+    //   return;
+    // }
 
     this.sumbitDate = this.appService.getDateString();
     console.log(this.sumbitDate);
@@ -90,10 +90,12 @@ export class ProductFormComponent implements OnInit {
       description,
     };
 
+    console.log({ user });
+
     this.productFormService.submitProductForm(user).subscribe(
       {
-        next: (c) => {
-          console.log(c);
+        next: (response) => {
+          console.log(response);
         },
       }
       // (data) => {

@@ -6,13 +6,16 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/user/shared/loader-factory';
+import { MatButtonModule } from '@angular/material/button';
+import { ToggleOptionsDirective } from '../directives/toggle-options.directive';
 
 @NgModule({
-  declarations: [ProductFormComponent],
+  declarations: [ProductFormComponent, ToggleOptionsDirective],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatInputModule,
+    // MatInputModule,
+    // MatButtonModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
