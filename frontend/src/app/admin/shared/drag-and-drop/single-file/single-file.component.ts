@@ -71,6 +71,8 @@ export class SingleFileComponent implements OnInit, OnChanges {
   append() {
     this.fileControl = new FormControl();
 
+    console.log(this.data.file);
+
     this.fileControl.patchValue({
       name: this.data.file.name,
       file: this.data.file,

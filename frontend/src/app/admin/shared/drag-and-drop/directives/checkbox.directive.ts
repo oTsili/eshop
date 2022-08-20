@@ -48,15 +48,9 @@ export class CheckboxDirective implements OnInit {
     event.preventDefault();
     event.stopPropagation();
 
-    console.log(this.altInputSiblings);
-    console.log(this.mainInputSiblings);
-    console.log(this.divSiblings);
-    console.log(this.inputSiblings);
-
     // remove the all the main or alt radio buttons,
     // respectivly to what is the current clicked button
     if (this.element.classList.contains('main-radio')) {
-      console.log(this.element);
       this.mainInputSiblings.forEach((el) => {
         this.renderer.removeClass(el, 'checked');
         this.renderer.removeAttribute(el, 'checked');

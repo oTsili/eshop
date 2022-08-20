@@ -1,17 +1,21 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ProductsController } from './product.controller';
 import { ProductService } from './product.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Product, ProductSchema } from './schemas/product.schema';
-import { NestjsFormDataModule } from 'nestjs-form-data';
+import { MulterModule } from '@nestjs/platform-express';
+import { extractFile } from 'src/custom-middlewares/multer.middleware';
 
 @Module({
   imports: [
-    // Basic
+    // MulterModule.register({
+    //   dest: './uploads',
+    // }),
+
+    /* Basic */
     // MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),
 
-    // With (pre/post hooks)middlewares
-    NestjsFormDataModule,
+    /* With (pre/post hooks)middlewares */
     MongooseModule.forFeatureAsync([
       {
         name: Product.name,
@@ -28,4 +32,8 @@ import { NestjsFormDataModule } from 'nestjs-form-data';
   controllers: [ProductsController],
   providers: [ProductService],
 })
-export class ProductModule {}
+export class ProductModule {
+  // configure(consumer: MiddlewareConsumer) {
+  //   consumer.apply(extractFile).forRoutes(ProductsController);
+  // }
+}

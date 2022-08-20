@@ -14,8 +14,10 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { request } from 'http';
+import { diskStorage } from 'multer';
 import { FormDataRequest } from 'nestjs-form-data';
 import { getMaxListeners } from 'process';
+import { MyNewFileInterceptor } from 'src/interceptors/file.interceptor';
 import { ProductService } from './product.service';
 import { Product } from './schemas/product.schema';
 
@@ -23,16 +25,29 @@ import { Product } from './schemas/product.schema';
 export class ProductsController {
   constructor(private readonly productService: ProductService) {}
 
-  @Post('upload')
-  @FormDataRequest()
-  @UseInterceptors(FileInterceptor('filePath'))
-  uploadFile(
-    @UploadedFile() file: Express.Multer.File,
-    @Body() body,
-    @Res() res: Response,
-  ) {
-    console.log({ file });
-    console.log({ body });
+  @Post('upload/:folder')
+  @UseInterceptors(
+    MyNewFileInterceptor('photo', (ctx) => {
+      // Get request from Context
+      const req = ctx.switchToHttp().getRequest();
+      // Return the options
+      return {
+        storage: diskStorage({
+          destination: `./static/images/products/${req.params.folder}`,
+          // tslint:disable-next-line: variable-name
+          filename: (req, file, cb) => {
+            const name = file.originalname.toLowerCase().split(' ').join('-');
+
+            const extension = file.mimetype.split('/')[1];
+            return cb(null, `${name}-${Date.now()}.${extension}`);
+          },
+        }),
+      };
+    }),
+  )
+  uploadSingle(@UploadedFile() file, @Res() res: Response, @Body() body) {
+    console.log(file);
+    console.log(body.email);
 
     res.status(HttpStatus.OK).json({ file });
   }
