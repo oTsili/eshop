@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Chip } from '../shared/side-bar/side-bar.interfaces';
 import { Product } from './product.interface';
 
-const BACKEND_URL = environment.BASE_URL + 'products';
+const BACKEND_URL = environment.BASE_URL + 'product';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {

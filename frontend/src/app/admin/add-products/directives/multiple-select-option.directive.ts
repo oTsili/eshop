@@ -38,7 +38,8 @@ export class MultipleSelectOption implements OnInit {
     this.renderer.addClass(aElem, 'visible');
 
     // set the data-value
-    const dataValue = this.elementRef.nativeElement.getAttribute('data-value');
+    // const dataValue = this.elementRef.nativeElement.getAttribute('data-value');
+    const dataValue = this.elementRef.nativeElement.innerText;
     this.renderer.setAttribute(aElem, 'data-value', dataValue);
 
     const text = this.renderer.createText(dataValue);
@@ -53,6 +54,9 @@ export class MultipleSelectOption implements OnInit {
     this.renderer.appendChild(aElem, iElem);
     // add a listener to the delete icon
     this.renderer.listen(iElem, 'click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
       // remove the a element from the list of selected colors
       aElem.remove();
       //   add the color to the list of options (so that it can be selected again)

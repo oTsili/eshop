@@ -3,6 +3,7 @@
 }
 .form {
   min-width: -webkit-fill-available;
+  max-width: fit-content;
   padding: 0 3%;
   padding-right: 10%;
 }

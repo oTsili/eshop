@@ -7,7 +7,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
-import { ProductsModule } from './products/products.module';
+import { ProductModule } from './product/product.module';
 import { CarouselSlidesModule } from './carousel-slides/carousel-slides.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { GridCategoriesModule } from './grid-categories/grid-categories.module';
@@ -20,6 +20,9 @@ import { CartModule } from './cart/cart.module';
 import { WhishlistModule } from './whishlist/whishlist.module';
 import { AccountModule } from './account/account.module';
 import { SharedModule } from './shared/shared.module';
+import { NominalNumberModule } from './nominal-number/nominal-number.module';
+import { SupplyHistoryModule } from './supply-history/supply-history.module';
+import { CustomerHistoryModule } from './customer-history/customer-history.module';
 
 @Module({
   // connect to the demo Database
@@ -53,7 +56,7 @@ import { SharedModule } from './shared/shared.module';
     //     AcceptLanguageResolver,
     //   ],
     // }),
-    ProductsModule,
+    ProductModule,
     CarouselSlidesModule,
     NavbarModule,
     GridCategoriesModule,
@@ -64,6 +67,9 @@ import { SharedModule } from './shared/shared.module';
     WhishlistModule,
     AccountModule,
     SharedModule,
+    NominalNumberModule,
+    SupplyHistoryModule,
+    CustomerHistoryModule,
     // ColorsModule,
   ],
   controllers: [TestController],

@@ -123,5 +123,7 @@
   "product name": "όνομα προϊόντος",
   "value required": "υποχρεωτικό πεδίο",
   "select": "επιλογή",
-  "colors": "χρώματα"
+  "colors": "χρώματα",
+  "select colors": "επιλέξτε χρώματα",
+  "submit": "αποθήκευση"
 }

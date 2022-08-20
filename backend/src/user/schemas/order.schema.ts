@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Product } from 'src/products/schemas/product.schema';
+import { Product } from 'src/product/schemas/product.schema';
 
 // Nested Schema
 @Schema()

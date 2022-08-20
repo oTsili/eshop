@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Schema as MongooseSchema, Types } from 'mongoose';
 
 export type ProductDocument = Product & Document;
 
@@ -13,11 +13,17 @@ export class Product {
   @Prop()
   altSrc: string;
 
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'NominalNumber' })
+  nominal_number: Types.ObjectId;
+
   @Prop()
   name: string;
 
   @Prop()
-  color: string[];
+  colors: string[];
+
+  @Prop()
+  main_color: string;
 
   @Prop()
   heel_height: string;
@@ -36,6 +42,9 @@ export class Product {
 
   @Prop()
   sales: string;
+
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Supplier' })
+  supplier: Types.ObjectId;
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);

@@ -12,19 +12,29 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Response } from 'express';
 import { request } from 'http';
+import { FormDataRequest } from 'nestjs-form-data';
 import { getMaxListeners } from 'process';
-import { ProductsService } from './products.service';
+import { ProductService } from './product.service';
 import { Product } from './schemas/product.schema';
 
-@Controller('products')
+@Controller('product')
 export class ProductsController {
-  constructor(private readonly productService: ProductsService) {}
+  constructor(private readonly productService: ProductService) {}
 
   @Post('upload')
-  @UseInterceptors(FileInterceptor('file'))
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
-    console.log(file);
+  @FormDataRequest()
+  @UseInterceptors(FileInterceptor('filePath'))
+  uploadFile(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() body,
+    @Res() res: Response,
+  ) {
+    console.log({ file });
+    console.log({ body });
+
+    res.status(HttpStatus.OK).json({ file });
   }
 
   @Post()
