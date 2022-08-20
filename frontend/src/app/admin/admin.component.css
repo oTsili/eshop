@@ -38,6 +38,8 @@ a:hover,
   padding: 9%;
 }
 .expand-icon {
+  position: sticky;
+  top: 2rem;
   background: #1b1c1d;
   padding: 0.9%;
   font-size: 1.5rem;
@@ -51,7 +53,11 @@ a:hover,
 }
 
 .icon-wrapper {
-  height: 2rem;
+  height: 4rem;
+  width: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .icon-wrapper:hover {
@@ -85,4 +91,8 @@ a:hover,
   padding: 2rem;
   transition: all 0.2s ease-in-out;
   /* margin-left: 16rem; */
+}
+
+.col-expand-icon {
+  position: relative;
 }

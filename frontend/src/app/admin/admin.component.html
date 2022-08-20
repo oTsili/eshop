@@ -1,12 +1,14 @@
 <!-- <a class="link" toggleActive>Open SideBar</a> -->
 
 <div class="dashboard-container">
-  <div [@slideOutIn] *ngIf="!isOpenSideBar" class="link expand-icon">
-    <a (click)="isOpenSideBar = true" class="link icon-link right-align">
-      <div class="icon-wrapper">
-        <i class="angle double right icon"></i>
-      </div>
-    </a>
+  <div class="col-expand-icon">
+    <div [@slideOutIn] *ngIf="!isOpenSideBar" class="link expand-icon">
+      <a (click)="isOpenSideBar = true" class="link icon-link right-align">
+        <div class="icon-wrapper">
+          <i class="angle double right icon"></i>
+        </div>
+      </a>
+    </div>
   </div>
   <div class="col-sidebar">
     <div [@slideInOut] *ngIf="isOpenSideBar" class="ui inverted vertical menu">
