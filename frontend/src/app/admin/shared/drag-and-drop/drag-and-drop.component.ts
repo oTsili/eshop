@@ -55,6 +55,22 @@ export class DragAndDropComponent implements OnInit {
     // this.uploadFilesSimulator(0);
   }
 
+  onSubmitFiles() {
+    // update the control
+    // this.append();
+
+    // console.log({ control: this.fileControl });
+    // send the control
+    this.dragAndDropService.uploadFiles(this.files).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (response) => {
+        console.error(response.error);
+      },
+    });
+  }
+
   loadComponent(file) {
     /**
      * Create a view container where we will insert our

@@ -1,54 +1,53 @@
 // import multer from 'multer';
 import { NextFunction, Request } from 'express';
 import multer from 'multer';
+import { diskStorage } from 'multer';
 import { MimeValidationError } from 'src/custom-errors/invalid-mime.error';
+import { Injectable, NestMiddleware } from '@nestjs/common';
 
-const storage = (mimeTypeMap: any, folder: any) => {
-  console.log('paokara!!!!!');
-  return multer.diskStorage({
-    destination: (
-      req: Request,
-      file: Express.Multer.File,
-      cb: { (error: Error | null, destination: string): void },
-    ) => {
-      // throw a specific error from the middlewares of common library I have published
-      const isValid = mimeTypeMap[file.mimetype]!;
-      let error = new MimeValidationError();
-      if (isValid) {
-        error = null as any;
-      }
-      cb(error, folder);
-    },
-    filename: (
-      req: Request,
-      file: Express.Multer.File,
-      cb: { (error: Error | null, destination: string): void },
-    ) => {
-      const name = file.originalname.toLowerCase().split(' ').join('-');
-      const ext = mimeTypeMap[file.mimetype];
-      cb(null, `${name}-${Date.now()}.${ext}`);
-    },
-  });
-};
+@Injectable()
+export class FilesMiddleware implements NestMiddleware {
+  // private storage = {...};
 
-const extractFile = (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-  // MIME_TYPE_MAP: { [key: string]: any },
-  // folder: string,
-  // formName: string,
-) => {
-  console.log(req.headers.mime_type_map);
-  const mime_types = JSON.parse(req.headers.mime_type_map as string);
+  async use(req, res, next) {
+    const upload = multer({
+      storage: diskStorage({
+        destination: `./static/images/products/${req.params.folder}`,
+        // tslint:disable-next-line: variable-name
+        filename: (req, file, cb) => {
+          const name = file.originalname.toLowerCase().split(' ').join('-');
 
-  multer({
-    storage: storage(mime_types, req.headers.folder as string),
-  }).single(req.headers.fileKey as string);
-};
+          const extension = file.mimetype.split('/')[1];
+          return cb(null, `${name}-${Date.now()}.${extension}`);
+        },
+      }),
+    });
+    // wait until upload has finished
+    await new Promise<void>((resolve, reject) => {
+      upload.array('files')(req, res, (err) => (err ? reject(err) : resolve()));
+    });
+    // Then you can access the new file names
+    console.log(req.files.map((file) => file.filename));
+    return next();
+  }
+}
 
-export { extractFile };
-// export function extractFile(req: Request, res: Response, next: NextFunction) {
-//   console.log(`Request...`);
-//   next();
-// };
+// @Injectable()
+// export class extractFile implements NestMiddleware {
+//   use(req: Request, res: Response, next: NextFunction) {
+//     console.log(`Request...`);
+//     multer({
+//       storage: diskStorage({
+//         destination: `./static/images/products/${req.params.folder}`,
+//         // tslint:disable-next-line: variable-name
+//         filename: (req, file, cb) => {
+//           const name = file.originalname.toLowerCase().split(' ').join('-');
+
+//           const extension = file.mimetype.split('/')[1];
+//           return cb(null, `${name}-${Date.now()}.${extension}`);
+//         },
+//       }),
+//     });
+//     next();
+//   }
+// }

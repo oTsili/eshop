@@ -9,15 +9,13 @@ import {
   Req,
   Res,
   UploadedFile,
+  UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
-import { request } from 'http';
 import { diskStorage } from 'multer';
 import { FormDataRequest } from 'nestjs-form-data';
-import { getMaxListeners } from 'process';
-import { MyNewFileInterceptor } from 'src/interceptors/file.interceptor';
+import { MyNewFilesInterceptor } from 'src/interceptors/files.interceptor';
 import { ProductService } from './product.service';
 import { Product } from './schemas/product.schema';
 
@@ -27,7 +25,7 @@ export class ProductsController {
 
   @Post('upload/:folder')
   @UseInterceptors(
-    MyNewFileInterceptor('photo', (ctx) => {
+    MyNewFilesInterceptor('photo[]', (ctx) => {
       // Get request from Context
       const req = ctx.switchToHttp().getRequest();
       // Return the options
@@ -45,11 +43,18 @@ export class ProductsController {
       };
     }),
   )
-  uploadSingle(@UploadedFile() file, @Res() res: Response, @Body() body) {
-    console.log(file);
+  uploadSingle(
+    @UploadedFiles() files: Array<Express.Multer.File>,
+    @Res() res: Response,
+    @Body() body,
+  ) {
+    for (let file of files) {
+      console.log(file.filename);
+    }
+    // console.log(files);
     console.log(body.email);
 
-    res.status(HttpStatus.OK).json({ file });
+    res.status(HttpStatus.OK).json({ files });
   }
 
   @Post()

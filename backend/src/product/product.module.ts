@@ -4,7 +4,6 @@ import { ProductService } from './product.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Product, ProductSchema } from './schemas/product.schema';
 import { MulterModule } from '@nestjs/platform-express';
-import { extractFile } from 'src/custom-middlewares/multer.middleware';
 
 @Module({
   imports: [
@@ -34,6 +33,6 @@ import { extractFile } from 'src/custom-middlewares/multer.middleware';
 })
 export class ProductModule {
   // configure(consumer: MiddlewareConsumer) {
-  //   consumer.apply(extractFile).forRoutes(ProductsController);
+  //   consumer.apply(extractFileOld).forRoutes(ProductsController);
   // }
 }
