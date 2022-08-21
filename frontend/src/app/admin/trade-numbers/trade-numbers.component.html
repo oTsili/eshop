@@ -1,0 +1,81 @@
+<div class="trade-number-container">
+  <table *ngIf="trade_numbers.styles" class="ui red table">
+    <thead>
+      <tr>
+        <th colspan="3">Style</th>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <th>Code</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let style of trade_numbers.styles">
+        <td>{{ style.description }}</td>
+        <td>{{ style.code }}</td>
+        <td><i class="ph-pencil-thin"></i></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table *ngIf="trade_numbers.types" class="ui orange table">
+    <thead>
+      <tr>
+        <th colspan="3">Type</th>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <th>Code</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let style of trade_numbers.types">
+        <td>{{ style.description }}</td>
+        <td>{{ style.code }}</td>
+        <td><i class="ph-pencil-thin"></i></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table *ngIf="trade_numbers.colors" class="ui yellow table">
+    <thead>
+      <tr>
+        <th colspan="3">Color</th>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <th>Code</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let style of trade_numbers.colors">
+        <td>{{ style.description }}</td>
+        <td>{{ style.code }}</td>
+        <td><i class="ph-pencil-thin"></i></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table *ngIf="trade_numbers.seasons" class="ui olive table">
+    <thead>
+      <tr>
+        <th colspan="3">Season</th>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <th>Code</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let style of trade_numbers.seasons">
+        <td>{{ style.description }}</td>
+        <td>{{ style.code }}</td>
+        <td><i class="ph-pencil-thin"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

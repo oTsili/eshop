@@ -8,6 +8,7 @@ import { HomeModule } from './home/home.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../user/shared/loader-factory';
+import { TradeNumbersModule } from './trade-numbers/trade-numbers.module';
 
 @NgModule({
   declarations: [AdminComponent],
@@ -15,6 +16,7 @@ import { HttpLoaderFactory } from '../user/shared/loader-factory';
     CommonModule,
     AdminRoutingModule,
     AddProductsModule,
+    TradeNumbersModule,
     HomeModule,
     RouterModule,
     // ngx-translate and the loader module

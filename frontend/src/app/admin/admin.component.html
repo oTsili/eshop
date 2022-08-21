@@ -25,19 +25,19 @@
           <img src="assets/images/admin/astronaut.webp" />
         </a>
       </div>
-      <a routerLink="home" class="item">
+      <a routerLink="home" routerLinkActive="active" class="item">
         <i class="home icon"></i>
         Home
       </a>
-      <a class="item">
+      <a routerLink="trade-numbers" routerLinkActive="active" class="item">
         <i class="block layout icon"></i>
-        Topics
+        Trade Numbers
       </a>
-      <a class="item">
+      <a class="item" routerLinkActive="active">
         <i class="smile icon"></i>
         Friends
       </a>
-      <a routerLink="add-products" class="item">
+      <a routerLink="add-products" routerLinkActive="active" class="item">
         <i class="upload icon"></i>
         Products
       </a>
@@ -48,7 +48,6 @@
     class="col-main"
     [ngStyle]="{ 'margin-left': isOpenSideBar ? '16rem' : '0' }"
   >
-    paokara
     <router-outlet></router-outlet>
   </div>
 </div>

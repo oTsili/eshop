@@ -4,6 +4,26 @@ import { ProductService } from './product.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Product, ProductSchema } from './schemas/product.schema';
 import { MulterModule } from '@nestjs/platform-express';
+import {
+  DirectoryColor,
+  DirectoryColorSchema,
+} from './schemas/directory-color.schema';
+import {
+  DirectoryStyle,
+  DirectoryStyleSchema,
+} from './schemas/directory-style.schema';
+import {
+  DirectorySize,
+  DirectorySizeSchema,
+} from './schemas/directory-size.schema';
+import {
+  DirectoryType,
+  DirectoryTypeSchema,
+} from './schemas/directory-type.schema';
+import {
+  DirectorySeason,
+  DirectorySeasonSchema,
+} from './schemas/directory-season.schema';
 
 @Module({
   imports: [
@@ -12,7 +32,13 @@ import { MulterModule } from '@nestjs/platform-express';
     // }),
 
     /* Basic */
-    // MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),
+    MongooseModule.forFeature([
+      { name: DirectorySeason.name, schema: DirectorySeasonSchema },
+      { name: DirectoryColor.name, schema: DirectoryColorSchema },
+      { name: DirectoryStyle.name, schema: DirectoryStyleSchema },
+      { name: DirectorySize.name, schema: DirectorySizeSchema },
+      { name: DirectoryType.name, schema: DirectoryTypeSchema },
+    ]),
 
     /* With (pre/post hooks)middlewares */
     MongooseModule.forFeatureAsync([
