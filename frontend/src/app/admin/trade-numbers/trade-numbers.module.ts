@@ -4,11 +4,12 @@ import { TradeNumbersComponent } from './trade-numbers.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/user/shared/loader-factory';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AddRowDirective } from './directives/add-row.directive';
+import { enableFormDirective } from './directives/enable-form-control.directive';
 
 @NgModule({
-  declarations: [TradeNumbersComponent],
+  declarations: [TradeNumbersComponent, AddRowDirective, enableFormDirective],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -21,5 +22,6 @@ import { BrowserModule } from '@angular/platform-browser';
       },
     }),
   ],
+  // exports: [addRowDirective],
 })
 export class TradeNumbersModule {}

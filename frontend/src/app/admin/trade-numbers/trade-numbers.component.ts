@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TradeNumbersService } from './trade-numbers.service';
 
 @Component({
   selector: 'app-trade-numbers',
   templateUrl: './trade-numbers.component.html',
-  styleUrls: ['./trade-numbers.component.css'],
+  styleUrls: ['./trade-numbers.component.scss'],
 })
 export class TradeNumbersComponent implements OnInit {
-  theTradeNumberForm: FormGroup;
+  styleForm: FormGroup;
+  typeForm: FormGroup;
+  colorsForm: FormGroup;
+  seasonForm: FormGroup;
   isLoading = false;
   trade_numbers;
 
@@ -17,17 +20,9 @@ export class TradeNumbersComponent implements OnInit {
   ngOnInit(): void {
     this.getTradeNumbers();
 
-    this.theTradeNumberForm = new FormGroup({
-      size_description: new FormControl(null, {}),
-      size_code: new FormControl(null, {}),
-      type_description: new FormControl(null, {}),
-      type_code: new FormControl(null, {}),
+    this.styleForm = new FormGroup({
       style_description: new FormControl(null, {}),
       style_code: new FormControl(null, {}),
-      color_description: new FormControl(null, {}),
-      color_code: new FormControl(null, {}),
-      season_description: new FormControl(null, {}),
-      season_code: new FormControl(null, {}),
     });
   }
 
@@ -41,4 +36,6 @@ export class TradeNumbersComponent implements OnInit {
       },
     });
   }
+
+  deleteRow(style) {}
 }
