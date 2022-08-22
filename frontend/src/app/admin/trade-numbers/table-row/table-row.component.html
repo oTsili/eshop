@@ -1,0 +1,39 @@
+
+  <td>
+    <input
+      class="disabled"
+      formControlName="category_description"
+      placeholder="{{ category.description | translate | titlecase }}"
+      type="text"
+    />
+    <div class="div-text">
+      {{ category.description | translate | titlecase }}
+    </div>
+  </td>
+  <td>
+    <input
+      class="disabled"
+      formControlName="category_code"
+      placeholder="{{ category.code }}"
+      type="text"
+    />
+    <div class="div-text">
+      {{ category.code }}
+    </div>
+  </td>
+  <td>
+    <a class="disabled checkmark-icon">
+      <i class="large green checkmark icon"></i>
+    </a>
+  </td>
+  <td>
+    <a enableform>
+      <i class="ph-pencil-thin"></i>
+    </a>
+  </td>
+  <td>
+    <a (click)="deleteRow(category)">
+      <i class="ph-trash-thin"></i>
+    </a>
+  </td>
+

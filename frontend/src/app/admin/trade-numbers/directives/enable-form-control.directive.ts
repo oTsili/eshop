@@ -57,6 +57,9 @@ export class enableFormDirective implements OnInit {
           '.checkmark-icon'
         )[this.texts.length / 2 - 1];
       console.log(this.checkmarkIcon);
+      console.log(
+        this.eleementRef.nativeElement.parentElement.parentElement.parentElement
+      );
     }
 
     if (!this.isOpenForm) {

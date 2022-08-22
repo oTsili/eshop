@@ -1,0 +1,32 @@
+<div [formGroup]="styleForm" class="ui form">
+  <table class="ui red table">
+    <thead>
+      <tr>
+        <th colspan="5">Style</th>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <th>Code</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let item of items">
+        <ng-container [ngTemplateOutlet]="item.templateRef"></ng-container>
+      </ng-container>
+
+      <ng-template tableRowHost></ng-template>
+      <!-- <tr class="row" #tableRowHost></tr> -->
+      <tr class="centered">
+        <td colspan="5">
+          <button (click)="onAdd()" category="style" class="ui primary button">
+            <i class="ph-plus-bold"></i>
+            <span>ADD</span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

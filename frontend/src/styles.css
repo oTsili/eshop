@@ -64,6 +64,8 @@ Medium: 11px
 
 */
 
+@import "semantic-ui-css/semantic.css";
+
 * {
   padding: 0;
   margin: 0;

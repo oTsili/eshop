@@ -1,5 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ContentChild,
+  ContentChildren,
+  OnInit,
+  QueryList,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TableRowDirective } from './directives/table-row.directive';
+import { TableRow } from './table-row/table-row.interfaces';
 import { TradeNumbersService } from './trade-numbers.service';
 
 @Component({
@@ -8,21 +17,32 @@ import { TradeNumbersService } from './trade-numbers.service';
   styleUrls: ['./trade-numbers.component.scss'],
 })
 export class TradeNumbersComponent implements OnInit {
-  styleForm: FormGroup;
+  style_description = new FormControl('', {});
+  style_code = new FormControl('', {});
+
   typeForm: FormGroup;
-  colorsForm: FormGroup;
+  colorForm: FormGroup;
   seasonForm: FormGroup;
   isLoading = false;
   trade_numbers;
+
 
   constructor(private tradeNumbersService: TradeNumbersService) {}
 
   ngOnInit(): void {
     this.getTradeNumbers();
 
-    this.styleForm = new FormGroup({
-      style_description: new FormControl(null, {}),
-      style_code: new FormControl(null, {}),
+    this.typeForm = new FormGroup({
+      type_description: new FormControl(null, {}),
+      type_code: new FormControl(null, {}),
+    });
+    this.colorForm = new FormGroup({
+      color_description: new FormControl(null, {}),
+      color_code: new FormControl(null, {}),
+    });
+    this.seasonForm = new FormGroup({
+      season_description: new FormControl(null, {}),
+      season_code: new FormControl(null, {}),
     });
   }
 
