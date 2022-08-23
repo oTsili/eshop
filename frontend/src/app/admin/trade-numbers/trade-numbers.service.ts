@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { TableRowDynamicComponent } from './table-row-dynamic/table-row-dynamic.component';
 import { TableRowItem } from './table-row/table-row.class';
 import { TableRowComponent } from './table-row/table-row.component';
 
@@ -19,7 +18,8 @@ export class TradeNumbersService {
     });
   }
 
-  getTableRow(category) {
-    return new TableRowItem(TableRowDynamicComponent, { category });
+  getTableRow(category, category_style) {
+    // console.log({ category_style });
+    return new TableRowItem(TableRowComponent, { category, category_style });
   }
 }

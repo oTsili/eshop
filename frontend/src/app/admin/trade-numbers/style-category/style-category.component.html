@@ -1,8 +1,10 @@
-<div [formGroup]="styleForm" class="ui form">
-  <table class="ui red table">
+<div class="ui form">
+  <table class="ui table">
     <thead>
-      <tr>
-        <th colspan="5">Style</th>
+      <tr class="table-header">
+        <th colspan="5">
+          <ng-content [table_header]></ng-content>
+        </th>
       </tr>
       <tr>
         <th>Description</th>

@@ -8,14 +8,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StyleCategoryModule } from './style-category/style-category.module';
 import { TableRowDirectivesModule } from './directives/table-row-directives.module';
 import { TableRowModule } from './table-row/table-row.module';
-import { TableRowDynamicModule } from './table-row-dynamic/table-row-dynamic.module';
 
 @NgModule({
   declarations: [TradeNumbersComponent],
   imports: [
     CommonModule,
     TableRowModule,
-    // TableRowDynamicModule,
     StyleCategoryModule,
     TableRowDirectivesModule,
     ReactiveFormsModule,

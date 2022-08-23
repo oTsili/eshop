@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
   Param,
@@ -56,120 +57,6 @@ export class ProductsController {
     console.log(body.email);
 
     res.status(HttpStatus.OK).json({ files });
-  }
-
-  @Post('trade-number/:category')
-  async createTradeNumDirectory(
-    @Res() response,
-    @Body() directories: Array<any>,
-    @Param('category') category,
-  ) {
-    let directoriesSaved = [];
-    switch (category) {
-      case 'season':
-        console.log({ season: category });
-        directoriesSaved = await this.productService.createDirectorySeason(
-          directories,
-        );
-
-        break;
-      case 'style':
-        console.log({ style: category });
-        directoriesSaved = await this.productService.createDirectoryStyle(
-          directories,
-        );
-
-        break;
-      case 'size':
-        console.log({ size: category });
-        directoriesSaved = await this.productService.createDirectorySize(
-          directories,
-        );
-        break;
-      case 'type':
-        console.log({ type: category });
-        directoriesSaved = await this.productService.createDirectoryType(
-          directories,
-        );
-
-        break;
-      case 'color':
-        console.log({ color: category });
-        directoriesSaved = await this.productService.createDirectoryColor(
-          directories,
-        );
-        break;
-    }
-
-    return response.status(HttpStatus.CREATED).json({
-      directoriesSaved,
-    });
-  }
-
-  @Put('trade-number/:category')
-  async updateTradeNumDirectory(
-    @Res() response,
-    @Body() directories: Array<any>,
-    @Param('category') category,
-  ) {
-    let directoryUpdated;
-    switch (category) {
-      case 'season':
-        console.log({ season: category });
-        directoryUpdated = await this.productService.updateDirectorySeason(
-          directories,
-        );
-        break;
-
-      case 'style':
-        console.log({ style: category });
-        directoryUpdated = await this.productService.updateDirectoryStyle(
-          directories,
-        );
-        break;
-
-      case 'size':
-        console.log({ size: category });
-        directoryUpdated = await this.productService.updateDirectorySize(
-          directories,
-        );
-        break;
-
-      case 'type':
-        console.log({ type: category });
-        directoryUpdated = await this.productService.updateDirectoryType(
-          directories,
-        );
-        break;
-
-      case 'color':
-        console.log({ color: category });
-        directoryUpdated = await this.productService.updateDirectoryColor(
-          directories,
-        );
-        break;
-    }
-
-    return response.status(HttpStatus.CREATED).json({
-      directoryUpdated,
-    });
-  }
-
-  @Get('trade-number')
-  async fetchTradeNumber(@Res() response) {
-    let seasons = await this.productService.findDirectorySeason();
-    let colors = await this.productService.findDirectoryColor();
-    let types = await this.productService.findDirectoryType();
-    let styles = await this.productService.findDirectoryStyle();
-
-    const trade_numbers = {
-      seasons,
-      colors,
-      types,
-      styles,
-    };
-
-    response.status(HttpStatus.OK).json(trade_numbers);
   }
 
   @Post()

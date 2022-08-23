@@ -1,39 +1,44 @@
-
-  <td>
-    <input
-      class="disabled"
-      formControlName="category_description"
-      placeholder="{{ category.description | translate | titlecase }}"
-      type="text"
-    />
-    <div class="div-text">
-      {{ category.description | translate | titlecase }}
-    </div>
-  </td>
-  <td>
-    <input
-      class="disabled"
-      formControlName="category_code"
-      placeholder="{{ category.code }}"
-      type="text"
-    />
-    <div class="div-text">
-      {{ category.code }}
-    </div>
-  </td>
-  <td>
-    <a class="disabled checkmark-icon">
-      <i class="large green checkmark icon"></i>
-    </a>
-  </td>
-  <td>
-    <a enableform>
-      <i class="ph-pencil-thin"></i>
-    </a>
-  </td>
-  <td>
-    <a (click)="deleteRow(category)">
-      <i class="ph-trash-thin"></i>
-    </a>
-  </td>
-
+<td class="category-description">
+  <input
+    class="disabled"
+    [(ngModel)]="category.description"
+    #descriptionInput="ngModel"
+    placeholder="{{ category.description | translate | titlecase }}"
+    type="text"
+    value="{{ category.description }}"
+  />
+  <div class="div-text">
+    {{ descriptionInput.value | translate | titlecase }}
+  </div>
+</td>
+<td class="category-code">
+  <input
+    class="disabled"
+    [(ngModel)]="category.code"
+    #codeInput="ngModel"
+    placeholder="{{ category.code }}"
+    type="text"
+    value="{{ category.code }}"
+  />
+  <div class="div-text">
+    {{ codeInput.value }}
+  </div>
+</td>
+<td>
+  <a
+    (click)="updateRow(descriptionInput.value, codeInput.value)"
+    class="disabled checkmark-icon"
+  >
+    <i class="large green checkmark icon"></i>
+  </a>
+</td>
+<td>
+  <a enableform>
+    <i class="ph-pencil-thin"></i>
+  </a>
+</td>
+<td>
+  <a (click)="deleteRow()">
+    <i class="ph-trash-thin"></i>
+  </a>
+</td>

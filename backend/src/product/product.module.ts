@@ -24,6 +24,8 @@ import {
   DirectorySeason,
   DirectorySeasonSchema,
 } from './schemas/directory-season.schema';
+import { ProductsTradeNumberController } from './product-trade-numbers.controller';
+import { ProductTradeNumberService } from './product-trade-number.service';
 
 @Module({
   imports: [
@@ -54,8 +56,8 @@ import {
       },
     ]),
   ],
-  controllers: [ProductsController],
-  providers: [ProductService],
+  controllers: [ProductsController, ProductsTradeNumberController],
+  providers: [ProductService, ProductTradeNumberService],
 })
 export class ProductModule {
   // configure(consumer: MiddlewareConsumer) {

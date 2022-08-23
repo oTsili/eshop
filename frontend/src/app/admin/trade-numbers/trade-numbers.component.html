@@ -1,221 +1,81 @@
 <div class="trade-number-container">
   <!-- START Style table -->
-  <app-style-category *ngIf="trade_numbers" [category]="trade_numbers.styles">
+  <app-style-category
+    *ngIf="trade_numbers"
+    [category]="trade_numbers.styles"
+    [category_style]="'style'"
+  >
+    <ng-container table_header> Style </ng-container>
     <ng-container *ngFor="let style of trade_numbers.styles">
       <ng-template tableRowContent>
-        <tr class="row" app-table-row [category]="style"></tr>
+        <tr
+          class="row"
+          app-table-row
+          [category]="style"
+          [category_style]="'style'"
+        ></tr>
       </ng-template>
     </ng-container>
   </app-style-category>
   <!-- END Style table -->
 
   <!-- START type table -->
-  <div [formGroup]="typeForm" class="ui form">
-    <table *ngIf="trade_numbers && trade_numbers.types" class="ui orange table">
-      <thead>
-        <tr>
-          <th colspan="5">Type</th>
-        </tr>
-        <tr>
-          <th>Description</th>
-          <th>Code</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="row" *ngFor="let type of trade_numbers.types">
-          <td>
-            <input
-              class="disabled"
-              formControlName="type_description"
-              placeholder="{{ type.description | translate | titlecase }}"
-              type="text"
-            />
-            <div class="div-text">
-              {{ type.description | translate | titlecase }}
-            </div>
-          </td>
-          <td>
-            <input
-              class="disabled"
-              formControlName="type_code"
-              placeholder="{{ type.code }}"
-              type="text"
-            />
-            <div class="div-text">
-              {{ type.code }}
-            </div>
-          </td>
-          <td>
-            <a class="disabled checkmark-icon">
-              <i class="large green checkmark icon"></i>
-            </a>
-          </td>
-          <td>
-            <a>
-              <i class="ph-pencil-thin"></i>
-            </a>
-          </td>
-          <td>
-            <a (click)="deleteRow(type)">
-              <i class="ph-trash-thin"></i>
-            </a>
-          </td>
-        </tr>
-        <tr class="centered">
-          <td colspan="5">
-            <button addTableRow category="type" class="ui primary button">
-              <i class="ph-plus-bold"></i>
-              <span>ADD</span>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <app-style-category
+    *ngIf="trade_numbers"
+    [category]="trade_numbers.types"
+    [category_style]="'type'"
+  >
+    <ng-container table_header> Type </ng-container>
+    <ng-container *ngFor="let type of trade_numbers.types">
+      <ng-template tableRowContent>
+        <tr
+          class="row"
+          app-table-row
+          [category]="type"
+          [category_style]="'type'"
+        ></tr>
+      </ng-template>
+    </ng-container>
+  </app-style-category>
   <!-- END types table -->
 
   <!-- START color table -->
-  <div [formGroup]="colorForm" class="ui form">
-    <table
-      *ngIf="trade_numbers && trade_numbers.colors"
-      class="ui yellow table"
-    >
-      <thead>
-        <tr>
-          <th colspan="5">Style</th>
-        </tr>
-        <tr>
-          <th>Description</th>
-          <th>Code</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="row" *ngFor="let color of trade_numbers.colors">
-          <td>
-            <input
-              class="disabled"
-              formControlName="color_description"
-              placeholder="{{ color.description | translate | titlecase }}"
-              type="text"
-            />
-            <div class="div-text">
-              {{ color.description | translate | titlecase }}
-            </div>
-          </td>
-          <td>
-            <input
-              class="disabled"
-              formControlName="color_code"
-              placeholder="{{ color.code }}"
-              type="text"
-            />
-            <div class="div-text">
-              {{ color.code }}
-            </div>
-          </td>
-          <td>
-            <a class="disabled checkmark-icon">
-              <i class="large green checkmark icon"></i>
-            </a>
-          </td>
-          <td>
-            <a>
-              <i class="ph-pencil-thin"></i>
-            </a>
-          </td>
-          <td>
-            <a (click)="deleteRow(color)">
-              <i class="ph-trash-thin"></i>
-            </a>
-          </td>
-        </tr>
-        <tr class="centered">
-          <td colspan="5">
-            <button addTableRow category="color" class="ui primary button">
-              <i class="ph-plus-bold"></i>
-              <span>ADD</span>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <app-style-category
+    *ngIf="trade_numbers"
+    [category]="trade_numbers.colors"
+    [category_style]="'color'"
+  >
+    <ng-container table_header> Color </ng-container>
+    <ng-container *ngFor="let color of trade_numbers.colors">
+      <ng-template tableRowContent>
+        <tr
+          class="row"
+          app-table-row
+          [category]="color"
+          [category_style]="'color'"
+        ></tr>
+      </ng-template>
+    </ng-container>
+  </app-style-category>
   <!-- END color table -->
 
   <!-- START season table -->
-  <div [formGroup]="seasonForm" class="ui form">
-    <table
-      *ngIf="trade_numbers && trade_numbers.seasons"
-      class="ui brown table"
-    >
-      <thead>
-        <tr>
-          <th colspan="5">Style</th>
-        </tr>
-        <tr>
-          <th>Description</th>
-          <th>Code</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="row" *ngFor="let season of trade_numbers.seasons">
-          <td>
-            <input
-              class="disabled"
-              formControlName="season_description"
-              placeholder="{{ season.description | translate | titlecase }}"
-              type="text"
-            />
-            <div class="div-text">
-              {{ season.description | translate | titlecase }}
-            </div>
-          </td>
-          <td>
-            <input
-              class="disabled"
-              formControlName="season_code"
-              placeholder="{{ season.code }}"
-              type="text"
-            />
-            <div class="div-text">
-              {{ season.code }}
-            </div>
-          </td>
-          <td>
-            <a class="disabled checkmark-icon">
-              <i class="large green checkmark icon"></i>
-            </a>
-          </td>
-          <td>
-            <a>
-              <i class="ph-pencil-thin"></i>
-            </a>
-          </td>
-          <td>
-            <a (click)="deleteRow(season)">
-              <i class="ph-trash-thin"></i>
-            </a>
-          </td>
-        </tr>
-        <tr class="centered">
-          <td colspan="5">
-            <button addTableRow category="season" class="ui primary button">
-              <i class="ph-plus-bold"></i>
-              <span>ADD</span>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <app-style-category
+    *ngIf="trade_numbers"
+    [category]="trade_numbers.seasons"
+    [category_style]="'season'"
+  >
+    <ng-container table_header> Season </ng-container>
+    <ng-container *ngFor="let season of trade_numbers.seasons">
+      <ng-template tableRowContent>
+        <tr
+          class="row"
+          app-table-row
+          [category]="season"
+          [category_style]="'season'"
+        ></tr>
+      </ng-template>
+    </ng-container>
+  </app-style-category>
   <!-- END season table -->
 </div>

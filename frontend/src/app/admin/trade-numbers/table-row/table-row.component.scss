@@ -39,6 +39,14 @@ a:active {
   cursor: pointer;
 }
 
-.ui.form input[type="text"] {
-  font-size: 1.3rem;
+.category-code {
+  width: 9rem;
+}
+
+.category-description {
+  width: 10rem;
+}
+td.category-description input[type="text"],
+td.category-code input[type="text"] {
+  font-size: 1.2rem;
 }

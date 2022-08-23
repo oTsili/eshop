@@ -29,16 +29,13 @@ export class StyleCategoryComponent implements OnInit {
   items!: QueryList<TableRowContentDirective>;
 
   @Input() category;
-  styleForm: FormGroup;
+  @Input() category_style;
 
   constructor(private tradeNumbersService: TradeNumbersService) {}
 
   ngOnInit(): void {
-    console.log({ category: this.category });
-    this.styleForm = new FormGroup({
-      style_description: new FormControl(null, {}),
-      style_code: new FormControl(null, {}),
-    });
+    // console.log({ category: this.category });
+    // console.log({ categoryStyle: this.category_style });
   }
 
   onAdd() {
@@ -50,7 +47,10 @@ export class StyleCategoryComponent implements OnInit {
     // go to the next index
     // this.currentNewsIndex = (this.currentNewsIndex + 1) % this.news.length;
     // get the next component
-    const tableRowItem = this.tradeNumbersService.getTableRow(this.category);
+    const tableRowItem = this.tradeNumbersService.getTableRow(
+      this.category,
+      this.category_style
+    );
     console.log({ tableRowItem });
     //get the container where to insert the new component (it is the viewContainerRef of the NewsDirective with the newsHost as its selector)
     const viewContainerRef = this.tableRowHost.viewContainerRef;
