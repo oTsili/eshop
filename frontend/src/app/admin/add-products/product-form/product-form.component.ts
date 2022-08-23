@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 import { Element } from 'src/app/user/shared/accordion/accordion.interfaces';
 import { imgMimeType } from 'src/app/user/shared/validators/img-mime-type-validator';
 import { environment } from 'src/environments/environment';
+import {
+  TradeNumber,
+  TradeNumbers,
+} from '../../trade-numbers/trade-numbers.interfaces';
+import { TradeNumbersService } from '../../trade-numbers/trade-numbers.service';
+import { AddProductsService } from '../add-products.service';
 import { ProductFormService } from './product-form.service';
 import { UploadProduct } from './upload-product.interfaces';
 
@@ -12,21 +19,23 @@ import { UploadProduct } from './upload-product.interfaces';
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.scss'],
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit, OnDestroy {
   theProductForm: FormGroup;
   isLoading = false;
   sumbitDate: string;
-  colors: Element[];
-  heel_heights: Element[];
+  trade_numbers: TradeNumbers;
+  colorsArraySubscription: Subscription;
 
   constructor(
     private appService: AppService,
-    private productFormService: ProductFormService
+    private addProductsService: AddProductsService,
+    private tradeNumberService: TradeNumbersService
   ) {}
 
   ngOnInit(): void {
-    this.colors = environment.COLOR_LIST;
-    this.heel_heights = environment.HEEL_LIST;
+    this.getTradeNumbers();
+    // this.colors = environment.COLOR_LIST;
+    // this.heel_heights = environment.HEEL_LIST;
 
     this.theProductForm = new FormGroup({
       name: new FormControl(null, {
@@ -35,13 +44,13 @@ export class ProductFormComponent implements OnInit {
       colors: new FormControl(null, {
         validators: [Validators.required],
       }),
-      sizes: new FormControl(null, {
-        validators: [Validators.required],
-      }),
-      material: new FormControl(null, {
+      size: new FormControl(null, {
         validators: [Validators.required],
       }),
       price: new FormControl(null, {
+        validators: [Validators.required],
+      }),
+      material: new FormControl(null, {
         validators: [Validators.required],
       }),
       sales: new FormControl(null, {
@@ -50,14 +59,68 @@ export class ProductFormComponent implements OnInit {
       heel_height: new FormControl(null, {
         validators: [Validators.required],
       }),
+      season: new FormControl(null, {
+        validators: [Validators.required],
+      }),
+      style: new FormControl(null, {
+        validators: [Validators.required],
+      }),
+      type: new FormControl(null, {
+        validators: [Validators.required],
+      }),
       description: new FormControl(null, {
         validators: [Validators.required],
       }),
+
       images: new FormControl(null, {
         // validators: [Validators.required],
         asyncValidators: [imgMimeType],
       }),
     });
+
+    this.colorsArraySubscription = this.addProductsService
+      .getColorsArrayListener()
+      .subscribe({
+        next: (response) => {
+          this.theProductForm.get('colors')?.patchValue(response);
+        },
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.colorsArraySubscription.unsubscribe();
+  }
+
+  getTradeNumbers() {
+    this.tradeNumberService.getTradeNumbers().subscribe({
+      next: (response) => {
+        // console.log(response);
+        this.trade_numbers = response;
+      },
+    });
+  }
+
+  onMaterialClick(value: string) {
+    this.theProductForm.get('material')?.patchValue(value);
+  }
+  onHeelClick(value: string) {
+    this.theProductForm.get('heel_height')?.patchValue(value);
+  }
+  // onColorsChange(value: string) {
+  //   console.log(value);
+  //   this.theProductForm.get('colors')?.patchValue(value);
+  // }
+  onSizeClick(value: string) {
+    this.theProductForm.get('size')?.patchValue(value);
+  }
+  onSeasonClick(value: string) {
+    this.theProductForm.get('season')?.patchValue(value);
+  }
+  onStyleClick(value: string) {
+    this.theProductForm.get('style')?.patchValue(value);
+  }
+  onTypeClick(value: string) {
+    this.theProductForm.get('type')?.patchValue(value);
   }
 
   onSubmit(form: FormGroup) {
@@ -65,6 +128,7 @@ export class ProductFormComponent implements OnInit {
     //   console.log('invalid form');
     //   return;
     // }
+    console.log(form.value);
 
     this.sumbitDate = this.appService.getDateString();
     console.log(this.sumbitDate);
@@ -72,51 +136,58 @@ export class ProductFormComponent implements OnInit {
     this.isLoading = true;
 
     const {
-      images,
       name,
       colors,
-      sizes,
-      material,
+      size,
       price,
+      material,
       sales,
-      heel_heigh,
+      heel_height,
+      season,
+      style,
+      type,
       description,
+      images,
     }: UploadProduct = {
       ...form.value,
     };
 
-    const user: UploadProduct = {
-      images,
+    const product: UploadProduct = {
       name,
       colors,
-      sizes,
-      material,
+      size,
       price,
+      material,
       sales,
-      heel_heigh,
+      heel_height,
+      season,
+      style,
+      type,
       description,
+      images,
     };
 
-    console.log({ user });
+    // console.log({ product });
 
-    this.productFormService.submitProductForm(user).subscribe(
-      {
-        next: (response) => {
-          console.log(response);
-        },
-      }
-      // (data) => {
-      //   this.router.navigate(['/']);
-      //   let duration = parseInt(data.expiresIn);
-      //   this.setAuthTimer(duration);
-      //   const now = new Date();
-      //   const expirationDate = new Date(now.getTime() + duration * 1000);
-      //   this.saveToStorage(expirationDate);
-      // },
-      // (error) => {
-      //   this.authStatusListener.next(false);
-      // }
-    );
+    // this.productFormService.submitProductForm(product).subscribe(
+    //   {
+    //     next: (response) => {
+    //       console.log(response);
+    //     },
+    //   }
+    // );
+
+    // (data) => {
+    //   this.router.navigate(['/']);
+    //   let duration = parseInt(data.expiresIn);
+    //   this.setAuthTimer(duration);
+    //   const now = new Date();
+    //   const expirationDate = new Date(now.getTime() + duration * 1000);
+    //   this.saveToStorage(expirationDate);
+    // },
+    // (error) => {
+    //   this.authStatusListener.next(false);
+    // }
 
     this.isLoading = false;
   }

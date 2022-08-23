@@ -9,6 +9,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TableRowDirective } from './directives/table-row.directive';
 import { TableRow } from './table-row/table-row.interfaces';
+import { TradeNumber } from './trade-numbers.interfaces';
 import { TradeNumbersService } from './trade-numbers.service';
 
 @Component({
@@ -24,8 +25,15 @@ export class TradeNumbersComponent implements OnInit {
   colorForm: FormGroup;
   seasonForm: FormGroup;
   isLoading = false;
-  trade_numbers;
+  trade_numbers: {
+    seasons: TradeNumber[];
+    colors: TradeNumber[];
+    types: TradeNumber[];
+    styles: TradeNumber[];
+  };
 
+  trade_numbers_array: TradeNumber[][];
+  trade_number_headers: string[];
 
   constructor(private tradeNumbersService: TradeNumbersService) {}
 
@@ -53,6 +61,9 @@ export class TradeNumbersComponent implements OnInit {
       next: (response) => {
         console.log(response);
         this.trade_numbers = response;
+        this.trade_numbers_array = Object.values(response);
+        this.trade_number_headers = Object.keys(response);
+        console.log(this.trade_numbers_array);
       },
     });
   }

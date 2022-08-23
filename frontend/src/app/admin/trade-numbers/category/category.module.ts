@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TableRowDirectivesModule } from '../directives/table-row-directives.module';
-import { StyleCategoryComponent } from './style-category.component';
+import { CategoryComponent } from './category.component';
 
 @NgModule({
-  declarations: [StyleCategoryComponent],
+  declarations: [CategoryComponent],
   imports: [CommonModule, ReactiveFormsModule, TableRowDirectivesModule],
-  exports: [StyleCategoryComponent],
+  exports: [CategoryComponent],
 })
-export class StyleCategoryModule {}
+export class CategoryModule {}

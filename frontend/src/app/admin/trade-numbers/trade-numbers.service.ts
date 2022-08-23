@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { TableRowItem } from './table-row/table-row.class';
 import { TableRowComponent } from './table-row/table-row.component';
+import { TradeNumber, TradeNumbers } from './trade-numbers.interfaces';
 
 const BACKEND_URL = environment.BASE_URL + 'product';
 
@@ -13,7 +14,7 @@ export class TradeNumbersService {
   constructor(private httpClient: HttpClient) {}
 
   getTradeNumbers() {
-    return this.httpClient.get(`${BACKEND_URL}/trade-number`, {
+    return this.httpClient.get<TradeNumbers>(`${BACKEND_URL}/trade-number`, {
       withCredentials: true,
     });
   }

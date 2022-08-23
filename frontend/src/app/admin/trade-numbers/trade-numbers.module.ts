@@ -5,17 +5,19 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/user/shared/loader-factory';
 import { ReactiveFormsModule } from '@angular/forms';
-import { StyleCategoryModule } from './style-category/style-category.module';
+import { CategoryModule } from './category/category.module';
 import { TableRowDirectivesModule } from './directives/table-row-directives.module';
 import { TableRowModule } from './table-row/table-row.module';
+import { ResponsiveCatalogModule } from 'src/app/user/shared/responsive-catalog/responsive-catalog.module';
 
 @NgModule({
   declarations: [TradeNumbersComponent],
   imports: [
     CommonModule,
     TableRowModule,
-    StyleCategoryModule,
+    CategoryModule,
     TableRowDirectivesModule,
+    ResponsiveCatalogModule,
     ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forRoot({

@@ -40,7 +40,7 @@ a:hover,
 .expand-icon {
   position: sticky;
   top: 2rem;
-  background: #1b1c1d;
+  background: #1b1c1dfa;
   padding: 0.9%;
   font-size: 1.5rem;
   height: fit-content;
@@ -95,4 +95,8 @@ a:hover,
 
 .col-expand-icon {
   position: relative;
+}
+
+.ui.inverted.menu {
+  background-color: #1b1c1dfa;
 }

@@ -1,7 +1,7 @@
 <form
+  *ngIf="trade_numbers && !isLoading"
   [formGroup]="theProductForm"
   (submit)="onSubmit(theProductForm)"
-  *ngIf="!isLoading"
 >
   <div
     class="ui form"
@@ -99,24 +99,29 @@
           />
           <div class="menu transition">
             <div
-              *ngFor="let heel_height of heel_heights"
+              (click)="onHeelClick(heel_height.description)"
+              *ngFor="let heel_height of trade_numbers.heels"
               selectOption
               class="item"
-              [attr.data-value]="heel_height.text"
+              [attr.data-value]="heel_height.description"
             >
-              {{ heel_height.text | translate | uppercase }}
+              {{ heel_height.description | translate | uppercase }}
             </div>
           </div>
         </div>
       </div>
-      <!-- START input of heel height -->
+      <!-- END input of heel heights -->
+      <!-- START input of colors -->
       <div class="field">
         <label>{{ "colors" | translate | uppercase }}</label>
         <div openOptions class="ui dropdown selection multiple">
           <select multiple="" class="ui dropdown">
             <option value="">select colors</option>
-            <option *ngFor="let color of colors" value="{{ color.text }}">
-              {{ color.text }}
+            <option
+              *ngFor="let color of trade_numbers.colors"
+              value="{{ color.description }}"
+            >
+              {{ color.description }}
             </option>
           </select>
           <div class="default text">
@@ -125,20 +130,20 @@
           <div class="menu transition">
             <div
               multipleSelectOption
-              *ngFor="let color of colors"
+              *ngFor="let color of trade_numbers.colors"
               class="item"
-              [attr.data-value]="color.text"
+              [attr.data-value]="color.description"
             >
               <div class="row">
-                <div class="box {{ color.text }}"></div>
-                {{ color.text | translate | uppercase }}
+                <div class="box {{ color.description }}"></div>
+                {{ color.description | translate | uppercase }}
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- START error message of heel height -->
+    <!-- START error message of colors -->
     <div
       *ngIf="
         theProductForm.get('heel_height')!.invalid &&
@@ -150,6 +155,179 @@
     </div>
     <!-- END error message of heel height -->
 
-    <div class="ui submit button">{{ "submit" | translate | titlecase }}</div>
+    <div class="two fields line">
+      <!-- START input of sizes-->
+      <div
+        class="field"
+        [ngClass]="{
+          error:
+            theProductForm.get('size')!.invalid &&
+            theProductForm.get('size')!.touched
+        }"
+      >
+        <label>{{ "size" | translate | uppercase }}</label>
+        <div openOptions class="ui selection dropdown">
+          <div class="default text">{{ "select" | translate | titlecase }}</div>
+          <i class="dropdown icon"></i>
+          <input formControlName="size" type="hidden" name="size" />
+          <div class="menu transition">
+            <div
+              (click)="onSizeClick(size.description)"
+              *ngFor="let size of trade_numbers.sizes"
+              selectOption
+              class="item"
+              [attr.data-value]="size.description"
+            >
+              {{ size.description | translate | uppercase }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END input of sizes -->
+      <!-- START input of seasons-->
+      <div
+        class="field"
+        [ngClass]="{
+          error:
+            theProductForm.get('season')!.invalid &&
+            theProductForm.get('season')!.touched
+        }"
+      >
+        <label>{{ "season" | translate | uppercase }}</label>
+        <div openOptions class="ui selection dropdown">
+          <div class="default text">{{ "select" | translate | titlecase }}</div>
+          <i class="dropdown icon"></i>
+          <input formControlName="season" type="hidden" name="season" />
+          <div class="menu transition">
+            <div
+              (click)="onSeasonClick(season.description)"
+              *ngFor="let season of trade_numbers.seasons"
+              selectOption
+              class="item"
+              [attr.data-value]="season.description"
+            >
+              {{ season.description | translate | uppercase }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END input of seasons -->
+    </div>
+
+    <div class="two fields line">
+      <!-- START input of styles-->
+      <div
+        class="field"
+        [ngClass]="{
+          error:
+            theProductForm.get('style')!.invalid &&
+            theProductForm.get('style')!.touched
+        }"
+      >
+        <label>{{ "style" | translate | uppercase }}</label>
+        <div openOptions class="ui selection dropdown">
+          <div class="default text">{{ "select" | translate | titlecase }}</div>
+          <i class="dropdown icon"></i>
+          <input formControlName="style" type="hidden" name="style" />
+          <div class="menu transition">
+            <div
+              (click)="onStyleClick(style.description)"
+              *ngFor="let style of trade_numbers.styles"
+              selectOption
+              class="item"
+              [attr.data-value]="style.description"
+            >
+              {{ style.description | translate | uppercase }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END input of styles -->
+      <!-- START input of types-->
+      <div
+        class="field"
+        [ngClass]="{
+          error:
+            theProductForm.get('type')!.invalid &&
+            theProductForm.get('type')!.touched
+        }"
+      >
+        <label>{{ "type" | translate | titlecase }}</label>
+        <div openOptions class="ui selection dropdown">
+          <div class="default text">{{ "select" | translate | titlecase }}</div>
+          <i class="dropdown icon"></i>
+          <input formControlName="type" type="hidden" name="type" />
+          <div class="menu transition">
+            <div
+              (click)="onTypeClick(type.description)"
+              *ngFor="let type of trade_numbers.types"
+              selectOption
+              class="item"
+              [attr.data-value]="type.description"
+            >
+              {{ type.description | translate | uppercase }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END input of types -->
+    </div>
+    <div class="two fields line">
+      <!-- START of sales -->
+      <div
+        class="field"
+        [ngClass]="{
+          error:
+            theProductForm.get('sales')!.invalid &&
+            theProductForm.get('sales')!.touched
+        }"
+      >
+        <label>{{ "sales" | translate | uppercase }}</label>
+        <input
+          formControlName="sales"
+          placeholder="{{ 'sales' | translate | titlecase }}"
+          type="text"
+        />
+      </div>
+      <!-- END of sales -->
+      <!-- START input of material-->
+      <div
+        class="field"
+        [ngClass]="{
+          error:
+            theProductForm.get('material')!.invalid &&
+            theProductForm.get('material')!.touched
+        }"
+      >
+        <label>{{ "material" | translate | titlecase }}</label>
+        <div openOptions class="ui selection dropdown">
+          <div #material class="default text">
+            {{ "select" | translate | titlecase }}
+          </div>
+          <i class="dropdown icon"></i>
+          <input formControlName="material" type="hidden" name="material" />
+          <div class="menu transition">
+            <div
+              (click)="onMaterialClick(material.description)"
+              *ngFor="let material of trade_numbers.materials"
+              selectOption
+              class="item"
+              [attr.data-value]="material.description"
+            >
+              {{ material.description | translate | uppercase }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END input of types -->
+    </div>
+    <div class="field">
+      <label>{{ "description" | translate | titlecase }}</label>
+      <textarea rows="3" formControlName="description"></textarea>
+    </div>
+
+    <div (click)="onSubmit(theProductForm)" class="ui submit button">
+      {{ "save" | translate | titlecase }}
+    </div>
   </div>
 </form>

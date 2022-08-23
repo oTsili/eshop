@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { ProductsController } from './product.controller';
 import { ProductService } from './product.service';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -26,6 +26,12 @@ import {
 } from './schemas/directory-season.schema';
 import { ProductsTradeNumberController } from './product-trade-numbers.controller';
 import { ProductTradeNumberService } from './product-trade-number.service';
+import { TradeNumberFolderMiddleware } from 'src/custom-middlewares/trade-number-folder.middleware';
+import {
+  DirectoryHeel,
+  DirectoryHeelSchema,
+} from './schemas/directory-heel.schema';
+import { DirectoryMaterial, DirectoryMaterialSchema } from './schemas/directory-material.schema';
 
 @Module({
   imports: [
@@ -40,6 +46,8 @@ import { ProductTradeNumberService } from './product-trade-number.service';
       { name: DirectoryStyle.name, schema: DirectoryStyleSchema },
       { name: DirectorySize.name, schema: DirectorySizeSchema },
       { name: DirectoryType.name, schema: DirectoryTypeSchema },
+      { name: DirectoryHeel.name, schema: DirectoryHeelSchema },
+      { name: DirectoryMaterial.name, schema: DirectoryMaterialSchema },
     ]),
 
     /* With (pre/post hooks)middlewares */
@@ -60,7 +68,9 @@ import { ProductTradeNumberService } from './product-trade-number.service';
   providers: [ProductService, ProductTradeNumberService],
 })
 export class ProductModule {
-  // configure(consumer: MiddlewareConsumer) {
-  //   consumer.apply(extractFileOld).forRoutes(ProductsController);
-  // }
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(TradeNumberFolderMiddleware)
+      .forRoutes({ path: 'product', method: RequestMethod.POST });
+  }
 }

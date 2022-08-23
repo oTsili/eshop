@@ -1,13 +1,16 @@
 export interface UploadProduct {
   name: string;
   colors: Array<string>;
-  sizes: Array<string>;
-  images: Array<string>;
-  material: string;
+  size: string;
   price: string;
+  material: string;
   sales: string;
-  heel_heigh: string;
-  description: string;
+  heel_height: string;
+  season: string;
+  style: string;
+  type: string;
+  description?: string;
+  images: Array<string>;
   id?: string;
   _id?: string;
 }

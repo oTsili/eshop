@@ -59,13 +59,48 @@ export class ProductsController {
     res.status(HttpStatus.OK).json({ files });
   }
 
-  @Post()
-  async createProduct(@Res() response, @Body() product: Product) {
-    const newProduct = await this.productService.create(product);
-    return response.status(HttpStatus.CREATED).json({
-      newProduct,
-    });
+  @Post('')
+  @UseInterceptors(
+    MyNewFilesInterceptor('photo[]', (ctx) => {
+      // Get request from Context
+      const req = ctx.switchToHttp().getRequest();
+      // Return the options
+      return {
+        storage: diskStorage({
+          destination: `./static/images/products/${req.params.folder}`,
+          // tslint:disable-next-line: variable-name
+          filename: (req, file, cb) => {
+            const name = file.originalname.toLowerCase().split(' ').join('-');
+
+            const extension = file.mimetype.split('/')[1];
+            return cb(null, `${name}-${Date.now()}.${extension}`);
+          },
+        }),
+      };
+    }),
+  )
+  createProduct(
+    @UploadedFiles() files: Array<Express.Multer.File>,
+    @Res() res: Response,
+    @Body() body,
+  ) {
+    console.log('inside create product');
+    for (let file of files) {
+      console.log(file.filename);
+    }
+    // console.log(files);
+    console.log(body.email);
+
+    res.status(HttpStatus.OK).json({ files });
   }
+
+  // @Post()
+  // async createProduct(@Res() response, @Body() product: Product) {
+  //   const newProduct = await this.productService.create(product);
+  //   return response.status(HttpStatus.CREATED).json({
+  //     newProduct,
+  //   });
+  // }
 
   @Get('')
   async fetchAll(@Res() response) {

@@ -14,11 +14,11 @@ import { TableRow } from '../table-row/table-row.interfaces';
 import { TradeNumbersService } from '../trade-numbers.service';
 
 @Component({
-  selector: 'app-style-category',
-  templateUrl: './style-category.component.html',
-  styleUrls: ['./style-category.component.scss'],
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.scss'],
 })
-export class StyleCategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit {
   @ViewChild(TableRowDirective, { static: true })
   tableRowHost: TableRowDirective;
 

@@ -1,81 +1,33 @@
-<div class="trade-number-container">
-  <!-- START Style table -->
-  <app-style-category
-    *ngIf="trade_numbers"
-    [category]="trade_numbers.styles"
-    [category_style]="'style'"
+  <app-responsive-catalog
+    [elements]="trade_numbers_array"
+    [justify_content]="'left'"
+    [margin]="'2rem'"
   >
-    <ng-container table_header> Style </ng-container>
-    <ng-container *ngFor="let style of trade_numbers.styles">
-      <ng-template tableRowContent>
-        <tr
-          class="row"
-          app-table-row
-          [category]="style"
+    <parent-element
+      *ngFor="let trade_number of trade_numbers_array; let i = index"
+    >
+      <ng-template firstElement>
+        <!-- START Style table -->
+        <app-category
+          *ngIf="trade_number"
+          [category]="trade_number"
           [category_style]="'style'"
-        ></tr>
+        >
+          <ng-container table_header>
+            {{ trade_number_headers[i] | titlecase }}
+          </ng-container>
+          <ng-container *ngFor="let category of trade_number">
+            <ng-template tableRowContent>
+              <tr
+                class="row"
+                app-table-row
+                [category]="category"
+                [category_style]="'style'"
+              ></tr>
+            </ng-template>
+          </ng-container>
+        </app-category>
+        <!-- END Style table -->
       </ng-template>
-    </ng-container>
-  </app-style-category>
-  <!-- END Style table -->
-
-  <!-- START type table -->
-  <app-style-category
-    *ngIf="trade_numbers"
-    [category]="trade_numbers.types"
-    [category_style]="'type'"
-  >
-    <ng-container table_header> Type </ng-container>
-    <ng-container *ngFor="let type of trade_numbers.types">
-      <ng-template tableRowContent>
-        <tr
-          class="row"
-          app-table-row
-          [category]="type"
-          [category_style]="'type'"
-        ></tr>
-      </ng-template>
-    </ng-container>
-  </app-style-category>
-  <!-- END types table -->
-
-  <!-- START color table -->
-  <app-style-category
-    *ngIf="trade_numbers"
-    [category]="trade_numbers.colors"
-    [category_style]="'color'"
-  >
-    <ng-container table_header> Color </ng-container>
-    <ng-container *ngFor="let color of trade_numbers.colors">
-      <ng-template tableRowContent>
-        <tr
-          class="row"
-          app-table-row
-          [category]="color"
-          [category_style]="'color'"
-        ></tr>
-      </ng-template>
-    </ng-container>
-  </app-style-category>
-  <!-- END color table -->
-
-  <!-- START season table -->
-  <app-style-category
-    *ngIf="trade_numbers"
-    [category]="trade_numbers.seasons"
-    [category_style]="'season'"
-  >
-    <ng-container table_header> Season </ng-container>
-    <ng-container *ngFor="let season of trade_numbers.seasons">
-      <ng-template tableRowContent>
-        <tr
-          class="row"
-          app-table-row
-          [category]="season"
-          [category_style]="'season'"
-        ></tr>
-      </ng-template>
-    </ng-container>
-  </app-style-category>
-  <!-- END season table -->
-</div>
+    </parent-element>
+  </app-responsive-catalog>

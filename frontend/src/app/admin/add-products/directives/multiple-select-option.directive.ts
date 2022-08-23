@@ -5,14 +5,21 @@ import {
   OnInit,
   Renderer2,
 } from '@angular/core';
+import { AddProductsService } from '../add-products.service';
+import englishLanguage from 'src/assets/i18n/toEn.json';
 
 @Directive({ selector: '[multipleSelectOption]' })
 export class MultipleSelectOption implements OnInit {
   element: HTMLElement;
   grandparentElement: HTMLElement;
   defaultTextElement: HTMLElement;
+  // selectedItems: string[];
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    private addProductsService: AddProductsService
+  ) {}
 
   ngOnInit(): void {
     this.element = this.elementRef.nativeElement;
@@ -42,6 +49,10 @@ export class MultipleSelectOption implements OnInit {
     const dataValue = this.elementRef.nativeElement.innerText;
     this.renderer.setAttribute(aElem, 'data-value', dataValue);
 
+    // save the value to the list of products service
+    let tranDataValue = englishLanguage[dataValue.trim().toLowerCase()];
+    this.addProductsService.pushColorsArray(tranDataValue);
+
     const text = this.renderer.createText(dataValue);
     this.renderer.appendChild(aElem, text);
 
@@ -56,6 +67,9 @@ export class MultipleSelectOption implements OnInit {
     this.renderer.listen(iElem, 'click', (event) => {
       event.preventDefault();
       event.stopPropagation();
+
+      // remove the value from the selected items array on products service
+      this.addProductsService.spliceColorsArray(tranDataValue);
 
       // remove the a element from the list of selected colors
       aElem.remove();

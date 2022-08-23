@@ -59,6 +59,18 @@ export class ProductsTradeNumberController {
             directories,
           );
         break;
+      case 'heel':
+        console.log({ color: category });
+        directoriesSaved =
+          await this.productTradeNumberService.createDirectoryHeel(directories);
+        break;
+      case 'material':
+        console.log({ color: category });
+        directoriesSaved =
+          await this.productTradeNumberService.createDirectoryMaterial(
+            directories,
+          );
+        break;
     }
 
     return response.status(HttpStatus.CREATED).json({
@@ -106,6 +118,16 @@ export class ProductsTradeNumberController {
         console.log({ color: category });
         directoryUpdated =
           await this.productTradeNumberService.updateDirectoryColor(id, row);
+        break;
+      case 'heel':
+        console.log({ color: category });
+        directoryUpdated =
+          await this.productTradeNumberService.updateDirectoryHeel(id, row);
+        break;
+      case 'material':
+        console.log({ color: category });
+        directoryUpdated =
+          await this.productTradeNumberService.updateDirectoryMaterial(id, row);
         break;
     }
 
@@ -155,6 +177,17 @@ export class ProductsTradeNumberController {
         directoryUpdated =
           await this.productTradeNumberService.deleteDirectoryColor(id);
         break;
+
+      case 'heel':
+        console.log({ color: category });
+        directoryUpdated =
+          await this.productTradeNumberService.deleteDirectoryHeel(id);
+        break;
+      case 'material':
+        console.log({ color: category });
+        directoryUpdated =
+          await this.productTradeNumberService.deleteDirectoryMaterial(id);
+        break;
     }
 
     return response.status(HttpStatus.OK).json({
@@ -168,12 +201,21 @@ export class ProductsTradeNumberController {
     let colors = await this.productTradeNumberService.findDirectoryColor();
     let types = await this.productTradeNumberService.findDirectoryType();
     let styles = await this.productTradeNumberService.findDirectoryStyle();
+    let heels = await this.productTradeNumberService.findDirectoryHeel();
+    let sizes = await this.productTradeNumberService.findDirectorySize();
+    let materials =
+      await this.productTradeNumberService.findDirectoryMaterial();
+
+    await this.productTradeNumberService.findDirectoryMaterial();
 
     const trade_numbers = {
       seasons,
       colors,
       types,
       styles,
+      heels,
+      sizes,
+      materials,
     };
 
     response.status(HttpStatus.OK).json(trade_numbers);

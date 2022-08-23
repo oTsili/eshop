@@ -20,13 +20,11 @@ export class ProductFormService {
     productData.append('material', product.material);
     productData.append('price', product.price);
     productData.append('sales', product.sales);
-    productData.append('heel_heigh', product.heel_heigh);
-    productData.append('description', product.description);
+    productData.append('heel_heigh', product.heel_height);
+    // productData.append('description', product.description);
 
-    return this.httpClient.post<UploadProduct>(
-      `${BACKEND_URL}/upload`,
-      productData,
-      { withCredentials: true }
-    );
+    return this.httpClient.post<UploadProduct>(`${BACKEND_URL}`, productData, {
+      withCredentials: true,
+    });
   }
 }
