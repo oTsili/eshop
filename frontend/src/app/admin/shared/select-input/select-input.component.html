@@ -1,0 +1,21 @@
+<label>{{ controlName.split("_").join(" ") | translate | titlecase }}</label>
+<div openOptions class="ui selection dropdown">
+  <div class="default text">{{ "select" | translate | titlecase }}</div>
+  <i class="dropdown icon"></i>
+  <input
+    [attr.formControlName]="controlName"
+    type="hidden"
+    name="{{ controlName }}"
+  />
+  <div class="menu transition">
+    <div
+      *ngFor="let option of options"
+      selectOption
+      class="item"
+      (click)="onOptionClick(option.description)"
+      [attr.data-value]="option.description"
+    >
+      {{ option.description | translate | uppercase }}
+    </div>
+  </div>
+</div>

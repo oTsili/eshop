@@ -2,28 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductFormComponent } from './product-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/user/shared/loader-factory';
-import { MatButtonModule } from '@angular/material/button';
-import { ToggleOptionsDirective } from '../directives/toggle-options.directive';
-import { SelectOptionDirective } from '../directives/select-option.directive';
-import { MultipleSelectOption } from '../directives/multiple-select-option.directive';
+import { SelectInputModule } from '../../shared/select-input/select-input.module';
+import { AddProductsDirectivesModule } from '../directives/add-products-directives.module';
 
 @NgModule({
-  declarations: [
-    ProductFormComponent,
-    ToggleOptionsDirective,
-    SelectOptionDirective,
-    MultipleSelectOption,
-  ],
+  declarations: [ProductFormComponent],
   imports: [
+    AddProductsDirectivesModule,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    // MatInputModule,
-    // MatButtonModule,
+    SelectInputModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

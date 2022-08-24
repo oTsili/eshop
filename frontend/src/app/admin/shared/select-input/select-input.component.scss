@@ -7,32 +7,6 @@
   text-align: center;
 }
 
-.error-message-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.x-icon-container {
-  display: flex;
-  justify-content: right;
-  margin-bottom: 1%;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 1%;
-}
-
-a,
-a:hover,
-a:visited,
-a:link,
-a:active {
-  text-decoration: none;
-  color: #912d2b !important;
-  cursor: pointer;
-}
-
 .ui.form .field.error label {
   color: #555;
 }

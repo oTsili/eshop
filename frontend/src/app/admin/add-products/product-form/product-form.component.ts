@@ -1,20 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/app.service';
-import { Element } from 'src/app/user/shared/accordion/accordion.interfaces';
-import { imgMimeType } from 'src/app/user/shared/validators/img-mime-type-validator';
-import { environment } from 'src/environments/environment';
-import {
-  TradeNumber,
-  TradeNumbers,
-} from '../../trade-numbers/trade-numbers.interfaces';
+
+import { TradeNumbers } from '../../trade-numbers/trade-numbers.interfaces';
 import { TradeNumbersService } from '../../trade-numbers/trade-numbers.service';
 import { AddProductsService } from '../add-products.service';
 import { UploadProduct } from './upload-product.interfaces';
@@ -24,7 +21,7 @@ import { UploadProduct } from './upload-product.interfaces';
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.scss'],
 })
-export class ProductFormComponent implements OnInit, OnDestroy {
+export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
   theProductForm: FormGroup;
   isLoading = false;
   sumbitDate: string;
@@ -38,8 +35,14 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     private appService: AppService,
     private addProductsService: AddProductsService,
     private tradeNumberService: TradeNumbersService,
-    private formBuilder: FormBuilder
+    private renderer: Renderer2,
+    private elementRef: ElementRef
   ) {}
+
+  ngAfterViewInit(): void {
+    // this.formElement = this.elementRef.nativeElement.querySelector('.form');
+    // console.log(this.formElement);
+  }
 
   ngOnInit(): void {
     this.getTradeNumbers();
@@ -147,31 +150,26 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  onMaterialClick(value: string) {
-    this.theProductForm.get('material')?.patchValue(value);
-  }
-  onHeelClick(value: string) {
-    this.theProductForm.get('heel_height')?.patchValue(value);
+  onOptionUpdate(event) {
+    console.log('updated');
+    this.theProductForm = event;
   }
 
-  onSizeClick(value: string) {
-    this.theProductForm.get('size')?.patchValue(value);
-  }
-  onSeasonClick(value: string) {
-    this.theProductForm.get('season')?.patchValue(value);
-  }
-  onStyleClick(value: string) {
-    this.theProductForm.get('style')?.patchValue(value);
-  }
-  onTypeClick(value: string) {
-    this.theProductForm.get('type')?.patchValue(value);
+  closeErrorMessage() {
+    const formElement = this.elementRef.nativeElement.querySelector('.form');
+    this.renderer.removeClass(formElement, 'error');
   }
 
   onSubmit(form: FormGroup) {
-    console.log(form.value);
+    // initialize the form without the error class
+    const formElement = this.elementRef.nativeElement.querySelector('.form');
+    console.log(formElement);
+    this.renderer.removeClass(formElement, 'error');
+    console.log(form);
 
     if (form.invalid) {
       console.log('invalid form');
+      this.renderer.addClass(formElement, 'error');
       return;
     }
 
@@ -239,5 +237,41 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     // }
 
     this.isLoading = false;
+  }
+
+  checkFormErrors() {
+    if (
+      (this.theProductForm.get('colors')!.invalid &&
+        this.theProductForm.get('colors')!.touched &&
+        this.theProductForm.get('colors')?.dirty) ||
+      (this.theProductForm.get('heel_height')!.invalid &&
+        this.theProductForm.get('heel_height')!.touched &&
+        this.theProductForm.get('heel_height')?.dirty) ||
+      (this.theProductForm.get('size')!.invalid &&
+        this.theProductForm.get('size')!.touched &&
+        this.theProductForm.get('size')?.dirty) ||
+      (this.theProductForm.get('season')!.invalid &&
+        this.theProductForm.get('season')!.touched &&
+        this.theProductForm.get('season')?.dirty) ||
+      (this.theProductForm.get('style')!.invalid &&
+        this.theProductForm.get('style')!.touched &&
+        this.theProductForm.get('style')?.dirty) ||
+      (this.theProductForm.get('type')!.invalid &&
+        this.theProductForm.get('type')!.touched &&
+        this.theProductForm.get('type')?.dirty) ||
+      (this.theProductForm.get('material')!.invalid &&
+        this.theProductForm.get('material')!.touched &&
+        this.theProductForm.get('material')?.dirty) ||
+      (this.theProductForm.get('name')!.invalid &&
+        this.theProductForm.get('name')!.touched) ||
+      (this.theProductForm.get('price')!.invalid &&
+        this.theProductForm.get('price')!.touched) ||
+      (this.theProductForm.get('sales')!.invalid &&
+        this.theProductForm.get('sales')!.touched)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

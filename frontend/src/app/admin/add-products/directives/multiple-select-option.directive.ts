@@ -9,7 +9,7 @@ import { AddProductsService } from '../add-products.service';
 import englishLanguage from 'src/assets/i18n/toEn.json';
 
 @Directive({ selector: '[multipleSelectOption]' })
-export class MultipleSelectOption implements OnInit {
+export class MultipleSelectOptionDirective implements OnInit {
   element: HTMLElement;
   grandparentElement: HTMLElement;
   defaultTextElement: HTMLElement;
