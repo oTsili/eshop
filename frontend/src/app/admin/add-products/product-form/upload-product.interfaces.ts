@@ -1,4 +1,6 @@
 export interface UploadProduct {
+  src: string;
+  altSrc: string;
   name: string;
   colors: Array<string>;
   size: string;

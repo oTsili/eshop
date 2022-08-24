@@ -1,5 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 import { Element } from 'src/app/user/shared/accordion/accordion.interfaces';
@@ -11,7 +17,6 @@ import {
 } from '../../trade-numbers/trade-numbers.interfaces';
 import { TradeNumbersService } from '../../trade-numbers/trade-numbers.service';
 import { AddProductsService } from '../add-products.service';
-import { ProductFormService } from './product-form.service';
 import { UploadProduct } from './upload-product.interfaces';
 
 @Component({
@@ -25,11 +30,15 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   sumbitDate: string;
   trade_numbers: TradeNumbers;
   colorsArraySubscription: Subscription;
+  filesArraySubscription: Subscription;
+  mainSrcSubscription: Subscription;
+  altSrcSubscription: Subscription;
 
   constructor(
     private appService: AppService,
     private addProductsService: AddProductsService,
-    private tradeNumberService: TradeNumbersService
+    private tradeNumberService: TradeNumbersService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +47,12 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     // this.heel_heights = environment.HEEL_LIST;
 
     this.theProductForm = new FormGroup({
+      src: new FormControl(null, {
+        validators: [Validators.required],
+      }),
+      altSrc: new FormControl(null, {
+        validators: [Validators.required],
+      }),
       name: new FormControl(null, {
         validators: [Validators.required],
       }),
@@ -72,10 +87,12 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         validators: [Validators.required],
       }),
 
-      images: new FormControl(null, {
-        // validators: [Validators.required],
-        asyncValidators: [imgMimeType],
-      }),
+      images: new FormControl(null, {}),
+      // images: new FormControl(null, {
+      //   // validators: [Validators.required],
+      //   asyncValidators: [imgMimeType],
+      // }),
+      // images: this.formBuilder.array([]),
     });
 
     this.colorsArraySubscription = this.addProductsService
@@ -83,6 +100,36 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response) => {
           this.theProductForm.get('colors')?.patchValue(response);
+        },
+      });
+
+    this.filesArraySubscription = this.addProductsService
+      .getFilesArrayListener()
+      .subscribe({
+        next: (response) => {
+          if (response) this.theProductForm.get('images')?.patchValue(response);
+        },
+      });
+
+    this.mainSrcSubscription = this.addProductsService
+      .getMainSrcListener()
+      .subscribe({
+        next: (response) => {
+          if (response) {
+            const mainSrc = response.split('.')[0];
+            this.theProductForm.get('src')?.patchValue(mainSrc);
+          }
+        },
+      });
+
+    this.altSrcSubscription = this.addProductsService
+      .getAltSrcListener()
+      .subscribe({
+        next: (response) => {
+          if (response) {
+            const altSrc = response.split('.')[0];
+            this.theProductForm.get('altSrc')?.patchValue(altSrc);
+          }
         },
       });
   }
@@ -106,10 +153,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   onHeelClick(value: string) {
     this.theProductForm.get('heel_height')?.patchValue(value);
   }
-  // onColorsChange(value: string) {
-  //   console.log(value);
-  //   this.theProductForm.get('colors')?.patchValue(value);
-  // }
+
   onSizeClick(value: string) {
     this.theProductForm.get('size')?.patchValue(value);
   }
@@ -124,11 +168,12 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: FormGroup) {
-    // if (form.invalid) {
-    //   console.log('invalid form');
-    //   return;
-    // }
     console.log(form.value);
+
+    if (form.invalid) {
+      console.log('invalid form');
+      return;
+    }
 
     this.sumbitDate = this.appService.getDateString();
     console.log(this.sumbitDate);
@@ -136,6 +181,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.isLoading = true;
 
     const {
+      src,
+      altSrc,
       name,
       colors,
       size,
@@ -153,6 +200,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     };
 
     const product: UploadProduct = {
+      src,
+      altSrc,
       name,
       colors,
       size,

@@ -57,6 +57,20 @@ export class AppService {
     return colorIndex;
   }
 
+  getFilesIndex(file: File, array: any[]) {
+    const fileIndex = array.findIndex((item) => {
+      return item === file;
+    });
+    return fileIndex;
+  }
+
+  getFileNamesIndex(name: string, array: any[]) {
+    const fileIndex = array.findIndex((item) => {
+      return item.name === name;
+    });
+    return fileIndex;
+  }
+
   getDateString(): string {
     // get the current date
     const m = new Date();

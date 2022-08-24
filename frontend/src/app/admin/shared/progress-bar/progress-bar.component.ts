@@ -1,8 +1,10 @@
 import {
   Component,
+  ElementRef,
   Input,
   OnChanges,
   OnInit,
+  Renderer2,
   SimpleChanges,
 } from '@angular/core';
 
@@ -13,12 +15,23 @@ import {
 })
 export class ProgressBarComponent implements OnInit, OnChanges {
   @Input() progress: number;
-  constructor() {}
+  bar: HTMLElement;
+  element: HTMLElement;
 
-  ngOnInit(): void {}
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+
+  ngOnInit(): void {
+    this.element = this.elementRef.nativeElement;
+    this.bar = this.elementRef.nativeElement.querySelector('.ui.progress .bar');
+  }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['progress']) this.progress = changes['progress'].currentValue;
-
-    console.log({ progress: this.progress });
+    if (this.bar) {
+      this.renderer.setStyle(
+        this.bar,
+        'width',
+        `${changes['progress'].currentValue}%`
+      );
+    }
   }
 }

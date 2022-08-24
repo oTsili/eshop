@@ -17,7 +17,7 @@
             theProductForm.get('name')!.touched
         }"
       >
-        <label>{{ "product name" | translate | uppercase }}</label>
+        <label>{{ "product name" | translate | titlecase }}</label>
         <input
           formControlName="name"
           placeholder="{{ 'product name' | translate | titlecase }}"
@@ -33,7 +33,7 @@
             theProductForm.get('price')!.touched
         }"
       >
-        <label>{{ "price" | translate | uppercase }}</label>
+        <label>{{ "price" | translate | titlecase }}</label>
         <input
           formControlName="price"
           placeholder="{{ 'price' | translate | titlecase }}"
@@ -88,7 +88,7 @@
             theProductForm.get('heel_height')!.touched
         }"
       >
-        <label>{{ "heel height" | translate | uppercase }}</label>
+        <label>{{ "heel height" | translate | titlecase }}</label>
         <div openOptions class="ui selection dropdown">
           <div class="default text">{{ "select" | translate | titlecase }}</div>
           <i class="dropdown icon"></i>
@@ -113,7 +113,7 @@
       <!-- END input of heel heights -->
       <!-- START input of colors -->
       <div class="field">
-        <label>{{ "colors" | translate | uppercase }}</label>
+        <label>{{ "colors" | translate | titlecase }}</label>
         <div openOptions class="ui dropdown selection multiple">
           <select multiple="" class="ui dropdown">
             <option value="">select colors</option>
@@ -165,7 +165,7 @@
             theProductForm.get('size')!.touched
         }"
       >
-        <label>{{ "size" | translate | uppercase }}</label>
+        <label>{{ "size" | translate | titlecase }}</label>
         <div openOptions class="ui selection dropdown">
           <div class="default text">{{ "select" | translate | titlecase }}</div>
           <i class="dropdown icon"></i>
@@ -193,7 +193,7 @@
             theProductForm.get('season')!.touched
         }"
       >
-        <label>{{ "season" | translate | uppercase }}</label>
+        <label>{{ "season" | translate | titlecase }}</label>
         <div openOptions class="ui selection dropdown">
           <div class="default text">{{ "select" | translate | titlecase }}</div>
           <i class="dropdown icon"></i>
@@ -224,7 +224,7 @@
             theProductForm.get('style')!.touched
         }"
       >
-        <label>{{ "style" | translate | uppercase }}</label>
+        <label>{{ "style" | translate | titlecase }}</label>
         <div openOptions class="ui selection dropdown">
           <div class="default text">{{ "select" | translate | titlecase }}</div>
           <i class="dropdown icon"></i>
@@ -282,7 +282,7 @@
             theProductForm.get('sales')!.touched
         }"
       >
-        <label>{{ "sales" | translate | uppercase }}</label>
+        <label>{{ "sales" | translate | titlecase }}</label>
         <input
           formControlName="sales"
           placeholder="{{ 'sales' | translate | titlecase }}"

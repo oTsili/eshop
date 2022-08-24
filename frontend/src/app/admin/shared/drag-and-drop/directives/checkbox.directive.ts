@@ -2,21 +2,29 @@ import {
   Directive,
   ElementRef,
   HostListener,
+  Input,
   OnInit,
   Renderer2,
 } from '@angular/core';
+import { AddProductsService } from 'src/app/admin/add-products/add-products.service';
+import { AppService } from 'src/app/app.service';
 
 @Directive({ selector: '[checkbox]' })
 export class CheckboxDirective implements OnInit {
+  @Input() name: string;
   element: HTMLElement;
-
   mainInputSiblings: HTMLElement[];
   altInputSiblings: HTMLElement[];
   divSiblings: HTMLElement[];
   inputSiblings: HTMLElement[];
   input: HTMLElement;
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    private addProductsService: AddProductsService,
+    private appService: AppService
+  ) {}
   ngOnInit(): void {
     this.element = this.elementRef.nativeElement;
 
@@ -54,11 +62,15 @@ export class CheckboxDirective implements OnInit {
       this.mainInputSiblings.forEach((el) => {
         this.renderer.removeClass(el, 'checked');
         this.renderer.removeAttribute(el, 'checked');
+        // save the index of main
+        this.addProductsService.setMain(this.name);
       });
     } else if (this.element.classList.contains('alt-radio')) {
       this.altInputSiblings.forEach((el) => {
         this.renderer.removeClass(el, 'checked');
         this.renderer.removeAttribute(el, 'checked');
+        // save the index of main
+        this.addProductsService.setAlt(this.name);
       });
     }
 

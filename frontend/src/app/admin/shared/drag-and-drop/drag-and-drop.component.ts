@@ -10,13 +10,14 @@ import { DragAndDropService } from './drag-and-drop.service';
   styleUrls: ['./drag-and-drop.component.scss'],
 })
 export class DragAndDropComponent implements OnInit {
-  files: any;
+  files: any[] = [];
   data: any;
   deleteSubscription: Subscription;
 
   // Keep track of the view from the elements queried with panelHost directive
   @ViewChild(ImageContainerHostDirective, { static: true })
   imageContainerHost!: ImageContainerHostDirective;
+
   constructor(private dragAndDropService: DragAndDropService) {}
 
   ngOnInit(): void {}
@@ -50,16 +51,14 @@ export class DragAndDropComponent implements OnInit {
    * @param files (Files List)
    */
   prepareFilesList(files: Array<any>) {
-    this.files = files;
-    // this.data ={}
-    // this.uploadFilesSimulator(0);
+    // this.files = files;
+    for (const item of files) {
+      item.progress = 0;
+      this.files.push(item);
+    }
   }
 
   onSubmitFiles() {
-    // update the control
-    // this.append();
-
-    // console.log({ control: this.fileControl });
     // send the control
     this.dragAndDropService.uploadFiles(this.files).subscribe({
       next: (response) => {

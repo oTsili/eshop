@@ -17,7 +17,7 @@ export class DragAndDropService {
     return new ImageContainerItem(SingleFileComponent, { file });
   }
 
-  uploadFiles(files: FileList) {
+  uploadFiles(files: any[]) {
     const fileData = new FormData();
 
     fileData.append('email', 'fsadfd8');
