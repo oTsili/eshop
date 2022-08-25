@@ -11,7 +11,7 @@ export interface UploadProduct {
   season: string;
   style: string;
   type: string;
-  description?: string;
+  description: string;
   images: Array<string>;
   id?: string;
   _id?: string;

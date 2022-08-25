@@ -52,7 +52,7 @@ export class ProductsTradeNumberController {
           await this.productTradeNumberService.createDirectoryType(directories);
 
         break;
-      case 'color':
+      case 'colors':
         console.log({ color: category });
         directoriesSaved =
           await this.productTradeNumberService.createDirectoryColor(
@@ -114,7 +114,7 @@ export class ProductsTradeNumberController {
           await this.productTradeNumberService.updateDirectoryType(id, row);
         break;
 
-      case 'color':
+      case 'colors':
         console.log({ color: category });
         directoryUpdated =
           await this.productTradeNumberService.updateDirectoryColor(id, row);
@@ -172,7 +172,7 @@ export class ProductsTradeNumberController {
           await this.productTradeNumberService.deleteDirectoryType(id);
         break;
 
-      case 'color':
+      case 'colors':
         console.log({ color: category });
         directoryUpdated =
           await this.productTradeNumberService.deleteDirectoryColor(id);

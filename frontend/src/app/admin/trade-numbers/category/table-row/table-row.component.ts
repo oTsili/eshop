@@ -1,5 +1,11 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { TableRowService } from './table-row.service';
 
 @Component({
@@ -7,7 +13,7 @@ import { TableRowService } from './table-row.service';
   templateUrl: './table-row.component.html',
   styleUrls: ['./table-row.component.scss'],
 })
-export class TableRowComponent implements OnInit {
+export class TableRowComponent implements OnInit, OnChanges {
   @Input() data;
   @Input() category;
   @Input() category_style;
@@ -18,10 +24,6 @@ export class TableRowComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // console.log({ data: this.data });
-    // console.log({ category: this.category });
-    // console.log({ style: this.category_style });
-
     // if the component has been created dynamically
     if (this.data) {
       this.category = this.data.category;
@@ -29,17 +31,21 @@ export class TableRowComponent implements OnInit {
     }
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['category_style'])
+      this.category_style = changes['category_style'].currentValue;
+    if (changes['category']) this.category = changes['category'].currentValue;
+  }
+
   updateRow(description: string, code: string) {
-    console.log({ description });
-    console.log({ code });
-    console.log(this.category);
     console.log(this.category_style);
+    console.log({ description, code });
     if (!description || !code) {
       console.log('please provide valid values');
       return;
     }
 
-    //if row pre-existed http request to update from the db
+    //if row pre-existed put request to update from the db
     if (this.category._id) {
       console.log('update row');
       this.tableRowService
@@ -49,6 +55,7 @@ export class TableRowComponent implements OnInit {
             console.log(response);
           },
         });
+      // else post request to create new row
     } else {
       console.log('create row');
       this.tableRowService
@@ -61,7 +68,13 @@ export class TableRowComponent implements OnInit {
     }
   }
 
-  deleteRow() {
+  deleteRow(description: string, code: string) {
+    // if no values to send, just remove the element from the DOM
+    if (!description || !code) {
+      this.elementRef.nativeElement.remove();
+      return;
+    }
+
     // http request to delete from the db
     this.tableRowService
       .deleteRow(this.category._id, this.category_style)

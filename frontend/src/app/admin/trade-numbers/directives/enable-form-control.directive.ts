@@ -7,9 +7,8 @@ import {
   Renderer2,
 } from '@angular/core';
 
-@Injectable({ providedIn: 'root' })
 @Directive({ selector: '[enableform]' })
-export class enableFormDirective implements OnInit {
+export class EnableFormDirective implements OnInit {
   element: HTMLElement;
   inputs: HTMLElement[];
   texts: HTMLElement[];
@@ -35,32 +34,12 @@ export class enableFormDirective implements OnInit {
   }
 
   @HostListener('click', ['$event'])
-  enableFormFunction(event, fromAddButton = false) {
-    console.log('i am clicked');
+  enableFormFunction(event) {
+    // console.log('i am clicked');
     event.preventDefault();
     event.stopPropagation();
 
-    console.log(this.eleementRef.nativeElement.parentElement.parentElement);
-
-    if (fromAddButton) {
-      this.element = this.eleementRef.nativeElement;
-      this.inputs =
-        this.eleementRef.nativeElement.parentElement.parentElement.parentElement.querySelectorAll(
-          'input'
-        );
-      this.texts =
-        this.eleementRef.nativeElement.parentElement.parentElement.parentElement.querySelectorAll(
-          '.div-text'
-        );
-      this.checkmarkIcon =
-        this.eleementRef.nativeElement.parentElement.parentElement.parentElement.querySelectorAll(
-          '.checkmark-icon'
-        )[this.texts.length / 2 - 1];
-      console.log(this.checkmarkIcon);
-      console.log(
-        this.eleementRef.nativeElement.parentElement.parentElement.parentElement
-      );
-    }
+    console.log('enable form clicked');
 
     if (!this.isOpenForm) {
       this.renderer.removeClass(this.checkmarkIcon, 'disabled');

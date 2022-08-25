@@ -1,33 +1,33 @@
-  <app-responsive-catalog
-    [elements]="trade_numbers_array"
-    [justify_content]="'left'"
-    [margin]="'2rem'"
+<app-responsive-catalog
+  [elements]="trade_numbers_array"
+  [justify_content]="'left'"
+  [margin]="'2rem'"
+>
+  <parent-element
+    *ngFor="let trade_number of trade_numbers_array; let i = index"
   >
-    <parent-element
-      *ngFor="let trade_number of trade_numbers_array; let i = index"
-    >
-      <ng-template firstElement>
-        <!-- START Style table -->
-        <app-category
-          *ngIf="trade_number"
-          [category]="trade_number"
-          [category_style]="'style'"
-        >
-          <ng-container table_header>
-            {{ trade_number_headers[i] | titlecase }}
-          </ng-container>
-          <ng-container *ngFor="let category of trade_number">
-            <ng-template tableRowContent>
-              <tr
-                class="row"
-                app-table-row
-                [category]="category"
-                [category_style]="'style'"
-              ></tr>
-            </ng-template>
-          </ng-container>
-        </app-category>
-        <!-- END Style table -->
-      </ng-template>
-    </parent-element>
-  </app-responsive-catalog>
+    <ng-template firstElement>
+      <!-- START Style table -->
+      <app-category
+        *ngIf="trade_number"
+        [category]="trade_number"
+        [category_style]="trade_number_headers[i]"
+      >
+        <ng-container table_header>
+          {{ trade_number_headers[i] | titlecase }}
+        </ng-container>
+        <ng-container *ngFor="let category of trade_number">
+          <ng-template tableRowContent>
+            <tr
+              class="row"
+              app-table-row
+              [category]="category"
+              [category_style]="trade_number_headers[i]"
+            ></tr>
+          </ng-template>
+        </ng-container>
+      </app-category>
+      <!-- END Style table -->
+    </ng-template>
+  </parent-element>
+</app-responsive-catalog>

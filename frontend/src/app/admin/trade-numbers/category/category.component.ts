@@ -5,12 +5,10 @@ import {
   OnInit,
   QueryList,
   ViewChild,
-  ViewContainerRef,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { TableRowContentDirective } from '../directives/table-row-content.directive';
 import { TableRowDirective } from '../directives/table-row.directive';
-import { TableRow } from '../table-row/table-row.interfaces';
+import { TableRow } from './table-row/table-row.interfaces';
 import { TradeNumbersService } from '../trade-numbers.service';
 
 @Component({
@@ -33,19 +31,13 @@ export class CategoryComponent implements OnInit {
 
   constructor(private tradeNumbersService: TradeNumbersService) {}
 
-  ngOnInit(): void {
-    // console.log({ category: this.category });
-    // console.log({ categoryStyle: this.category_style });
-  }
+  ngOnInit(): void {}
 
   onAdd() {
     this.loadComponent();
   }
 
   loadComponent() {
-    console.log({ category: this.category });
-    // go to the next index
-    // this.currentNewsIndex = (this.currentNewsIndex + 1) % this.news.length;
     // get the next component
     const tableRowItem = this.tradeNumbersService.getTableRow(
       this.category,
@@ -54,11 +46,6 @@ export class CategoryComponent implements OnInit {
     console.log({ tableRowItem });
     //get the container where to insert the new component (it is the viewContainerRef of the NewsDirective with the newsHost as its selector)
     const viewContainerRef = this.tableRowHost.viewContainerRef;
-
-    // const viewContainerRef = this.tableRowHost;
-
-    // remove the previous components, contained in the viewContainerRef
-    // viewContainerRef.clear();
 
     // add the next component
     if (tableRowItem) {

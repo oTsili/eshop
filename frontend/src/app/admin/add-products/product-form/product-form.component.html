@@ -6,7 +6,12 @@
   <div class="ui form" [ngClass]="{ error: checkFormErrors() }">
     <!-- START two fields --name, price  -->
     <div class="two fields">
-      <div class="field" error-input>
+      <div
+        class="field"
+        error-input
+        [form]="theProductForm"
+        [controlName]="'name'"
+      >
         <label>{{ "product name" | translate | titlecase }}</label>
         <input
           formControlName="name"
@@ -15,7 +20,12 @@
         />
       </div>
 
-      <div class="field" error-input>
+      <div
+        class="field"
+        error-input
+        [form]="theProductForm"
+        [controlName]="'price'"
+      >
         <label>{{ "price" | translate | titlecase }}</label>
         <input
           formControlName="price"
@@ -33,8 +43,8 @@
         error-select
         class="field"
         [form]="theProductForm"
-        [options]="trade_numbers.heels"
         [controlName]="'heel_height'"
+        [options]="trade_numbers.heels"
         (optionUpdated)="onOptionUpdate($event)"
       ></app-select-input>
       <!-- END input of heel heights -->
@@ -101,7 +111,12 @@
     <!-- START of two fields -->
     <div class="two fields line">
       <!-- START of sales -->
-      <div class="field" error-input>
+      <div
+        class="field"
+        error-input
+        [form]="theProductForm"
+        [controlName]="'sales'"
+      >
         <label>{{ "sales" | translate | titlecase }}</label>
         <input
           formControlName="sales"
@@ -167,6 +182,7 @@
         <div class="header">
           {{ "There are some errors!!" | translate | titlecase }}
         </div>
+        <p class="error-text">Please provide all the required information.</p>
       </div>
     </div>
     <!-- END error messages -->

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { TableRowItem } from './table-row/table-row.class';
-import { TableRowComponent } from './table-row/table-row.component';
+import { TableRowItem } from './category/table-row/table-row.class';
+import { TableRowComponent } from './category/table-row/table-row.component';
 import { TradeNumber, TradeNumbers } from './trade-numbers.interfaces';
 
 const BACKEND_URL = environment.BASE_URL + 'product';

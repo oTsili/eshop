@@ -14,6 +14,7 @@ import { AppService } from 'src/app/app.service';
 import { TradeNumbers } from '../../trade-numbers/trade-numbers.interfaces';
 import { TradeNumbersService } from '../../trade-numbers/trade-numbers.service';
 import { AddProductsService } from '../add-products.service';
+import { ProductFormService } from './product-form.service';
 import { UploadProduct } from './upload-product.interfaces';
 
 @Component({
@@ -35,6 +36,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
     private appService: AppService,
     private addProductsService: AddProductsService,
     private tradeNumberService: TradeNumbersService,
+    private productFormService: ProductFormService,
     private renderer: Renderer2,
     private elementRef: ElementRef
   ) {}
@@ -90,7 +92,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
         validators: [Validators.required],
       }),
 
-      images: new FormControl(null, {}),
+      images: new FormControl(null, { validators: [Validators.required] }),
       // images: new FormControl(null, {
       //   // validators: [Validators.required],
       //   asyncValidators: [imgMimeType],
@@ -163,9 +165,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
   onSubmit(form: FormGroup) {
     // initialize the form without the error class
     const formElement = this.elementRef.nativeElement.querySelector('.form');
-    console.log(formElement);
     this.renderer.removeClass(formElement, 'error');
-    console.log(form);
 
     if (form.invalid) {
       console.log('invalid form');
@@ -214,15 +214,13 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
       images,
     };
 
-    // console.log({ product });
+    console.log({ product });
 
-    // this.productFormService.submitProductForm(product).subscribe(
-    //   {
-    //     next: (response) => {
-    //       console.log(response);
-    //     },
-    //   }
-    // );
+    this.productFormService.submitProductForm(product).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+    });
 
     // (data) => {
     //   this.router.navigate(['/']);

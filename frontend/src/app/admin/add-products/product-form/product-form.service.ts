@@ -13,15 +13,20 @@ export class ProductFormService {
 
   submitProductForm(product: UploadProduct) {
     const productData = new FormData();
-    // productData.append('name', product.name);
-    // productData.append('images', product.images);
-    // productData.append('colors', product.colors);
-    // productData.append('sizes', product.sizes);
-    productData.append('material', product.material);
+    productData.append('src', product.src);
+    productData.append('altSrc', product.altSrc);
+    productData.append('name', product.name);
+    for (let color of product.colors) productData.append('colors', color);
+    productData.append('size', product.size);
     productData.append('price', product.price);
+    productData.append('material', product.material);
     productData.append('sales', product.sales);
     productData.append('heel_heigh', product.heel_height);
-    // productData.append('description', product.description);
+    productData.append('season', product.season);
+    productData.append('style', product.style);
+    productData.append('type', product.type);
+    productData.append('description', product.description);
+    for (let image of product.images) productData.append('photo[]', image);
 
     return this.httpClient.post<UploadProduct>(`${BACKEND_URL}`, productData, {
       withCredentials: true,

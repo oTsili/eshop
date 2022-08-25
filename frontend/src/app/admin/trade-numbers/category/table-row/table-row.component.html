@@ -26,6 +26,7 @@
 </td>
 <td>
   <a
+    enableform
     (click)="updateRow(descriptionInput.value, codeInput.value)"
     class="disabled checkmark-icon"
   >
@@ -38,7 +39,7 @@
   </a>
 </td>
 <td>
-  <a (click)="deleteRow()">
+  <a (click)="deleteRow(descriptionInput.value, codeInput.value)">
     <i class="ph-trash-thin"></i>
   </a>
 </td>
