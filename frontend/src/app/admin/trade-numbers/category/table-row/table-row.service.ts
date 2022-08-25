@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { TradeNumber } from '../../trade-numbers.interfaces';
 
 const BACKEND_URL = environment.BASE_URL + 'product';
 
@@ -20,7 +21,7 @@ export class TableRowService {
   updateRow(id: string, category: string, description: string, code: string) {
     const row = { description, code };
 
-    return this.httpClient.put(
+    return this.httpClient.put<{ directoryUpdated: TradeNumber }>(
       `${BACKEND_URL}/trade-number/${id}/${category}`,
       row,
       {
@@ -32,7 +33,7 @@ export class TableRowService {
   createRow(category: string, description: string, code: string) {
     const row = { description, code };
 
-    return this.httpClient.post(
+    return this.httpClient.post<{ directoriesSaved: TradeNumber }>(
       `${BACKEND_URL}/trade-number/${category}`,
       row,
       {

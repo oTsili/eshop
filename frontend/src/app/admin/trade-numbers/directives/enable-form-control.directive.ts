@@ -3,6 +3,7 @@ import {
   ElementRef,
   HostListener,
   Injectable,
+  Input,
   OnInit,
   Renderer2,
 } from '@angular/core';
@@ -13,7 +14,7 @@ export class EnableFormDirective implements OnInit {
   inputs: HTMLElement[];
   texts: HTMLElement[];
   checkmarkIcon: HTMLElement;
-  isOpenForm = false;
+  @Input() isOpenForm = false;
 
   constructor(private eleementRef: ElementRef, private renderer: Renderer2) {}
 
@@ -38,8 +39,6 @@ export class EnableFormDirective implements OnInit {
     // console.log('i am clicked');
     event.preventDefault();
     event.stopPropagation();
-
-    console.log('enable form clicked');
 
     if (!this.isOpenForm) {
       this.renderer.removeClass(this.checkmarkIcon, 'disabled');

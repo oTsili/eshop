@@ -1,6 +1,7 @@
 export interface TradeNumber {
   description: string;
   code: string;
+  _id: string;
 }
 
 export interface TradeNumbers {

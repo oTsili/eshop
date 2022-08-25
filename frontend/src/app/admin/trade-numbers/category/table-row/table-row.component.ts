@@ -7,6 +7,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { TableRowService } from './table-row.service';
+import dictionary from 'src/assets/i18n/toEn.json';
 
 @Component({
   selector: 'tr[app-table-row]',
@@ -26,7 +27,7 @@ export class TableRowComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     // if the component has been created dynamically
     if (this.data) {
-      this.category = this.data.category;
+      this.category = { description: '', code: '' };
       this.category_style = this.data.category_style;
     }
   }
@@ -45,6 +46,12 @@ export class TableRowComponent implements OnInit, OnChanges {
       return;
     }
 
+    // translate to english the provided description and code
+    description = dictionary[description] || description;
+    code = dictionary[code] || code;
+
+    console.log(description, code);
+
     //if row pre-existed put request to update from the db
     if (this.category._id) {
       console.log('update row');
@@ -53,6 +60,8 @@ export class TableRowComponent implements OnInit, OnChanges {
         .subscribe({
           next: (response) => {
             console.log(response);
+            // update its id in case of deletion or update
+            this.category._id = response.directoryUpdated._id;
           },
         });
       // else post request to create new row
@@ -63,6 +72,8 @@ export class TableRowComponent implements OnInit, OnChanges {
         .subscribe({
           next: (response) => {
             console.log(response);
+            // update its id in case of deletion or update
+            this.category._id = response.directoriesSaved._id;
           },
         });
     }

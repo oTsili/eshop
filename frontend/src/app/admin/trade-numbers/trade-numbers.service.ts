@@ -19,8 +19,8 @@ export class TradeNumbersService {
     });
   }
 
-  getTableRow(category, category_style) {
+  getTableRow(category_style) {
     // console.log({ category_style });
-    return new TableRowItem(TableRowComponent, { category, category_style });
+    return new TableRowItem(TableRowComponent, { category_style });
   }
 }

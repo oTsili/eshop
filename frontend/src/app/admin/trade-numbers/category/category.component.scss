@@ -21,7 +21,10 @@
   border: 0.1rem solid black;
 }
 
-.ui.primary.button:hover {
+.ui.primary.button:hover,
+.ui.primary.button:active,
+.ui.primary.button:link,
+.ui.primary.button:visited {
   background-color: #1b1c1dfa;
 }
 

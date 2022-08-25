@@ -38,9 +38,9 @@ export class CategoryComponent implements OnInit {
   }
 
   loadComponent() {
+    console.log(this.category);
     // get the next component
     const tableRowItem = this.tradeNumbersService.getTableRow(
-      this.category,
       this.category_style
     );
     console.log({ tableRowItem });
