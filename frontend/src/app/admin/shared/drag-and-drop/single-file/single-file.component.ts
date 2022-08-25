@@ -3,11 +3,15 @@ import {
   ElementRef,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { AddProductsService } from 'src/app/admin/add-products/add-products.service';
+import { ProductFormService } from 'src/app/admin/add-products/product-form/product-form.service';
 import { AppService } from 'src/app/app.service';
 
 @Component({
@@ -15,22 +19,30 @@ import { AppService } from 'src/app/app.service';
   templateUrl: './single-file.component.html',
   styleUrls: ['./single-file.component.scss'],
 })
-export class SingleFileComponent implements OnInit, OnChanges {
+export class SingleFileComponent implements OnInit, OnChanges, OnDestroy {
   @Input() data: any;
   private imageReader = new FileReader();
   src: string;
   size: string;
-  // fileForm: FormGroup;
-  // fileFormArray: FormArray;
-  // fileControl: AbstractControl;
+  productFormSubscription: Subscription;
+  form: FormGroup;
 
   constructor(
     private elementRef: ElementRef,
     private appService: AppService,
-    private addProductService: AddProductsService // private formBuilder: FormBuilder
+    private addProductService: AddProductsService,
+    private productFormService: ProductFormService
   ) {}
 
   ngOnInit(): void {
+    this.productFormSubscription = this.productFormService
+      .getFormListener()
+      .subscribe({
+        next: (response) => {
+          this.form = response;
+        },
+      });
+
     this.uploadFilesSimulator(0);
 
     this.imageReader.onloadend = (e) => {
@@ -50,6 +62,10 @@ export class SingleFileComponent implements OnInit, OnChanges {
     // });
 
     // this.fileFormArray = this.fileForm.get('fileFormArray') as FormArray;
+  }
+
+  ngOnDestroy(): void {
+    this.productFormSubscription.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -96,4 +112,14 @@ export class SingleFileComponent implements OnInit, OnChanges {
       }, 200);
     }, 1000);
   }
+
+  // checkFormErrors() {
+  //   if (
+
+  //   ) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 }

@@ -31,6 +31,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
   filesArraySubscription: Subscription;
   mainSrcSubscription: Subscription;
   altSrcSubscription: Subscription;
+  productFormSubscription: Subscription;
 
   constructor(
     private appService: AppService,
@@ -48,6 +49,15 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.getTradeNumbers();
+
+    this.productFormSubscription = this.productFormService
+      .getFormListener()
+      .subscribe({
+        next: (response) => {
+          this.theProductForm = response;
+        },
+      });
+
     // this.colors = environment.COLOR_LIST;
     // this.heel_heights = environment.HEEL_LIST;
 
@@ -99,6 +109,9 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
       // }),
       // images: this.formBuilder.array([]),
     });
+
+    // update single files with the form
+    this.productFormService.updateForm(this.theProductForm);
 
     this.colorsArraySubscription = this.addProductsService
       .getColorsArrayListener()
@@ -158,11 +171,17 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   closeErrorMessage() {
+    // unred the fields
+    this.productFormService.formSubmitted(false);
+
+    // unred the form
     const formElement = this.elementRef.nativeElement.querySelector('.form');
     this.renderer.removeClass(formElement, 'error');
   }
 
   onSubmit(form: FormGroup) {
+    this.productFormService.formSubmitted(true);
+
     // initialize the form without the error class
     const formElement = this.elementRef.nativeElement.querySelector('.form');
     this.renderer.removeClass(formElement, 'error');

@@ -6,12 +6,14 @@ import {
   OnInit,
   Renderer2,
 } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { AddProductsService } from 'src/app/admin/add-products/add-products.service';
 import { AppService } from 'src/app/app.service';
 
 @Directive({ selector: '[checkbox]' })
 export class CheckboxDirective implements OnInit {
   @Input() name: string;
+  @Input() form: FormGroup;
   element: HTMLElement;
   mainInputSiblings: HTMLElement[];
   altInputSiblings: HTMLElement[];

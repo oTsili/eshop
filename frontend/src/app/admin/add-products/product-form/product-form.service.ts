@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UploadProduct } from './upload-product.interfaces';
 
@@ -9,7 +11,26 @@ const BACKEND_URL = environment.BASE_URL + 'product';
   providedIn: 'root',
 })
 export class ProductFormService {
+  private formListener = new Subject<FormGroup>();
+  private formSubmitListener = new BehaviorSubject<boolean>(false);
+
   constructor(private httpClient: HttpClient) {}
+
+  getFormSubmitListener() {
+    return this.formSubmitListener.asObservable();
+  }
+
+  formSubmitted(isSubmitted) {
+    this.formSubmitListener.next(isSubmitted);
+  }
+
+  getFormListener() {
+    return this.formListener.asObservable();
+  }
+
+  updateForm(form) {
+    this.formListener.next(form);
+  }
 
   submitProductForm(product: UploadProduct) {
     const productData = new FormData();

@@ -165,7 +165,12 @@
     </div>
     <!-- END of two fields -->
     <!-- START input of description -->
-    <div class="field">
+    <div
+      class="field"
+      error-input
+      [form]="theProductForm"
+      [controlName]="'description'"
+    >
       <label>{{ "description" | translate | titlecase }}</label>
       <textarea rows="3" formControlName="description"></textarea>
     </div>
@@ -182,7 +187,7 @@
         <div class="header">
           {{ "There are some errors!!" | translate | titlecase }}
         </div>
-        <p class="error-text">Please provide all the required information.</p>
+        <p class="error-text">Please provide all the required fields.</p>
       </div>
     </div>
     <!-- END error messages -->
