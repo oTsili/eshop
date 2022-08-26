@@ -11,4 +11,5 @@ export class DirectoryMaterial {
   code: string;
 }
 
-export const DirectoryMaterialSchema = SchemaFactory.createForClass(DirectoryMaterial);
+export const DirectoryMaterialSchema =
+  SchemaFactory.createForClass(DirectoryMaterial);

@@ -9,9 +9,13 @@ import * as session from 'express-session';
 
 import { AppModule } from './app.module';
 import { Session } from '@nestjs/common';
+const busboy = require('connect-busboy');
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    // rawBody: true,
+  });
+
   // set glabal request route prefix (e.g. http://localhost:3000/api/<whatever>)
   app.setGlobalPrefix('api');
 
@@ -20,8 +24,9 @@ async function bootstrap() {
 
   app.useStaticAssets(join(__dirname, '..', 'static'));
 
-  // app.use(bodyParser.urlencoded({ extended: true }));
+  // app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
   // app.use(bodyParser.json());
+  // app.use(bodyParser({ limit: '50mb' }));
   // app.use(cookieParser());
 
   app.use(
@@ -35,11 +40,14 @@ async function bootstrap() {
     }),
   );
 
+  // app.use(busboy({ immediate: true }));
+  app.use(busboy());
+
   app.enableCors({
     origin: 'http://localhost:4200',
     methods: 'GET, PUT, POST, DELETE, PATCH, OPTIONS',
     allowedHeaders:
-      'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization',
+      'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization, enctype',
     credentials: true,
   });
 

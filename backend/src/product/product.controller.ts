@@ -1,16 +1,12 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   HttpStatus,
-  Param,
   Post,
-  Put,
   Query,
   Req,
   Res,
-  UploadedFile,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
@@ -18,8 +14,17 @@ import { Response } from 'express';
 import { diskStorage } from 'multer';
 import { FormDataRequest } from 'nestjs-form-data';
 import { MyNewFilesInterceptor } from 'src/interceptors/files.interceptor';
+import { LoggingInterceptor } from 'src/interceptors/folder-name.interceptor';
 import { ProductService } from './product.service';
-import { Product } from './schemas/product.schema';
+import * as fs from 'fs';
+
+import session from 'express-session';
+
+declare module 'express-session' {
+  export interface SessionData {
+    folder: { [key: string]: any };
+  }
+}
 
 @Controller('product')
 export class ProductsController {
@@ -48,30 +53,41 @@ export class ProductsController {
   uploadSingle(
     @UploadedFiles() files: Array<Express.Multer.File>,
     @Res() res: Response,
+    @Req() req: Request,
     @Body() body,
   ) {
     for (let file of files) {
       console.log(file.filename);
     }
     // console.log(files);
-    console.log(body.email);
+    console.log(req);
 
     res.status(HttpStatus.OK).json({ files });
   }
 
   @Post('')
   @UseInterceptors(
+    // LoggingInterceptor,
     MyNewFilesInterceptor('photo[]', (ctx) => {
       // Get request from Context
       const req = ctx.switchToHttp().getRequest();
+
       // Return the options
       return {
         storage: diskStorage({
-          destination: `./static/images/products/${req.params.folder}`,
+          destination: (req, file, cb) => {
+            // console.log(req.session.folder);
+            // const folder = req.session.folder;
+
+            const path = `./static/images/products/${req.session.folder}`;
+            fs.mkdirSync(path, { recursive: true });
+            return cb(null, path);
+          },
+          // destination: `./static/images/products/${req.session.folder}`,
           // tslint:disable-next-line: variable-name
           filename: (req, file, cb) => {
+            console.log({ session: req.session });
             const name = file.originalname.toLowerCase().split(' ').join('-');
-
             const extension = file.mimetype.split('/')[1];
             return cb(null, `${name}-${Date.now()}.${extension}`);
           },
@@ -79,18 +95,22 @@ export class ProductsController {
       };
     }),
   )
+  // @FormDataRequest()
   createProduct(
     @UploadedFiles() files: Array<Express.Multer.File>,
+    @Req() req: Request,
     @Res() res: Response,
     @Body() body,
   ) {
     console.log('inside create product');
-    for (let file of files) {
-      console.log(file.filename);
-    }
+    // console.log(body);
+    // for (let file of body.files) {
+    //   console.log(file.filename);
+    // }
     // console.log(files);
-    console.log(body.email);
+    // console.log(body);
 
+    // console.log(files);
     res.status(HttpStatus.OK).json({ files });
   }
 

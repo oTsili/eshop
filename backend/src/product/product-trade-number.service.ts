@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-// import { CreateDirectoryColorDto } from './dto/create-directory-color.dto';
-// import { CreateDirectorySeasonDto } from './dto/create-directory-season.dto';
-// import { CreateDirectoryDto } from './dto/create-directory-size.dto';
-// import { CreateDirectoryDto } from './dto/create-directory-style.dto';
-// import { CreateDirectoryTypeDto } from './dto/create-directory-type.dto';
-import { CreateDirectoryDto } from './dto/create-directory.dto';
-
+import { CreateDirectoryColorsDto } from './dto/create-directory-colors.dto';
+import { CreateDirectoryStyleDto } from './dto/create-directory-style.dto';
+import { CreateDirectoryTypeDto } from './dto/create-directory-type.dto';
+import { CreateDirectorySeasonDto } from './dto/create-directory-season.dto';
+import { CreateDirectoryHeelDto } from './dto/create-directory-heel_height.dto';
+import { CreateDirectoryMaterialDto } from './dto/create-directory-material.dto';
+import { CreateDirectorySizeDto } from './dto/create-directory-size.dto';
 import {
   DirectoryColor,
   DirectoryColorDocument,
@@ -36,7 +36,6 @@ import {
   DirectoryType,
   DirectoryTypeDocument,
 } from './schemas/directory-type.schema';
-import { Product, ProductDocument } from './schemas/product.schema';
 
 @Injectable()
 export class ProductTradeNumberService {
@@ -59,90 +58,108 @@ export class ProductTradeNumberService {
 
   /*************  Create   *************/
 
-  async createDirectoryStyle(directoryDto: CreateDirectoryDto[]) {
+  async createDirectoryStyle(directoryDto: CreateDirectoryStyleDto[]) {
     return this.directoryStyleModel.create(directoryDto);
   }
 
-  async createDirectoryColor(directoryDto: CreateDirectoryDto[]) {
+  async createDirectoryColor(directoryDto: CreateDirectoryColorsDto[]) {
     return this.directoryColorModel.create(directoryDto);
   }
 
-  async createDirectorySize(directoryDto: CreateDirectoryDto[]) {
+  async createDirectorySize(directoryDto: CreateDirectorySizeDto[]) {
     return this.directorySizeModel.create(directoryDto);
   }
 
-  async createDirectoryType(directoryDto: CreateDirectoryDto[]) {
+  async createDirectoryType(directoryDto: CreateDirectoryTypeDto[]) {
     return this.directoryTypeModel.create(directoryDto);
   }
 
-  async createDirectorySeason(directoryDto: CreateDirectoryDto[]) {
+  async createDirectorySeason(directoryDto: CreateDirectorySeasonDto[]) {
     return this.directorySeasonModel.create(directoryDto);
   }
 
-  async createDirectoryHeel(directoryDto: CreateDirectoryDto[]) {
+  async createDirectoryHeel(directoryDto: CreateDirectoryHeelDto[]) {
     return this.directoryHeelModel.create(directoryDto);
   }
-  async createDirectoryMaterial(directoryDto: CreateDirectoryDto[]) {
+  async createDirectoryMaterial(directoryDto: CreateDirectoryMaterialDto[]) {
     return this.directoryMaterialModel.create(directoryDto);
   }
 
   /*************  Update   *************/
 
-  async updateDirectoryStyle(id: string, directoryDto: CreateDirectoryDto[]) {
+  async updateDirectoryStyle(
+    id: string,
+    directoryDto: CreateDirectoryStyleDto[],
+  ) {
     return this.directoryStyleModel.findByIdAndUpdate(id, directoryDto);
   }
 
-  async updateDirectoryColor(id: string, directoryDto: CreateDirectoryDto[]) {
+  async updateDirectoryColor(
+    id: string,
+    directoryDto: CreateDirectoryColorsDto[],
+  ) {
     return this.directoryColorModel.findByIdAndUpdate(id, directoryDto);
   }
 
-  async updateDirectorySize(id: string, directoryDto: CreateDirectoryDto[]) {
+  async updateDirectorySize(
+    id: string,
+    directoryDto: CreateDirectorySizeDto[],
+  ) {
     return this.directorySizeModel.findByIdAndUpdate(id, directoryDto);
   }
 
-  async updateDirectoryType(id: string, directoryDto: CreateDirectoryDto[]) {
+  async updateDirectoryType(
+    id: string,
+    directoryDto: CreateDirectoryTypeDto[],
+  ) {
     return this.directoryTypeModel.findByIdAndUpdate(id, directoryDto);
   }
 
-  async updateDirectorySeason(id: string, directoryDto: CreateDirectoryDto[]) {
+  async updateDirectorySeason(
+    id: string,
+    directoryDto: CreateDirectorySeasonDto[],
+  ) {
     return this.directorySeasonModel.findByIdAndUpdate(id, directoryDto);
   }
-  async updateDirectoryHeel(id: string, directoryDto: CreateDirectoryDto[]) {
+  async updateDirectoryHeel(
+    id: string,
+    directoryDto: CreateDirectoryHeelDto[],
+  ) {
     return this.directoryHeelModel.findByIdAndUpdate(id, directoryDto);
   }
   async updateDirectoryMaterial(
     id: string,
-    directoryDto: CreateDirectoryDto[],
+    directoryDto: CreateDirectoryMaterialDto[],
   ) {
     return this.directoryMaterialModel.findByIdAndUpdate(id, directoryDto);
   }
 
   /*************  Delete   *************/
 
-  async deleteDirectoryStyle(directoryDto: CreateDirectoryDto[]) {
+  async deleteDirectoryStyle(directoryDto: CreateDirectoryStyleDto[]) {
     return this.directoryStyleModel.findByIdAndDelete(directoryDto);
   }
 
-  async deleteDirectoryColor(directoryDto: CreateDirectoryDto[]) {
+  async deleteDirectoryColor(directoryDto: CreateDirectoryColorsDto[]) {
     return this.directoryColorModel.findByIdAndDelete(directoryDto);
   }
 
-  async deleteDirectorySize(directoryDto: CreateDirectoryDto[]) {
+  async deleteDirectorySize(directoryDto: CreateDirectorySizeDto[]) {
     return this.directorySizeModel.findByIdAndDelete(directoryDto);
   }
 
-  async deleteDirectoryType(directoryDto: CreateDirectoryDto[]) {
+  async deleteDirectoryType(directoryDto: CreateDirectoryTypeDto[]) {
     return this.directoryTypeModel.findByIdAndDelete(directoryDto);
   }
 
-  async deleteDirectorySeason(directoryDto: CreateDirectoryDto[]) {
+  async deleteDirectorySeason(directoryDto: CreateDirectorySeasonDto[]) {
     return this.directorySeasonModel.findByIdAndDelete(directoryDto);
   }
-  async deleteDirectoryHeel(directoryDto: CreateDirectoryDto[]) {
+  async deleteDirectoryHeel(directoryDto: CreateDirectoryHeelDto[]) {
     return this.directoryHeelModel.findByIdAndDelete(directoryDto);
   }
 
-  async deleteDirectoryMaterial(directoryDto: CreateDirectoryDto[]) {
+  async deleteDirectoryMaterial(directoryDto: CreateDirectoryMaterialDto[]) {
     return this.directoryMaterialModel.findByIdAndDelete(directoryDto);
   }
 
@@ -163,10 +180,10 @@ export class ProductTradeNumberService {
   async findDirectoryHeel(): Promise<DirectoryHeel[]> {
     return this.directoryHeelModel.find().exec();
   }
-  async findDirectorySize(): Promise<DirectoryHeel[]> {
+  async findDirectorySize(): Promise<DirectorySize[]> {
     return this.directorySizeModel.find().exec();
   }
-  async findDirectoryMaterial(): Promise<DirectoryHeel[]> {
+  async findDirectoryMaterial(): Promise<DirectoryMaterial[]> {
     return this.directoryMaterialModel.find().exec();
   }
 }

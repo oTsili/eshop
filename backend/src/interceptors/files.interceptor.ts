@@ -39,6 +39,7 @@ export const MyNewFilesInterceptor = (
         ...this.moduleOptions,
         ...localOptions(context),
       });
+
       return super.intercept(context, next);
     }
   }

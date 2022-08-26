@@ -11,4 +11,5 @@ export class DirectoryStyle {
   code: string;
 }
 
-export const DirectoryStyleSchema = SchemaFactory.createForClass(DirectoryStyle);
+export const DirectoryStyleSchema =
+  SchemaFactory.createForClass(DirectoryStyle);

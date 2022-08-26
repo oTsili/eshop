@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class CreateDirectoryDto {
+export class CreateDirectorySizeDto {
   @IsNotEmpty()
   description: string;
 

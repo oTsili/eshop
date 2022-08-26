@@ -3,12 +3,14 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { CreateProductDto } from './dto/create-product-document.dto';
+import { ProductTradeNumberService } from './product-trade-number.service';
 
 import { Product, ProductDocument } from './schemas/product.schema';
 
 @Injectable()
 export class ProductService {
   constructor(
+    private readonly productTradeNumberService: ProductTradeNumberService,
     @InjectModel(Product.name) private productModel: Model<ProductDocument>,
   ) {}
 
@@ -58,6 +60,43 @@ export class ProductService {
         .exec()
     );
   }
+
+  // async fetchFolderName(body): Promise<string> {
+  //   const {
+  //     src,
+  //     altSrc,
+  //     name,
+  //     color,
+  //     size,
+  //     material,
+  //     sales,
+  //     heel_height,
+  //     season,
+  //     style,
+  //     type,
+  //   } = body;
+
+  //   let seasons = await this.productTradeNumberService.findDirectorySeason();
+  //   let colors = await this.productTradeNumberService.findDirectoryColor();
+  //   let types = await this.productTradeNumberService.findDirectoryType();
+  //   let styles = await this.productTradeNumberService.findDirectoryStyle();
+
+  //   const trade_numbers = {
+  //     seasons,
+  //     colors,
+  //     types,
+  //     styles,
+  //   };
+
+  //   console.log({ season });
+
+  //   const code1 = seasons.find((s) => s.description === season).code;
+
+  //   console.log(code1);
+
+  //   const folder = '  ';
+  //   return folder;
+  // }
 
   /**
    * computes and save the after-sales special price

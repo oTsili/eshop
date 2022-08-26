@@ -26,18 +26,26 @@ import {
 } from './schemas/directory-season.schema';
 import { ProductsTradeNumberController } from './product-trade-numbers.controller';
 import { ProductTradeNumberService } from './product-trade-number.service';
-import { TradeNumberFolderMiddleware } from 'src/custom-middlewares/trade-number-folder.middleware';
+import {
+  TradeNumberFolderMiddleware,
+  // TradeNumberFolderMiddleware
+} from 'src/custom-middlewares/trade-number-folder.middleware';
 import {
   DirectoryHeel,
   DirectoryHeelSchema,
 } from './schemas/directory-heel.schema';
-import { DirectoryMaterial, DirectoryMaterialSchema } from './schemas/directory-material.schema';
+import {
+  DirectoryMaterial,
+  DirectoryMaterialSchema,
+} from './schemas/directory-material.schema';
+import { NestjsFormDataModule } from 'nestjs-form-data';
 
 @Module({
   imports: [
     // MulterModule.register({
     //   dest: './uploads',
     // }),
+    NestjsFormDataModule,
 
     /* Basic */
     MongooseModule.forFeature([
