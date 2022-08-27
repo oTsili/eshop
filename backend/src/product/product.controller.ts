@@ -13,19 +13,16 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { diskStorage } from 'multer';
-import { FormDataRequest } from 'nestjs-form-data';
 import { MyNewFilesInterceptor } from 'src/interceptors/files.interceptor';
-import { LoggingInterceptor } from 'src/interceptors/folder-name.interceptor';
 import { ProductService } from './product.service';
 import * as fs from 'fs';
-
-import session from 'express-session';
 
 declare module 'express-session' {
   export interface SessionData {
     folder: { [key: string]: any };
     paths: string[];
     trade_number: string;
+    path: string;
   }
 }
 

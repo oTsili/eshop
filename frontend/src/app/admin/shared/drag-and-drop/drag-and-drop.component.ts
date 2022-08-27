@@ -58,17 +58,17 @@ export class DragAndDropComponent implements OnInit {
     }
   }
 
-  onSubmitFiles() {
-    // send the control
-    this.dragAndDropService.uploadFiles(this.files).subscribe({
-      next: (response) => {
-        console.log(response);
-      },
-      error: (response) => {
-        console.error(response.error);
-      },
-    });
-  }
+  // onSubmitFiles() {
+  //   // send the control
+  //   this.dragAndDropService.uploadFiles(this.files).subscribe({
+  //     next: (response) => {
+  //       console.log(response);
+  //     },
+  //     error: (response) => {
+  //       console.error(response.error);
+  //     },
+  //   });
+  // }
 
   loadComponent(file) {
     /**

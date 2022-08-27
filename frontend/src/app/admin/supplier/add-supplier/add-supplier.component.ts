@@ -1,5 +1,12 @@
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 import { Supplier } from '../supplier.interfaces';
 import { AddSupplierService } from './add-supplier.service';
@@ -9,11 +16,13 @@ import { AddSupplierService } from './add-supplier.service';
   templateUrl: './add-supplier.component.html',
   styleUrls: ['./add-supplier.component.scss'],
 })
-export class AddSupplierComponent implements OnInit {
+export class AddSupplierComponent implements OnInit, OnDestroy {
   supplierForm: FormGroup;
   isLoading = false;
   suppliers;
   sumbitDate: string;
+  supplierFormSubscription: Subscription;
+  fileSubscription: Subscription;
 
   constructor(
     private addSupplierService: AddSupplierService,
@@ -23,7 +32,27 @@ export class AddSupplierComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.supplierFormSubscription = this.addSupplierService
+      .getSupplierFormListener()
+      .subscribe({
+        next: (response) => {
+          this.supplierForm = response;
+          console.log(response);
+        },
+      });
+
+    this.fileSubscription = this.addSupplierService
+      .getFileListener()
+      .subscribe({
+        next: (response) => {
+          if (response) this.supplierForm.get('photo')?.patchValue(response);
+        },
+      });
+
     this.supplierForm = new FormGroup({
+      company_name: new FormControl(null, {
+        validators: [Validators.required],
+      }),
       firstname: new FormControl(null, {
         validators: [Validators.required],
       }),
@@ -48,7 +77,18 @@ export class AddSupplierComponent implements OnInit {
       id: new FormControl(null, {
         validators: [Validators.required],
       }),
+      photo: new FormControl(null, {
+        // validators: [Validators.required],
+      }),
     });
+
+    // update single files with the form
+    this.addSupplierService.updateForm(this.supplierForm);
+  }
+
+  ngOnDestroy(): void {
+    this.supplierFormSubscription.unsubscribe();
+    this.fileSubscription.unsubscribe();
   }
 
   onSubmit(form: FormGroup) {

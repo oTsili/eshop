@@ -61,43 +61,6 @@ export class ProductService {
     );
   }
 
-  // async fetchFolderName(body): Promise<string> {
-  //   const {
-  //     src,
-  //     altSrc,
-  //     name,
-  //     color,
-  //     size,
-  //     material,
-  //     sales,
-  //     heel_height,
-  //     season,
-  //     style,
-  //     type,
-  //   } = body;
-
-  //   let seasons = await this.productTradeNumberService.findDirectorySeason();
-  //   let colors = await this.productTradeNumberService.findDirectoryColor();
-  //   let types = await this.productTradeNumberService.findDirectoryType();
-  //   let styles = await this.productTradeNumberService.findDirectoryStyle();
-
-  //   const trade_numbers = {
-  //     seasons,
-  //     colors,
-  //     types,
-  //     styles,
-  //   };
-
-  //   console.log({ season });
-
-  //   const code1 = seasons.find((s) => s.description === season).code;
-
-  //   console.log(code1);
-
-  //   const folder = '  ';
-  //   return folder;
-  // }
-
   /**
    * computes and save the after-sales special price
    * @param products the pre-fetched products (with )

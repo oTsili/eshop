@@ -51,6 +51,7 @@ export class SingleFileComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe({
         next: (response) => {
           this.form = response;
+          console.log(response);
         },
       });
 
@@ -67,6 +68,7 @@ export class SingleFileComponent implements OnInit, OnChanges, OnDestroy {
     // add push the file to the service's array
     this.addProductService.pushFilesArray(this.data.file);
 
+    this.addSupplierService.setFile(this.data.file);
     console.log(this.data);
     // this.fileForm = this.formBuilder.group({
     //   fileFormArray: this.formBuilder.array([]),
@@ -95,19 +97,6 @@ export class SingleFileComponent implements OnInit, OnChanges, OnDestroy {
     this.elementRef.nativeElement.remove();
   }
 
-  // onSubmitFile() {
-  //   // update the control
-  //   this.append();
-
-  //   console.log({ control: this.fileControl });
-  //   // send the control
-  //   this.singleFileService.uploadFiles(this.fileControl).subscribe({
-  //     next: (response) => {
-  //       console.log(response);
-  //     },
-  //   });
-  // }
-
   /**
    * Simulate the upload process
    */
@@ -124,14 +113,4 @@ export class SingleFileComponent implements OnInit, OnChanges, OnDestroy {
       }, 200);
     }, 1000);
   }
-
-  // checkFormErrors() {
-  //   if (
-
-  //   ) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
 }

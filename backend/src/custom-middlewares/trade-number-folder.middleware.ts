@@ -1,10 +1,8 @@
-import { Injectable, NestMiddleware, UseInterceptors } from '@nestjs/common';
-import { FilesInterceptor } from '@nestjs/platform-express';
-import e, { Request, Response, NextFunction } from 'express';
-import { FormDataRequest } from 'nestjs-form-data';
+import { Injectable, NestMiddleware } from '@nestjs/common';
+import { Response, NextFunction } from 'express';
 import { ProductTradeNumberService } from 'src/product/product-trade-number.service';
-import { Product } from 'src/product/schemas/product.schema';
-const busboy = require('busboy');
+// const busboy = require('busboy');
+// import * as busboy from 'busboy';
 
 @Injectable()
 // @FormDataRequest()
@@ -15,6 +13,7 @@ export class TradeNumberFolderMiddleware implements NestMiddleware {
 
   async use(req, res: Response, next: NextFunction) {
     console.log('Middleware...');
+    let flagFileName = '';
 
     let seasons = await this.productTradeNumberService.findDirectorySeason();
     let colors = await this.productTradeNumberService.findDirectoryColor();
@@ -74,8 +73,11 @@ export class TradeNumberFolderMiddleware implements NestMiddleware {
         // console.log({ folder });
       });
       req.busboy.on('file', (name, file, info) => {
-        // console.log(name);
+        // console.log(name)
+        flagFileName = name;
       });
+
+      // if (flagFileName)
       req.pipe(req.busboy);
     }
 

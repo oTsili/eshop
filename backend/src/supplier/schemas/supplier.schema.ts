@@ -5,13 +5,13 @@ export type SupplierDocument = Supplier & Document;
 @Schema()
 export class Supplier {
   @Prop()
-  first_name: string;
+  firstname: string;
 
   @Prop()
-  last_name: string;
+  lastname: string;
 
   @Prop()
-  tax_id_num: string;
+  tax_id_number: string;
 
   @Prop()
   phone: string;

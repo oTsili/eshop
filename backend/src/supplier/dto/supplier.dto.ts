@@ -5,13 +5,13 @@ export class CreateSupplierDto {
   company_name: string;
 
   @IsNotEmpty()
-  first_name: string;
+  firstname: string;
 
   @IsNotEmpty()
-  last_name: string;
+  lastname: string;
 
   @IsNotEmpty()
-  tax_id_num: string;
+  tax_id_number: string;
 
   phone: string;
 

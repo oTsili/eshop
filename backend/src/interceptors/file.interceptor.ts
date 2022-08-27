@@ -1,4 +1,8 @@
-import { FileInterceptor, MulterModuleOptions } from '@nestjs/platform-express';
+import {
+  FileInterceptor,
+  FilesInterceptor,
+  MulterModuleOptions,
+} from '@nestjs/platform-express';
 import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
 import { MULTER_MODULE_OPTIONS } from '@nestjs/platform-express/multer/files.constants';
 import * as multer from 'multer';
@@ -12,7 +16,7 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 
-export const MyNewFileInterceptor = (
+export const MyNewFilesInterceptor = (
   fieldName: string,
   localOptions?: (context: ExecutionContext) => MulterOptions,
 ) => {
@@ -36,6 +40,7 @@ export const MyNewFileInterceptor = (
         ...this.moduleOptions,
         ...localOptions(context),
       });
+
       return super.intercept(context, next);
     }
   }

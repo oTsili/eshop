@@ -13,6 +13,8 @@ const BACKEND_URL = environment.BASE_URL + 'supplier';
 export class AddSupplierService {
   private formListener = new Subject<FormGroup>();
   private formSubmitListener = new BehaviorSubject<boolean>(false);
+  private fileListener = new BehaviorSubject<File | null>(null);
+  private file: File;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -26,6 +28,23 @@ export class AddSupplierService {
 
   getSupplierFormListener() {
     return this.formListener.asObservable();
+  }
+
+  updateForm(form) {
+    this.formListener.next(form);
+  }
+
+  getFileListener() {
+    return this.fileListener.asObservable();
+  }
+
+  updateFile() {
+    this.fileListener.next(this.file);
+  }
+
+  setFile(file: File) {
+    this.file = file;
+    this.updateFile();
   }
 
   submitSupplierForm(supplier: Supplier) {
@@ -42,31 +61,11 @@ export class AddSupplierService {
 
     console.log(supplierData.entries());
 
-    let headers = new HttpHeaders();
-    // headers = headers.append('Content-Type', 'multipart/form-data');
-    // headers = headers.append('enctype', 'multipart/form-data');
-    // headers = headers.append(
-    //   'Content-Type',
-    //   'application/x-www-form-urlencoded'
-    // );
-    // headers = headers.append('enctype', 'application/x-www-form-urlencoded');
-    // headers = headers.append('Accept', 'application/json');
-
-    // console.log({ headers });
-
-    let params = new HttpParams();
-    params = params.append('reportProgress', true);
-    params = params.append('withCredentials', true);
-
-    const options = {
-      headers,
-      params,
-    };
-
     return this.httpClient.post<Supplier>(
       `${BACKEND_URL}`,
       supplierData,
-      options
+      // options
+      { withCredentials: true }
     );
   }
 }

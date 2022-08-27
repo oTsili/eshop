@@ -5,6 +5,21 @@
     (submit)="onSubmit(supplierForm)"
   >
     <div class="ui form" [ngClass]="{ error: checkFormErrors() }">
+      <!-- START field --company_name  -->
+      <div
+        class="field"
+        error-input
+        [form]="supplierForm"
+        [controlName]="'company_name'"
+      >
+        <label>{{ "company name" | translate | titlecase }}</label>
+        <input
+          formControlName="company_name"
+          placeholder="{{ 'company name' | translate | titlecase }}"
+          type="text"
+        />
+      </div>
+      <!-- END field --company_name  -->
       <!-- START two fields --firstname, lastname  -->
       <div class="two fields">
         <div

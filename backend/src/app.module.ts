@@ -23,6 +23,7 @@ import { SharedModule } from './shared/shared.module';
 import { NominalNumberModule } from './nominal-number/nominal-number.module';
 import { SupplyHistoryModule } from './supply-history/supply-history.module';
 import { CustomerHistoryModule } from './customer-history/customer-history.module';
+import { SupplierModule } from './supplier/supplier.module';
 
 @Module({
   // connect to the demo Database
@@ -56,6 +57,7 @@ import { CustomerHistoryModule } from './customer-history/customer-history.modul
     //     AcceptLanguageResolver,
     //   ],
     // }),
+    SupplierModule,
     ProductModule,
     CarouselSlidesModule,
     NavbarModule,

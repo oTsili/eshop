@@ -3,7 +3,6 @@ import { ProductsController } from './product.controller';
 import { ProductService } from './product.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Product, ProductSchema } from './schemas/product.schema';
-import { MulterModule } from '@nestjs/platform-express';
 import {
   DirectoryColor,
   DirectoryColorSchema,
@@ -26,10 +25,7 @@ import {
 } from './schemas/directory-season.schema';
 import { ProductsTradeNumberController } from './product-trade-numbers.controller';
 import { ProductTradeNumberService } from './product-trade-number.service';
-import {
-  TradeNumberFolderMiddleware,
-  // TradeNumberFolderMiddleware
-} from 'src/custom-middlewares/trade-number-folder.middleware';
+import { TradeNumberFolderMiddleware } from 'src/custom-middlewares/trade-number-folder.middleware';
 import {
   DirectoryHeel,
   DirectoryHeelSchema,
@@ -42,9 +38,6 @@ import { NestjsFormDataModule } from 'nestjs-form-data';
 
 @Module({
   imports: [
-    // MulterModule.register({
-    //   dest: './uploads',
-    // }),
     NestjsFormDataModule,
 
     /* Basic */
