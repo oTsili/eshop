@@ -14,7 +14,7 @@ export class TradeNumberFolderMiddleware implements NestMiddleware {
   ) {}
 
   async use(req, res: Response, next: NextFunction) {
-    console.log('Request...');
+    console.log('Middleware...');
 
     let seasons = await this.productTradeNumberService.findDirectorySeason();
     let colors = await this.productTradeNumberService.findDirectoryColor();
@@ -43,7 +43,7 @@ export class TradeNumberFolderMiddleware implements NestMiddleware {
       heel_heights,
       materials,
     ];
-    console.log({ seasons });
+    // console.log({ seasons });
 
     const categories = Object.keys(trade_numbers).map((el) => {
       if (el !== 'colors') {
@@ -53,73 +53,34 @@ export class TradeNumberFolderMiddleware implements NestMiddleware {
       }
     });
 
-    // const values = Object.values(trade_numbers);
-    categories.map;
-    console.log({ categories });
-
-    // console.log({ values });
+    // console.log({ categories });
 
     let folder = 's';
 
     if (req.busboy) {
       req.busboy.on('field', (name, value, info) => {
-        console.log(name, value);
+        // console.log(name, value);
 
         categoriesArray.forEach((element, index) => {
           element.forEach((el) => {
             if (el.description === value && name === categories[index]) {
-              console.log(el.code);
+              // console.log(el.code);
               folder = folder + el.code;
             }
           });
         });
         req.session.folder = folder;
 
-        console.log({ folder });
+        // console.log({ folder });
       });
       req.busboy.on('file', (name, file, info) => {
-        console.log(name);
+        // console.log(name);
       });
       req.pipe(req.busboy);
     }
 
-    // console.log({ body: req.busboy });
-    // const bb = busboy({ headers: req.headers });
-
-    // bb.on('field', (name, value, info) => {
-    //   console.log(name);
-    // });
-
-    // const code1 = seasons.find((s) => s.description === season).code;
-
-    // console.log(code1);
+    req.session.paths = [];
 
     next();
   }
 }
-// @Injectable()
-// export class TradeNumberFolderMiddleware implements NestMiddleware {
-//   constructor(
-//     private readonly productTradeNumberService: ProductTradeNumberService,
-//   ) {}
-
-//   async use(req, res, next) {
-//     let seasons = await this.productTradeNumberService.findDirectorySeason();
-//     let colors = await this.productTradeNumberService.findDirectoryColor();
-//     let types = await this.productTradeNumberService.findDirectoryType();
-//     let styles = await this.productTradeNumberService.findDirectoryStyle();
-
-//     const trade_numbers = {
-//       seasons,
-//       colors,
-//       types,
-//       styles,
-//     };
-//     console.log('inside middleware');
-
-//     req.session.folder = 'paok';
-//     console.log(req.body);
-
-//     next();
-//   }
-// }

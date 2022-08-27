@@ -12,4 +12,5 @@ export interface TradeNumbers {
   heels: TradeNumber[];
   sizes: TradeNumber[];
   materials: TradeNumber[];
+  suppliers: TradeNumber[];
 }

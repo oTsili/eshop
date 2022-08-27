@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 
 import { AddProductsService } from 'src/app/admin/add-products/add-products.service';
 import { ProductFormService } from 'src/app/admin/add-products/product-form/product-form.service';
+import { AddSupplierService } from 'src/app/admin/supplier/add-supplier/add-supplier.service';
 import { AppService } from 'src/app/app.service';
 
 @Component({
@@ -25,18 +26,28 @@ export class SingleFileComponent implements OnInit, OnChanges, OnDestroy {
   src: string;
   size: string;
   productFormSubscription: Subscription;
+  supplierFormSubscription: Subscription;
   form: FormGroup;
 
   constructor(
     private elementRef: ElementRef,
     private appService: AppService,
     private addProductService: AddProductsService,
-    private productFormService: ProductFormService
+    private productFormService: ProductFormService,
+    private addSupplierService: AddSupplierService
   ) {}
 
   ngOnInit(): void {
     this.productFormSubscription = this.productFormService
-      .getFormListener()
+      .getProductFormListener()
+      .subscribe({
+        next: (response) => {
+          this.form = response;
+        },
+      });
+
+    this.supplierFormSubscription = this.addSupplierService
+      .getSupplierFormListener()
       .subscribe({
         next: (response) => {
           this.form = response;
@@ -66,6 +77,7 @@ export class SingleFileComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnDestroy(): void {
     this.productFormSubscription.unsubscribe();
+    this.supplierFormSubscription.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

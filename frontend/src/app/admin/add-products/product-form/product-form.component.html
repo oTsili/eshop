@@ -164,6 +164,29 @@
       <!-- END input of colors -->
     </div>
     <!-- END of two fields -->
+      <!-- START of two fields -->
+    <div class="two fields line">
+      <!-- START input of supplier-->
+      <app-select-input
+        error-select
+        class="field"
+        [form]="theProductForm"
+        [options]="trade_numbers.suppliers"
+        [controlName]="'supplier'"
+        (optionUpdated)="onOptionUpdate($event)"
+      ></app-select-input>
+      <!-- END input of supplier -->
+      <!-- START input of main-color -->
+      <app-select-input
+        error-select
+        class="field"
+        [form]="theProductForm"
+        [controlName]="'main_color'"
+        [options]="trade_numbers.colors"
+        (optionUpdated)="onOptionUpdate($event)"
+      ></app-select-input>
+      <!-- END input of types -->
+    </div>
     <!-- START input of description -->
     <div
       class="field"

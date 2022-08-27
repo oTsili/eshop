@@ -1,9 +1,10 @@
 .container {
   display: flex;
+  gap: 4%;
 }
 .form {
-  min-width: -webkit-fill-available;
-  max-width: fit-content;
-  padding: 0 3%;
-  padding-right: 10%;
+  flex: 1 1 auto;
 }
+/* .drag-and-drop {
+  flex: 1 1 auto;
+} */

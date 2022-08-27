@@ -1,0 +1,155 @@
+<div class="container">
+  <form
+    *ngIf="!isLoading"
+    [formGroup]="supplierForm"
+    (submit)="onSubmit(supplierForm)"
+  >
+    <div class="ui form" [ngClass]="{ error: checkFormErrors() }">
+      <!-- START two fields --firstname, lastname  -->
+      <div class="two fields">
+        <div
+          class="field"
+          error-input
+          [form]="supplierForm"
+          [controlName]="'firstname'"
+        >
+          <label>{{ "first name" | translate | titlecase }}</label>
+          <input
+            formControlName="firstname"
+            placeholder="{{ 'first name' | translate | titlecase }}"
+            type="text"
+          />
+        </div>
+
+        <div
+          class="field"
+          error-input
+          [form]="supplierForm"
+          [controlName]="'lastname'"
+        >
+          <label>{{ "last name" | translate | titlecase }}</label>
+          <input
+            formControlName="lastname"
+            placeholder="{{ 'last name' | translate | titlecase }}"
+            type="text"
+          />
+        </div>
+      </div>
+      <!-- END two fields --firstname, lastname  -->
+      <!-- START two fields --tax_id_number, phone  -->
+      <div class="two fields">
+        <div
+          class="field"
+          error-input
+          [form]="supplierForm"
+          [controlName]="'tax_id_number'"
+        >
+          <label>{{ "tax id number" | translate | titlecase }}</label>
+          <input
+            formControlName="tax_id_number"
+            placeholder="{{ 'tax id number' | translate | titlecase }}"
+            type="text"
+          />
+        </div>
+
+        <div
+          class="field"
+          error-input
+          [form]="supplierForm"
+          [controlName]="'phone'"
+        >
+          <label>{{ "phone number" | translate | titlecase }}</label>
+          <input
+            formControlName="phone"
+            placeholder="{{ 'phone number' | translate | titlecase }}"
+            type="text"
+          />
+        </div>
+      </div>
+      <!-- END two fields --tax_id_number, phone  -->
+      <!-- START two fields --address, city  -->
+      <div class="two fields">
+        <div
+          class="field"
+          error-input
+          [form]="supplierForm"
+          [controlName]="'address'"
+        >
+          <label>{{ "address" | translate | titlecase }}</label>
+          <input
+            formControlName="address"
+            placeholder="{{ 'address' | translate | titlecase }}"
+            type="text"
+          />
+        </div>
+
+        <div
+          class="field"
+          error-input
+          [form]="supplierForm"
+          [controlName]="'city'"
+        >
+          <label>{{ "city" | translate | titlecase }}</label>
+          <input
+            formControlName="city"
+            placeholder="{{ 'city' | translate | titlecase }}"
+            type="text"
+          />
+        </div>
+      </div>
+      <!-- END two fields --address, city  -->
+      <!-- START two fields --country, id  -->
+      <div class="two fields">
+        <div
+          class="field"
+          error-input
+          [form]="supplierForm"
+          [controlName]="'country'"
+        >
+          <label>{{ "country" | translate | titlecase }}</label>
+          <input
+            formControlName="country"
+            placeholder="{{ 'country' | translate | titlecase }}"
+            type="text"
+          />
+        </div>
+
+        <div
+          class="field"
+          error-input
+          [form]="supplierForm"
+          [controlName]="'id'"
+        >
+          <label>{{ "id" | translate | titlecase }}</label>
+          <input
+            formControlName="id"
+            placeholder="{{ 'id' | translate | titlecase }}"
+            type="text"
+          />
+        </div>
+      </div>
+      <!-- END two fields --country, id  -->
+
+      <!-- START error messages -->
+      <div class="ui error message">
+        <div class="error-message-container">
+          <div class="x-icon-container">
+            <a (click)="closeErrorMessage()">
+              <i class="close icon"></i>
+            </a>
+          </div>
+          <div class="header">
+            {{ "There are some errors!!" | translate | titlecase }}
+          </div>
+          <p class="error-text">Please provide all the required fields.</p>
+        </div>
+      </div>
+      <!-- END error messages -->
+      <div (click)="onSubmit(supplierForm)" class="ui submit button">
+        {{ "save" | translate | titlecase }}
+      </div>
+    </div>
+  </form>
+
+  <app-drag-and-drop></app-drag-and-drop>
+</div>

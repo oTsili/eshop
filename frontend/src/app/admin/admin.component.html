@@ -1,6 +1,6 @@
 <!-- <a class="link" toggleActive>Open SideBar</a> -->
 
-<div class="dashboard-container">
+<div class="admin-container">
   <div class="col-expand-icon">
     <div [@slideOutIn] *ngIf="!isOpenSideBar" class="link expand-icon">
       <a (click)="isOpenSideBar = true" class="link icon-link right-align">
@@ -28,6 +28,11 @@
       <a routerLink="home" routerLinkActive="active" class="item">
         <i class="home icon"></i>
         Home
+      </a>
+      <a routerLink="add-supplier" routerLinkActive="active" class="item">
+        <i class="warehouse icon"></i>
+
+        Supplier
       </a>
       <a routerLink="trade-numbers" routerLinkActive="active" class="item">
         <i class="block layout icon"></i>

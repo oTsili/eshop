@@ -4,33 +4,51 @@ import {
   HostListener,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { FormControlName, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { AddSupplierService } from '../../supplier/add-supplier/add-supplier.service';
 import { ProductFormService } from '../product-form/product-form.service';
 
 @Directive({
   selector: '[error-select]',
 })
-export class ErrorSelectDirective implements OnInit, OnChanges {
+export class ErrorSelectDirective implements OnInit, OnChanges, OnDestroy {
   @Input() form: FormGroup;
   @Input() controlName: string;
   count = 0;
-  submitFormSubscription: Subscription;
+  submitProductFormSubscription: Subscription;
+  submitSupplierFormSubscription: Subscription;
   isFormSubmitted = false;
+  // isSupplierFormSubmitted = false;
 
-  constructor(private productFormService: ProductFormService) {}
+  constructor(
+    private productFormService: ProductFormService,
+    private supplierService: AddSupplierService
+  ) {}
 
   ngOnInit(): void {
-    this.submitFormSubscription = this.productFormService
-      .getFormSubmitListener()
+    this.submitProductFormSubscription = this.productFormService
+      .getProductFormSubmitListener()
       .subscribe({
         next: (response) => {
           this.isFormSubmitted = response;
         },
       });
+    this.submitSupplierFormSubscription = this.supplierService
+      .getSupplierFormSubmitListener()
+      .subscribe({
+        next: (response) => {
+          this.isFormSubmitted = response;
+        },
+      });
+  }
+  ngOnDestroy(): void {
+    this.submitProductFormSubscription.unsubscribe();
+    this.submitSupplierFormSubscription.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

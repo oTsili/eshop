@@ -11,6 +11,8 @@ export interface UploadProduct {
   season: string;
   style: string;
   type: string;
+  supplier: string;
+  main_color: string;
   description: string;
   images: Array<string>;
   id?: string;

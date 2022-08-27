@@ -7,6 +7,7 @@ import {
   Query,
   Req,
   Res,
+  Session,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
@@ -23,6 +24,8 @@ import session from 'express-session';
 declare module 'express-session' {
   export interface SessionData {
     folder: { [key: string]: any };
+    paths: string[];
+    trade_number: string;
   }
 }
 
@@ -30,40 +33,40 @@ declare module 'express-session' {
 export class ProductsController {
   constructor(private readonly productService: ProductService) {}
 
-  @Post('upload/:folder')
-  @UseInterceptors(
-    MyNewFilesInterceptor('photo[]', (ctx) => {
-      // Get request from Context
-      const req = ctx.switchToHttp().getRequest();
-      // Return the options
-      return {
-        storage: diskStorage({
-          destination: `./static/images/products/${req.params.folder}`,
-          // tslint:disable-next-line: variable-name
-          filename: (req, file, cb) => {
-            const name = file.originalname.toLowerCase().split(' ').join('-');
+  // @Post('upload/:folder')
+  // @UseInterceptors(
+  //   MyNewFilesInterceptor('photo[]', (ctx) => {
+  //     // Get request from Context
+  //     const req = ctx.switchToHttp().getRequest();
+  //     // Return the options
+  //     return {
+  //       storage: diskStorage({
+  //         destination: `./static/images/products/${req.params.folder}`,
+  //         // tslint:disable-next-line: variable-name
+  //         filename: (req, file, cb) => {
+  //           const name = file.originalname.toLowerCase().split(' ').join('-');
 
-            const extension = file.mimetype.split('/')[1];
-            return cb(null, `${name}-${Date.now()}.${extension}`);
-          },
-        }),
-      };
-    }),
-  )
-  uploadSingle(
-    @UploadedFiles() files: Array<Express.Multer.File>,
-    @Res() res: Response,
-    @Req() req: Request,
-    @Body() body,
-  ) {
-    for (let file of files) {
-      console.log(file.filename);
-    }
-    // console.log(files);
-    console.log(req);
+  //           const extension = file.mimetype.split('/')[1];
+  //           return cb(null, `${name}-${Date.now()}.${extension}`);
+  //         },
+  //       }),
+  //     };
+  //   }),
+  // )
+  // uploadSingle(
+  //   @UploadedFiles() files: Array<Express.Multer.File>,
+  //   @Res() res: Response,
+  //   @Req() req: Request,
+  //   @Body() body,
+  // ) {
+  //   for (let file of files) {
+  //     console.log(file.filename);
+  //   }
+  //   // console.log(files);
+  //   console.log(req);
 
-    res.status(HttpStatus.OK).json({ files });
-  }
+  //   res.status(HttpStatus.OK).json({ files });
+  // }
 
   @Post('')
   @UseInterceptors(
@@ -89,18 +92,26 @@ export class ProductsController {
             console.log({ session: req.session });
             const name = file.originalname.toLowerCase().split(' ').join('-');
             const extension = file.mimetype.split('/')[1];
-            return cb(null, `${name}-${Date.now()}.${extension}`);
+            const filename = `${name.split('.')[0]}-${Date.now()}.${extension}`;
+
+            req.session.paths.push(
+              `./static/images/products/${req.session.folder}/${filename}`,
+            );
+            req.session.trade_number = `${req.session.folder}`;
+
+            return cb(null, filename);
           },
         }),
       };
     }),
   )
   // @FormDataRequest()
-  createProduct(
+  async createProduct(
     @UploadedFiles() files: Array<Express.Multer.File>,
     @Req() req: Request,
     @Res() res: Response,
     @Body() body,
+    @Session() session,
   ) {
     console.log('inside create product');
     // console.log(body);
@@ -108,10 +119,55 @@ export class ProductsController {
     //   console.log(file.filename);
     // }
     // console.log(files);
-    // console.log(body);
+    console.log({ body });
+    console.log({ session });
 
-    // console.log(files);
-    res.status(HttpStatus.OK).json({ files });
+    const {
+      src,
+      altSrc,
+      name,
+      colors,
+      main_color,
+      size,
+      price,
+      material,
+      sales,
+      heel_height,
+      season,
+      style,
+      type,
+      description,
+      supplier,
+    } = body;
+
+    const images = session.paths;
+    const trade_number = session.trade_number;
+
+    const product = {
+      src,
+      altSrc,
+      name,
+      colors,
+      main_color,
+      size,
+      price,
+      material,
+      sales,
+      heel_height,
+      season,
+      style,
+      type,
+      description,
+      images,
+      nominal_number: trade_number,
+      supplier,
+    };
+
+    const newProduct = await this.productService.create(product);
+
+    return res.status(HttpStatus.CREATED).json({
+      newProduct,
+    });
   }
 
   // @Post()

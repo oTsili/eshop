@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddProductsComponent } from './add-products/add-products.component';
 import { AdminComponent } from './admin.component';
 import { HomeComponent } from './home/home.component';
+import { AddSupplierComponent } from './supplier/add-supplier/add-supplier.component';
 import { TradeNumbersComponent } from './trade-numbers/trade-numbers.component';
 
 const adminRoutes: Routes = [
@@ -16,6 +17,10 @@ const adminRoutes: Routes = [
       //   redirectTo: 'add-products',
       //   // component: AdminComponent,
       // },
+      {
+        path: 'add-supplier',
+        component: AddSupplierComponent,
+      },
       {
         path: 'add-products',
         component: AddProductsComponent,

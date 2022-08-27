@@ -5,7 +5,7 @@ import defaultLanguage from 'src/assets/i18n/en.json';
 import greekLanguage from 'src/assets/i18n/el.json';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
   animations: [

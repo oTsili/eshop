@@ -9,12 +9,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../user/shared/loader-factory';
 import { TradeNumbersModule } from './trade-numbers/trade-numbers.module';
+import { SupplierModule } from './supplier/supplier.module';
 
 @NgModule({
   declarations: [AdminComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
+    SupplierModule,
     AddProductsModule,
     TradeNumbersModule,
     HomeModule,

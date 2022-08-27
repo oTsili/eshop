@@ -51,7 +51,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
     this.getTradeNumbers();
 
     this.productFormSubscription = this.productFormService
-      .getFormListener()
+      .getProductFormListener()
       .subscribe({
         next: (response) => {
           this.theProductForm = response;
@@ -96,6 +96,12 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
         validators: [Validators.required],
       }),
       type: new FormControl(null, {
+        validators: [Validators.required],
+      }),
+      supplier: new FormControl(null, {
+        validators: [Validators.required],
+      }),
+      main_color: new FormControl(null, {
         validators: [Validators.required],
       }),
       description: new FormControl(null, {
@@ -154,6 +160,10 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.colorsArraySubscription.unsubscribe();
+    this.filesArraySubscription.unsubscribe();
+    this.colorsArraySubscription.unsubscribe();
+    this.mainSrcSubscription.unsubscribe();
+    this.altSrcSubscription.unsubscribe();
   }
 
   getTradeNumbers() {
@@ -172,7 +182,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   closeErrorMessage() {
     // unred the fields
-    this.productFormService.formSubmitted(false);
+    this.productFormService.productFormSubmitted(false);
 
     // unred the form
     const formElement = this.elementRef.nativeElement.querySelector('.form');
@@ -180,7 +190,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onSubmit(form: FormGroup) {
-    this.productFormService.formSubmitted(true);
+    this.productFormService.productFormSubmitted(true);
 
     // initialize the form without the error class
     const formElement = this.elementRef.nativeElement.querySelector('.form');
@@ -210,6 +220,8 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
       season,
       style,
       type,
+      supplier,
+      main_color,
       description,
       images,
     }: UploadProduct = {
@@ -229,6 +241,8 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
       season,
       style,
       type,
+      supplier,
+      main_color,
       description,
       images,
     };
@@ -240,18 +254,6 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log(response);
       },
     });
-
-    // (data) => {
-    //   this.router.navigate(['/']);
-    //   let duration = parseInt(data.expiresIn);
-    //   this.setAuthTimer(duration);
-    //   const now = new Date();
-    //   const expirationDate = new Date(now.getTime() + duration * 1000);
-    //   this.saveToStorage(expirationDate);
-    // },
-    // (error) => {
-    //   this.authStatusListener.next(false);
-    // }
 
     this.isLoading = false;
   }
