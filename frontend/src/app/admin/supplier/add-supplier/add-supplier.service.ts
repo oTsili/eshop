@@ -11,7 +11,7 @@ const BACKEND_URL = environment.BASE_URL + 'supplier';
   providedIn: 'root',
 })
 export class AddSupplierService {
-  private formListener = new Subject<FormGroup>();
+  private supplierFormListener = new BehaviorSubject<FormGroup | null>(null);
   private formSubmitListener = new BehaviorSubject<boolean>(false);
   private fileListener = new BehaviorSubject<File | null>(null);
   private file: File;
@@ -27,11 +27,11 @@ export class AddSupplierService {
   }
 
   getSupplierFormListener() {
-    return this.formListener.asObservable();
+    return this.supplierFormListener.asObservable();
   }
 
-  updateForm(form) {
-    this.formListener.next(form);
+  updateSupplierForm(form) {
+    this.supplierFormListener.next(form);
   }
 
   getFileListener() {
@@ -47,8 +47,13 @@ export class AddSupplierService {
     this.updateFile();
   }
 
+  deleteFile() {
+    this.fileListener.next(null);
+  }
+
   submitSupplierForm(supplier: Supplier) {
     const supplierData = new FormData();
+    supplierData.append('company_name', supplier.company_name);
     supplierData.append('firstname', supplier.firstname);
     supplierData.append('lastname', supplier.lastname);
     supplierData.append('tax_id_number', supplier.tax_id_number);

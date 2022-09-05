@@ -1,0 +1,15 @@
+img {
+  width: 4rem;
+}
+.disabled {
+  display: none;
+}
+a,
+a:hover,
+a:visited,
+a:link,
+a:active {
+  // text-decoration: none !important;
+  color: #000000f2 !important;
+  cursor: pointer;
+}

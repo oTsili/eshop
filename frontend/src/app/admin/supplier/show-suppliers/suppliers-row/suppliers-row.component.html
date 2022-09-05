@@ -1,0 +1,141 @@
+<td>
+  <a
+    enableform
+    [colStart]="8"
+    [isOpenForm]="true"
+    (click)="updateRow(supplier._id)"
+    class="disabled checkmark-icon"
+  >
+    <i class="large green checkmark icon"></i>
+  </a>
+  <a enableform [colStart]="8" [isOpenForm]="false">
+    <i class="ph-pencil-thin"></i>
+  </a>
+  <a (click)="deleteRow(supplier._id)">
+    <i class="ph-trash-thin"></i>
+  </a>
+</td>
+<td>
+  <input
+    class="disabled"
+    [(ngModel)]="supplier.company_name"
+    #companyNameInput="ngModel"
+    placeholder="{{ supplier.company_name }}"
+    type="text"
+    value="{{ supplier.company_name }}"
+  />
+  <div class="div-text">
+    {{ companyNameInput.value }}
+  </div>
+</td>
+<td>
+  <input
+    class="disabled"
+    [(ngModel)]="supplier.firstname"
+    #firstNameInput="ngModel"
+    placeholder="{{ supplier.firstname }}"
+    type="text"
+    value="{{ supplier.firstname }}"
+  />
+  <div class="div-text">
+    {{ firstNameInput.value }}
+  </div>
+</td>
+<td>
+  <input
+    class="disabled"
+    [(ngModel)]="supplier.lastname"
+    #lastNameInput="ngModel"
+    placeholder="{{ supplier.lastname }}"
+    type="text"
+    value="{{ supplier.lastname }}"
+  />
+  <div class="div-text">
+    {{ lastNameInput.value }}
+  </div>
+</td>
+<td>
+  <input
+    class="disabled"
+    [(ngModel)]="supplier.tax_id_number"
+    #taxIdNumberInput="ngModel"
+    placeholder="{{ supplier.tax_id_number }}"
+    type="text"
+    value="{{ supplier.tax_id_number }}"
+  />
+  <div class="div-text">
+    {{ taxIdNumberInput.value }}
+  </div>
+</td>
+<td>
+  <input
+    class="disabled"
+    [(ngModel)]="supplier.phone"
+    #phoneInput="ngModel"
+    placeholder="{{ supplier.phone }}"
+    type="text"
+    value="{{ supplier.phone }}"
+  />
+  <div class="div-text">
+    {{ phoneInput.value }}
+  </div>
+</td>
+<td>
+  <input
+    class="disabled"
+    [(ngModel)]="supplier.address"
+    #addressInput="ngModel"
+    placeholder="{{ supplier.address }}"
+    type="text"
+    value="{{ supplier.address }}"
+  />
+  <div class="div-text">
+    {{ addressInput.value }}
+  </div>
+</td>
+<td>
+  <input
+    class="disabled"
+    [(ngModel)]="supplier.city"
+    #cityInput="ngModel"
+    placeholder="{{ supplier.city }}"
+    type="text"
+    value="{{ supplier.city }}"
+  />
+  <div class="div-text">
+    {{ cityInput.value }}
+  </div>
+</td>
+<td>
+  <input
+    class="disabled"
+    [(ngModel)]="supplier.country"
+    #countryInput="ngModel"
+    placeholder="{{ supplier.country }}"
+    type="text"
+    value="{{ supplier.country }}"
+  />
+  <div class="div-text">
+    {{ countryInput.value }}
+  </div>
+</td>
+<td>
+  <input
+    class="disabled"
+    [(ngModel)]="supplier.id"
+    #idInput="ngModel"
+    placeholder="{{ supplier.id }}"
+    type="text"
+    value="{{ supplier.id }}"
+  />
+  <div class="div-text">
+    {{ idInput.value }}
+  </div>
+</td>
+<td class="centered">
+  <img
+    src="{{ base_url.replace('/api/', '') }}{{
+      supplier.photo.replace('./static', '')
+    }}"
+  />
+</td>

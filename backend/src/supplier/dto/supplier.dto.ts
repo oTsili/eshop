@@ -20,4 +20,8 @@ export class CreateSupplierDto {
   city: string;
 
   country: string;
+
+  id: string;
+
+  photo: string;
 }

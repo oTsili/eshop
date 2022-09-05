@@ -42,7 +42,7 @@ export class SingleFileComponent implements OnInit, OnChanges, OnDestroy {
       .getProductFormListener()
       .subscribe({
         next: (response) => {
-          this.form = response;
+          if (response) this.form = response;
         },
       });
 
@@ -50,8 +50,8 @@ export class SingleFileComponent implements OnInit, OnChanges, OnDestroy {
       .getSupplierFormListener()
       .subscribe({
         next: (response) => {
-          this.form = response;
-          console.log(response);
+          if (response) this.form = response;
+          // console.log(response);
         },
       });
 
@@ -69,7 +69,7 @@ export class SingleFileComponent implements OnInit, OnChanges, OnDestroy {
     this.addProductService.pushFilesArray(this.data.file);
 
     this.addSupplierService.setFile(this.data.file);
-    console.log(this.data);
+    // console.log(this.data);
     // this.fileForm = this.formBuilder.group({
     //   fileFormArray: this.formBuilder.array([]),
     // });
@@ -93,7 +93,13 @@ export class SingleFileComponent implements OnInit, OnChanges, OnDestroy {
    * @param index (File index)
    */
   deleteFile() {
+    console.log(this.form);
+    this.form.get('photo')?.patchValue(null);
     this.addProductService.spliceFilesArray(this.data.file);
+    this.addSupplierService.deleteFile();
+
+    this.productFormService.updateForm(this.form);
+    this.addSupplierService.updateSupplierForm(this.form);
     this.elementRef.nativeElement.remove();
   }
 

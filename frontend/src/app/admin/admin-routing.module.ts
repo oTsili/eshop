@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddProductsComponent } from './add-products/add-products.component';
 import { AdminComponent } from './admin.component';
 import { HomeComponent } from './home/home.component';
-import { AddSupplierComponent } from './supplier/add-supplier/add-supplier.component';
+import { ShowSuppliersComponent } from './supplier/show-suppliers/show-suppliers.component';
+import { SupplierComponent } from './supplier/supplier.component';
 import { TradeNumbersComponent } from './trade-numbers/trade-numbers.component';
 
 const adminRoutes: Routes = [
@@ -18,8 +19,9 @@ const adminRoutes: Routes = [
       //   // component: AdminComponent,
       // },
       {
-        path: 'add-supplier',
-        component: AddSupplierComponent,
+        path: 'suppliers',
+        loadChildren: () =>
+          import('./supplier/supplier.module').then((m) => m.SupplierModule),
       },
       {
         path: 'add-products',

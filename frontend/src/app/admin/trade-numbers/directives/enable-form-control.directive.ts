@@ -15,6 +15,7 @@ export class EnableFormDirective implements OnInit {
   texts: HTMLElement[];
   checkmarkIcon: HTMLElement;
   @Input() isOpenForm = false;
+  @Input() colStart: number;
 
   constructor(private eleementRef: ElementRef, private renderer: Renderer2) {}
 
@@ -42,13 +43,21 @@ export class EnableFormDirective implements OnInit {
 
     if (!this.isOpenForm) {
       this.renderer.removeClass(this.checkmarkIcon, 'disabled');
-      for (let i = this.texts.length - 2; i < this.texts.length; i++) {
+      for (
+        let i = this.texts.length - this.colStart;
+        i < this.texts.length;
+        i++
+      ) {
         this.renderer.addClass(this.texts[i], 'disabled');
         this.renderer.removeClass(this.inputs[i], 'disabled');
       }
     } else {
       this.renderer.addClass(this.checkmarkIcon, 'disabled');
-      for (let i = this.texts.length - 2; i < this.texts.length; i++) {
+      for (
+        let i = this.texts.length - this.colStart;
+        i < this.texts.length;
+        i++
+      ) {
         this.renderer.addClass(this.inputs[i], 'disabled');
         this.renderer.removeClass(this.texts[i], 'disabled');
       }

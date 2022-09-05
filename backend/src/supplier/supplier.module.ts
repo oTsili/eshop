@@ -15,9 +15,9 @@ import { Supplier, SupplierDocumentSchema } from './schemas/supplier.schema';
   ],
 })
 export class SupplierModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(SupplierFolderMiddleware)
-      .forRoutes({ path: 'supplier', method: RequestMethod.POST });
-  }
+  // configure(consumer: MiddlewareConsumer) {
+  //   consumer
+  //     .apply(SupplierFolderMiddleware)
+  //     .forRoutes({ path: 'supplier', method: RequestMethod.POST });
+  // }
 }

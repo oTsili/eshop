@@ -39,8 +39,8 @@ export class TableRowComponent implements OnInit, OnChanges {
   }
 
   updateRow(description: string, code: string) {
-    console.log(this.category_style);
-    console.log({ description, code });
+    // console.log(this.category_style);
+    // console.log({ description, code });
     if (!description || !code) {
       console.log('please provide valid values');
       return;
@@ -50,7 +50,7 @@ export class TableRowComponent implements OnInit, OnChanges {
     description = dictionary[description] || description;
     code = dictionary[code] || code;
 
-    console.log(description, code);
+    // console.log(description, code);
 
     //if row pre-existed put request to update from the db
     if (this.category._id) {

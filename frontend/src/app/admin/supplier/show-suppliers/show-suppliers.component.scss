@@ -1,0 +1,21 @@
+// @import "semantic-ui-css/semantic.css";
+
+.button {
+  border: 0.1em solid black;
+  width: fit-content;
+  border-radius: 4%;
+  margin-top: 2%;
+  cursor: pointer;
+}
+
+.button:hover {
+  color: white;
+  background-color: black;
+}
+
+.button-text {
+  font-size: 1.2rem;
+  line-height: 2;
+  padding: 0 1rem;
+  font-weight: 600;
+}

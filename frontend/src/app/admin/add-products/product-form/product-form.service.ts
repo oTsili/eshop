@@ -11,7 +11,7 @@ const BACKEND_URL = environment.BASE_URL + 'product';
   providedIn: 'root',
 })
 export class ProductFormService {
-  private formListener = new Subject<FormGroup>();
+  private formListener = new BehaviorSubject<FormGroup | null>(null);
   private formSubmitListener = new BehaviorSubject<boolean>(false);
 
   constructor(private httpClient: HttpClient) {}

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 
 @Injectable({
@@ -10,6 +11,7 @@ export class AddProductsService {
   private filesArrayListener = new BehaviorSubject<File[] | null>(null);
   private mainSrcListener = new BehaviorSubject<string | null>(null);
   private altSrcListener = new BehaviorSubject<string | null>(null);
+
   private mainSrcName: string;
   private altSrcName: string;
   private colorsArr: string[] = [];

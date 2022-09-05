@@ -27,6 +27,7 @@
 <td>
   <a
     enableform
+    [colStart]="2"
     [isOpenForm]="true"
     (click)="updateRow(descriptionInput.value, codeInput.value)"
     class="disabled checkmark-icon"
@@ -35,7 +36,7 @@
   </a>
 </td>
 <td>
-  <a enableform [isOpenForm]="false">
+  <a enableform [colStart]="2" [isOpenForm]="false">
     <i class="ph-pencil-thin"></i>
   </a>
 </td>

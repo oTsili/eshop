@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpStatus,
   Post,
   Req,
@@ -24,22 +25,16 @@ export class SupplierController {
     FileInterceptor('photo', {
       storage: diskStorage({
         destination: (req, file, cb) => {
-          console.log({ myfolder: req.session.folder });
-          // const folder = req.session.folder;
-
-          const path = `./static/images/suppliers/${req.session.folder}`;
+          const path = `./static/images/suppliers/${req.body.tax_id_number}`;
           fs.mkdirSync(path, { recursive: true });
           return cb(null, path);
         },
-        // destination: `./static/images/products/${req.session.folder}`,
-        // tslint:disable-next-line: variable-name
         filename: (req, file, cb) => {
-          //   console.log({ session: req.session });
           const name = file.originalname.toLowerCase().split(' ').join('-');
           const extension = file.mimetype.split('/')[1];
           const filename = `${name.split('.')[0]}-${Date.now()}.${extension}`;
 
-          req.session.path = `./static/images/suppliers/${req.session.folder}/${filename}`;
+          req.session.path = `./static/images/suppliers/${req.body.tax_id_number}/${filename}`;
 
           return cb(null, filename);
         },
@@ -87,5 +82,12 @@ export class SupplierController {
     const newSupplier = await this.supplierService.create(supplier);
 
     return res.status(HttpStatus.CREATED).json(newSupplier);
+  }
+
+  @Get('')
+  async fetchAll(@Res() res) {
+    let suppliers = await this.supplierService.findAll();
+
+    return res.status(HttpStatus.OK).json({ suppliers });
   }
 }

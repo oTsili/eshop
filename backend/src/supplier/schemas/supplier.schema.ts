@@ -5,6 +5,9 @@ export type SupplierDocument = Supplier & Document;
 @Schema()
 export class Supplier {
   @Prop()
+  company_name: string;
+
+  @Prop()
   firstname: string;
 
   @Prop()
@@ -24,6 +27,12 @@ export class Supplier {
 
   @Prop()
   country: string;
+
+  @Prop()
+  id: string;
+
+  @Prop()
+  photo: string;
 }
 
 export const SupplierDocumentSchema = SchemaFactory.createForClass(Supplier);

@@ -36,7 +36,7 @@ export class AddSupplierComponent implements OnInit, OnDestroy {
       .getSupplierFormListener()
       .subscribe({
         next: (response) => {
-          this.supplierForm = response;
+          if (response) this.supplierForm = response;
           console.log(response);
         },
       });
@@ -83,7 +83,7 @@ export class AddSupplierComponent implements OnInit, OnDestroy {
     });
 
     // update single files with the form
-    this.addSupplierService.updateForm(this.supplierForm);
+    this.addSupplierService.updateSupplierForm(this.supplierForm);
   }
 
   ngOnDestroy(): void {
@@ -110,6 +110,7 @@ export class AddSupplierComponent implements OnInit, OnDestroy {
     this.isLoading = true;
 
     const {
+      company_name,
       firstname,
       lastname,
       tax_id_number,
@@ -124,6 +125,7 @@ export class AddSupplierComponent implements OnInit, OnDestroy {
     };
 
     const supplier: Supplier = {
+      company_name,
       firstname,
       lastname,
       tax_id_number,
@@ -157,10 +159,24 @@ export class AddSupplierComponent implements OnInit, OnDestroy {
 
   checkFormErrors() {
     if (
+      (this.supplierForm.get('company_name')!.invalid &&
+        this.supplierForm.get('company_name')!.touched) ||
       (this.supplierForm.get('firstname')!.invalid &&
         this.supplierForm.get('firstname')!.touched) ||
       (this.supplierForm.get('lastname')!.invalid &&
-        this.supplierForm.get('lastname')!.touched)
+        this.supplierForm.get('lastname')!.touched) ||
+      (this.supplierForm.get('tax_id_number')!.invalid &&
+        this.supplierForm.get('tax_id_number')!.touched) ||
+      (this.supplierForm.get('phone')!.invalid &&
+        this.supplierForm.get('phone')!.touched) ||
+      (this.supplierForm.get('address')!.invalid &&
+        this.supplierForm.get('address')!.touched) ||
+      (this.supplierForm.get('city')!.invalid &&
+        this.supplierForm.get('city')!.touched) ||
+      (this.supplierForm.get('country')!.invalid &&
+        this.supplierForm.get('country')!.touched) ||
+      (this.supplierForm.get('id')!.invalid &&
+        this.supplierForm.get('id')!.touched)
     ) {
       return true;
     } else {

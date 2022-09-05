@@ -16,11 +16,11 @@ import { SupplierModule } from './supplier/supplier.module';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SupplierModule,
-    AddProductsModule,
-    TradeNumbersModule,
-    HomeModule,
-    RouterModule,
+    // SupplierModule,
+    // AddProductsModule,
+    // TradeNumbersModule,
+    // HomeModule,
+    // RouterModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({
@@ -30,13 +30,13 @@ import { SupplierModule } from './supplier/supplier.module';
         deps: [HttpClient],
       },
     }),
-    RouterModule.forChild([
-      {
-        path: '',
-        pathMatch: 'full',
-        component: AdminComponent,
-      },
-    ]),
+    // RouterModule.forChild([
+    //   {
+    //     path: '',
+    //     pathMatch: 'full',
+    //     component: AdminComponent,
+    //   },
+    // ]),
   ],
   exports: [AdminComponent],
 })

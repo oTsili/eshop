@@ -7,11 +7,15 @@ import { Supplier, SupplierDocument } from './schemas/supplier.schema';
 @Injectable()
 export class SupplierService {
   constructor(
-    @InjectModel(Supplier.name) private productModel: Model<SupplierDocument>,
+    @InjectModel(Supplier.name) private supplierModel: Model<SupplierDocument>,
   ) {}
 
   async create(createSupplierDto: CreateSupplierDto): Promise<Supplier> {
-    const createProduct = new this.productModel(createSupplierDto);
-    return createProduct.save();
+    const createSupplier = new this.supplierModel(createSupplierDto);
+    return createSupplier.save();
+  }
+
+  async findAll(): Promise<Supplier[]> {
+    return this.supplierModel.find().exec();
   }
 }

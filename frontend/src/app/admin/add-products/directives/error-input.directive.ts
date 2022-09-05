@@ -7,7 +7,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { FormControlName, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AddSupplierService } from '../../supplier/add-supplier/add-supplier.service';
 import { ProductFormService } from '../product-form/product-form.service';

@@ -1,0 +1,41 @@
+<div class="ui form">
+  <table class="ui compact celled definition table">
+    <thead>
+      <!-- <tr class="table-header">
+        <th colspan="5"></th>
+      </tr> -->
+      <tr>
+        <th></th>
+        <th>Company Name</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Tax ID Number</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>Country</th>
+        <th>ID</th>
+        <th>Photo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <ng-container *ngFor="let item of items">
+        <ng-container [ngTemplateOutlet]="item.templateRef"></ng-container>
+      </ng-container> -->
+
+      <!-- <tr class="row" #tableRowHost></tr> -->
+      <tr
+        app-suppliers-row
+        [supplier]="supplier"
+        *ngFor="let supplier of suppliers"
+      >
+        <!-- <td colspan="5">
+          <div (click)="onAdd()" category="style" class="ui primary button">
+            <i class="ph-plus-bold"></i>
+            <span>ADD</span>
+          </div>
+        </td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>

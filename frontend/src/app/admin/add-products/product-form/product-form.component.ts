@@ -54,7 +54,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
       .getProductFormListener()
       .subscribe({
         next: (response) => {
-          this.theProductForm = response;
+          if (response) this.theProductForm = response;
         },
       });
 
