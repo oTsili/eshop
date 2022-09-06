@@ -1,14 +1,27 @@
 <td>
   <a
     enableform
-    [colStart]="8"
+    [colStart]="9"
     [isOpenForm]="true"
-    (click)="updateRow(supplier._id)"
+    (click)="
+      updateRow(
+        companyNameInput.value,
+        firstNameInput.value,
+        lastNameInput.value,
+        taxIdNumberInput.value,
+        phoneInput.value,
+        addressInput.value,
+        cityInput.value,
+        countryInput.value,
+        idInput.value,
+        supplier._id
+      )
+    "
     class="disabled checkmark-icon"
   >
     <i class="large green checkmark icon"></i>
   </a>
-  <a enableform [colStart]="8" [isOpenForm]="false">
+  <a enableform [colStart]="9" [isOpenForm]="false">
     <i class="ph-pencil-thin"></i>
   </a>
   <a (click)="deleteRow(supplier._id)">
@@ -135,7 +148,7 @@
 <td class="centered">
   <img
     src="{{ base_url.replace('/api/', '') }}{{
-      supplier.photo.replace('./static', '')
+      supplier.photo!.replace('./static', '')
     }}"
   />
 </td>

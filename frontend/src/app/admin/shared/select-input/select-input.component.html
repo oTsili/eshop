@@ -15,7 +15,7 @@
       (click)="onOptionClick(option.description)"
       [attr.data-value]="option.description"
     >
-      {{ option.description | translate | uppercase }}
+      {{ option.description || option.company_name | translate | uppercase }}
     </div>
   </div>
 </div>

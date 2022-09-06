@@ -35,6 +35,11 @@ import {
   DirectoryMaterialSchema,
 } from './schemas/directory-material.schema';
 import { NestjsFormDataModule } from 'nestjs-form-data';
+import { SupplierService } from 'src/supplier/supplier.service';
+import {
+  Supplier,
+  SupplierDocumentSchema,
+} from 'src/supplier/schemas/supplier.schema';
 
 @Module({
   imports: [
@@ -49,6 +54,7 @@ import { NestjsFormDataModule } from 'nestjs-form-data';
       { name: DirectoryType.name, schema: DirectoryTypeSchema },
       { name: DirectoryHeel.name, schema: DirectoryHeelSchema },
       { name: DirectoryMaterial.name, schema: DirectoryMaterialSchema },
+      { name: Supplier.name, schema: SupplierDocumentSchema },
     ]),
 
     /* With (pre/post hooks)middlewares */
@@ -66,7 +72,7 @@ import { NestjsFormDataModule } from 'nestjs-form-data';
     ]),
   ],
   controllers: [ProductsController, ProductsTradeNumberController],
-  providers: [ProductService, ProductTradeNumberService],
+  providers: [ProductService, ProductTradeNumberService, SupplierService],
 })
 export class ProductModule {
   configure(consumer: MiddlewareConsumer) {

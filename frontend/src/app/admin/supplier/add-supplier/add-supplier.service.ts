@@ -62,7 +62,7 @@ export class AddSupplierService {
     supplierData.append('city', supplier.city);
     supplierData.append('country', supplier.country);
     supplierData.append('id', supplier.id);
-    supplierData.append('photo', supplier.photo);
+    if (supplier.photo) supplierData.append('photo', supplier.photo);
 
     console.log(supplierData.entries());
 

@@ -1,9 +1,12 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
+  Param,
   Post,
+  Put,
   Req,
   Res,
   Session,
@@ -89,5 +92,25 @@ export class SupplierController {
     let suppliers = await this.supplierService.findAll();
 
     return res.status(HttpStatus.OK).json({ suppliers });
+  }
+
+  @Put(':id')
+  async updateSupplier(@Res() res, @Body() body, @Param('id') id: string) {
+    console.log(body);
+    console.log(id);
+
+    const updatedSupplier = this.supplierService.updateSupplier(id, body);
+
+    return res.status(HttpStatus.OK).json({ updatedSupplier });
+  }
+
+  @Delete(':id')
+  async deleteSupplier(@Res() res, @Body() body, @Param('id') id) {
+    console.log(body);
+    console.log(id);
+
+    const deletedSupplier = this.supplierService.deleteSupplier(id);
+
+    return res.status(HttpStatus.OK).json({ deletedSupplier });
   }
 }

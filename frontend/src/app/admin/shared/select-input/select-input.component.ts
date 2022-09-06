@@ -11,7 +11,9 @@ export class SelectInputComponent implements OnInit {
   @Input() controlName: string;
   @Output() optionUpdated = new EventEmitter();
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // console.log(this.options);
+  }
 
   onOptionClick(value: string) {
     this.form.get(this.controlName)?.patchValue(value);

@@ -8,6 +8,6 @@ export interface Supplier {
   city: string;
   country: string;
   id: string;
-  photo: string;
+  photo?: string;
   _id?: string;
 }

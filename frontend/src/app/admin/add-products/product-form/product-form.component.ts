@@ -169,7 +169,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
   getTradeNumbers() {
     this.tradeNumberService.getTradeNumbers().subscribe({
       next: (response) => {
-        // console.log(response);
+        console.log(response);
         this.trade_numbers = response;
       },
     });

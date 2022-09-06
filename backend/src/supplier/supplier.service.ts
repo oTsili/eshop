@@ -18,4 +18,12 @@ export class SupplierService {
   async findAll(): Promise<Supplier[]> {
     return this.supplierModel.find().exec();
   }
+
+  async updateSupplier(id: string, supplierDto: CreateSupplierDto) {
+    return this.supplierModel.findByIdAndUpdate(id, supplierDto);
+  }
+
+  async deleteSupplier(id: string) {
+    return this.supplierModel.findByIdAndDelete(id);
+  }
 }
