@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { TradeNumber } from '../../trade-numbers.interfaces';
 
-const BACKEND_URL = environment.BASE_URL + 'product';
+const BACKEND_URL = environment.BASE_URL + '/product';
 
 @Injectable({ providedIn: 'root' })
 export class TableRowService {

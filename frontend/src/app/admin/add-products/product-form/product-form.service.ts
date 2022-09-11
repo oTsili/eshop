@@ -5,7 +5,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UploadProduct } from './upload-product.interfaces';
 
-const BACKEND_URL = environment.BASE_URL + 'product';
+const BACKEND_URL = environment.BASE_URL + '/product';
 
 @Injectable({
   providedIn: 'root',

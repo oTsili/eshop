@@ -5,7 +5,7 @@ import { TableRowItem } from './category/table-row/table-row.class';
 import { TableRowComponent } from './category/table-row/table-row.component';
 import { TradeNumber, TradeNumbers } from './trade-numbers.interfaces';
 
-const BACKEND_URL = environment.BASE_URL + 'product';
+const BACKEND_URL = environment.BASE_URL + '/product';
 
 @Injectable({
   providedIn: 'root',

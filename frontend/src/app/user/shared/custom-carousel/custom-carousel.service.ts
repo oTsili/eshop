@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Slide } from './custom-carousel.interface';
 
-const BACKEND_URL = environment.BASE_URL + 'carousel-slides';
+const BACKEND_URL = environment.BASE_URL + '/carousel-slides';
 
 @Injectable({
   providedIn: 'root',

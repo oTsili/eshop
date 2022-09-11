@@ -7,7 +7,7 @@ import {
 import { User } from 'src/app/user/header/signup/signup.interfaces';
 import { environment } from 'src/environments/environment';
 
-const BACKEND_URL = environment.BASE_URL + 'whishlist';
+const BACKEND_URL = environment.BASE_URL + '/whishlist';
 
 @Injectable({ providedIn: 'root' })
 export class CatalogDetailsService {

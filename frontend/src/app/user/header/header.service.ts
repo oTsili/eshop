@@ -4,7 +4,7 @@ import { map, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { navBarElement } from './header.interfaces';
 
-const BACKEND_URL = environment.BASE_URL + 'navbar';
+const BACKEND_URL = environment.BASE_URL + '/navbar';
 
 @Injectable({ providedIn: 'root' })
 export class HeaderService {

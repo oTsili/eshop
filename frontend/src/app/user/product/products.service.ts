@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Chip } from '../shared/side-bar/side-bar.interfaces';
 import { Product } from './product.interface';
 
-const BACKEND_URL = environment.BASE_URL + 'product';
+const BACKEND_URL = environment.BASE_URL + '/product';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
@@ -53,8 +53,14 @@ export class ProductsService {
           console.log({ userData });
           userData.products.forEach((product) => {
             product.id = product._id;
-            product.src = `${environment.BASE_URL}${product.src}`;
-            product.altSrc = `${environment.BASE_URL}${product.altSrc}`;
+            product.src = `${environment.BASE_URL}${product.src}`.replace(
+              '/api/static',
+              ''
+            );
+            product.altSrc = `${environment.BASE_URL}${product.altSrc}`.replace(
+              '/api/static',
+              ''
+            );
           });
           return userData;
         })

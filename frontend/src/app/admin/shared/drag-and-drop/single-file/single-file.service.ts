@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
-const BASE_URL = environment.BASE_URL + 'product';
+const BASE_URL = environment.BASE_URL + '/product';
 
 @Injectable({
   providedIn: 'root',

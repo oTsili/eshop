@@ -5,7 +5,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Supplier } from '../supplier.interfaces';
 
-const BACKEND_URL = environment.BASE_URL + 'supplier';
+const BACKEND_URL = environment.BASE_URL + '/supplier';
 
 @Injectable({
   providedIn: 'root',

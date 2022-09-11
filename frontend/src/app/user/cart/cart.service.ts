@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
-const BACKEND_URL = environment.BASE_URL + 'cart';
+const BACKEND_URL = environment.BASE_URL + '/cart';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {

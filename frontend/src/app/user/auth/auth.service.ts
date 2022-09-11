@@ -10,7 +10,7 @@ import {
   UserAttrs,
 } from '../header/signup/signup.interfaces';
 
-const BACKEND_URL = environment.BASE_URL + 'user';
+const BACKEND_URL = environment.BASE_URL + '/user';
 
 @Injectable({
   providedIn: 'root',

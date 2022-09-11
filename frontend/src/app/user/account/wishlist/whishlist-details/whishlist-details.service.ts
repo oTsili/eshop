@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { CartItem } from '../../account.interfaces';
 import { User } from '../../../header/signup/signup.interfaces';
 
-const BACKEND_URL = environment.BASE_URL + 'cart';
+const BACKEND_URL = environment.BASE_URL + '/cart';
 
 @Injectable({ providedIn: 'root' })
 export class WhishlistDetailsService {

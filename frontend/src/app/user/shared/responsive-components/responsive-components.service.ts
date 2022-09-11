@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 
-const BACKEND_URL = environment.BASE_URL + 'grid-categories';
+const BACKEND_URL = environment.BASE_URL + '/grid-categories';
 
 @Injectable({
   providedIn: 'root',

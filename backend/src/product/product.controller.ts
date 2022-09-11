@@ -145,8 +145,20 @@ export class ProductsController {
     const images = session.paths;
     console.log({ images });
     const trade_number = session.trade_number;
-    src = `/static/images/products/${session.folder}/${src}`;
-    altSrc = `/static/images/products/${session.folder}/${altSrc}`;
+
+    let srcIndex = -1;
+    let altSrcIndex = -1;
+    images.forEach((image, index) => {
+      // console.log(image, index);
+      if (image.includes(src)) {
+        srcIndex = index;
+      }
+      if (image.includes(altSrc)) {
+        altSrcIndex = index;
+      }
+    });
+    src = images[srcIndex];
+    altSrc = images[altSrcIndex];
 
     let supplierObj: Supplier = await this.supplierService.findFromName(
       supplier,

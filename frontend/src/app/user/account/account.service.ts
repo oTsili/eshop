@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { User } from '../header/signup/signup.interfaces';
 import { Account, WhishlistItem } from './account.interfaces';
 
-const BACKEND_URL = environment.BASE_URL + 'account';
+const BACKEND_URL = environment.BASE_URL + '/account';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {

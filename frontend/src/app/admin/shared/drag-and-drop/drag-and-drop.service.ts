@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ImageContainerItem } from './image-container-item/image-container-item.class';
 import { SingleFileComponent } from './single-file/single-file.component';
 
-const BASE_URL = environment.BASE_URL + 'product';
+const BASE_URL = environment.BASE_URL + '/product';
 
 @Injectable({
   providedIn: 'root',
