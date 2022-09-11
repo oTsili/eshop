@@ -12,8 +12,8 @@
       *ngFor="let option of options"
       selectOption
       class="item"
-      (click)="onOptionClick(option.description)"
-      [attr.data-value]="option.description"
+      (click)="onOptionClick(option.description || option.company_name)"
+      [attr.data-value]="option.description || option.company_name"
     >
       {{ option.description || option.company_name | translate | uppercase }}
     </div>

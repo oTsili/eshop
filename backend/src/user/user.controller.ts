@@ -26,7 +26,7 @@ import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard';
 // import { ValidationPipe } from 'src/pipes/validation.pipe';
 import { User } from './schemas/user.schema';
 import { UserService } from './user.service';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { AuthGuard } from '@nestjs/passport';
 import { HttpExceptionFilter } from 'src/exception-filters/http-exception.filter';
 import { JwtService } from '@nestjs/jwt';

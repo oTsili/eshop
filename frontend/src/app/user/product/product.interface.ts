@@ -1,4 +1,5 @@
 export interface Product {
+  nominal_number?: string;
   src: string;
   altSrc: string;
   name: string;

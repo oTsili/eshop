@@ -53,6 +53,8 @@ export class ProductsService {
           console.log({ userData });
           userData.products.forEach((product) => {
             product.id = product._id;
+            product.src = `${environment.BASE_URL}${product.src}`;
+            product.altSrc = `${environment.BASE_URL}${product.altSrc}`;
           });
           return userData;
         })

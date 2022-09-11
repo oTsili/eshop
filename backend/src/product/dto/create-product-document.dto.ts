@@ -10,6 +10,7 @@ export class CreateProductDto {
   size: string;
   material: string;
   description: string;
+  images: string[];
   price: string;
   sales: string;
   supplier: Types.ObjectId;

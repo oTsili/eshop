@@ -72,10 +72,10 @@ export class TradeNumberFolderMiddleware implements NestMiddleware {
 
         // console.log({ folder });
       });
-      req.busboy.on('file', (name, file, info) => {
-        // console.log(name)
-        flagFileName = name;
-      });
+      // req.busboy.on('file', (name, file, info) => {
+      //   // console.log(name)
+      //   flagFileName = name;
+      // });
 
       // if (flagFileName)
       req.pipe(req.busboy);

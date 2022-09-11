@@ -177,6 +177,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onOptionUpdate(event) {
     console.log('updated');
+    console.log(event);
     this.theProductForm = event;
   }
 
@@ -278,6 +279,9 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
       (this.theProductForm.get('type')!.invalid &&
         this.theProductForm.get('type')!.touched &&
         this.theProductForm.get('type')?.dirty) ||
+      (this.theProductForm.get('supplier')!.invalid &&
+        this.theProductForm.get('supplier')!.touched &&
+        this.theProductForm.get('supplier')?.dirty) ||
       (this.theProductForm.get('material')!.invalid &&
         this.theProductForm.get('material')!.touched &&
         this.theProductForm.get('material')?.dirty) ||

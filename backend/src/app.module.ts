@@ -20,7 +20,6 @@ import { CartModule } from './cart/cart.module';
 import { WhishlistModule } from './whishlist/whishlist.module';
 import { AccountModule } from './account/account.module';
 import { SharedModule } from './shared/shared.module';
-import { NominalNumberModule } from './nominal-number/nominal-number.module';
 import { SupplyHistoryModule } from './supply-history/supply-history.module';
 import { CustomerHistoryModule } from './customer-history/customer-history.module';
 import { SupplierModule } from './supplier/supplier.module';
@@ -69,7 +68,6 @@ import { SupplierModule } from './supplier/supplier.module';
     WhishlistModule,
     AccountModule,
     SharedModule,
-    NominalNumberModule,
     SupplyHistoryModule,
     CustomerHistoryModule,
     // ColorsModule,

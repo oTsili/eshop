@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Types } from 'mongoose';
 
 export type SupplierDocument = Supplier & Document;
 
@@ -33,6 +34,8 @@ export class Supplier {
 
   @Prop()
   photo: string;
+
+  _id?: Types.ObjectId;
 }
 
 export const SupplierDocumentSchema = SchemaFactory.createForClass(Supplier);

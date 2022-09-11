@@ -19,6 +19,10 @@ export class SupplierService {
     return this.supplierModel.find().exec();
   }
 
+  async findFromName(company_name: string): Promise<Supplier> {
+    return this.supplierModel.findOne({ company_name }).exec();
+  }
+
   async updateSupplier(id: string, supplierDto: CreateSupplierDto) {
     return this.supplierModel.findByIdAndUpdate(id, supplierDto);
   }

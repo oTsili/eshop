@@ -16,6 +16,8 @@ import { diskStorage } from 'multer';
 import { MyNewFilesInterceptor } from 'src/interceptors/files.interceptor';
 import { ProductService } from './product.service';
 import * as fs from 'fs';
+import { SupplierService } from 'src/supplier/supplier.service';
+import { Supplier } from 'src/supplier/schemas/supplier.schema';
 
 declare module 'express-session' {
   export interface SessionData {
@@ -28,7 +30,10 @@ declare module 'express-session' {
 
 @Controller('product')
 export class ProductsController {
-  constructor(private readonly productService: ProductService) {}
+  constructor(
+    private readonly productService: ProductService,
+    private readonly supplierService: SupplierService,
+  ) {}
 
   // @Post('upload/:folder')
   // @UseInterceptors(
@@ -92,7 +97,7 @@ export class ProductsController {
             const filename = `${name.split('.')[0]}-${Date.now()}.${extension}`;
 
             req.session.paths.push(
-              `./static/images/products/${req.session.folder}/${filename}`,
+              `/static/images/products/${req.session.folder}/${filename}`,
             );
             req.session.trade_number = `${req.session.folder}`;
 
@@ -119,7 +124,7 @@ export class ProductsController {
     console.log({ body });
     console.log({ session });
 
-    const {
+    let {
       src,
       altSrc,
       name,
@@ -138,7 +143,16 @@ export class ProductsController {
     } = body;
 
     const images = session.paths;
+    console.log({ images });
     const trade_number = session.trade_number;
+    src = `/static/images/products/${session.folder}/${src}`;
+    altSrc = `/static/images/products/${session.folder}/${altSrc}`;
+
+    let supplierObj: Supplier = await this.supplierService.findFromName(
+      supplier,
+    );
+
+    console.log({ supplier: supplierObj });
 
     const product = {
       src,
@@ -157,8 +171,10 @@ export class ProductsController {
       description,
       images,
       nominal_number: trade_number,
-      supplier,
+      supplier: supplierObj._id,
     };
+
+    console.log({ product });
 
     const newProduct = await this.productService.create(product);
 

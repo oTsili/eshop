@@ -46,6 +46,7 @@ export class ProductFormService {
     productData.append('season', product.season);
     productData.append('style', product.style);
     productData.append('type', product.type);
+    productData.append('supplier', product.supplier);
     productData.append('description', product.description);
     for (let image of product.images) productData.append('photo[]', image);
 

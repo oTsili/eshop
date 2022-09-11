@@ -2,13 +2,17 @@ FROM node:18-alpine AS deps
 
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm install --ignore-scripts --legacy-peer-deps
+# RUN npm install --ignore-scripts --legacy-peer-deps
+RUN npm install 
 
 FROM node:18-alpine
 WORKDIR /app
 COPY --from=deps app/node_modules node_modules
 COPY . .
 
-# EXPOSE 4200
+# EXPOSE 4200 49153
 
-ENTRYPOINT ["npm", "run", "start", "--", "--disable-host-check", "--host", "0.0.0.0"]
+# for Windows
+ENTRYPOINT ["npm", "run", "start", "--", "--disable-host-check", "--host", "0.0.0.0", "--poll", "1"]
+# for Linux
+# ENTRYPOINT ["npm", "run", "start", "--", "--disable-host-check", "--host", "0.0.0.0"]

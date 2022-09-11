@@ -13,8 +13,8 @@ export class Product {
   @Prop()
   altSrc: string;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'NominalNumber' })
-  nominal_number: Types.ObjectId;
+  @Prop()
+  nominal_number: string;
 
   @Prop()
   name: string;
@@ -39,6 +39,9 @@ export class Product {
 
   @Prop()
   price: string;
+
+  @Prop()
+  images: string[];
 
   @Prop()
   sales: string;
