@@ -10,6 +10,7 @@ $base-width: 20rem;
   // margin: 2rem;
   height: 100%;
   transition: scrollLeft 0.5s ease-in-out;
+  width: min-content;
 }
 
 .col {

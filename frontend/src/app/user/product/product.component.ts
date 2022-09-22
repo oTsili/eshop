@@ -31,4 +31,8 @@ export class ProductComponent implements OnInit, OnChanges {
       this.isMouseDown = changes['isMouseDown'].currentValue;
     }
   }
+
+  hasSales(sales: string) {
+    return parseInt(sales) > 0;
+  }
 }

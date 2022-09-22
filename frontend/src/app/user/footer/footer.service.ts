@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-const BACKEND_URL = environment.BASE_URL + 'footer';
+const BACKEND_URL = environment.BASE_URL + '/footer';
 
 @Injectable({
   providedIn: 'root',

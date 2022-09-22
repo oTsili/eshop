@@ -13,7 +13,9 @@
           img_height="30rem"
           img_width="100%"
           [product]="whishItem.product"
-          [source]="whishItem.product.src"
+          source="{{ base_url.replace('/api', '') }}{{
+            whishItem.product.src.replace('/static', '')
+          }}"
         ></app-product>
       </div>
     </ng-template>
@@ -25,7 +27,9 @@
           img_height="30rem"
           img_width="100%"
           [product]="whishItem.product"
-          [source]="whishItem.product.altSrc"
+          source="{{ base_url.replace('/api', '') }}{{
+            whishItem.product.altSrc.replace('/static', '')
+          }}"
         ></app-product>
       </div>
     </ng-template>

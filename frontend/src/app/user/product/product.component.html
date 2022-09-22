@@ -8,9 +8,8 @@
     class="image"
     src="{{ source }}"
   />
-  <div *ngIf="product.sales" class="sales-text--wrapper">
+  <div *ngIf="hasSales(product.sales)" class="sales-text--wrapper">
     <div class="sales-text">-{{ product.sales }}%</div>
     <hr />
   </div>
-
 </div>

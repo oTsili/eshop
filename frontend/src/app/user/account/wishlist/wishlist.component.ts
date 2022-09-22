@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AuthService } from '../../auth/auth.service';
 import { User } from '../../header/signup/signup.interfaces';
 import { Account, WhishlistItem } from '../account.interfaces';
@@ -16,6 +17,7 @@ export class WishlistComponent implements OnInit, OnDestroy {
   accountSubscription: Subscription;
   isAuthenticated = false;
   account: Account;
+  base_url = environment.BASE_URL;
   constructor(
     private accountService: AccountService,
     private authService: AuthService

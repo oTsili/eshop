@@ -67,7 +67,7 @@ export class ProductService {
    */
   computeSalesPrice(products: Product[]) {
     products.forEach((product: Product) => {
-      if (product.sales) {
+      if (parseInt(product.sales) > 0) {
         product.price = (
           parseInt(product.price) -
           parseInt(product.price) * (parseInt(product.sales) / 100)

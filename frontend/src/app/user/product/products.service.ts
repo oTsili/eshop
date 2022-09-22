@@ -83,6 +83,7 @@ export class ProductsService {
   onProductsUpdated(updated: boolean) {
     this.onProductsUpdatedListener.next(updated);
   }
+  
   onProductsNotUpdated(error: string) {
     this.onProductsUpdatedListener.error(error);
   }

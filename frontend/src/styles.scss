@@ -30,3 +30,16 @@
 //     border-radius: 0%;
 //   }
 // }
+
+app-search,
+app-home {
+  a,
+  a:hover,
+  a:visited,
+  a:link,
+  a:active {
+    // text-decoration: none !important;
+    color: #000000f2 !important;
+    cursor: pointer;
+  }
+}

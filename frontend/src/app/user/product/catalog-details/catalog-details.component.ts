@@ -96,4 +96,8 @@ export class CatalogDetailsComponent implements OnInit, OnChanges {
       console.log('please login first');
     }
   }
+
+  hasSales(sales: string) {
+    return parseInt(sales) > 0;
+  }
 }

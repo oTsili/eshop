@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, map, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../header/signup/signup.interfaces';
 import { Account, WhishlistItem } from './account.interfaces';
