@@ -31,15 +31,33 @@
 //   }
 // }
 
-app-search,
-app-home {
-  a,
-  a:hover,
-  a:visited,
-  a:link,
-  a:active {
+app-user-app {
+  header {
+    box-shadow: none !important;
+  }
+
+  .ui.segment {
+    border: 0px !important;
+    margin: 4rem 0 !important;
+  }
+
+  .button,
+  a {
     // text-decoration: none !important;
     color: #000000f2 !important;
     cursor: pointer;
+  }
+  .button-wrapper {
+    .button:hover,
+    .button:visited,
+    .button:link,
+    .button:active,
+    a:hover,
+    a:visited,
+    a:link,
+    a:active {
+      color: white !important;
+      cursor: pointer !important;
+    }
   }
 }

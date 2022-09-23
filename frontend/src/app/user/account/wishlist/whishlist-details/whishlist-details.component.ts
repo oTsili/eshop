@@ -12,6 +12,8 @@ import { User } from '../../../header/signup/signup.interfaces';
 import { WhishlistDetailsService } from './whishlist-details.service';
 import { AccountService } from '../../account.service';
 import { WhishlistService } from '../whishlist.service';
+import { BehaviorSubject } from 'rxjs';
+import { AuthService } from 'src/app/user/auth/auth.service';
 
 @Component({
   selector: 'app-whishlist-details',
@@ -20,17 +22,20 @@ import { WhishlistService } from '../whishlist.service';
 })
 export class WhishlistDetailsComponent implements OnInit, OnChanges {
   @Input() account: Account;
-  @Input() isAuthenticated = false;
   @Input() whishlistItem: WhishlistItem;
   oldPrice: number;
   quantity: number;
+  isAuthenticated$: BehaviorSubject<boolean>;
 
   constructor(
     private whishlistService: WhishlistService,
     private whishlistDetailsService: WhishlistDetailsService,
     private appService: AppService,
-    private accountService: AccountService
-  ) {}
+    private accountService: AccountService,
+    private authService: AuthService
+  ) {
+    this.isAuthenticated$ = this.authService.isAuthenticated$;
+  }
 
   ngOnInit(): void {
     if (this.whishlistItem.quantity)
@@ -42,9 +47,6 @@ export class WhishlistDetailsComponent implements OnInit, OnChanges {
 
     if (changes['whishlistItem'])
       this.whishlistItem = changes['whishlistItem'].currentValue;
-
-    if (changes['isAuthenticated'])
-      this.isAuthenticated = changes['isAuthenticated'].currentValue;
 
     // compute the pre-sales(old) price from the sales percentage
     this.oldPrice =
@@ -66,8 +68,8 @@ export class WhishlistDetailsComponent implements OnInit, OnChanges {
   onSubmitCart(form: NgForm) {
     console.log(form);
     // if user id is available
-    console.log({ authenticated: this.isAuthenticated });
-    if (this.isAuthenticated) {
+    console.log({ authenticated: this.isAuthenticated$ });
+    if (this.isAuthenticated$) {
       // get the user id
       let userString = localStorage.getItem('user');
       let user: User;

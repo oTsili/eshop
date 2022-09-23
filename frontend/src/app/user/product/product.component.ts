@@ -5,6 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Product } from './product.interface';
 
 @Component({
@@ -21,10 +22,16 @@ export class ProductComponent implements OnInit, OnChanges {
   @Input() whishlist = false;
   @Input() isMouseDown = false;
   oldPrice: number;
+  base_url = environment.BASE_URL;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.source = `${this.base_url.replace('/api', '')}${this.source.replace(
+      '/static',
+      ''
+    )}`;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.isMouseDown) {

@@ -53,14 +53,7 @@ export class ProductsService {
           console.log({ userData });
           userData.products.forEach((product) => {
             product.id = product._id;
-            product.src = `${environment.BASE_URL}${product.src}`.replace(
-              '/api/static',
-              ''
-            );
-            product.altSrc = `${environment.BASE_URL}${product.altSrc}`.replace(
-              '/api/static',
-              ''
-            );
+            
           });
           return userData;
         })
