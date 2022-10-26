@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Slide } from './custom-carousel.interface';
@@ -8,6 +9,18 @@ import { DynamicDatabase } from './dynamic-database';
   selector: 'app-custom-carousel',
   templateUrl: './custom-carousel.component.html',
   styleUrls: ['./custom-carousel.component.scss'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('.4s', style({ transform: 'translateX(0%)' })),
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateX(0%)' }),
+        animate('.4s', style({ transform: 'translateX(-100%)' })),
+      ]),
+    ]),
+  ],
 })
 export class CustomCarouselComponent implements OnInit, OnDestroy {
   intervalId: NodeJS.Timer | null;

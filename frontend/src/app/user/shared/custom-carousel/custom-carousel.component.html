@@ -11,6 +11,8 @@
     <!-- Image carousel -->
     <ng-container *ngFor="let slide of slides; let i = index">
       <div
+        [@slideInOut]
+        *ngIf="currentSlide === i"
         gdArea="img"
         class="carousel--custom carousel-img slide-item"
         [ngClass]="{ active: currentSlide === i }"
