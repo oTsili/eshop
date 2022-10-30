@@ -32,6 +32,12 @@ export class Product {
   size: string;
 
   @Prop()
+  style: string;
+
+  @Prop()
+  type: string;
+
+  @Prop()
   material: string;
 
   @Prop()

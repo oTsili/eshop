@@ -76,7 +76,8 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     private paginatorService: PaginatorService,
     private accountService: AccountService,
     private authService: AuthService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private route: ActivatedRoute
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
@@ -89,6 +90,11 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     this.subscribeToAuthStatusAndGetAccount();
     let routes = this.router.url.split('/');
     routes.shift();
+
+    this.route.queryParams.subscribe((params: Params) => {
+      console.log(params);
+      this.productsService.toUpdateProducts(params);
+    });
 
     this.breadcrumbItems = this.breadcrumbService.getBreadcrumbs(
       routes,

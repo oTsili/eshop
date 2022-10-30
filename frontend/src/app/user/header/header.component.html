@@ -43,9 +43,16 @@
             <i class="dropdown icon"></i>
             <span class="text">{{ link.text | translate | uppercase }}</span>
             <div dropdownSubmenuClose class="menu">
-              <div *ngFor="let sublink of link.subNavBarElements" class="item">
+              <a
+                *ngFor="let sublink of link.subNavBarElements"
+                class="item"
+                [routerLink]="['home/search']"
+                [queryParams]="{
+                  type: sublink.text
+                }"
+              >
                 {{ sublink.text | translate | uppercase }}
-              </div>
+              </a>
             </div>
           </div>
           <div
@@ -195,9 +202,16 @@
         <!---- END main menu links ---->
         <!---- START secondary dropdown menu links  for each main link ---->
         <div dropdownSubmenuClose class="menu">
-          <div *ngFor="let sublink of link.subNavBarElements" class="item">
+          <a
+            *ngFor="let sublink of link.subNavBarElements"
+            class="item"
+            [routerLink]="['home/search']"
+            [queryParams]="{
+              type: sublink.text
+            }"
+          >
             {{ sublink.text | translate | uppercase }}
-          </div>
+          </a>
         </div>
         <!---- END secondary dropdown menu links for each main link ---->
       </div>

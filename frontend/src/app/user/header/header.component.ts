@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
@@ -104,7 +104,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private productService: ProductsService,
     private appService: AppService,
     private accountService: AccountService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     // get a reference to the isAuthenticated$ listener
     this.isAuthenticated$ = this.authService.isAuthenticated$;
@@ -220,6 +221,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.navBarElementsSubsciption = this.headerService
       .getNavBarElements()
       .subscribe((response) => {
+        console.log(response);
         this.initialData = response.navBarElement;
         // save the class for the header links to be added as class
         this.numOfLinks = this.numToWord(this.initialData.length);

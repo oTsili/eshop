@@ -236,6 +236,7 @@ export class ProductsController {
     @Query('currentPage') currentPage: number,
     @Query('sort') sort: string,
     @Query('description') description: string,
+    // @Query('category') category: string,
 
     @Query('heel height') heel_height: string,
     @Query('sales') sales: string,
@@ -243,6 +244,7 @@ export class ProductsController {
   ) {
     let query = request.query;
     let description_query;
+
     /**
      * for the query parameters heel_height, sales and price, which contain
      * non-numeral characters, refactor mongodb queryies, by stripping those
@@ -269,6 +271,9 @@ export class ProductsController {
     if (description === '') {
       delete query.description;
     }
+    // if (category) {
+    //   query.category = category;
+    // }
     if (sales) {
       const [min, max] = sales
         .split('-')
@@ -290,6 +295,8 @@ export class ProductsController {
       query.heel_height = { $gte: min, $lte: max };
     }
 
+    console.log({ query });
+
     // get the products
     const products = await this.productService.findFromQuery(
       query,
@@ -299,7 +306,7 @@ export class ProductsController {
       description,
     );
 
-    // console.log(products);
+    console.log(products);
 
     // get the number of the products, so that the paginator is informed (e.g. page 1 of ...._)
     const totalProducts = await this.productService.countProducts(query);
