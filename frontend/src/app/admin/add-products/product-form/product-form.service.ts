@@ -32,6 +32,8 @@ export class ProductFormService {
     this.formListener.next(form);
   }
 
+
+
   submitProductForm(product: UploadProduct) {
     const productData = new FormData();
     productData.append('src', product.src);

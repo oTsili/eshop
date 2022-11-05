@@ -207,7 +207,7 @@ export class ProductsTradeNumberController {
     let sizes = await this.productTradeNumberService.findDirectorySize();
     let materials =
       await this.productTradeNumberService.findDirectoryMaterial();
-    let suppliers = await this.supplierService.findAll();
+    // let suppliers = await this.supplierService.findAll();
 
     const trade_numbers = {
       seasons,
@@ -217,7 +217,7 @@ export class ProductsTradeNumberController {
       heels,
       sizes,
       materials,
-      suppliers,
+      // suppliers,
     };
 
     response.status(HttpStatus.OK).json(trade_numbers);

@@ -5,9 +5,9 @@
     [ngStyle]="{ 'justify-content': justify_content }"
   >
     <ng-container *ngFor="let item of items; let j = index">
-      <div class="col" *ngIf="j >= i * numOfCols && j < (i + 1) * numOfCols">
-        <div class="wrapper" [ngStyle]="{ margin: margin }">
-          <ng-container
+      <div   class="col" *ngIf="j >= i * numOfCols && j < (i + 1) * numOfCols">
+        <div elementWidth (getElementWidth)="updateElementWidth($event)"   class="wrapper" [ngStyle]="{ margin: margin }">
+          <ng-container 
             [ngTemplateOutlet]="item.firstElement.templateRef"
           ></ng-container>
           <ng-container

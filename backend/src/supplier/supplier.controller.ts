@@ -91,7 +91,7 @@ export class SupplierController {
   async fetchAll(@Res() res) {
     let suppliers = await this.supplierService.findAll();
 
-    return res.status(HttpStatus.OK).json({ suppliers });
+    return res.status(HttpStatus.OK).json(suppliers);
   }
 
   @Put(':id')

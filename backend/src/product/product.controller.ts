@@ -295,7 +295,7 @@ export class ProductsController {
       query.heel_height = { $gte: min, $lte: max };
     }
 
-    console.log({ query });
+    // console.log({ query });
 
     // get the products
     const products = await this.productService.findFromQuery(
@@ -306,7 +306,7 @@ export class ProductsController {
       description,
     );
 
-    console.log(products);
+    // console.log(products);
 
     // get the number of the products, so that the paginator is informed (e.g. page 1 of ...._)
     const totalProducts = await this.productService.countProducts(query);

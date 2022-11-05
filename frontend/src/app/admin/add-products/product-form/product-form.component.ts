@@ -10,6 +10,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/app.service';
+import { Supplier } from '../../supplier/supplier.interfaces';
 
 import { TradeNumbers } from '../../trade-numbers/trade-numbers.interfaces';
 import { TradeNumbersService } from '../../trade-numbers/trade-numbers.service';
@@ -27,6 +28,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading = false;
   sumbitDate: string;
   trade_numbers: TradeNumbers;
+  suppliers: Supplier[];
   colorsArraySubscription: Subscription;
   filesArraySubscription: Subscription;
   mainSrcSubscription: Subscription;
@@ -49,6 +51,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.getTradeNumbers();
+    this.getSuppliers();
 
     this.productFormSubscription = this.productFormService
       .getProductFormListener()
@@ -171,6 +174,15 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
       next: (response) => {
         console.log(response);
         this.trade_numbers = response;
+      },
+    });
+  }
+
+  getSuppliers() {
+    this.tradeNumberService.getSuppliers().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.suppliers = response;
       },
     });
   }
