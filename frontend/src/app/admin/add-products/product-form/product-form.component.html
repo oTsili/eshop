@@ -144,7 +144,7 @@
             </option>
           </select>
           <div class="default text">
-            {{ "select colors" | translate | titlecase }}
+            {{ "select" | translate | titlecase }}
           </div>
           <div class="menu transition">
             <div
@@ -198,6 +198,22 @@
       <textarea rows="3" formControlName="description"></textarea>
     </div>
     <!-- END input of description -->
+
+    <!-- START success SUBMIT message -->
+    <div class="ui info message">
+      <div class="info-message-container">
+        <div class="x-icon-container">
+          <a (click)="closeInfoMessage()">
+            <i class="close icon"></i>
+          </a>
+        </div>
+        <div class="header">
+          {{ "Form submitted succesfully!" | translate | titlecase }}
+        </div>
+        <p class="info-text">You can add next product now.</p>
+      </div>
+    </div>
+    <!-- END success SUBMIT message -->
 
     <!-- START error messages -->
     <div class="ui error message">

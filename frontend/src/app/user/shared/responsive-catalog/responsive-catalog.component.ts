@@ -18,7 +18,6 @@ import { ParentElementDirective } from './directives/parent-element.directive';
   styleUrls: ['./responsive-catalog.component.scss'],
 })
 export class ResponsiveCatalogComponent implements OnInit, OnChanges {
-  pageWidth: number;
   sideBarWidth: number;
   numOfCols: number = 3;
   arrOfCols: number[];
@@ -28,6 +27,7 @@ export class ResponsiveCatalogComponent implements OnInit, OnChanges {
   @Input() elements: any[];
   @Input() justify_content: string;
   @Input() margin: string;
+  @Input() pageWidth: number = 0;
   @ContentChildren(ParentElementDirective)
   items!: QueryList<ParentElementDirective>;
 
@@ -35,7 +35,8 @@ export class ResponsiveCatalogComponent implements OnInit, OnChanges {
   updateRowsCols() {
     // get the sidebar offset(px), convert to rem(*0.1), divide with
     // the box width plus the margin (3rem + .6rem + .6rem = 4.2rem)
-    this.pageWidth = this.elementRef.nativeElement.offsetWidth;
+    if (!this.pageWidth)
+      this.pageWidth = this.elementRef.nativeElement.offsetWidth;
     // console.log({ pageWidth: this.pageWidth });
 
     if (this.elementWidth) {
@@ -43,7 +44,7 @@ export class ResponsiveCatalogComponent implements OnInit, OnChanges {
       // console.log({ elementWidth: this.elementWidth + this.totalMargin });
 
       this.numOfCols = Math.floor(
-        this.pageWidth / (this.elementWidth + this.totalMargin) - 1
+        this.pageWidth / (this.elementWidth + this.totalMargin)
       );
       // console.log(this.numOfCols);
       // compute the width of the container containing the products, so that
@@ -58,6 +59,7 @@ export class ResponsiveCatalogComponent implements OnInit, OnChanges {
       this.arrOfRows = Array(
         Math.ceil(this.elements.length / this.numOfCols)
       ).fill(1);
+      // console.log(this.arrOfRows);
       this.changeDetectorRef.detectChanges();
     }
   }

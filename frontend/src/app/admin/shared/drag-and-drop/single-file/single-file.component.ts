@@ -93,7 +93,7 @@ export class SingleFileComponent implements OnInit, OnChanges, OnDestroy {
    * @param index (File index)
    */
   deleteFile() {
-    console.log(this.form);
+    // console.log(this.form);
     this.form.get('photo')?.patchValue(null);
     this.addProductService.spliceFilesArray(this.data.file);
     this.addSupplierService.deleteFile();

@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-select-input',
@@ -11,12 +18,15 @@ export class SelectInputComponent implements OnInit {
   @Input() controlName: string;
   @Output() optionUpdated = new EventEmitter();
 
+  constructor(private elementRef: ElementRef) {}
+
   ngOnInit(): void {
     // console.log(this.options);
   }
 
   onOptionClick(value: string) {
     this.form.get(this.controlName)?.patchValue(value);
+    // console.log(this.elementRef.nativeElement);
     this.optionUpdated.emit(this.form);
   }
 }

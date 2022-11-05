@@ -60,7 +60,7 @@ export class ErrorSelectDirective implements OnInit, OnChanges, OnDestroy {
 
   @HostListener('click', ['$event'])
   activateTouched() {
-    console.log(this.form.get(this.controlName)?.value);
+    // console.log(this.form.get(this.controlName)?.value);
     this.form.get(this.controlName)?.markAsTouched();
     if (
       this.count > 0 &&

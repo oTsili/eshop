@@ -21,8 +21,9 @@
     <div class="results-show">
       <app-responsive-catalog
         [elements]="products"
-        [justify_content]="'center'"
+        [justify_content]="'left'"
         [margin]="'2rem'"
+        [pageWidth]="pageWidth"
       >
         <parent-element *ngFor="let product of products">
           <ng-template firstElement>

@@ -1,10 +1,13 @@
 import {
   AfterContentInit,
+  AfterViewChecked,
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   OnDestroy,
   OnInit,
+  Output,
   Renderer2,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -23,7 +26,10 @@ import { UploadProduct } from './upload-product.interfaces';
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.scss'],
 })
-export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ProductFormComponent
+  implements OnInit, OnDestroy, AfterViewChecked
+{
+  @Output() clearDragAndDropImages = new EventEmitter();
   theProductForm: FormGroup;
   isLoading = false;
   sumbitDate: string;
@@ -44,12 +50,12 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
     private elementRef: ElementRef
   ) {}
 
-  ngAfterViewInit(): void {
-    // this.formElement = this.elementRef.nativeElement.querySelector('.form');
-    // console.log(this.formElement);
+  ngAfterViewChecked(): void {
+    // this.clearOptionFields();
   }
 
   ngOnInit(): void {
+    console.log(this.elementRef.nativeElement);
     this.getTradeNumbers();
     this.getSuppliers();
 
@@ -172,7 +178,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
   getTradeNumbers() {
     this.tradeNumberService.getTradeNumbers().subscribe({
       next: (response) => {
-        console.log(response);
+        // console.log(response);
         this.trade_numbers = response;
       },
     });
@@ -181,15 +187,15 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
   getSuppliers() {
     this.tradeNumberService.getSuppliers().subscribe({
       next: (response) => {
-        console.log(response);
+        // console.log(response);
         this.suppliers = response;
       },
     });
   }
 
   onOptionUpdate(event) {
-    console.log('updated');
-    console.log(event);
+    // console.log('updated');
+    // console.log(event);
     this.theProductForm = event;
   }
 
@@ -200,6 +206,18 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
     // unred the form
     const formElement = this.elementRef.nativeElement.querySelector('.form');
     this.renderer.removeClass(formElement, 'error');
+  }
+
+  closeInfoMessage() {
+    const infoMessage =
+      this.elementRef.nativeElement.querySelector('.info.message');
+    this.renderer.setStyle(infoMessage, 'display', 'none');
+  }
+
+  openInfoMessage() {
+    const infoMessage =
+      this.elementRef.nativeElement.querySelector('.info.message');
+    this.renderer.setStyle(infoMessage, 'display', 'block');
   }
 
   onSubmit(form: FormGroup) {
@@ -216,7 +234,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.sumbitDate = this.appService.getDateString();
-    console.log(this.sumbitDate);
+    // console.log(this.sumbitDate);
 
     this.isLoading = true;
 
@@ -265,10 +283,46 @@ export class ProductFormComponent implements OnInit, OnDestroy, AfterViewInit {
     this.productFormService.submitProductForm(product).subscribe({
       next: (response) => {
         console.log(response);
+
+        this.clearDragAndDropImages.emit();
+        // clear the input text fields
+        this.theProductForm.reset();
+
+        this.clearOptionFields();
+        // unred the form and the fields
+        this.closeErrorMessage();
+        // open form submitted message
+        this.openInfoMessage();
       },
     });
 
     this.isLoading = false;
+  }
+
+  clearOptionFields() {
+    // console.log(this.theProductForm);
+
+    // Object.entries(this.theProductForm.controls).forEach((key, value) => {
+    //   let optionElement = this.elementRef.nativeElement.querySelector(
+    //     key.toString()
+    //   );
+    //   console.log(optionElement);
+    // });
+
+    const optionElements =
+      this.elementRef.nativeElement.getElementsByClassName('default text');
+    for (let element of optionElements) {
+      this.renderer.setProperty(element, 'innerText', 'Επιλογή');
+      this.renderer.setStyle(element, 'font-weight', 300);
+      this.renderer.setStyle(element, 'color', 'rgba(0, 0, 0, 0.87)');
+    }
+
+    const colorsElement =
+      this.elementRef.nativeElement.getElementsByClassName('delete icon');
+    // console.log(colorsElement);
+    for (let deleteButton of colorsElement) {
+      deleteButton.click();
+    }
   }
 
   checkFormErrors() {

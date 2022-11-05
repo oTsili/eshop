@@ -45,13 +45,13 @@ export class CatalogDetailsComponent implements OnInit, OnChanges {
 
     if (this.account?.whishlist && this.account?.whishlist?.length > 0) {
       this.account?.whishlist?.forEach((item) => {
-        if (item.product._id == this.product._id) {
+        if (item.product && item.product._id == this.product._id) {
           this.isAddedToWhishlist = true;
         }
       });
 
       this.account?.cart?.forEach((item) => {
-        if (item.product._id == this.product._id) {
+        if (item.product && item.product._id == this.product._id) {
           this.isAddedToCart = true;
         }
       });

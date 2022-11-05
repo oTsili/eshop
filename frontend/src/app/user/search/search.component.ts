@@ -61,6 +61,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   breadcrumbItems: Breadcrumb[];
   account: Account;
   isAuthenticated = false;
+  pageWidth = 0;
 
   constructor(
     public dynamicDatabase: DynamicDatabase,
@@ -149,6 +150,8 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
         console.log('products update');
         this.getProducts(response.queryParams);
       });
+
+    this.getPageWidth();
   }
 
   ngOnDestroy(): void {
@@ -158,6 +161,12 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     this.changePagePaginatorSubscription.unsubscribe();
     this.updateProductsSubscription.unsubscribe();
     this.authStatusSubscription.unsubscribe();
+  }
+
+  getPageWidth() {
+    this.pageWidth =
+      this.elementRef.nativeElement.querySelector('.results-show').clientWidth;
+    // console.log(this.getPageWidth);
   }
 
   subscribeToAuthStatusAndGetAccount() {

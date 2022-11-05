@@ -1,6 +1,8 @@
 <div class="container">
   <div class="form">
-    <app-product-form></app-product-form>
+    <app-product-form
+      (clearDragAndDropImages)="clearDragAndDropImages()"
+    ></app-product-form>
   </div>
   <div class="drag-and-drop">
     <app-drag-and-drop></app-drag-and-drop>
