@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  HostListener,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -61,7 +62,14 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   breadcrumbItems: Breadcrumb[];
   account: Account;
   isAuthenticated = false;
-  pageWidth = 0;
+  // pageWidth = 0;
+  // @HostListener('window:resize', ['$event'])
+  // getPageWidth() {
+  //   this.pageWidth =
+  //     this.elementRef.nativeElement.querySelector('.results-show').offsetWidth;
+  //   console.log(this.pageWidth);
+  //   console.log(this.elementRef);
+  // }
 
   constructor(
     public dynamicDatabase: DynamicDatabase,
@@ -93,7 +101,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     routes.shift();
 
     this.route.queryParams.subscribe((params: Params) => {
-      console.log(params);
+      // console.log(params);
       this.productsService.toUpdateProducts(params);
     });
 
@@ -140,8 +148,8 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
       });
 
     // get the products on page initialization
-    let queryParams = this.router.parseUrl(this.router.url).queryParams;
-    this.getProducts(queryParams);
+    // let queryParams = this.router.parseUrl(this.router.url).queryParams;
+    // this.getProducts(queryParams);
 
     // subsribe to events that update the products in the page
     this.updateProductsSubscription = this.productsService
@@ -151,7 +159,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
         this.getProducts(response.queryParams);
       });
 
-    this.getPageWidth();
+    // this.getPageWidth();
   }
 
   ngOnDestroy(): void {
@@ -161,12 +169,6 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     this.changePagePaginatorSubscription.unsubscribe();
     this.updateProductsSubscription.unsubscribe();
     this.authStatusSubscription.unsubscribe();
-  }
-
-  getPageWidth() {
-    this.pageWidth =
-      this.elementRef.nativeElement.querySelector('.results-show').clientWidth;
-    // console.log(this.getPageWidth);
   }
 
   subscribeToAuthStatusAndGetAccount() {
@@ -225,11 +227,6 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
           if (totalProducts === 0) {
             this.isOpenErrorMessage = true;
           }
-
-          this.paginatorService.onProductsLoaded(
-            this.totalProducts,
-            this.productsPerPage
-          );
 
           this.isLoading = false;
 

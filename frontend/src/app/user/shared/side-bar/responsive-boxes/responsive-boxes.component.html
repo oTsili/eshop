@@ -1,14 +1,12 @@
-<app-responsive-catalog [elements]="elementList">
-  <parent-element *ngFor="let element of elementList; let i = index">
-    <ng-template firstElement>
-      <div
-        [ngClass]="{ active: activeStatusArray[i] }"
-        (click)="onSubmit(i)"
-        class="button box {{ element.text }}"
-        [ngClass]="{ element: show_text }"
-      >
-        <ng-container *ngIf="show_text">{{ element.text }} </ng-container>
-      </div>
-    </ng-template>
-  </parent-element>
-</app-responsive-catalog>
+<!-- <parent-element *ngFor="let element of elementList; let i = index"> -->
+<div class="container">
+  <div
+    *ngFor="let element of elementList; let i = index"
+    [ngClass]="{ active: activeStatusArray[i] }"
+    (click)="onSubmit(i)"
+    class="button box {{ element.text }}"
+    [ngClass]="{ element: show_text }"
+  >
+    <ng-container *ngIf="show_text">{{ element.text }} </ng-container>
+  </div>
+</div>

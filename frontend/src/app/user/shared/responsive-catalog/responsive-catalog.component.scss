@@ -3,6 +3,8 @@ $base-width: 20rem;
 .elements {
   user-select: none;
   height: auto !important;
+  display: flex;
+  flex-flow: row wrap;
 }
 
 .wrapper {

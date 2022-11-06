@@ -1,25 +1,17 @@
 <div class="elements">
-  <div
-    class="row"
-    *ngFor="let row of arrOfRows; let i = index"
-    [ngStyle]="{ 'justify-content': justify_content }"
-  >
-    <ng-container *ngFor="let item of items; let j = index">
-      <div   class="col" *ngIf="j >= i * numOfCols && j < (i + 1) * numOfCols">
-        <div elementWidth (getElementWidth)="updateElementWidth($event)"   class="wrapper" [ngStyle]="{ margin: margin }">
-          <ng-container 
-            [ngTemplateOutlet]="item.firstElement.templateRef"
-          ></ng-container>
-          <ng-container
-            *ngIf="item.secondElement"
-            [ngTemplateOutlet]="item.secondElement.templateRef"
-          ></ng-container>
-          <ng-container
-            *ngIf="item.thirdElement"
-            [ngTemplateOutlet]="item.thirdElement.templateRef"
-          ></ng-container>
-        </div>
-      </div>
-    </ng-container>
-  </div>
+  <ng-container *ngFor="let item of items; let j = index">
+    <div class="wrapper" [ngStyle]="{ margin: margin }">
+      <ng-container
+        [ngTemplateOutlet]="item.firstElement.templateRef"
+      ></ng-container>
+      <ng-container
+        *ngIf="item.secondElement"
+        [ngTemplateOutlet]="item.secondElement.templateRef"
+      ></ng-container>
+      <ng-container
+        *ngIf="item.thirdElement"
+        [ngTemplateOutlet]="item.thirdElement.templateRef"
+      ></ng-container>
+    </div>
+  </ng-container>
 </div>
