@@ -131,7 +131,7 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
     // get the url from the browser
     let urlTree = this.router.parseUrl(this.router.url);
 
-    console.log(urlTree.queryParams[chip.key]);
+    // console.log(urlTree.queryParams[chip.key]);
 
     // delete the query parameter came from the chip
     delete urlTree.queryParams[chip.key];

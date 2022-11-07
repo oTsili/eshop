@@ -1,10 +1,6 @@
 <div class="container">
   <div class="range_container">
-    <form
-      (ngSubmit)="onRegister(priceForm)"
-      [formGroup]="priceForm"
-      #priceElementForm
-    >
+    <form [formGroup]="priceForm" #priceElementForm>
       <div class="sliders_control">
         <input
           (mouseup)="onSubmit()"

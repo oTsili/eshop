@@ -3,8 +3,20 @@ $base-width: 20rem;
 .elements {
   user-select: none;
   height: auto !important;
+  // display: flex;
+  // flex-flow: row wrap;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
   display: flex;
-  flex-flow: row wrap;
+}
+
+.wrap {
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .wrapper {

@@ -4,7 +4,7 @@
     <hr />
   </div>
   <div>
-    <mat-chip-list #chipList aria-label="Fruit selection">
+    <mat-chip-list #chipList aria-label="Filter selection">
       <mat-chip *ngFor="let chip of chipsList" (removed)="remove(chip)">
         {{ chip.key | translate }} : {{ chip.value | translate }}
         <button matChipRemove>

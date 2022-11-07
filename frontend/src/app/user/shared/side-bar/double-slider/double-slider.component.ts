@@ -1,7 +1,8 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router, UrlSerializer } from '@angular/router';
+import { ActivatedRoute, Router, UrlSerializer } from '@angular/router';
 import { ProductsService } from 'src/app/user/product/products.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-double-slider',
@@ -18,7 +19,9 @@ export class DoubleSliderComponent implements OnInit {
   constructor(
     private router: Router,
     private urlSerializer: UrlSerializer,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private location: Location,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -40,43 +43,27 @@ export class DoubleSliderComponent implements OnInit {
   });
 
   onSubmit() {
-    // toggle the isSubmitted value
-    this.isSubmitted = true;
-
     // deserialize
     let urlTree = this.router.parseUrl(this.router.url);
 
     let price = `${this.from}\u20AC	-${this.to}\u20AC	`;
-    // update the color query param
+
+    // update the price query param
     urlTree.queryParams['price'] = price;
 
     // call the method to update the products
     this.productsService.toUpdateProducts(urlTree.queryParams).subscribe({
       next: (response) => {
-        if (this.isSubmitted) {
-          // navigate to the updated url
-          this.router.navigateByUrl(urlTree);
+        // navigate to the updated url
+        this.router.navigateByUrl(urlTree);
 
-          // compose the chip view
-          let chip = { key: 'price', value: price };
+        // compose the chip view
+        let chip = { key: 'price', value: price };
 
-          // add a chip in the sidebar
-          this.productsService.addChip(chip);
-
-          // reset the isSubmitted value
-          this.isSubmitted = false;
-        }
+        // add a chip in the sidebar
+        this.productsService.addChip(chip);
       },
     });
-  }
-
-  onRegister(form: FormGroup) {
-    console.log(this.priceForm);
-    if (form.invalid) {
-      console.log('form invalid');
-      return;
-    }
-    console.log(form);
   }
 
   controlFromSlider(

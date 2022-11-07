@@ -235,9 +235,9 @@ export class ProductsController {
     @Query('pageSize') pageSize: number,
     @Query('currentPage') currentPage: number,
     @Query('sort') sort: string,
-    @Query('description') description: string,
-    // @Query('category') category: string,
 
+    @Query('description') description: string,
+    @Query('color') color: string,
     @Query('heel height') heel_height: string,
     @Query('sales') sales: string,
     @Query('price') price: string,
@@ -250,9 +250,17 @@ export class ProductsController {
      * non-numeral characters, refactor mongodb queryies, by stripping those
      * non-numeral characters, and parsing the strings to numbers
      */
+
     // console.log({ pageSize }, { currentPage }, { sort }, { description });
 
-    // console.log({ query });
+    console.log({ query });
+
+    // convert query property 'color' to 'colors',
+    // since we changed the product object to have an array of colors instead of one color
+    if (color) {
+      query.colors = color;
+      delete query.color;
+    }
 
     if (description) {
       query.description = { $regex: description, $options: 'i' };
@@ -292,10 +300,12 @@ export class ProductsController {
         .map((num: string) => parseInt(num.replace(/\D/g, '')));
 
       // console.log({ min }, { max });
-      query.heel_height = { $gte: min, $lte: max };
+      // query.heel_height = { $gte: min, $lte: max };
+      delete query['heel height'];
+      query.heel_height = heel_height;
     }
 
-    // console.log({ query });
+    console.log({ query });
 
     // get the products
     const products = await this.productService.findFromQuery(

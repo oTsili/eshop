@@ -24,7 +24,10 @@ export class PaginatorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() productsPerPage = environment.PRODUCTS_PER_PAGE;
   productsLoadedSubscription: Subscription;
 
-  constructor(private paginatorService: PaginatorService, private productsService: ProductsService) {}
+  constructor(
+    private paginatorService: PaginatorService,
+    private productsService: ProductsService
+  ) {}
 
   ngOnInit(): void {
     this.productsLoadedSubscription = this.paginatorService
@@ -40,8 +43,10 @@ export class PaginatorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.totalProducts = changes['totalProducts'].currentValue;
-    this.productsPerPage = changes['productsPerPage'].currentValue;
+    if (changes['totalProducts'])
+      this.totalProducts = changes['totalProducts'].currentValue;
+    if (changes['productsPerPage'])
+      this.productsPerPage = changes['productsPerPage'].currentValue;
   }
 
   onChangePage(pageData: PageEvent) {

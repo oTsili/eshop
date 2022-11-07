@@ -53,7 +53,6 @@ export class ProductsService {
           console.log({ userData });
           userData.products.forEach((product) => {
             product.id = product._id;
-            
           });
           return userData;
         })
@@ -76,7 +75,7 @@ export class ProductsService {
   onProductsUpdated(updated: boolean) {
     this.onProductsUpdatedListener.next(updated);
   }
-  
+
   onProductsNotUpdated(error: string) {
     this.onProductsUpdatedListener.error(error);
   }
