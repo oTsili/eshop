@@ -84,7 +84,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navBarElementsSubsciption: Subscription;
   changeLanguageSubscription: Subscription;
   accountSubscription: Subscription;
-  authStatusSubsciption: Subscription;
   activeLanguage: string;
   isOverList = false;
   numOfLinks: string;
@@ -140,7 +139,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.accountSubscription.unsubscribe();
     this.changeLanguageSubscription.unsubscribe();
     this.navBarElementsSubsciption.unsubscribe();
-    this.authStatusSubsciption.unsubscribe();
   }
 
   subscribeToAccountUpdates() {
