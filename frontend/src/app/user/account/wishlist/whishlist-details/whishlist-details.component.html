@@ -30,14 +30,17 @@
         </button>
       </div>
       <div class="line button">
-        <a class="button-text">{{ "edit" | translate | titlecase }}</a>
+        <button class="button-text">
+          {{ "edit" | translate | titlecase }}
+        </button>
       </div>
       <div class="line button">
-        <a
+        <button
           class="button-text"
           (click)="deleteWhishlistItem(whishlistItem._id)"
-          >{{ "remove item" | translate | titlecase }}</a
         >
+          {{ "remove item" | translate | titlecase }}
+        </button>
       </div>
       <input type="hidden" name="quantity" [(ngModel)]="quantity" />
     </div>

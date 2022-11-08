@@ -101,7 +101,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private searchService: SearchService,
     private authService: AuthService,
-    private productService: ProductsService,
+    private productsService: ProductsService,
     private appService: AppService,
     private accountService: AccountService,
     private router: Router,
@@ -179,16 +179,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // console.log({ search });
 
     // initialize the state of the no products message
-    this.productService.onUpdateNoProductsMessage(false);
+    this.productsService.onUpdateNoProductsMessage(false);
 
     // update the products in the catalog if already in the page and
     // not navigated by the code in the beggining.
     const url = this.router.url.split('/')[2];
 
-    console.log(url);
+    // console.log(url);
 
     if (url === 'search') {
-      this.productService
+      this.productsService
         .toUpdateProducts({ description: this.search })
         .subscribe({
           next: (response) => {
@@ -196,13 +196,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
             this.searchService.onUpdateSearchQueryHeader(this.search);
 
             // add the chip
-            this.productService.addChip({
+            this.productsService.addChip({
               key: 'description',
               value: this.search,
             });
           },
         });
     }
+  }
+
+  updateSearchQueryHeaderAndChipText(linkText: string) {
+    this.searchService.onUpdateSearchQueryHeader(linkText);
+    // compose the chip view
+    const chip = { key: 'type', value: linkText };
+
+    // add a chip in the sidebar
+    this.productsService.addChip(chip);
   }
 
   updateHamburgerStatus(event: MouseEvent) {
@@ -246,16 +255,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.appService.onLanguageChange(language);
   }
 
-  onTest() {
-    this.headerService.onTest();
-  }
+  // onTest() {
+  //   this.headerService.onTest();
+  // }
 
-  onTestAuth() {
-    console.log('testAuth');
-    this.authService.isAuthenticated().subscribe((response) => {
-      console.log(response);
-    });
-  }
+  // onTestAuth() {
+  //   console.log('testAuth');
+  //   this.authService.isAuthenticated().subscribe((response) => {
+  //     console.log(response);
+  //   });
+  // }
 
   onLogout() {
     console.log('logout');

@@ -35,7 +35,7 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
-  searchQuery: string | null;
+  searchQuery: string;
   color: string | null;
   size: string | null;
   heel: string | null;
@@ -62,14 +62,6 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   breadcrumbItems: Breadcrumb[];
   account: Account;
   isAuthenticated = false;
-  // pageWidth = 0;
-  // @HostListener('window:resize', ['$event'])
-  // getPageWidth() {
-  //   this.pageWidth =
-  //     this.elementRef.nativeElement.querySelector('.results-show').offsetWidth;
-  //   console.log(this.pageWidth);
-  //   console.log(this.elementRef);
-  // }
 
   constructor(
     public dynamicDatabase: DynamicDatabase,
@@ -147,10 +139,6 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
         this.productsService.toUpdateProducts(queryParams);
       });
 
-    // get the products on page initialization
-    // let queryParams = this.router.parseUrl(this.router.url).queryParams;
-    // this.getProducts(queryParams);
-
     // subsribe to events that update the products in the page
     this.updateProductsSubscription = this.productsService
       .getToUpdateProductsListener()
@@ -158,8 +146,6 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
         console.log('products update');
         this.getProducts(response.queryParams);
       });
-
-    // this.getPageWidth();
   }
 
   ngOnDestroy(): void {
@@ -254,7 +240,8 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
 
     // pass the query parameter description value to the header "Search for .."
     let urlTree = this.router.parseUrl(this.router.url);
-    this.searchQuery = urlTree.queryParams['description'];
+    this.searchQuery =
+      urlTree.queryParams['description'] || urlTree.queryParams['type'];
 
     // update the products on Products component
     this.productsService.toUpdateProducts(urlTree.queryParams);

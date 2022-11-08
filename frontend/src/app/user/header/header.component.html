@@ -50,6 +50,7 @@
                 [queryParams]="{
                   type: sublink.text
                 }"
+                (click)="updateSearchQueryHeaderAndChipText(sublink.text)"
               >
                 {{ sublink.text | translate | uppercase }}
               </a>
@@ -94,7 +95,7 @@
       <!-- END search box -->
     </div>
 
-    <div (click)="onTestAuth()" class="item">test</div>
+    <!-- <div (click)="onTestAuth()" class="item">test</div> -->
     <div
       ngClass="spacer"
       [ngClass.gt-md]="{ spacer: true, 'spacer--left': false }"
@@ -209,6 +210,7 @@
             [queryParams]="{
               type: sublink.text
             }"
+            (click)="updateSearchQueryHeaderAndChipText(sublink.text)"
           >
             {{ sublink.text | translate | uppercase }}
           </a>
