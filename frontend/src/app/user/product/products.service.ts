@@ -111,11 +111,13 @@ export class ProductsService {
   }
 
   addChip(chip: Chip) {
+    console.log(this.chipsList);
     if (chip) {
-      const chipIndex = this.getChipIndex(chip.key);
+      let chipIndex = this.getChipIndex(chip.key);
       if (chipIndex >= 0) {
         this.removeChip(chipIndex);
       }
+
       this.chipsList.push(chip);
       this.chipsListUpdateListener.next({ chipsList: this.chipsList });
     }

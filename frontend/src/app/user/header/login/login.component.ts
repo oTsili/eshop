@@ -93,7 +93,9 @@ export class LoginComponent implements OnInit, OnDestroy {
           // localStorage.setItem('user', JSON.stringify(response));
         },
         error: (error) => {
-          let errorMessage = error.error.message.split(':')[1].trim();
+          // console.log(error);
+          let errorMessage = error.error.message;
+          // .split(':')[1].trim();
           console.log(errorMessage);
 
           this.translateSubscription = this.translate
