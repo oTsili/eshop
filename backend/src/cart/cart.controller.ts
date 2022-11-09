@@ -24,12 +24,20 @@ export class CartController {
     private readonly sharedService: SharedService,
   ) {}
 
-  @UseGuards(JwtAuthGuard)
-  @Get(':userId')
-  async fetchUserCart(@Req() req, @Res() res, @Param('userId') userId: string) {
-    const cartItems = await this.cartService.findCartItemsByUserId(userId);
+  // @UseGuards(JwtAuthGuard)
+  // @Get('/user/:userId')
+  // async fetchUserCart(@Req() req, @Res() res, @Param('userId') userId: string) {
+  //   const cartItems = await this.cartService.findCartItemsByUserId(userId);
 
-    return res.status(HttpStatus.OK).json(cartItems);
+  //   return res.status(HttpStatus.OK).json(cartItems);
+  // }
+
+  @UseGuards(JwtAuthGuard)
+  @Get(':cartId')
+  async fetchCart(@Req() req, @Res() res, @Param('cartId') cartId: string) {
+    const cartItem = await this.cartService.findCartItem(cartId);
+
+    return res.status(HttpStatus.OK).json(cartItem);
   }
 
   @UseGuards(JwtAuthGuard)

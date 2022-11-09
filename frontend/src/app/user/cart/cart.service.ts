@@ -13,4 +13,10 @@ export class CartService {
       withCredentials: true,
     });
   }
+
+  getCartItem(id: string) {
+    return this.httpClient.get(`${BACKEND_URL}/${id}`, {
+      withCredentials: true,
+    });
+  }
 }

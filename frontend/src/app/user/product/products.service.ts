@@ -23,6 +23,16 @@ export class ProductsService {
 
   constructor(private httpClient: HttpClient) {}
 
+  getProduct(product_id: string) {
+    console.log({ product_id });
+    let queryParams = new HttpParams().set('product_id', product_id);
+
+    return this.httpClient.get<Product>(`${BACKEND_URL}`, {
+      params: queryParams,
+      withCredentials: true,
+    });
+  }
+
   getProducts(
     porductsPerPage: number,
     currentPage: number,

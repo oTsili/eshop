@@ -17,6 +17,10 @@ export class CartService {
       .populate('user');
   }
 
+  async findCartItem(cartId: string) {
+    return this.cartModel.findById(cartId).populate('product').populate('user');
+  }
+
   async create(createCartItemDto: CreateCartItemDto): Promise<CartItem> {
     const createCartItem = new this.cartModel(createCartItemDto);
     return createCartItem.save();

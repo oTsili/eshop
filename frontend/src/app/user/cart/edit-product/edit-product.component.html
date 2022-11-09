@@ -1,0 +1,13 @@
+<div class="container">
+  <!-- START  header upper segment -->
+  <div class="header-wrapper">
+    <span class="header">{{ pageHeader | translate }} </span>
+  </div>
+  <app-breadcrumb [breadcrumbs]="breadcrumbItems"></app-breadcrumb>
+  <!-- END header upper segment-->
+
+  <!-- START lower segment -->
+  <div class="external-wrapper">
+    <app-product-showcase [product]="product"></app-product-showcase>
+  </div>
+</div>

@@ -27,6 +27,11 @@ export class ProductService {
     return this.productModel.find(query).countDocuments();
   }
 
+  async findProduct(product_id: string) {
+    console.log({ product_id });
+    return this.productModel.findById(product_id).exec();
+  }
+
   async findFromQuery(query, pageSize, currentPage, sort, description_query) {
     return (
       this.productModel

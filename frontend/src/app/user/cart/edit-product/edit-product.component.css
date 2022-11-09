@@ -1,0 +1,29 @@
+.header-wrapper {
+  position: relative;
+  text-align: center;
+  padding: 1.5rem 0;
+  margin: 1rem 0;
+}
+
+.header {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.header::after {
+  content: "";
+  width: 20rem;
+  height: 0.1rem;
+  background-color: #c8c8c8;
+  display: block;
+  transform: translate(-50%);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+}
+
+.external-wrapper {
+  display: flex;
+
+  margin-top: 2%;
+}

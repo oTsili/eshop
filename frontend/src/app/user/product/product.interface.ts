@@ -4,6 +4,7 @@ export interface Product {
   altSrc: string;
   name: string;
   description: string;
+  images: string[];
   price: string;
   sales: string;
   id: string;

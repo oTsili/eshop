@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   HttpStatus,
+  Param,
   Post,
   Query,
   Req,
@@ -204,6 +205,19 @@ export class ProductsController {
   // }
 
   @Get('')
+  async fetchProduct(
+    @Req() req,
+    @Res() res,
+    @Query('product_id') product_id: string,
+    // @Param('product_id') product_id: string,
+  ) {
+    console.log({ product_id });
+    const product = await this.productService.findProduct(product_id);
+
+    return res.status(HttpStatus.OK).json(product);
+  }
+
+  @Get('all')
   async fetchAll(@Res() response) {
     let products = await this.productService.findAll();
 

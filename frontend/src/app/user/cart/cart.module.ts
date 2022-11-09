@@ -8,14 +8,18 @@ import { ProductModule } from '../product/product.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../shared/loader-factory';
+import { CartRoutingModule } from './cart-routing.module';
+import { EditProductModule } from './edit-product/edit-product.module';
 
 @NgModule({
   declarations: [CartComponent],
   imports: [
+    CartRoutingModule,
     CommonModule,
     BreadcrumbModule,
     TaxShippingModule,
     ProductModule,
+    EditProductModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({
