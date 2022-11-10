@@ -1,6 +1,9 @@
 .showcase-container {
   display: flex;
+  margin-left: 10%;
+  margin-right: 10%;
 }
+
 app-carousel {
   width: 100%;
 }

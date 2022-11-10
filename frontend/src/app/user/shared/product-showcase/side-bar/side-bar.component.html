@@ -1,1 +1,20 @@
-<p>side-bar works!</p>
+<div *ngIf="product" class="side-bar-container">
+  <div class="header">
+    {{ product.name }}
+  </div>
+  <div class="row nominal-number">
+    {{ product.nominal_number }}
+  </div>
+  <div class="row product product-price--wrapper link">
+    <span
+      *ngIf="hasSales(product.sales)"
+      class="product-price product-price-old"
+    >
+      {{ oldPrice }}
+    </span>
+    <span class="product-price product-price-new">
+      {{ product.price }}
+    </span>
+  </div>
+  <div class="row divider"></div>
+</div>
