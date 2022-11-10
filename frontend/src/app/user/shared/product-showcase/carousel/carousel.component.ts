@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThumbnailService } from '../thumbnail/thumbnail.service';
 import { CarouselService } from './carousel.service';
 
 @Component({
@@ -9,7 +10,10 @@ import { CarouselService } from './carousel.service';
 export class CarouselComponent implements OnInit {
   imageSrc: string;
 
-  constructor(private carouselService: CarouselService) {}
+  constructor(
+    private carouselService: CarouselService,
+    private thumbnailService: ThumbnailService
+  ) {}
 
   ngOnInit(): void {
     this.carouselService.getThumbnailListener().subscribe({
@@ -17,7 +21,11 @@ export class CarouselComponent implements OnInit {
     });
   }
 
-  moveLeft() {}
+  moveLeft() {
+    this.thumbnailService.onArrowClick(-1);
+  }
 
-  moveRight() {}
+  moveRight() {
+    this.thumbnailService.onArrowClick(+1);
+  }
 }

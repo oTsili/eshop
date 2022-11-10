@@ -1,8 +1,8 @@
 <div class="thumbnail-container">
-  <div class="column" *ngFor="let thumbnail of thumbnails">
-    <a (click)="preview(thumbnail)">
+  <div class="column" *ngFor="let thumbnail of thumbnails; let i= index">
+    <a (click)="preview(i)">
       <img
-        [ngClass]="{ active: currentSlide === thumbnail }"
+        [ngClass]="{ active: currentSlide === i }"
         src="{{ thumbnail }}"
       />
     </a>

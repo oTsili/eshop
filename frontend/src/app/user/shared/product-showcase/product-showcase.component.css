@@ -1,3 +1,10 @@
-.container {
+.showcase-container {
   display: flex;
+}
+app-carousel {
+  width: 100%;
+}
+
+app-side-bar {
+  width: 100%;
 }

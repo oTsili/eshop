@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CarouselService } from '../carousel/carousel.service';
+import { ThumbnailService } from './thumbnail.service';
 
 @Component({
   selector: 'app-thumbnail',
@@ -19,18 +20,26 @@ import { CarouselService } from '../carousel/carousel.service';
 })
 export class ThumbnailComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() thumbnails: string[];
-  currentSlide = '';
+  currentSlide = 0;
   base_url = environment.BASE_URL;
 
   constructor(
     private carouselService: CarouselService,
+    private thumbnailService: ThumbnailService,
     private elementRef: ElementRef,
-    private renderer: Renderer2,
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    // console.log(this.thumbnails);
+    this.thumbnailService.getArrowClickListener().subscribe((response) => {
+      this.currentSlide =
+        (this.currentSlide + response) % this.thumbnails.length;
+
+      if (this.currentSlide < 0) {
+        this.currentSlide = this.thumbnails.length + this.currentSlide;
+      }
+      this.preview(this.currentSlide);
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -53,8 +62,8 @@ export class ThumbnailComponent implements OnInit, OnChanges, AfterViewInit {
     this.changeDetectorRef.detectChanges();
   }
 
-  preview(thumbnail: string) {
-    this.currentSlide = thumbnail;
-    this.carouselService.onThumbnailUpdate(thumbnail);
+  preview(index: number) {
+    this.currentSlide = index;
+    this.carouselService.onThumbnailUpdate(this.thumbnails[index]);
   }
 }

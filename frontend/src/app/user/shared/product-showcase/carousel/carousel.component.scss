@@ -1,18 +1,18 @@
-.container {
+.carousel-container {
   display: flex;
 }
 
 img {
   height: 45rem;
-  margin: 5%;
+  padding: 1%;
 }
 
 /******************* Controls  ************************/
 
 .control {
   height: 55rem;
-  padding-right: 25%;
-  padding-left: 25%;
+  padding-right: 8%;
+  padding-left: 8%;
   border: none;
   background-color: transparent;
   outline: 0; // remove blue outline border, but make sure they are still focussable for accessibility

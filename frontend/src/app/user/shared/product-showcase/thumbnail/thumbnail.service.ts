@@ -1,9 +1,19 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThumbnailService {
+  private arrowClickListener = new Subject<number>();
 
-  constructor() { }
+  constructor() {}
+
+  getArrowClickListener() {
+    return this.arrowClickListener.asObservable();
+  }
+
+  onArrowClick(direction: number) {
+    this.arrowClickListener.next(direction);
+  }
 }
