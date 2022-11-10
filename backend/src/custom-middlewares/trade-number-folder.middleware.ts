@@ -63,7 +63,7 @@ export class TradeNumberFolderMiddleware implements NestMiddleware {
         categoriesArray.forEach((element, index) => {
           element.forEach((el) => {
             if (el.description === value && name === categories[index]) {
-              // console.log(el.code);
+              console.log(el.description, el.code);
               folder = folder + el.code;
             }
           });

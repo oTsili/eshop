@@ -46,3 +46,12 @@
   background-color: #c8c8c8;
   display: inline-block;
 }
+
+.colors img {
+  height: 6rem;
+  margin-left: 3%;
+}
+
+.subheader {
+  font-size: 1.5rem;
+}

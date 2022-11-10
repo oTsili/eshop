@@ -22,12 +22,7 @@
   left: 50%;
 }
 
-.external-wrapper {
-  display: flex;
-
-  margin-top: 2%;
-}
-
 app-product-showcase {
-  width: 100%;
+  margin-top: 2%;
+  /* width: 100%; */
 }

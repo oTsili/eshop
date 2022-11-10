@@ -17,4 +17,12 @@
     </span>
   </div>
   <div class="row divider"></div>
+
+  <div class="row subheader">
+    {{ "colors" | translate | titlecase }}
+  </div>
+
+  <div class="row colors">
+    <img src="{{ image.src }}" *ngFor="let image of similar_products" />
+  </div>
 </div>

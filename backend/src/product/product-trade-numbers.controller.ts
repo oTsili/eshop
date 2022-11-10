@@ -146,47 +146,47 @@ export class ProductsTradeNumberController {
     @Param('id') id,
   ) {
     let directoryUpdated;
-    console.log({ directories });
-    console.log({ category });
-    console.log({ id });
+    // console.log({ directories });
+    // console.log({ category });
+    // console.log({ id });
     switch (category) {
       case 'season':
-        console.log({ season: category });
+        // console.log({ season: category });
         directoryUpdated =
           await this.productTradeNumberService.deleteDirectorySeason(id);
         break;
 
       case 'style':
-        console.log({ style: category });
+        // console.log({ style: category });
         directoryUpdated =
           await this.productTradeNumberService.deleteDirectoryStyle(id);
         break;
 
       case 'size':
-        console.log({ size: category });
+        // console.log({ size: category });
         directoryUpdated =
           await this.productTradeNumberService.deleteDirectorySize(id);
         break;
 
       case 'type':
-        console.log({ type: category });
+        // console.log({ type: category });
         directoryUpdated =
           await this.productTradeNumberService.deleteDirectoryType(id);
         break;
 
       case 'colors':
-        console.log({ color: category });
+        // console.log({ color: category });
         directoryUpdated =
           await this.productTradeNumberService.deleteDirectoryColor(id);
         break;
 
       case 'heel':
-        console.log({ color: category });
+        // console.log({ color: category });
         directoryUpdated =
           await this.productTradeNumberService.deleteDirectoryHeel(id);
         break;
       case 'material':
-        console.log({ color: category });
+        // console.log({ color: category });
         directoryUpdated =
           await this.productTradeNumberService.deleteDirectoryMaterial(id);
         break;
