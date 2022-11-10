@@ -1,1 +1,5 @@
-<p>product-showcase works!</p>
+<div class="container">
+  <app-thumbnail *ngIf="product" [thumbnails]="product.images"></app-thumbnail>
+  <app-carousel></app-carousel>
+  <app-side-bar></app-side-bar>
+</div>
