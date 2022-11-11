@@ -28,7 +28,7 @@ export class ProductService {
   }
 
   async findProduct(product_id: string) {
-    console.log({ product_id });
+    // console.log({ product_id });
     return this.productModel.findById(product_id).exec();
   }
 

@@ -146,7 +146,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .getAccountListener()
       .subscribe({
         next: (response) => {
-          console.log({ 'auth update: ': response });
+          // console.log({ 'auth update: ': response });
           let userString = localStorage.getItem('user');
           if (userString) {
             let user: User = JSON.parse(userString);
@@ -213,9 +213,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   updateHamburgerStatus(event: MouseEvent) {
-    console.log(event);
+    // console.log(event);
     this.isOpenHamburgerMenu = !this.isOpenHamburgerMenu;
-    console.log(this.isOpenHamburgerMenu);
+    // console.log(this.isOpenHamburgerMenu);
 
     this.headerService.onHamburgerStatusChange(this.isOpenHamburgerMenu, event);
   }
@@ -228,7 +228,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.navBarElementsSubsciption = this.headerService
       .getNavBarElements()
       .subscribe((response) => {
-        console.log(response);
+        // console.log(response);
         this.initialData = response.navBarElement;
         // save the class for the header links to be added as class
         this.numOfLinks = this.numToWord(this.initialData.length);

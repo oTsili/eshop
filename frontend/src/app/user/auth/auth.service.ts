@@ -62,7 +62,7 @@ export class AuthService {
       )
       .pipe(
         map((userData) => {
-          console.log({ userData });
+          // console.log({ userData });
           return userData;
         })
       );
@@ -103,7 +103,7 @@ export class AuthService {
 
   // update the isAuthenticated variable whitout reaching the backend
   onUpdateAuthStatus(status: boolean) {
-    console.log({ status });
+    // console.log({ status });
     this.isAuthenticated$.next(status);
   }
 

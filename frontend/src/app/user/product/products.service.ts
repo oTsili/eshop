@@ -24,7 +24,7 @@ export class ProductsService {
   constructor(private httpClient: HttpClient) {}
 
   getProduct(product_id: string) {
-    console.log({ product_id });
+    // console.log({ product_id });
     let queryParams = new HttpParams().set('product_id', product_id);
 
     return this.httpClient.get<Product>(`${BACKEND_URL}`, {
@@ -60,7 +60,7 @@ export class ProductsService {
       }>(`${BACKEND_URL}/query`, { params: queryParams, withCredentials: true })
       .pipe(
         map((userData) => {
-          console.log({ userData });
+          // console.log({ userData });
           userData.products.forEach((product) => {
             product.id = product._id;
           });
@@ -121,7 +121,7 @@ export class ProductsService {
   }
 
   addChip(chip: Chip) {
-    console.log(this.chipsList);
+    // console.log(this.chipsList);
     if (chip) {
       let chipIndex = this.getChipIndex(chip.key);
       if (chipIndex >= 0) {

@@ -32,22 +32,22 @@ export class EditProductComponent implements OnInit {
       const cart_item_id = params['cart_item_id'];
       this.product_id = params['product_id'];
 
-      console.log(params);
-      console.log(params['cart_item_id']);
+      // console.log(params);
+      // console.log(params['cart_item_id']);
 
       this.cartService.getCartItem(cart_item_id).subscribe({
         next: (response) => {
-          console.log(response);
+          // console.log(response);
           this.cart_item = response;
         },
       });
 
-      // this.productService.getProduct(params['product_id']).subscribe({
-      //   next: (response) => {
-      //     console.log(response);
-      //     this.product = response;
-      //   },
-      // });
+      this.productService.getProduct(params['product_id']).subscribe({
+        next: (response) => {
+          // console.log(response);
+          this.product = response;
+        },
+      });
     });
 
     this.initializeBreadcrumbs();
@@ -57,7 +57,7 @@ export class EditProductComponent implements OnInit {
     // get each intermediate route from the url
     let routes = this.router.url.split('/');
 
-    console.log({ routes });
+    // console.log({ routes });
     // delete the first (which is an empty string)
     routes.shift();
     // ths last route becomes the page header

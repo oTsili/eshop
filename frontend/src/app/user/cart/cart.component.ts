@@ -65,7 +65,7 @@ export class CartComponent implements OnInit, OnDestroy {
       .getAccountListener()
       .subscribe({
         next: (response) => {
-          console.log({ account: response });
+          // console.log({ account: response });
           // this.isAuthenticated = response;
           // get user basic info from the browser's storage
           let userString = localStorage.getItem('user');
@@ -76,7 +76,7 @@ export class CartComponent implements OnInit, OnDestroy {
               // get the account from the db
               this.accountService.getAccount(user.id).subscribe({
                 next: (response) => {
-                  console.log({ myAccount: response });
+                  // console.log({ myAccount: response });
                   this.account = response.account;
 
                   if (this.account && this.account.cart)
@@ -105,7 +105,7 @@ export class CartComponent implements OnInit, OnDestroy {
   deleteCartItem(id) {
     this.cartService.deleteCartItem(id).subscribe({
       next: (response) => {
-        console.log(response);
+        // console.log(response);
         this.accountService.onUpdateAccount();
       },
     });

@@ -15,18 +15,21 @@ import { Product } from '../../product/product.interface';
 })
 export class ProductShowcaseComponent implements OnInit, OnChanges {
   @Input() cart_item: CartItem;
-  product: Product;
+  @Input() product: Product;
 
   constructor() {}
 
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['cart_item'].currentValue) {
+    if (changes['cart_item'] && changes['cart_item'].currentValue) {
       this.cart_item = changes['cart_item'].currentValue;
-      console.log(this.cart_item);
-      this.product = this.cart_item.product;
-      console.log(this.product);
+      // console.log(this.cart_item);
+    }
+
+    if (changes['product'] && changes['product'].currentValue) {
+      this.product = changes['product'].currentValue;
+      // console.log(this.product);
     }
   }
 }
