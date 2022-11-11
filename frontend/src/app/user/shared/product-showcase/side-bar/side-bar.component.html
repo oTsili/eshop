@@ -18,11 +18,68 @@
   </div>
   <div class="row divider"></div>
 
-  <div class="row subheader">
+  <div class="rowX2 subheader">
     {{ "colors" | translate | titlecase }}
   </div>
 
-  <div class="row colors">
-    <img src="{{ image.src }}" *ngFor="let image of similar_products" />
+  <div class="rowX2 colors">
+    <ng-container *ngFor="let single_product of similar_products">
+      <a>
+        <img
+          [routerLink]="'../edit-product'"
+          [queryParams]="{ product_id: single_product._id }"
+          routerLinkActive="active"
+          src="{{ single_product.src }}"
+        />
+      </a>
+    </ng-container>
+  </div>
+
+  <div class="row subheader">
+    {{ "size" | translate | titlecase }}
+  </div>
+
+  <div class="rowX2 sizes">
+    <ng-container *ngFor="let single_product of similar_products">
+      <a
+        class="size-box"
+        *ngIf="
+          similar_products[0].nominal_number!.split('-')[0].slice(0, -2) ===
+          single_product.nominal_number!.split('-')[0].slice(0, -2)
+        "
+      >
+        {{ single_product.nominal_number!.split("-")[0].slice(-2) }}</a
+      >
+    </ng-container>
+  </div>
+
+  <div class="rowX2 subheader">
+    {{ "quantity" | translate | titlecase }}
+  </div>
+
+  <div class="rowX2 quantities">
+    <div class="cart-controls">
+      <span class="icon-control control">
+        <a (click)="decreaseQuantity(cart_item)">
+          <i class="ph-minus"></i>
+        </a>
+      </span>
+      <span class="icon-control">
+        <div class="quantity">{{ cart_item.quantity }}</div>
+      </span>
+      <span class="icon-control control">
+        <a (click)="increaseQuantity(cart_item)">
+          <i class="ph-plus"></i>
+        </a>
+      </span>
+    </div>
+  </div>
+
+  <div class="rowX2 buttons">
+    <div class="button">
+      <button class="button-text">
+        {{ "submit" | translate | titlecase }}
+      </button>
+    </div>
   </div>
 </div>

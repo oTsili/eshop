@@ -73,7 +73,10 @@
                 <span class="icon-control control">
                   <a
                     [routerLink]="['edit-product']"
-                    [queryParams]="{ product_id: item.product._id }"
+                    [queryParams]="{
+                      cart_item_id: item._id,
+                      product_id: item.product._id
+                    }"
                   >
                     <i class="ph-pencil-simple"></i>
                   </a>

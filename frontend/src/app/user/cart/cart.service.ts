@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { CartItem } from '../account/account.interfaces';
 
 const BACKEND_URL = environment.BASE_URL + '/cart';
 
@@ -15,7 +16,7 @@ export class CartService {
   }
 
   getCartItem(id: string) {
-    return this.httpClient.get(`${BACKEND_URL}/${id}`, {
+    return this.httpClient.get<CartItem>(`${BACKEND_URL}/${id}`, {
       withCredentials: true,
     });
   }

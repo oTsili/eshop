@@ -5,6 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { CartItem } from 'src/app/user/account/account.interfaces';
 import { Product } from 'src/app/user/product/product.interface';
 import { environment } from 'src/environments/environment';
 import { SideBarService } from './side-bar.service';
@@ -15,7 +16,8 @@ import { SideBarService } from './side-bar.service';
   styleUrls: ['./side-bar.component.css'],
 })
 export class SideBarComponent implements OnInit, OnChanges {
-  @Input() product: Product;
+  @Input() cart_item: CartItem;
+  product: Product;
   oldPrice: number;
   similar_products: Product[];
   base_url = environment.BASE_URL;
@@ -26,8 +28,9 @@ export class SideBarComponent implements OnInit, OnChanges {
     this.getSimilarProducts();
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['product'].currentValue) {
-      this.product = changes['product'].currentValue;
+    if (changes['cart_item'] && changes['cart_item'].currentValue) {
+      this.cart_item = changes['cart_item'].currentValue;
+      this.product = this.cart_item.product;
       console.log(this.product);
 
       // compute the pre-sales(old) price from the sales percentage
@@ -61,5 +64,15 @@ export class SideBarComponent implements OnInit, OnChanges {
 
   hasSales(sales: string) {
     return parseInt(sales) > 0;
+  }
+
+  increaseQuantity(item: CartItem) {
+    item.quantity++;
+  }
+
+  decreaseQuantity(item: CartItem) {
+    if (item.quantity > 1) {
+      item.quantity--;
+    }
   }
 }

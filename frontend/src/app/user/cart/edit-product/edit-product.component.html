@@ -1,11 +1,11 @@
 <div class="container">
   <!-- START  header upper segment -->
   <div class="header-wrapper">
-    <span class="header">{{ pageHeader | translate }} </span>
+    <span class="header">{{ pageHeader | translate | titlecase }} </span>
   </div>
   <app-breadcrumb [breadcrumbs]="breadcrumbItems"></app-breadcrumb>
   <!-- END header upper segment-->
 
   <!-- START lower segment -->
-  <app-product-showcase [product]="product"></app-product-showcase>
+  <app-product-showcase [cart_item]="cart_item"></app-product-showcase>
 </div>

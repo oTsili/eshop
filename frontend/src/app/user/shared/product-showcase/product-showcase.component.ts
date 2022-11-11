@@ -5,6 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { CartItem } from '../../account/account.interfaces';
 import { Product } from '../../product/product.interface';
 
 @Component({
@@ -13,13 +14,19 @@ import { Product } from '../../product/product.interface';
   styleUrls: ['./product-showcase.component.css'],
 })
 export class ProductShowcaseComponent implements OnInit, OnChanges {
-  @Input() product: Product;
+  @Input() cart_item: CartItem;
+  product: Product;
+
   constructor() {}
 
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.product = changes['product'].currentValue;
-    console.log(this.product);
+    if (changes['cart_item'].currentValue) {
+      this.cart_item = changes['cart_item'].currentValue;
+      console.log(this.cart_item);
+      this.product = this.cart_item.product;
+      console.log(this.product);
+    }
   }
 }

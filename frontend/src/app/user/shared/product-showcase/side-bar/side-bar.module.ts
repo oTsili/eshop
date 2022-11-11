@@ -4,10 +4,12 @@ import { SideBarComponent } from './side-bar.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpLoaderFactory } from '../../loader-factory';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [SideBarComponent],
   imports: [
+    RouterModule,
     CommonModule,
     HttpClientModule,
     TranslateModule.forRoot({

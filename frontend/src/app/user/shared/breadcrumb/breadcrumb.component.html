@@ -10,7 +10,7 @@
       <i class="right chevron icon divider"></i>
     </ng-container>
     <div *ngIf="i === breadcrumbs.length - 1" class="section">
-      {{ breadcrumb.text | translate }}
+      {{ breadcrumb.text | translate | titlecase }}
     </div>
   </ng-container>
 </div>

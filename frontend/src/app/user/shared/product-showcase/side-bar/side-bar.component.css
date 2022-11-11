@@ -2,10 +2,16 @@
   text-align: center;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+  margin-bottom: 5%;
 }
 
 .row {
   margin-top: 5%;
+}
+
+.rowX2 {
+  margin-top: 10%;
 }
 
 .header {
@@ -50,8 +56,71 @@
 .colors img {
   height: 6rem;
   margin-left: 3%;
+  padding: 1%;
 }
 
 .subheader {
   font-size: 1.5rem;
+}
+
+.active {
+  border: 0.1rem solid;
+}
+
+.size-box {
+  border: 0.1rem solid;
+  padding: 0.7rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.cart-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.2rem;
+}
+
+.quantity {
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 0.2px solid black;
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-control {
+  padding: 0 1rem;
+}
+
+button {
+  all: unset;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  border: 0.1rem solid black;
+  /* height: 4.2rem; */
+  /* display: flex; */
+  align-items: center;
+  /* justify-content: center; */
+  /* cursor: pointer; */
+  width: 30rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.button-text {
+  padding: 0.2rem 0;
+}
+
+.button:hover {
+  color: white !important;
+  background-color: black;
 }
