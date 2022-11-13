@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Account, CartItem, Order } from '../account/account.interfaces';
@@ -35,7 +41,45 @@ export class CartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initializeBreadcrumbs();
     this.subscribeToAccountUpdates();
+    console.log(window.paypal);
+
+    window.paypal
+      .Buttons({
+        style: {
+          layout: 'vertical',
+          color: 'gold',
+          shape: 'rect',
+          label: 'paypal',
+        },
+
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [
+              {
+                amount: {
+                  value: '1000',
+                  currency_code: 'USD',
+                },
+              },
+            ],
+          });
+        },
+
+        onApprove: (data, actions) => {
+          return actions.order.capture().then((details) => {
+            alert('Transaction completed');
+          });
+        },
+
+        onError: (error) => {
+          console.log(error);
+        },
+      })
+      .render(this.paypalRef.nativeElement);
   }
+
+  @ViewChild('paypalRef', { static: true }) private paypalRef: ElementRef;
+
   ngOnDestroy(): void {
     this.accountSubscription.unsubscribe();
   }
