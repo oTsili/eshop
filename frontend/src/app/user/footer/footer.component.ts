@@ -57,8 +57,9 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.footerSubscription.unsubscribe();
-    this.changeLanguageSubscription.unsubscribe();
+    if (this.footerSubscription) this.footerSubscription.unsubscribe();
+    if (this.changeLanguageSubscription)
+      this.changeLanguageSubscription.unsubscribe();
   }
 
   getFooterContent() {

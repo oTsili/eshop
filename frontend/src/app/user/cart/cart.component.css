@@ -84,7 +84,7 @@
 .product-description {
   margin-left: 4%;
   white-space: nowrap;
-  font-size: 1.3rem;
+  font-size: 1.7rem;
 }
 
 .wrapper {
@@ -163,4 +163,75 @@ a:hover {
 
 .product-price::before {
   content: "\20AC";
+}
+
+.subtotal {
+  font-size: 1.7rem;
+  color: black;
+  font-weight: 500;
+  position: relative;
+  /* display: flex; */
+  /* justify-content: space-between; */
+}
+
+.subtotal::after {
+  content: "";
+  height: 0.1rem;
+  background-color: #c8c8c8;
+  display: block;
+  margin-top: 5%;
+}
+
+.subtotal-number,
+.total-number {
+  position: absolute;
+  right: 0;
+}
+.subtotal-number::after,
+.total-number::after {
+  content: "\20AC";
+}
+
+.total {
+  position: relative;
+  font-size: 2rem;
+  color: black;
+  font-weight: 600;
+}
+
+.row {
+  margin-top: 5%;
+}
+
+.rowX2 {
+  margin-top: 10%;
+}
+
+.rowX4 {
+  margin-top: 20%;
+}
+
+button {
+  all: unset;
+}
+
+.button {
+  /* margin-top: 1rem; */
+  border: 0.1rem solid black;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.button:hover {
+  color: white !important;
+  background-color: black;
+}
+
+.button-text {
+  padding: 0.2rem 0;
+  font-size: initial;
+  font-weight: 700;
 }

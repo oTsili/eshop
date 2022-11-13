@@ -28,6 +28,9 @@ export class CartComponent implements OnInit, OnDestroy {
   cart: CartItem[];
   isAuthenticated = false;
   account: Account;
+  subtotal: number;
+  total: number;
+  shipping: number;
   // quantity: number;
 
   constructor(
@@ -41,44 +44,44 @@ export class CartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initializeBreadcrumbs();
     this.subscribeToAccountUpdates();
-    console.log(window.paypal);
+    // console.log(window.paypal);
 
-    window.paypal
-      .Buttons({
-        style: {
-          layout: 'vertical',
-          color: 'gold',
-          shape: 'rect',
-          label: 'paypal',
-        },
+    // window.paypal
+    //   .Buttons({
+    //     style: {
+    //       layout: 'vertical',
+    //       color: 'gold',
+    //       shape: 'rect',
+    //       label: 'paypal',
+    //     },
 
-        createOrder: (data, actions) => {
-          return actions.order.create({
-            purchase_units: [
-              {
-                amount: {
-                  value: '1000',
-                  currency_code: 'USD',
-                },
-              },
-            ],
-          });
-        },
+    //     createOrder: (data, actions) => {
+    //       return actions.order.create({
+    //         purchase_units: [
+    //           {
+    //             amount: {
+    //               value: '1000',
+    //               currency_code: 'USD',
+    //             },
+    //           },
+    //         ],
+    //       });
+    //     },
 
-        onApprove: (data, actions) => {
-          return actions.order.capture().then((details) => {
-            alert('Transaction completed');
-          });
-        },
+    //     onApprove: (data, actions) => {
+    //       return actions.order.capture().then((details) => {
+    //         alert('Transaction completed');
+    //       });
+    //     },
 
-        onError: (error) => {
-          console.log(error);
-        },
-      })
-      .render(this.paypalRef.nativeElement);
+    //     onError: (error) => {
+    //       console.log(error);
+    //     },
+    //   })
+    //   .render(this.paypalRef.nativeElement);
   }
 
-  @ViewChild('paypalRef', { static: true }) private paypalRef: ElementRef;
+  // @ViewChild('paypalRef', { static: true }) private paypalRef: ElementRef;
 
   ngOnDestroy(): void {
     this.accountSubscription.unsubscribe();
@@ -120,11 +123,24 @@ export class CartComponent implements OnInit, OnDestroy {
               // get the account from the db
               this.accountService.getAccount(user.id).subscribe({
                 next: (response) => {
-                  // console.log({ myAccount: response });
+                  console.log({ myAccount: response });
                   this.account = response.account;
 
                   if (this.account && this.account.cart)
                     this.cart = this.account.cart;
+
+                  this.subtotal = 0;
+                  for (let cart_product of this.cart) {
+                    this.subtotal +=
+                      cart_product.product.price * cart_product.quantity;
+                  }
+                  console.log(this.subtotal);
+
+                  if (this.shipping) {
+                    this.total = this.shipping + this.subtotal;
+                  } else {
+                    this.total = this.subtotal;
+                  }
                 },
               });
           }

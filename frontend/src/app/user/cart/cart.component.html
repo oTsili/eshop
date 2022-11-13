@@ -101,9 +101,26 @@
         </div>
         <!-- <div class="ui divider"></div> -->
         <app-tax-shipping></app-tax-shipping>
+        <div class="rowX2 subtotal">
+          <span>
+            {{ "subtotal" | translate | titlecase }}
+          </span>
+          <span class="subtotal-number">{{ subtotal }}</span>
+        </div>
+        <div class="rowX2 total">
+          <span>
+            {{ "total" | translate | titlecase }}
+          </span>
+          <span class="total-number">{{ total }}</span>
+        </div>
+        <div class="rowX4 button">
+          <button [routerLink]="['checkout']" type="submit" class="button-text">
+            {{ "checkout" | translate | titlecase }}
+          </button>
+        </div>
       </div>
 
-      <div #paypalRef></div>
+      <!-- <div #paypalRef></div> -->
     </div>
     <!-- END summary container -->
   </div>

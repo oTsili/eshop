@@ -1,0 +1,24 @@
+.spacer {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.ui.menu {
+  font-weight: 500 !important;
+  font-size: 1.32rem !important;
+  border: none !important;
+  font-family: "Source Serif Pro", "Roboto Serif", "Roboto", "Rubik", sans-seri !important;
+}
+
+.ui.menu.upper {
+  box-shadow: 0px 1px 2px 0 #ffffff;
+}
+
+.ui.menu .item {
+  padding: 0.8rem 1.3rem;
+}
+
+.title {
+  cursor: pointer;
+}

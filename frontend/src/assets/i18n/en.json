@@ -125,5 +125,9 @@
   "select colors": "select colors",
   "save": "save",
   "submit": "submit",
-  "edit-product": "edit product"
+  "edit-product": "edit product",
+  "tax and shipping estimation": "shipping and package estimation",
+  "subtotal": "subtotal",
+  "total": "total",
+  "checkout": "checkout"
 }

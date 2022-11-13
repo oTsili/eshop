@@ -19,6 +19,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpLoaderFactory } from './shared/loader-factory';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HeaderSimpleModule } from './header-simple/header-simple.module';
 
 @NgModule({
   declarations: [UserAppComponent],
@@ -27,6 +28,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     UserRoutingModule,
     FooterModule,
     HeaderModule,
+    HeaderSimpleModule,
     HomeModule,
     MatButtonModule,
     FlexLayoutModule,

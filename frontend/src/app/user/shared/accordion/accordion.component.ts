@@ -28,6 +28,8 @@ export class AccordionComponent implements OnInit, OnChanges {
   @ContentChildren(PanelItemDirective)
   items!: QueryList<PanelItemDirective>;
 
+  @Input() customTitle: boolean;
+
   constructor(private accordionService: AccordionService) {}
 
   ngOnInit(): void {
@@ -35,8 +37,13 @@ export class AccordionComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const index = changes['index'].currentValue;
-    this.loadComponent(index);
+    if (changes['index'] && changes['index'].currentValue) {
+      const index = changes['index'].currentValue;
+      this.loadComponent(index);
+    }
+    if (changes['customTitle'] && changes['customTitle'].currentValue) {
+      this.customTitle = changes['customTitle'].currentValue;
+    }
   }
 
   loadComponent(index: number) {

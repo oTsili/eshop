@@ -10,6 +10,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../shared/loader-factory';
 import { CartRoutingModule } from './cart-routing.module';
 import { EditProductModule } from './edit-product/edit-product.module';
+import { CheckoutModule } from './checkout/checkout.module';
 
 @NgModule({
   declarations: [CartComponent],
@@ -19,6 +20,7 @@ import { EditProductModule } from './edit-product/edit-product.module';
     BreadcrumbModule,
     TaxShippingModule,
     ProductModule,
+    CheckoutModule,
     EditProductModule,
     // ngx-translate and the loader module
     HttpClientModule,

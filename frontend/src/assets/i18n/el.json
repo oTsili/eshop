@@ -128,5 +128,9 @@
   "select colors": "επιλέξτε χρώματα",
   "save": "αποθήκευση",
   "submit": "υποβολή",
-  "edit-product": "επεξεργασία προϊόντος"
+  "edit-product": "επεξεργασία προϊόντος",
+  "tax and shipping estimation": "εκτίμηση μεταφορών και φόρων",
+  "subtotal": "υποσύνολο",
+  "total": "σύνολο",
+  "checkout": "ολοκλήρωση αγοράς"
 }

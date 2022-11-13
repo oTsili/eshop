@@ -18,7 +18,11 @@
 <ng-template panelHost></ng-template>
 
 <ng-template #header let-item let-index="index">
-  <div class="title active link" toggleAccordion>
+  <div
+    [ngClass]="{ custom: customTitle }"
+    class="title active link"
+    toggleAccordion
+  >
     <!-- title -->
     <ng-container
       [ngTemplateOutlet]="item.panelHeader.templateRef"

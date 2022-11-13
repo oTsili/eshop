@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 
 const cartRoutes: Routes = [
@@ -18,6 +19,20 @@ const cartRoutes: Routes = [
         {
           label: 'edit-product',
           url: 'edit-product',
+        },
+      ],
+    },
+  },
+  {
+    path: 'checkout',
+    canLoad: [AuthGuard],
+    component: CheckoutComponent,
+    data: {
+      title: 'checkout',
+      breadcrumb: [
+        {
+          label: 'checkout',
+          url: 'checkout',
         },
       ],
     },

@@ -1,10 +1,10 @@
 <!-- Accordion Start -->
 <div class="ui fluid accordion">
-  <app-accordion isCollapsed="false">
+  <app-accordion isCollapsed="false" [customTitle]="true">
     <ng-container *ngFor="let panel of accordionPanels; let i = index">
       <panel-item>
         <ng-template panelHeader>
-          {{ panel.data.header | translate | uppercase }}
+          {{ panel.data.header | translate | titlecase }}
           <!-- {{
             'I will be displayed in the [ngTemplateOutlet]="item.panelHeader.templateRef"'
           }} -->
@@ -13,6 +13,7 @@
           <!-- {{
             'I will be displayed in the [ngTemplateOutlet]="item.panelContent.templateRef"'
           }} -->
+
           <app-form></app-form>
         </ng-template>
       </panel-item>

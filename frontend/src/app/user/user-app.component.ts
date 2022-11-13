@@ -24,13 +24,15 @@ export class UserAppComponent implements OnInit, OnDestroy {
   modalOpen = false;
   mainActive = true;
   modalSubsciption: Subscription;
-  withWarning=false;
+  headerSubscription: Subscription;
+  withWarning = false;
+  header_simple = false;
 
   constructor(
     private userAppService: UserAppService,
     private renderer: Renderer2,
     private translate: TranslateService,
-    private cd: ChangeDetectorRef,
+    private changeDetectorRef: ChangeDetectorRef,
     private signupService: SignupService,
     private loginService: LoginService
   ) {
@@ -47,10 +49,23 @@ export class UserAppComponent implements OnInit, OnDestroy {
         this.withWarning = response;
         this.toggleModal();
       });
+
+    this.headerSubscription = this.userAppService
+      .getHeaderListener()
+      .subscribe({
+        next: (response) => {
+          this.header_simple = response;
+          this.changeDetectorRef.detectChanges();
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
 
   ngOnDestroy(): void {
     this.modalSubsciption.unsubscribe();
+    this.headerSubscription.unsubscribe();
   }
 
   /**
@@ -59,7 +74,7 @@ export class UserAppComponent implements OnInit, OnDestroy {
   toggleModal() {
     this.modalOpen = !this.modalOpen;
 
-    this.cd.detectChanges();
+    this.changeDetectorRef.detectChanges();
   }
   /**
    * toggle between signup and login form in the modal and change

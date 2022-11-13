@@ -14,6 +14,6 @@ export class TaxShippingComponent implements OnInit {
 
   ngOnInit(): void {
     this.accordionPanels = this.taxShippingService.getAccordionPanels();
-    console.log(this.accordionPanels);
+    // console.log(this.accordionPanels);
   }
 }
