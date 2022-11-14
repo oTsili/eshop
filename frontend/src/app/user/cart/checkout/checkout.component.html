@@ -1,1 +1,111 @@
-lala
+<div class="container">
+  <!-- START  header upper segment -->
+  <div class="header-wrapper">
+    <span class="header">{{ pageHeader | translate | titlecase }} </span>
+  </div>
+  <app-breadcrumb [breadcrumbs]="breadcrumbItems"></app-breadcrumb>
+  <form>
+    <div class="boxes-container">
+      <div class="form-wrapper">
+        <div class="personal-info-wrapper">
+          <div class="personal-info-container">
+            <h3 class="ui header">
+              {{ "shipping address" | translate | titlecase }}
+            </h3>
+            <div class="two fields">
+              <div class="ui input">
+                <input
+                  type="text"
+                  placeholder="{{ 'first name' | translate | titlecase }}"
+                />
+              </div>
+
+              <div class="ui input">
+                <input
+                  type="text"
+                  placeholder="{{ 'last name' | translate | titlecase }}"
+                />
+              </div>
+            </div>
+            <div class="two fields">
+              <div class="ui input">
+                <input
+                  type="text"
+                  placeholder="{{ 'company name' | translate | titlecase }}"
+                />
+              </div>
+
+              <div class="ui input">
+                <input
+                  type="text"
+                  placeholder="{{ 'address' | translate | titlecase }}"
+                />
+              </div>
+            </div>
+            <div class="two fields">
+              <div class="ui input">
+                <input
+                  type="text"
+                  placeholder="{{ 'city' | translate | titlecase }}"
+                />
+              </div>
+
+              <div class="ui input">
+                <input
+                  type="text"
+                  placeholder="{{ 'state' | translate | titlecase }}"
+                />
+              </div>
+            </div>
+            <div class="two fields">
+              <div class="ui input">
+                <input
+                  type="text"
+                  placeholder="{{ 'postal code' | translate | titlecase }}"
+                />
+              </div>
+
+              <div class="ui input">
+                <input
+                  type="text"
+                  placeholder="{{ 'country' | translate | titlecase }}"
+                />
+              </div>
+            </div>
+            <div class="two fields">
+              <div class="ui input">
+                <input
+                  type="text"
+                  placeholder="{{ 'phone number' | translate | titlecase }}"
+                />
+              </div>
+
+              <div class="ui input">
+                <input
+                  type="text"
+                  placeholder="{{ 'fax' | translate | titlecase }}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shipping-wrapper">
+          <div class="shipping-container">
+            <h3 class="ui header">
+              {{ "shipping method" | translate | titlecase }}
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="summary-external-wrapper">
+        <div class="summary-wrapper">
+          <div class="summary-container">
+            <h3 class="ui header">
+              {{ "summary" | translate | titlecase }}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

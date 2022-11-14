@@ -1,0 +1,76 @@
+.header-wrapper {
+  position: relative;
+  text-align: center;
+  padding: 1.5rem 0;
+  margin: 1rem 0;
+}
+
+.header {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.header-wrapper > .header::after {
+  content: "";
+  width: 20rem;
+  height: 0.1rem;
+  background-color: #c8c8c8;
+  display: block;
+  transform: translate(-50%);
+  position: absolute;
+  left: 50%;
+  margin-top: 0.3%;
+}
+
+.form-wrapper {
+  margin: 5% 1% auto auto;
+  width: 49%;
+}
+
+.ui.input {
+  width: 48%;
+  margin: 1%;
+}
+
+.personal-info-wrapper {
+  border: 0.1rem solid;
+}
+
+.personal-info-container {
+  margin: 3%;
+}
+
+.shipping-wrapper {
+  margin-top: 4%;
+  border: 0.1rem solid;
+}
+
+.shipping-container {
+  margin: 3%;
+}
+
+.ui.input > input {
+  border-radius: unset;
+}
+
+form {
+  font-size: 1.2rem;
+}
+
+.summary-external-wrapper {
+  margin: 5% 1% auto auto;
+  width: 49%;
+}
+
+.summary-wrapper {
+  border: 0.1rem solid;
+}
+
+.summary-container {
+  margin: 3%;
+}
+.boxes-container {
+  display: flex;
+}
+
+
