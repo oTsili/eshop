@@ -1,7 +1,7 @@
 <div class="container">
   <!-- START  header upper segment -->
   <div class="header-wrapper">
-    <span class="header">{{ pageHeader | translate }} </span>
+    <span class="header">{{ pageHeader | translate | titlecase }} </span>
   </div>
   <app-breadcrumb [breadcrumbs]="breadcrumbItems"></app-breadcrumb>
   <!-- END header upper segment-->

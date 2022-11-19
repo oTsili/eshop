@@ -1,0 +1,80 @@
+.summary-external-wrapper {
+  margin: 2% 1% auto auto;
+  width: 49%;
+}
+
+.form-wrapper {
+  margin: 2% 1% auto auto;
+  width: 49%;
+}
+
+.ui.input {
+  width: 48%;
+  margin: 1%;
+}
+
+.personal-info-wrapper {
+  border: 0.1rem solid;
+}
+.personal-info-container {
+  margin: 3%;
+}
+.shipping-wrapper {
+  margin-top: 4%;
+  border: 0.1rem solid;
+}
+
+.shipping-container {
+  margin: 3%;
+}
+
+.ui.input > input {
+  border-radius: unset;
+}
+
+form {
+  font-size: 1.2rem;
+}
+
+.summary-wrapper {
+  border: 0.1rem solid;
+}
+
+.summary-container {
+  margin: 3%;
+}
+.boxes-container {
+  display: flex;
+}
+
+button {
+  all: unset;
+}
+
+.button {
+  /* margin-top: 1rem; */
+  border: 0.1rem solid black;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 35%;
+}
+
+.button:hover {
+  color: white !important;
+  background-color: black;
+}
+
+.button-text {
+  padding: 0.2rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 3%;
+}

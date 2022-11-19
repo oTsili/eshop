@@ -129,5 +129,9 @@
   "tax and shipping estimation": "shipping and package estimation",
   "subtotal": "subtotal",
   "total": "total",
-  "checkout": "checkout"
+  "checkout": "checkout",
+  "next step": "next step",
+  "back to cart": "back to cart",
+  "shipping": "shipping",
+  "shipping address": "shipping address"
 }

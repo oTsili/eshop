@@ -14,6 +14,7 @@ import { User } from '../header/signup/signup.interfaces';
 import { PanelItem } from '../shared/accordion/host-panel/host-panel-item.class';
 import { Breadcrumb } from '../shared/breadcrumb/breadcrumb.interfaces';
 import { BreadcrumbService } from '../shared/breadcrumb/breadcrumb.service';
+import { UserAppService } from '../user-app.service';
 import { CartService } from './cart.service';
 
 @Component({
@@ -38,12 +39,14 @@ export class CartComponent implements OnInit, OnDestroy {
     private breadcrumbService: BreadcrumbService,
     private cartService: CartService,
     private authService: AuthService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private userAppService: UserAppService
   ) {}
 
   ngOnInit(): void {
     this.initializeBreadcrumbs();
     this.subscribeToAccountUpdates();
+    this.userAppService.onDisableHeaderAndFooter(false);
     // console.log(window.paypal);
 
     // window.paypal

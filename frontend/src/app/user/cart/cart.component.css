@@ -140,10 +140,6 @@
   padding: 0 1rem;
 }
 
-button {
-  all: unset;
-}
-
 a {
   color: #555;
   opacity: 1;

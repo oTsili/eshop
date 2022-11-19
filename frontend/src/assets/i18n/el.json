@@ -132,5 +132,9 @@
   "tax and shipping estimation": "εκτίμηση μεταφορών και φόρων",
   "subtotal": "υποσύνολο",
   "total": "σύνολο",
-  "checkout": "ολοκλήρωση αγοράς"
+  "checkout": "Ολοκλήρωση Αγοράς",
+  "next step": "επόμενο βήμα",
+  "back to cart": "πίσω στο καλάθι",
+  "shipping": "αποστολή",
+  "shipping address": "διεύθυνση αποστολής"
 }
