@@ -1,0 +1,32 @@
+<form>
+  <div class="boxes-container">
+    <div class="form-wrapper">
+      <div class="billing-wrapper">
+        <div class="billing-container">
+          <h3 class="ui header">
+            {{ "billing method" | translate | titlecase }}
+          </h3>
+          <div class="paypal-buttons-wrapper">
+            <div class="paypal-buttons" #paypalRef></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="summary-external-wrapper">
+      <div class="summary-wrapper">
+        <div class="summary-container">
+          <h3 class="ui header">
+            {{ "summary" }}
+          </h3>
+        </div>
+      </div>
+      <div class="button-wrapper">
+        <div class="rowX4 button">
+          <button [routerLink]="['../..']" type="submit" class="button-text">
+            {{ "back to cart" }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

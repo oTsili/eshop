@@ -136,5 +136,16 @@
   "next step": "επόμενο βήμα",
   "back to cart": "πίσω στο καλάθι",
   "shipping": "αποστολή",
-  "shipping address": "διεύθυνση αποστολής"
+  "billing": "πληρωμή",
+  "shipping address": "διεύθυνση αποστολής",
+  "shipping method": "τρόπος αποστολής",
+  "billing method": "τρόπος πληρωμής",
+  "company name": "ονομασία επιχείρησης",
+  "address": "διεύθυνση",
+  "city": "πόλη",
+  "state": "περιφέρεια",
+  "postal code": "ταχυδρομικός κώδικας",
+  "country": "χώρα",
+  "phone number": "αριθμός τηλεφώνου",
+  "fax": "αριθμός φάξ"
 }

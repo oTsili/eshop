@@ -133,5 +133,7 @@
   "next step": "next step",
   "back to cart": "back to cart",
   "shipping": "shipping",
-  "shipping address": "shipping address"
+  "shipping address": "shipping address",
+  "shipping method": "shipping method",
+  "billing method": "billing method"
 }

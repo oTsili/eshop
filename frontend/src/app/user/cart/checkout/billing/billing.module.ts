@@ -1,12 +1,24 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from 'src/app/user/shared/loader-factory';
 import { BillingComponent } from './billing.component';
 
 @NgModule({
   declarations: [BillingComponent],
   imports: [
     CommonModule,
+    // ngx-translate and the loader module
+    HttpClientModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     RouterModule.forChild([
       {
         path: '',

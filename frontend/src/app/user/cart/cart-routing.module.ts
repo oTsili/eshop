@@ -10,10 +10,6 @@ const cartRoutes: Routes = [
     path: 'edit-product',
     canLoad: [AuthGuard],
     component: EditProductComponent,
-    // loadChildren: () =>
-    //   import('./edit-product/edit-product.module').then(
-    //     (m) => m.EditProductModule
-    //   ),
     data: {
       title: 'edit-product',
       breadcrumb: [
@@ -27,21 +23,16 @@ const cartRoutes: Routes = [
   {
     path: 'checkout',
     loadChildren: () => CheckoutModule,
+    data: {
+      title: 'checkout',
+      breadcrumb: [
+        {
+          label: 'checkout',
+          url: 'checkout',
+        },
+      ],
+    },
   },
-  // {
-  //   path: 'checkout',
-  //   canLoad: [AuthGuard],
-  //   component: CheckoutComponent,
-  //   data: {
-  //     title: 'checkout',
-  //     breadcrumb: [
-  //       {
-  //         label: 'checkout',
-  //         url: 'checkout',
-  //       },
-  //     ],
-  //   },
-  // },
 ];
 
 @NgModule({

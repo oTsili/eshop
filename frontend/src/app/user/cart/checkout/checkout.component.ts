@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import { Breadcrumb } from '../../shared/breadcrumb/breadcrumb.interfaces';
 import { BreadcrumbService } from '../../shared/breadcrumb/breadcrumb.service';
 import { UserAppService } from '../../user-app.service';
+import { CheckoutService } from './checkout.service';
 
 @Component({
   selector: 'app-checkout',
@@ -12,15 +13,52 @@ import { UserAppService } from '../../user-app.service';
 export class CheckoutComponent implements OnInit {
   pageHeader: string;
   breadcrumbItems: Breadcrumb[];
+  active_route: string;
+
   constructor(
     private userAppService: UserAppService,
     private router: Router,
-    private breadcrumbService: BreadcrumbService
+    private activatedRoute: ActivatedRoute,
+    private breadcrumbService: BreadcrumbService,
+    private checkoutService: CheckoutService
   ) {}
 
   ngOnInit(): void {
     this.userAppService.onDisableHeaderAndFooter(true);
     this.initializeBreadcrumbs();
+
+    this.checkoutService.getRouterOutletListener().subscribe({
+      next: (response) => {
+        this.getActiveRoute(response);
+      },
+    });
+
+    // this.activatedRoute.url.subscribe((url) => {
+    //   console.log(url);
+    //   console.log(
+    //     this.activatedRoute.firstChild?.data.subscribe((data: Data) => {
+    //       console.log(data);
+    //     })
+    //   );
+    // });
+
+    // this.activatedRoute.firstChild?.data.subscribe((data: Data) => {
+    //   console.log(data);
+    //   this.active_route = data['title'];
+    // });
+
+    // console.log(this.activatedRoute);
+
+    this.getActiveRoute();
+  }
+
+  getActiveRoute(activateRoute?: string) {
+    const routes = this.router.url.split('/');
+    if (!activateRoute) {
+      this.active_route = routes[routes.length - 1];
+    } else {
+      this.active_route = activateRoute;
+    }
   }
 
   initializeBreadcrumbs() {

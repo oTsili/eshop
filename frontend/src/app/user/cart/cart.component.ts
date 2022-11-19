@@ -47,44 +47,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.initializeBreadcrumbs();
     this.subscribeToAccountUpdates();
     this.userAppService.onDisableHeaderAndFooter(false);
-    // console.log(window.paypal);
-
-    // window.paypal
-    //   .Buttons({
-    //     style: {
-    //       layout: 'vertical',
-    //       color: 'gold',
-    //       shape: 'rect',
-    //       label: 'paypal',
-    //     },
-
-    //     createOrder: (data, actions) => {
-    //       return actions.order.create({
-    //         purchase_units: [
-    //           {
-    //             amount: {
-    //               value: '1000',
-    //               currency_code: 'USD',
-    //             },
-    //           },
-    //         ],
-    //       });
-    //     },
-
-    //     onApprove: (data, actions) => {
-    //       return actions.order.capture().then((details) => {
-    //         alert('Transaction completed');
-    //       });
-    //     },
-
-    //     onError: (error) => {
-    //       console.log(error);
-    //     },
-    //   })
-    //   .render(this.paypalRef.nativeElement);
   }
-
-  // @ViewChild('paypalRef', { static: true }) private paypalRef: ElementRef;
 
   ngOnDestroy(): void {
     this.accountSubscription.unsubscribe();

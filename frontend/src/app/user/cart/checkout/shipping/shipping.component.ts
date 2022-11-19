@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CheckoutService } from '../checkout.service';
 
 @Component({
   selector: 'app-shipping',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shipping.component.scss'],
 })
 export class ShippingComponent implements OnInit {
-  constructor() {}
+  constructor(private checkoutService: CheckoutService) {}
 
   ngOnInit(): void {}
+
+  triggerRouterOutletActivate(activeRoute: string) {
+    this.checkoutService.onRouterOutletUpdate(activeRoute);
+  }
 }

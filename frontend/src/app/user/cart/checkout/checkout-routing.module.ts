@@ -15,11 +15,29 @@ const checkoutRoutes: Routes = [
       {
         path: 'shipping',
         loadChildren: () => ShippingModule,
+        data: {
+          title: 'shipping',
+          breadcrumb: [
+            {
+              label: 'shipping',
+              url: 'shipping',
+            },
+          ],
+        },
         // component: ShippingComponent,
       },
       {
         path: 'billing',
         loadChildren: () => BillingModule,
+        data: {
+          title: 'billing',
+          breadcrumb: [
+            {
+              label: 'billing',
+              url: 'billing',
+            },
+          ],
+        },
       },
     ],
   },

@@ -6,24 +6,18 @@
   <app-breadcrumb [breadcrumbs]="breadcrumbItems"></app-breadcrumb>
   <div class="steps-wrapper">
     <div class="ui large steps">
-      <div class="active step">
+      <div [ngClass]="{ disabled: active_route !== 'shipping' }" class="step">
         <i class="truck icon"></i>
         <div class="content">
-          <div class="title">Shipping</div>
+          <div class="title">{{ "shipping" | translate | titlecase }}</div>
           <div class="description">Choose your shipping options</div>
         </div>
       </div>
-      <div class="step">
+      <div [ngClass]="{ disabled: active_route !== 'billing' }" class="step">
         <i class="payment icon"></i>
         <div class="content">
-          <div class="title">Billing</div>
+          <div class="title">{{ "billing" | translate | titlecase }}</div>
           <div class="description">Enter billing information</div>
-        </div>
-      </div>
-      <div class="disabled step">
-        <i class="info icon"></i>
-        <div class="content">
-          <div class="title">Confirm Order</div>
         </div>
       </div>
     </div>
