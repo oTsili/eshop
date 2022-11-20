@@ -1,0 +1,23 @@
+<!-- Accordion Start -->
+<div class="ui fluid accordion">
+  <app-accordion isCollapsed="false" [customTitle]="true">
+    <ng-container *ngFor="let panel of accordionPanels; let i = index">
+      <panel-item>
+        <ng-template panelHeader>
+          {{ panel.data.header | translate | titlecase }}
+          <!-- {{
+            'I will be displayed in the [ngTemplateOutlet]="item.panelHeader.templateRef"'
+          }} -->
+        </ng-template>
+        <ng-template panelContent>
+          <!-- {{
+            'I will be displayed in the [ngTemplateOutlet]="item.panelContent.templateRef"'
+          }} -->
+
+          <app-order-summary [cart]="cart"></app-order-summary>
+        </ng-template>
+      </panel-item>
+    </ng-container>
+  </app-accordion>
+</div>
+<!-- Accordion End -->

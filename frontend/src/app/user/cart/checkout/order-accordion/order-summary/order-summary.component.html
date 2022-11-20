@@ -1,0 +1,50 @@
+<table class="ui table">
+  <thead>
+    <tr>
+      <th class="one wide"></th>
+      <th class="one wide"></th>
+      <th class="one wide"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of cart; let i = index">
+      <td class="col">
+        <div class="wrapper">
+          <div class="product main-product">
+            <app-product
+              img_container_width="11rem"
+              img_height="16.5rem"
+              img_width="100%"
+              [product]="item.product"
+              [source]="item.product.src"
+            ></app-product>
+          </div>
+          <div class="product hover-product">
+            <app-product
+              img_container_width="11rem"
+              img_height="16.5rem"
+              img_width="100%"
+              [product]="item.product"
+              [source]="item.product.altSrc"
+            ></app-product>
+          </div>
+        </div>
+      </td>
+
+      <td class="one wide">
+        <div class="product-description">
+          {{ item.product.name | translate }}
+        </div>
+        <div class="product-nominal-number">
+          {{ item.product.nominal_number }}
+        </div>
+      </td>
+
+      <td class="one wide">
+        <div class="product-price product-price-new">
+          {{ item.product.price | translate }}
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
