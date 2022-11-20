@@ -1,6 +1,6 @@
 <div class="container">
   <!-- START search header UPPER DIVISION -->
-  <div class="header-wrapper">
+  <div class="header-wrapper" *ngIf="searchQuery">
     <span class="header">
       {{ page.header | translate }} "{{ searchQuery | translate | uppercase }}"
     </span>

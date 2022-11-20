@@ -3,8 +3,10 @@ import {
   Component,
   ElementRef,
   OnInit,
+  Renderer2,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { Account, CartItem } from 'src/app/user/account/account.interfaces';
 import { AccountService } from 'src/app/user/account/account.service';
 import { User } from 'src/app/user/header/signup/signup.interfaces';
@@ -21,8 +23,14 @@ export class BillingComponent implements AfterViewInit, OnInit {
   total: number;
   shipping: number;
   cart: CartItem[];
+  isVisible = false;
 
-  constructor(private accountService: AccountService) {}
+  constructor(
+    private accountService: AccountService,
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    private router: Router
+  ) {}
 
   ngAfterViewInit(): void {
     console.log(window.paypal);
@@ -49,7 +57,9 @@ export class BillingComponent implements AfterViewInit, OnInit {
         },
         onApprove: (data, actions) => {
           return actions.order.capture().then((details) => {
-            alert('Transaction completed');
+            // alert('Transaction completed');
+            this.isVisible = true;
+            this.router.navigate(['/home/search']);
           });
         },
         onError: (error) => {
@@ -94,5 +104,11 @@ export class BillingComponent implements AfterViewInit, OnInit {
           },
         });
     }
+  }
+
+  closeInfoMessage() {
+    const infoMessage =
+      this.elementRef.nativeElement.querySelector('.info.message');
+    this.renderer.setStyle(infoMessage, 'display', 'none');
   }
 }

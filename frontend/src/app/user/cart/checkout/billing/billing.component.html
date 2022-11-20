@@ -1,3 +1,18 @@
+<!-- START success PAYMENT message -->
+<div [ngClass]="{ visible: isVisible }" class="ui info message row">
+  <div class="info-message-container">
+    <div class="x-icon-container">
+      <a (click)="closeInfoMessage()">
+        <i class="close icon"></i>
+      </a>
+    </div>
+    <div class="header">
+      {{ "payment completed!" | translate | titlecase }}
+    </div>
+    <p class="info-text">You can continue shopping.</p>
+  </div>
+</div>
+<!-- END success PAYMENT message -->
 <form>
   <div class="boxes-container">
     <div class="form-wrapper">

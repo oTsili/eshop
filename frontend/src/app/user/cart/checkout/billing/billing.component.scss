@@ -127,13 +127,52 @@ button {
 }
 
 .row {
-  margin-top: 5%;
+  margin-top: 5% !important;
 }
 
 .rowX2 {
-  margin-top: 10%;
+  margin-top: 10% !important;
 }
 
 .rowX4 {
-  margin-top: 20%;
+  margin-top: 20% !important;
+}
+
+.visible {
+  display: block;
+}
+
+.info.message {
+  display: none;
+  color: #276f86;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: center;
+  .info-message-container {
+    display: flex;
+    flex-direction: column;
+    .header {
+      text-align: center;
+      margin-bottom: 1%;
+    }
+    .info-text {
+      font-size: 1.3rem;
+      padding-bottom: 3%;
+    }
+    .x-icon-container {
+      display: flex;
+      justify-content: right;
+      margin-bottom: 1%;
+    }
+
+    a,
+    a:hover,
+    a:visited,
+    a:link,
+    a:active {
+      text-decoration: none;
+      color: #276f86 !important;
+      cursor: pointer;
+    }
+  }
 }

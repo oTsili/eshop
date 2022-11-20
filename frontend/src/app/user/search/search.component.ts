@@ -28,6 +28,7 @@ import { AccountService } from '../account/account.service';
 import { User } from '../header/signup/signup.interfaces';
 import { Account } from '../account/account.interfaces';
 import { AuthService } from '../auth/auth.service';
+import { UserAppService } from '../user-app.service';
 
 @Component({
   selector: 'app-search',
@@ -78,7 +79,8 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     private accountService: AccountService,
     private authService: AuthService,
     private breadcrumbService: BreadcrumbService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userAppService: UserAppService
   ) {
     translate.setTranslation('en', defaultLanguage);
     translate.setTranslation('el', greekLanguage);
@@ -146,6 +148,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
         console.log('products update');
         this.getProducts(response.queryParams);
       });
+    this.userAppService.onDisableHeaderAndFooter(false);
   }
 
   ngOnDestroy(): void {
