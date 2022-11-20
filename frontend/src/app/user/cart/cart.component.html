@@ -113,8 +113,8 @@
           </span>
           <span class="total-number">{{ total }}</span>
         </div>
-        <div class="rowX4 button">
-          <button [routerLink]="['checkout']" type="submit" class="button-text">
+        <div class="rowX4 button" [routerLink]="['checkout']">
+          <button type="submit" class="button-text">
             {{ "checkout" | translate | titlecase }}
           </button>
         </div>

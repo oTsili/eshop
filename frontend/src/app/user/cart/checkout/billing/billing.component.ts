@@ -90,21 +90,16 @@ export class BillingComponent implements AfterViewInit, OnInit {
         // get the account from the db
         this.accountService.getAccount(user.id).subscribe({
           next: (response) => {
-            console.log({ myAccount: response });
             this.account = response.account;
 
             if (this.account && this.account.cart)
               this.cart = this.account.cart;
-            console.log(this.cart);
-
-            // this.test();
 
             this.subtotal = 0;
             for (let cart_product of this.cart) {
               this.subtotal +=
                 cart_product.product.price * cart_product.quantity;
             }
-            console.log(this.subtotal);
 
             if (this.shipping) {
               this.total = this.shipping + this.subtotal;
@@ -125,7 +120,6 @@ export class BillingComponent implements AfterViewInit, OnInit {
   deleteFromWhishlist(id: string) {
     this.whishlistService.deleteWhishlistItem(id).subscribe({
       next: (response) => {
-        console.log({ response });
         this.accountService.onUpdateAccount();
       },
     });
@@ -134,7 +128,6 @@ export class BillingComponent implements AfterViewInit, OnInit {
   deleteFromCart(id: string) {
     this.cartService.deleteCartItem(id).subscribe({
       next: (response) => {
-        // console.log(response);
         this.accountService.onUpdateAccount();
       },
     });

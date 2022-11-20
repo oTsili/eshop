@@ -91,13 +91,12 @@
         </div>
       </div>
       <div class="button-wrapper">
-        <div class="rowX4 button">
-          <button
-            (click)="triggerRouterOutletActivate('billing')"
-            routerLink="../billing"
-            type="button"
-            class="button-text"
-          >
+        <div
+          class="rowX4 button"
+          (click)="triggerRouterOutletActivate('billing')"
+          routerLink="../billing"
+        >
+          <button type="button" class="button-text">
             {{ "next step" | translate | titlecase }}
           </button>
         </div>
@@ -113,8 +112,8 @@
         </div>
       </div>
       <div class="button-wrapper">
-        <div class="rowX4 button">
-          <button [routerLink]="['../..']" type="submit" class="button-text">
+        <div class="rowX4 button" [routerLink]="['../..']">
+          <button type="button" class="button-text">
             {{ "back to cart" | translate | titlecase }}
           </button>
         </div>
