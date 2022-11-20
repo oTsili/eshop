@@ -9,7 +9,9 @@ import {
 import { Router } from '@angular/router';
 import { Account, CartItem } from 'src/app/user/account/account.interfaces';
 import { AccountService } from 'src/app/user/account/account.service';
+import { WhishlistService } from 'src/app/user/account/wishlist/whishlist.service';
 import { User } from 'src/app/user/header/signup/signup.interfaces';
+import { CartService } from '../../cart.service';
 
 @Component({
   selector: 'app-billing',
@@ -27,6 +29,8 @@ export class BillingComponent implements AfterViewInit, OnInit {
 
   constructor(
     private accountService: AccountService,
+    private whishlistService: WhishlistService,
+    private cartService: CartService,
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private router: Router
@@ -59,6 +63,9 @@ export class BillingComponent implements AfterViewInit, OnInit {
           return actions.order.capture().then((details) => {
             // alert('Transaction completed');
             this.isVisible = true;
+
+            this.deleteFromWhishlistAndCart();
+
             this.router.navigate(['/home/search']);
           });
         },
@@ -88,6 +95,9 @@ export class BillingComponent implements AfterViewInit, OnInit {
 
             if (this.account && this.account.cart)
               this.cart = this.account.cart;
+            console.log(this.cart);
+
+            // this.test();
 
             this.subtotal = 0;
             for (let cart_product of this.cart) {
@@ -110,5 +120,35 @@ export class BillingComponent implements AfterViewInit, OnInit {
     const infoMessage =
       this.elementRef.nativeElement.querySelector('.info.message');
     this.renderer.setStyle(infoMessage, 'display', 'none');
+  }
+
+  deleteFromWhishlist(id: string) {
+    this.whishlistService.deleteWhishlistItem(id).subscribe({
+      next: (response) => {
+        console.log({ response });
+        this.accountService.onUpdateAccount();
+      },
+    });
+  }
+
+  deleteFromCart(id: string) {
+    this.cartService.deleteCartItem(id).subscribe({
+      next: (response) => {
+        // console.log(response);
+        this.accountService.onUpdateAccount();
+      },
+    });
+  }
+
+  deleteFromWhishlistAndCart() {
+    if (this.account.whishlist && this.account.cart)
+      for (let whishlistItem of this.account.whishlist) {
+        for (let cartItem of this.account.cart) {
+          if (cartItem.product._id === whishlistItem.product._id) {
+            if (cartItem._id) this.deleteFromCart(cartItem._id);
+            if (whishlistItem._id) this.deleteFromWhishlist(whishlistItem._id);
+          }
+        }
+      }
   }
 }
