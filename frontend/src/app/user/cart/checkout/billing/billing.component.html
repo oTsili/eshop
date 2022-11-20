@@ -15,9 +15,22 @@
     <div class="summary-external-wrapper">
       <div class="summary-wrapper">
         <div class="summary-container">
-          <h3 class="ui header">
+          <!-- <h3 class="ui header">
             {{ "summary" }}
-          </h3>
+          </h3> -->
+          <app-order-accordion [cart]="cart"></app-order-accordion>
+          <div class="rowX2 subtotal">
+            <span>
+              {{ "subtotal" | translate | titlecase }}
+            </span>
+            <span class="subtotal-number">{{ subtotal }}</span>
+          </div>
+          <div class="rowX2 total">
+            <span>
+              {{ "total" | translate | titlecase }}
+            </span>
+            <span class="total-number">{{ total }}</span>
+          </div>
         </div>
       </div>
       <div class="button-wrapper">

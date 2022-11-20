@@ -106,9 +106,10 @@
     <div class="summary-external-wrapper">
       <div class="summary-wrapper">
         <div class="summary-container">
-          <h3 class="ui header">
+          <!-- <h3 class="ui header">
             {{ "summary" | translate | titlecase }}
-          </h3>
+          </h3> -->
+          <app-order-accordion [cart]="cart"></app-order-accordion>
         </div>
       </div>
       <div class="button-wrapper">

@@ -5,12 +5,13 @@ import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/user/shared/loader-factory';
+import { OrderAccordionModule } from '../order-accordion/order-accordion.module';
 
 @NgModule({
   declarations: [ShippingComponent],
   imports: [
     CommonModule,
-
+    OrderAccordionModule,
     // RouterModule,
     RouterModule.forChild([
       {

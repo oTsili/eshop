@@ -91,3 +91,49 @@ button {
 .paypal-button.paypal-button-shape-rect {
   border-radius: unset;
 }
+
+.subtotal {
+  font-size: 1.7rem;
+  color: black;
+  font-weight: 500;
+  position: relative;
+  /* display: flex; */
+  /* justify-content: space-between; */
+}
+
+.subtotal::after {
+  content: "";
+  height: 0.1rem;
+  background-color: #c8c8c8;
+  display: block;
+  margin-top: 5%;
+}
+
+.subtotal-number,
+.total-number {
+  position: absolute;
+  right: 0;
+}
+.subtotal-number::after,
+.total-number::after {
+  content: "\20AC";
+}
+
+.total {
+  position: relative;
+  font-size: 2rem;
+  color: black;
+  font-weight: 600;
+}
+
+.row {
+  margin-top: 5%;
+}
+
+.rowX2 {
+  margin-top: 10%;
+}
+
+.rowX4 {
+  margin-top: 20%;
+}
