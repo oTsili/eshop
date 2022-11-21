@@ -19,6 +19,6 @@ export class OrderSummaryComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.cart = changes['cart'].currentValue;
-    console.log(this.cart);
+    // console.log(this.cart);
   }
 }

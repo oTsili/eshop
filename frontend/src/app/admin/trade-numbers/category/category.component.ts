@@ -38,12 +38,12 @@ export class CategoryComponent implements OnInit {
   }
 
   loadComponent() {
-    console.log(this.category);
+    // console.log(this.category);
     // get the next component
     const tableRowItem = this.tradeNumbersService.getTableRow(
       this.category_style
     );
-    console.log({ tableRowItem });
+    // console.log({ tableRowItem });
     //get the container where to insert the new component (it is the viewContainerRef of the NewsDirective with the newsHost as its selector)
     const viewContainerRef = this.tableRowHost.viewContainerRef;
 

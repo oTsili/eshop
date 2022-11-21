@@ -24,7 +24,7 @@ export class DropdownMenuOpenCloseDirective implements OnInit {
 
   @HostListener('mouseover', ['$event'])
   enableDisplay(event: MouseEvent) {
-    console.log('menuOpen');
+    // console.log('menuOpen');
     this.renderer.addClass(this.element, 'active');
     this.renderer.addClass(this.element, 'visible');
 

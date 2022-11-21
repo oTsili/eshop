@@ -55,7 +55,7 @@ export class ProductFormComponent
   }
 
   ngOnInit(): void {
-    console.log(this.elementRef.nativeElement);
+    // console.log(this.elementRef.nativeElement);
     this.getTradeNumbers();
     this.getSuppliers();
 
@@ -278,11 +278,11 @@ export class ProductFormComponent
       images,
     };
 
-    console.log({ product });
+    // console.log({ product });
 
     this.productFormService.submitProductForm(product).subscribe({
       next: (response) => {
-        console.log(response);
+        // console.log(response);
 
         this.clearDragAndDropImages.emit();
         // clear the input text fields

@@ -80,7 +80,7 @@ export class CatalogDetailsComponent implements OnInit, OnChanges {
 
           this.catalogDetailsService.addtoWhishlist(whishlistItem).subscribe({
             next: (response) => {
-              console.log({ addWhishlist: response });
+              // console.log({ addWhishlist: response });
               this.accountService.onUpdateAccount();
               this.isAddedToWhishlist = true;
             },

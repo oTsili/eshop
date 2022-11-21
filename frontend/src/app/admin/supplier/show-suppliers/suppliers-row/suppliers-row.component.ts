@@ -43,7 +43,7 @@ export class SuppliersRowComponent {
     if (_id)
       this.suppliersService.updateRow(_id, supplier).subscribe({
         next: (respnse) => {
-          console.log(respnse);
+          // console.log(respnse);
         },
       });
   }
@@ -52,7 +52,7 @@ export class SuppliersRowComponent {
     if (id)
       this.suppliersService.deleteRow(id).subscribe({
         next: (response) => {
-          console.log(response);
+          // console.log(response);
           this.elementRef.nativeElement.remove();
         },
       });

@@ -9,20 +9,6 @@ export class TaxShippingService {
     return [
       new PanelItem(FormComponent, {
         header: 'tax and shipping estimation',
-        // elementList: [
-        //   { text: 'red' },
-        //   { text: 'blue' },
-        //   { text: 'green' },
-        //   { text: 'white' },
-        //   { text: 'beige' },
-        //   { text: 'brown' },
-        //   { text: 'yellow' },
-        //   { text: 'pink' },
-        //   { text: 'mocha' },
-        //   { text: 'purple' },
-        //   { text: 'orange' },
-        // ],
-        // comp: 'Brave as they come',
       }),
     ];
   }

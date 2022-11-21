@@ -66,9 +66,9 @@ export class WhishlistDetailsComponent implements OnInit, OnChanges {
   }
 
   onSubmitCart(form: NgForm) {
-    console.log(form);
+    // console.log(form);
     // if user id is available
-    console.log({ authenticated: this.isAuthenticated$ });
+    // console.log({ authenticated: this.isAuthenticated$ });
     if (this.isAuthenticated$) {
       // get the user id
       let userString = localStorage.getItem('user');
@@ -86,7 +86,7 @@ export class WhishlistDetailsComponent implements OnInit, OnChanges {
           // http requetst to add the cart item to the db
           this.whishlistDetailsService.addtoCart(cartItem).subscribe({
             next: (response) => {
-              console.log({ cartAdd: response });
+              // console.log({ cartAdd: response });
               this.accountService.onUpdateAccount();
             },
             error: (response) => {
@@ -103,7 +103,7 @@ export class WhishlistDetailsComponent implements OnInit, OnChanges {
   deleteWhishlistItem(id) {
     this.whishlistService.deleteWhishlistItem(id).subscribe({
       next: (response) => {
-        console.log({ response });
+        // console.log({ response });
         this.accountService.onUpdateAccount();
       },
     });

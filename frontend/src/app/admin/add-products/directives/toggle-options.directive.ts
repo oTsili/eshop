@@ -40,6 +40,6 @@ export class ToggleOptionsDirective implements OnInit {
 
   @HostListener('change', ['$event'])
   onSelect(event) {
-    console.log(event);
+    // console.log(event);
   }
 }

@@ -91,7 +91,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
 
     this.signupDate = this.appService.getDateString();
-    console.log(this.signupDate);
+    // console.log(this.signupDate);
 
     this.isLoading = true;
 
@@ -107,7 +107,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.signupSubscription = this.authService.signup(user).subscribe(
       {
         next: (c) => {
-          console.log(c);
+          // console.log(c);
           this.userAppService.onToggleModal();
         },
       }

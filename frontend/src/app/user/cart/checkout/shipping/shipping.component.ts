@@ -39,7 +39,7 @@ export class ShippingComponent implements OnInit {
         // get the account from the db
         this.accountService.getAccount(user.id).subscribe({
           next: (response) => {
-            console.log({ myAccount: response });
+            // console.log({ myAccount: response });
             this.account = response.account;
 
             if (this.account && this.account.cart)
@@ -50,7 +50,7 @@ export class ShippingComponent implements OnInit {
               this.subtotal +=
                 cart_product.product.price * cart_product.quantity;
             }
-            console.log(this.subtotal);
+            // console.log(this.subtotal);
 
             if (this.shipping) {
               this.total = this.shipping + this.subtotal;

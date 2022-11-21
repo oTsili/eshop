@@ -37,8 +37,11 @@ export class AccordionComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const index = changes['index'].currentValue;
-    this.loadComponent(index);
+    let index = 0;
+    if (changes['index']) {
+      index = changes['index'].currentValue;
+      this.loadComponent(index);
+    }
     if (changes['customTitle'] && changes['customTitle'].currentValue) {
       this.customTitle = changes['customTitle'].currentValue;
     }

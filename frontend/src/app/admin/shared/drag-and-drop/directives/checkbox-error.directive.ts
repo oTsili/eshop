@@ -23,7 +23,7 @@ export class CheckBoxErrorDirective implements OnInit {
         'input'
       );
 
-    console.log(this.inputs);
+    // console.log(this.inputs);
   }
 
   @HostBinding('class.error')

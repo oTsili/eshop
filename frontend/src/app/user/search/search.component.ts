@@ -222,7 +222,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
           this.productsService.onProductsUpdated(true);
         },
         error: (response) => {
-          console.log(response);
+          // console.log(response);
           this.productsService.onProductsNotUpdated(response);
         },
       });

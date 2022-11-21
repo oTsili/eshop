@@ -14,7 +14,7 @@ export class ShowSuppliersComponent implements OnInit {
   ngOnInit(): void {
     this.showSuppliersService.getSuppliers().subscribe({
       next: (response) => {
-        console.log({ response });
+        // console.log({ response });
         this.suppliers = response.suppliers;
       },
     });

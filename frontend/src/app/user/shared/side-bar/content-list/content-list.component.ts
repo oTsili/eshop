@@ -88,7 +88,7 @@ export class ContentListComponent implements OnInit, OnDestroy {
   toggleActiveClass(index: number) {
     let elHeader = this.data.header;
 
-    console.log({ elHeader });
+    // console.log({ elHeader });
     if (elHeader === 'heel height') {
       this.contentListService.initializeHeelHeightActiveStatusArray();
       this.contentListService.onUpdateHeelHeighActiveStatusArray(index);
@@ -144,7 +144,7 @@ export class ContentListComponent implements OnInit, OnDestroy {
         }
       },
       error: (response) => {
-        console.log(response);
+        // console.log(response);
         console.log('something went wrong');
       },
     });

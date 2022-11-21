@@ -54,24 +54,24 @@ export class TableRowComponent implements OnInit, OnChanges {
 
     //if row pre-existed put request to update from the db
     if (this.category._id) {
-      console.log('update row');
+      // console.log('update row');
       this.tableRowService
         .updateRow(this.category._id, this.category_style, description, code)
         .subscribe({
           next: (response) => {
-            console.log(response);
+            // console.log(response);
             // update its id in case of deletion or update
             this.category._id = response.directoryUpdated._id;
           },
         });
       // else post request to create new row
     } else {
-      console.log('create row');
+      // console.log('create row');
       this.tableRowService
         .createRow(this.category_style, description, code)
         .subscribe({
           next: (response) => {
-            console.log(response);
+            // console.log(response);
             // update its id in case of deletion or update
             this.category._id = response.directoriesSaved._id;
           },
@@ -91,7 +91,7 @@ export class TableRowComponent implements OnInit, OnChanges {
       .deleteRow(this.category._id, this.category_style)
       .subscribe({
         next: (response) => {
-          console.log(response);
+          // console.log(response);
           // delete the element from the dom
           this.elementRef.nativeElement.remove();
         },

@@ -88,12 +88,12 @@ export class FooterComponent implements OnInit, OnDestroy {
   // }
 
   onRegister(form: FormGroup) {
-    console.log(this.newsLetterForm);
+    // console.log(this.newsLetterForm);
     if (form.invalid) {
       console.log('form invalid');
       return;
     }
-    console.log(form);
+    // console.log(form);
   }
 
   getFooterAreas(numOfCols: number) {

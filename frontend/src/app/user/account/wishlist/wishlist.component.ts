@@ -41,7 +41,7 @@ export class WishlistComponent implements OnInit, OnDestroy {
       .getAccountListener()
       .subscribe({
         next: (response) => {
-          console.log({ account: response });
+          // console.log({ account: response });
           // this.isAuthenticated = response;
           // get user basic info from the browser's storage
           let userString = localStorage.getItem('user');
@@ -52,7 +52,7 @@ export class WishlistComponent implements OnInit, OnDestroy {
               // get the account from the db
               this.accountService.getAccount(user.id).subscribe({
                 next: (response) => {
-                  console.log({ my: response });
+                  // console.log({ my: response });
                   this.account = response.account;
 
                   if (this.account && this.account.whishlist)

@@ -19,7 +19,7 @@ export class DropdownSubmenuOpenDirective implements OnInit {
   @HostListener('mouseover', ['$event'])
   // @HostListener('click', ['$event'])
   activateDisplay(): void {
-    console.log('submenuOpen');
+    // console.log('submenuOpen');
     this.renderer.addClass(this.menuElement, 'transition');
     this.renderer.addClass(this.menuElement, 'visible');
     // this.renderer.setStyle(this.menuElement, 'visibility', 'visible');

@@ -52,13 +52,13 @@ export class HeaderService {
       })
       .pipe(
         map((userData) => {
-          console.log(userData);
+          // console.log(userData);
           return userData;
         })
       )
       .subscribe({
         next: (c) => {
-          console.log(c);
+          // console.log(c);
         },
       });
   }

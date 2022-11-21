@@ -26,7 +26,7 @@ export class DropDownSubmenuCloseDirective implements OnInit {
 
   @HostListener('mouseout', ['$event'])
   disableDisplay() {
-    console.log('submenuClose');
+    // console.log('submenuClose');
     // close menu when mouseout of the list of items
     this.renderer.removeClass(this.element, 'transition');
     this.renderer.addClass(this.element, 'hidden');

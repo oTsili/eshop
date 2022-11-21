@@ -51,7 +51,7 @@ export class AccountComponent implements OnInit {
   }
 
   updateBreadcrumbsFromBreadcrumbs(event: string) {
-    console.log(event);
+    // console.log(event);
 
     // get each intermediate route from the url
     let routes = event.split('/');
@@ -65,7 +65,7 @@ export class AccountComponent implements OnInit {
       routes,
       this.router.url
     );
-    console.log(this.breadcrumbItems);
+    // console.log(this.breadcrumbItems);
 
     // if account is clicked it will be navigated to profile,
     // and that's why breadcrumbs have to be updated

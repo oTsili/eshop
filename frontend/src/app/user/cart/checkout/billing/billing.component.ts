@@ -37,7 +37,7 @@ export class BillingComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngAfterViewInit(): void {
-    console.log(window.paypal);
+    // console.log(window.paypal);
     window.paypal
       .Buttons({
         style: {

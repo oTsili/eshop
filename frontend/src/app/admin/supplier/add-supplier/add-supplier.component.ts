@@ -37,7 +37,7 @@ export class AddSupplierComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response) => {
           if (response) this.supplierForm = response;
-          console.log(response);
+          // console.log(response);
         },
       });
 
@@ -105,7 +105,7 @@ export class AddSupplierComponent implements OnInit, OnDestroy {
     }
 
     this.sumbitDate = this.appService.getDateString();
-    console.log(this.sumbitDate);
+    // console.log(this.sumbitDate);
 
     this.isLoading = true;
 
@@ -137,11 +137,11 @@ export class AddSupplierComponent implements OnInit, OnDestroy {
       photo,
     };
 
-    console.log({ supplier });
+    // console.log({ supplier });
 
     this.addSupplierService.submitSupplierForm(supplier).subscribe({
       next: (response) => {
-        console.log(response);
+        // console.log(response);
       },
     });
 

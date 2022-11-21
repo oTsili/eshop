@@ -32,8 +32,6 @@ export class ProductFormService {
     this.formListener.next(form);
   }
 
-
-
   submitProductForm(product: UploadProduct) {
     const productData = new FormData();
     productData.append('src', product.src);
@@ -52,7 +50,7 @@ export class ProductFormService {
     productData.append('description', product.description);
     for (let image of product.images) productData.append('photo[]', image);
 
-    console.log(productData.entries());
+    // console.log(productData.entries());
 
     let headers = new HttpHeaders();
     // headers = headers.append('Content-Type', 'multipart/form-data');

@@ -64,7 +64,7 @@ export class AddSupplierService {
     supplierData.append('id', supplier.id);
     if (supplier.photo) supplierData.append('photo', supplier.photo);
 
-    console.log(supplierData.entries());
+    // console.log(supplierData.entries());
 
     return this.httpClient.post<Supplier>(
       `${BACKEND_URL}`,
