@@ -44,7 +44,6 @@ export class ResponsiveBoxesComponent
 
   ngAfterViewInit(): void {
     this.elementList = this.data.elementList;
-    console.log(this.elementList);
   }
 
   ngOnInit(): void {

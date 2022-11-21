@@ -277,6 +277,11 @@ export class ProductsController {
     }
 
     if (description) {
+      description = description
+        .replace(/[!@#?$%^&*()_+|}{}\\\/]/g, '')
+        .replace(/\s+/g, ' ')
+        .replace(/^(\s*)([\W\w]*)(\b\s*$)/g, '$2');
+
       query.description = { $regex: description, $options: 'i' };
       // console.log(query.description);
 

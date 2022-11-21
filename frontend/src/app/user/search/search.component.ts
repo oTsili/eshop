@@ -145,7 +145,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     this.updateProductsSubscription = this.productsService
       .getToUpdateProductsListener()
       .subscribe((response) => {
-        console.log('products update');
+        // console.log('products update');
         this.getProducts(response.queryParams);
       });
     this.userAppService.onDisableHeaderAndFooter(false);
@@ -170,7 +170,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
       .getAuthStatusListener()
       .subscribe({
         next: (response) => {
-          console.log({ 'auth update: ': response });
+          // console.log({ 'auth update: ': response });
           this.isAuthenticated = response;
           let userString = localStorage.getItem('user');
           if (userString) {

@@ -166,9 +166,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onSubmitSearch() {
+    this.search = this.search
+      .replace(/[!@#?$%^&*()_+|}{}\\\/]/g, '')
+      .replace(/\s+/g, ' ')
+      .replace(/^(\s*)([\W\w]*)(\b\s*$)/g, '$2');
+
     // update url and navigate if in other page
     this.router.navigate(['/home/search'], {
-      queryParams: { description: this.search },
+      queryParams: {
+        description: this.search,
+      },
       queryParamsHandling: 'merge',
     });
     // const search = this.search
