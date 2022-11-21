@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -17,7 +18,9 @@ import { ResponsiveBoxesService } from './responsive-boxes.service';
   templateUrl: './responsive-boxes.component.html',
   styleUrls: ['./responsive-boxes.component.css'],
 })
-export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
+export class ResponsiveBoxesComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   @Input() data;
   numberOfCols: number;
   arrOfCols: number[];
@@ -39,8 +42,12 @@ export class ResponsiveBoxesComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.elementList = this.data.elementList;
+    console.log(this.elementList);
+  }
+
+  ngOnInit(): void {
     this.queryParam = this.data.header;
     this.show_text = this.data.show_text;
 

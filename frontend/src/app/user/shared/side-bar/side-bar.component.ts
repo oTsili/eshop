@@ -66,6 +66,7 @@ export class SideBarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.accordionPanels = this.accordionService.getAccordionPanels();
+    console.log(this.accordionPanels);
 
     // get the chiplist and subscribe
     this.chipListSubscription = this.productsService
