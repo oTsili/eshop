@@ -211,12 +211,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   updateSearchQueryHeaderAndChipText(linkText: string) {
-    this.searchService.onUpdateSearchQueryHeader(linkText);
-    // compose the chip view
-    const chip = { key: 'type', value: linkText };
+    const url = this.router.url.split('/')[2].split('?')[0];
+    if (url === 'search') {
+      this.searchService.onUpdateSearchQueryHeader(linkText);
+      // compose the chip view
+      const chip = { key: 'type', value: linkText };
 
-    // add a chip in the sidebar
-    this.productsService.addChip(chip);
+      // add a chip in the sidebar
+      this.productsService.addChip(chip);
+    }
   }
 
   updateHamburgerStatus(event: MouseEvent) {
