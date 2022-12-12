@@ -13,11 +13,7 @@ const adminRoutes: Routes = [
     path: '',
     component: AdminComponent,
     children: [
-      // {
-      //   path: '',
-      //   redirectTo: 'add-products',
-      //   // component: AdminComponent,
-      // },
+      { path: '', redirectTo: 'add-products' },
       {
         path: 'suppliers',
         loadChildren: () =>

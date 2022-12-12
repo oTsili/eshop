@@ -24,18 +24,22 @@
       </ng-container> -->
 
       <!-- <tr class="row" #tableRowHost></tr> -->
-      <tr
+      <ng-container
+      *ngIf="suppliers"
+      >
+        <tr
         app-suppliers-row
         [supplier]="supplier"
         *ngFor="let supplier of suppliers"
-      >
+        >
+      </tr>
+      </ng-container>
         <!-- <td colspan="5">
           <div (click)="onAdd()" category="style" class="ui primary button">
             <i class="ph-plus-bold"></i>
             <span>ADD</span>
           </div>
         </td> -->
-      </tr>
     </tbody>
   </table>
 </div>
