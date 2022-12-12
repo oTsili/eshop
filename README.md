@@ -21,13 +21,21 @@ There are two working environments:
 
 The client environment contains the following pages:
 
-a. **Home page** where any messages are displayed in a carousel/slide, pages are listed in grid, and sales are presented in a dragging carousel [https:eshop.esite.gr/home](https:eshop.esite.gr/home),
-b. **Search page** for searching products with a filtering side-bar, where user can check out the products, filter in regard the price, color, size, etc. [https://eshop.esite.gr/home/account/whishlist](https://eshop.esite.gr/home/account/whishlist),
+a. **Home page**, as shown in **Fig.2**, where any messages are displayed in a carousel/slide, pages are listed in grid, and sales are presented in a dragging carousel [https:eshop.esite.gr/home](https:eshop.esite.gr/home),
+b. **Search page**, as shown in **Fig.3**, for searching products with a filtering side-bar, where user can check out the products, filter in regard the price, color, size, etc. [https://eshop.esite.gr/home/account/whishlist](https://eshop.esite.gr/home/account/whishlist),
 c. **Whishlist page** for maintaining user's whishlist [https:eshop.esite.gr/home/search](https:eshop.esite.gr/home/search),
 d. **Cart page** to overview the orders and changing the quantity, and color [https://eshop.esite.gr/home/cart](https://eshop.esite.gr/home/cart) and
 e. **Payment page** which includes the shipping information and payment information. [https://eshop.esite.gr/home/cart/checkout/shipping](https://eshop.esite.gr/home/cart/checkout/shipping)
 
 Payment has been configured with Paypal (account or credit card)
+
+| ![home page](/img\home_page.png) |
+| :------------------------------: |
+| <b>Fig.2 - Home/Landing Page</b> |
+
+| ![search page](/img\search_page.png) |
+| :----------------------------------: |
+|  <b>Fig.3 - Search Product Page</b>  |
 
 ### 2. The Admin Environment
 
@@ -36,5 +44,8 @@ The admin environment contains the following pages:
 a. **Home page** containing the landing page `not completed` [https:eshop.esite.gr/admin/home](https:eshop.esite.gr/admin/home),
 b. **Supplier page** with a page tab for the presentation of suppliers, which have been previously recorded [https://eshop.esite.gr/admin/suppliers/show-suppliers](https://eshop.esite.gr/admin/suppliers/show-suppliers), and another page tab for adding new suppliers. [https://eshop.esite.gr/admin/suppliers/add-supplier](https://eshop.esite.gr/admin/suppliers/add-supplier),
 c. **Trade numbers page** where the components of the trade number and their matching individual code is presented and may be configured/changed [https://eshop.esite.gr/admin/trade-numbers](https://eshop.esite.gr/admin/trade-numbers),
-d. **Cart page** to overview the orders and changing the quantity, and color [https://eshop.esite.gr/home/cart](https://eshop.esite.gr/home/cart) and
-e. **Shipping/Payment page** which includes the shipping information and payment information. [https://eshop.esite.gr/home/cart/checkout/shipping](https://eshop.esite.gr/home/cart/checkout/shipping)
+d. **Products page**, shown in **Fig. 4** allows adding new products and their photos with drag & drop, or file browsing [https://eshop.esite.gr/admin/add-products](https://eshop.esite.gr/admin/add-products).
+
+|  ![admin page](/img\admin_page.png)   |
+| :-----------------------------------: |
+| <b>Fig.4 - Admin Add Product Page</b> |
