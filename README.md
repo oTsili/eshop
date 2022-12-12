@@ -6,9 +6,9 @@
 
 The Stack is implemented with **_Docker Swarm Microservcices_**, with traefik at the role of ingress, sending **incoming requests** to the **Frontend (Angular)**, which subsequently make request to the **Backend (NestJS )**, which on its turn makes **queries to MongoDB** to sustain state. The above is described as shown in **Fig. 1.**
 
-|    ![traefik eshop](./img/traefik_eshop.drawio.png)     |
-| :-----------------------------------------------------: |
-| <b>Fig.1 - Docker Swarm With Traefik Implementation</b> |
+| <img src="./img/traefik_eshop.drawio.png" alt="Hero Logo" height="350"> |
+| :---------------------------------------------------------------------: |
+|         <b>Fig.1 - Docker Swarm With Traefik Implementation</b>         |
 
 # Contents
 
@@ -29,13 +29,13 @@ e. **Payment page** which includes the shipping information and payment informat
 
 Payment has been configured with Paypal (account or credit card)
 
-| ![home page](./img/home_page.png) |
-| :-------------------------------: |
-| <b>Fig.2 - Home/Landing Page</b>  |
+| <img src="./img/home_page.png" alt="Hero Logo" height="350"> |
+| :----------------------------------------------------------: |
+|               <b>Fig.2 - Home/Landing Page</b>               |
 
-| ![search page](./img/search_page.png) |
-| :-----------------------------------: |
-|  <b>Fig.3 - Search Product Page</b>   |
+| <img src="./img/search_page.png" alt="Hero Logo" height="350"> |
+| :------------------------------------------------------------: |
+|               <b>Fig.3 - Search Product Page</b>               |
 
 ### 2. The Admin Environment
 
@@ -46,6 +46,6 @@ b. **Supplier page** with a page tab for the presentation of suppliers, which ha
 c. **Trade numbers page** where the components of the trade number and their matching individual code is presented and may be configured/changed [https://eshop.esite.gr/admin/trade-numbers](https://eshop.esite.gr/admin/trade-numbers),
 d. **Products page**, shown in **Fig. 4** allows adding new products and their photos with drag & drop, or file browsing [https://eshop.esite.gr/admin/add-products](https://eshop.esite.gr/admin/add-products).
 
-|  ![admin page](./img/admin_page.png)  |
-| :-----------------------------------: |
-| <b>Fig.4 - Admin Add Product Page</b> |
+| <img src="./img/admin_page.png" alt="Hero Logo" height="350"> |
+| :-----------------------------------------------------------: |
+|             <b>Fig.4 - Admin Add Product Page</b>             |
