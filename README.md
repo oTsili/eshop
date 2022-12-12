@@ -1,6 +1,6 @@
 # MEAN STACK (NestJs) E-shop
 
-<img src="./img/hero.jpg" alt="Hero Logo" height="350">
+<img src="./img/hero.jpg" alt="Hero Logo" width="100%">
 
 # Architecture
 
