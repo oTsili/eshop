@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   // BASE_URL: 'http://localhost:3000/api/',
-  BASE_URL: 'api',
+  BASE_URL: '/api',
   // BASE_URL: '/api/',
   PAGE_SIZE_OPTIONS: [6, 12, 18, 24, 30],
   TOTAL_PRODUCTS: 0,

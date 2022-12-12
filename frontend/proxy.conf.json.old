@@ -1,0 +1,8 @@
+// {
+//   "/api": {
+//     "target": "https://eshop.esite.gr/api",
+//     "secure": false,
+//     "logLevel": "debug",
+//     "changeOrigin": true
+//   }
+// }
