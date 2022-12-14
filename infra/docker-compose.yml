@@ -19,7 +19,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
       # MONGO_INITDB_DATABASE: eshop
     # ports:
-    #   - "27017:27017  "
+      # - "27017:27017"
     deploy:
       labels:
         - traefik.enable=false
