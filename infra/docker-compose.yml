@@ -27,11 +27,11 @@ services:
     # deploy:
     #   labels:
     #     - "traefik.enable=true"
-    #     - "traefik.http.routers.mongo-router.rule=Host(`test.esite.gr`)"
+    #     - "traefik.http.routers.mongo-router.rule=Host(`test.tsilingeridis.eu`)"
     #     - "traefik.http.routers.mongo.entrypoints=web"
     #     - "traefik.http.routers.mongo.middlewares=test-redirectscheme"
 
-    #     - "traefik.http.routers.mongo-secure.rule=Host(`test.esite.gr`)"
+    #     - "traefik.http.routers.mongo-secure.rule=Host(`test.tsilingeridis.eu`)"
     #     - "traefik.http.routers.mongo-secure.entrypoints=websecure"
     #     - "traefik.http.routers.mongo-secure.tls.certresolver=myresolver"
     #     - "traefik.http.routers.mongo-secure.service=mongo-service"
@@ -50,11 +50,11 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.frontend.rule=Host(`eshop.esite.gr`)"
+        - "traefik.http.routers.frontend.rule=Host(`eshop.tsilingeridis.eu`)"
         - "traefik.http.routers.frontend.entrypoints=web"
         - "traefik.http.routers.frontend.middlewares=test-redirectscheme"
 
-        - "traefik.http.routers.frontend-secure.rule=Host(`eshop.esite.gr`)"
+        - "traefik.http.routers.frontend-secure.rule=Host(`eshop.tsilingeridis.eu`)"
         - "traefik.http.routers.frontend-secure.entrypoints=websecure"
         - "traefik.http.routers.frontend-secure.tls.certresolver=myresolver"
         - "traefik.http.routers.frontend-secure.service=frontend-service"
@@ -86,14 +86,14 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.backend-router.rule=Host(`eshop.esite.gr`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
-        # - "traefik.http.routers.backend-router.rule=Host(`eshop.esite.gr`) && PathPrefix(`/api/`)"
+        - "traefik.http.routers.backend-router.rule=Host(`eshop.tsilingeridis.eu`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
+        # - "traefik.http.routers.backend-router.rule=Host(`eshop.tsilingeridis.eu`) && PathPrefix(`/api/`)"
 
         - "traefik.http.routers.backend-router.entrypoints=web"
         - "traefik.http.routers.backend-router.middlewares=test-redirectscheme"
 
-        - "traefik.http.routers.backend-secure.rule=Host(`eshop.esite.gr`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
-        # - "traefik.http.routers.backend-secure.rule=Host(`eshop.esite.gr`) && PathPrefix(`/images/`)"
+        - "traefik.http.routers.backend-secure.rule=Host(`eshop.tsilingeridis.eu`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
+        # - "traefik.http.routers.backend-secure.rule=Host(`eshop.tsilingeridis.eu`) && PathPrefix(`/images/`)"
         - "traefik.http.routers.backend-secure.entrypoints=websecure"
         - "traefik.http.routers.backend-secure.tls.certresolver=myresolver"
         - "traefik.http.routers.backend-secure.service=backend-service"

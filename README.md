@@ -14,18 +14,18 @@ The Stack is implemented with **_Docker Swarm Microservcices_**, with traefik at
 
 There are two working environments:
 
-1. The **Client** home page [https:eshop.esite.gr/home](https:eshop.esite.gr/home)
-2. The **Admin** home page [https:eshop.esite.gr/admin](https:eshop.esite.gr/admin)
+1. The **Client** home page [https:eshop.tsilingeridis.eu/home](https:eshop.tsilingeridis.eu/home)
+2. The **Admin** home page [https:eshop.tsilingeridis.eu/admin](https:eshop.tsilingeridis.eu/admin)
 
 ### 1. The Client Environment
 
 The client environment contains the following pages:
 
-a. **Home page**, as shown in **Fig.2**, where any messages are displayed in a carousel/slide, pages are listed in grid, and sales are presented in a dragging carousel [https:eshop.esite.gr/home](https:eshop.esite.gr/home),
-b. **Search page**, as shown in **Fig.3**, for searching products with a filtering side-bar, where user can check out the products, filter in regard the price, color, size, etc. [https://eshop.esite.gr/home/account/whishlist](https://eshop.esite.gr/home/account/whishlist),
-c. **Whishlist page** for maintaining user's whishlist [https:eshop.esite.gr/home/search](https:eshop.esite.gr/home/search),
-d. **Cart page** to overview the orders and changing the quantity, and color [https://eshop.esite.gr/home/cart](https://eshop.esite.gr/home/cart) and
-e. **Payment page** which includes the shipping information and payment information. [https://eshop.esite.gr/home/cart/checkout/shipping](https://eshop.esite.gr/home/cart/checkout/shipping)
+a. **Home page**, as shown in **Fig.2**, where any messages are displayed in a carousel/slide, pages are listed in grid, and sales are presented in a dragging carousel [https:eshop.tsilingeridis.eu/home](https:eshop.tsilingeridis.eu/home),
+b. **Search page**, as shown in **Fig.3**, for searching products with a filtering side-bar, where user can check out the products, filter in regard the price, color, size, etc. [https://eshop.tsilingeridis.eu/home/account/whishlist](https://eshop.tsilingeridis.eu/home/account/whishlist),
+c. **Whishlist page** for maintaining user's whishlist [https:eshop.tsilingeridis.eu/home/search](https:eshop.tsilingeridis.eu/home/search),
+d. **Cart page** to overview the orders and changing the quantity, and color [https://eshop.tsilingeridis.eu/home/cart](https://eshop.tsilingeridis.eu/home/cart) and
+e. **Payment page** which includes the shipping information and payment information. [https://eshop.tsilingeridis.eu/home/cart/checkout/shipping](https://eshop.tsilingeridis.eu/home/cart/checkout/shipping)
 
 Payment has been configured with Paypal (account or credit card)
 
@@ -41,10 +41,10 @@ Payment has been configured with Paypal (account or credit card)
 
 The admin environment contains the following pages:
 
-a. **Home page** containing the landing page `not completed` [https:eshop.esite.gr/admin/home](https:eshop.esite.gr/admin/home),
-b. **Supplier page** with a page tab for the presentation of suppliers, which have been previously recorded [https://eshop.esite.gr/admin/suppliers/show-suppliers](https://eshop.esite.gr/admin/suppliers/show-suppliers), and another page tab for adding new suppliers. [https://eshop.esite.gr/admin/suppliers/add-supplier](https://eshop.esite.gr/admin/suppliers/add-supplier),
-c. **Trade numbers page** where the components of the trade number and their matching individual code is presented and may be configured/changed [https://eshop.esite.gr/admin/trade-numbers](https://eshop.esite.gr/admin/trade-numbers),
-d. **Products page**, shown in **Fig. 4** allows adding new products and their photos with drag & drop, or file browsing [https://eshop.esite.gr/admin/add-products](https://eshop.esite.gr/admin/add-products).
+a. **Home page** containing the landing page `not completed` [https:eshop.tsilingeridis.eu/admin/home](https:eshop.tsilingeridis.eu/admin/home),
+b. **Supplier page** with a page tab for the presentation of suppliers, which have been previously recorded [https://eshop.tsilingeridis.eu/admin/suppliers/show-suppliers](https://eshop.tsilingeridis.eu/admin/suppliers/show-suppliers), and another page tab for adding new suppliers. [https://eshop.tsilingeridis.eu/admin/suppliers/add-supplier](https://eshop.tsilingeridis.eu/admin/suppliers/add-supplier),
+c. **Trade numbers page** where the components of the trade number and their matching individual code is presented and may be configured/changed [https://eshop.tsilingeridis.eu/admin/trade-numbers](https://eshop.tsilingeridis.eu/admin/trade-numbers),
+d. **Products page**, shown in **Fig. 4** allows adding new products and their photos with drag & drop, or file browsing [https://eshop.tsilingeridis.eu/admin/add-products](https://eshop.tsilingeridis.eu/admin/add-products).
 
 | <img src="./img/admin_page.png" alt="Hero Logo" height="350"> |
 | :-----------------------------------------------------------: |

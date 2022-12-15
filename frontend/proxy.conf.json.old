@@ -1,6 +1,6 @@
 // {
 //   "/api": {
-//     "target": "https://eshop.esite.gr/api",
+//     "target": "https://eshop.tsilingeridis.eu/api",
 //     "secure": false,
 //     "logLevel": "debug",
 //     "changeOrigin": true
