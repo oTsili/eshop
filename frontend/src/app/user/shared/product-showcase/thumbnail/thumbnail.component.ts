@@ -46,10 +46,12 @@ export class ThumbnailComponent implements OnInit, OnChanges, AfterViewInit {
     if (changes['thumbnails']) {
       this.thumbnails = changes['thumbnails'].currentValue;
 
-      for (let i = 0; i < this.thumbnails.length; i++) {
-        this.thumbnails[i] =
-          this.base_url.replace('/api', '') +
-          this.thumbnails[i].replace('/static', '');
+      if (!this.thumbnails[0].includes('http')) {
+        for (let i = 0; i < this.thumbnails.length; i++) {
+          this.thumbnails[i] =
+            this.base_url.replace('/api', '') +
+            this.thumbnails[i].replace('/static', '');
+        }
       }
     }
   }

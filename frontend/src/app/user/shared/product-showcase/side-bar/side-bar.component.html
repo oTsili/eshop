@@ -26,10 +26,20 @@
     <ng-container *ngFor="let single_product of similar_products">
       <a>
         <img
+          *ngIf="cart_item"
           [routerLink]="'../edit-product'"
           [queryParams]="{
             product_id: single_product._id,
             cart_item_id: cart_item._id
+          }"
+          routerLinkActive="active"
+          src="{{ single_product.src }}"
+        />
+        <img
+          *ngIf="!cart_item"
+          [routerLink]="'../edit-product'"
+          [queryParams]="{
+            product_id: single_product._id
           }"
           routerLinkActive="active"
           src="{{ single_product.src }}"
@@ -60,7 +70,7 @@
     {{ "quantity" | translate | titlecase }}
   </div>
 
-  <div class="rowX2 quantities">
+  <div *ngIf="cart_item" class="rowX2 quantities">
     <div class="cart-controls">
       <span class="icon-control control">
         <a (click)="decreaseQuantity(cart_item)">
@@ -68,7 +78,7 @@
         </a>
       </span>
       <span class="icon-control">
-        <div class="quantity">{{ cart_item.quantity }}</div>
+        <div class="quantity">{{ cart_item.quantity || 1 }}</div>
       </span>
       <span class="icon-control control">
         <a (click)="increaseQuantity(cart_item)">

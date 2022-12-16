@@ -35,12 +35,14 @@ export class EditProductComponent implements OnInit {
       // console.log(params);
       // console.log(params['cart_item_id']);
 
-      this.cartService.getCartItem(cart_item_id).subscribe({
-        next: (response) => {
-          // console.log(response);
-          this.cart_item = response;
-        },
-      });
+      if (cart_item_id) {
+        this.cartService.getCartItem(cart_item_id).subscribe({
+          next: (response) => {
+            // console.log(response);
+            this.cart_item = response;
+          },
+        });
+      }
 
       this.productService.getProduct(params['product_id']).subscribe({
         next: (response) => {

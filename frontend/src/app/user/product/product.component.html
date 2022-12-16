@@ -1,15 +1,22 @@
-<div class="product-wrapper" [style.width]="img_container_width">
-  <img
-    [ngStyle]="{
-      cursor: isMouseDown ? 'move' : 'pointer'
-    }"
-    [style.height]="img_height ? img_height : '40rem'"
-    [style.width]="img_width ? img_width : 'auto'"
-    class="image"
-    src="{{ source }}"
-  />
-  <div *ngIf="hasSales(product.sales)" class="sales-text--wrapper">
-    <div class="sales-text">-{{ product.sales }}%</div>
-    <hr />
+<a
+  [routerLink]="['edit-product']"
+  [queryParams]="{
+    product_id: product._id
+  }"
+>
+  <div class="product-wrapper" [style.width]="img_container_width">
+    <img
+      [ngStyle]="{
+        cursor: isMouseDown ? 'move' : 'pointer'
+      }"
+      [style.height]="img_height ? img_height : '40rem'"
+      [style.width]="img_width ? img_width : 'auto'"
+      class="image"
+      src="{{ source }}"
+    />
+    <div *ngIf="hasSales(product.sales)" class="sales-text--wrapper">
+      <div class="sales-text">-{{ product.sales }}%</div>
+      <hr />
+    </div>
   </div>
-</div>
+</a>

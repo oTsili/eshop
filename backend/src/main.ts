@@ -44,8 +44,8 @@ async function bootstrap() {
   app.use(busboy());
 
   app.enableCors({
-    // origin: 'http://localhost:4200',
-    origin: 'eshop.tsilingeridis.eu',
+    origin: 'http://localhost:4200',
+    // origin: 'eshop.tsilingeridis.eu',
     methods: 'GET, PUT, POST, DELETE, PATCH, OPTIONS',
     allowedHeaders:
       'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization, enctype',

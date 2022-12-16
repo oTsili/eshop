@@ -17,7 +17,7 @@ import { SideBarService } from './side-bar.service';
 })
 export class SideBarComponent implements OnInit, OnChanges {
   @Input() cart_item: CartItem;
-  product: Product;
+  @Input() product: Product;
   oldPrice: number;
   similar_products: Product[];
   base_url = environment.BASE_URL;
@@ -32,6 +32,15 @@ export class SideBarComponent implements OnInit, OnChanges {
       this.cart_item = changes['cart_item'].currentValue;
       this.product = this.cart_item.product;
       // console.log(this.product);
+
+      // compute the pre-sales(old) price from the sales percentage
+      this.oldPrice =
+        parseInt(this.product.price) +
+        parseInt(this.product.price) * (parseInt(this.product.sales) / 100);
+    }
+
+    if (changes['product'] && changes['product'].currentValue) {
+      this.product = changes['product'].currentValue;
 
       // compute the pre-sales(old) price from the sales percentage
       this.oldPrice =

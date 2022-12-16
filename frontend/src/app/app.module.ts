@@ -6,7 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserModule } from './user/user-app.module';
 
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpClientXsrfModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
+import { LocalhostInterceptor } from './user/shared/interceptors/localhost-interceptor';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -16,7 +21,9 @@ import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LocalhostInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

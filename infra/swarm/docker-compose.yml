@@ -3,8 +3,8 @@ version: "3.9"
 # networks:
 #   proxy:
 #     driver: overlay
-  # internal:
-  #   external: false
+# internal:
+#   external: false
 
 services:
   ###### MONGODB #######
@@ -12,14 +12,14 @@ services:
     image: mongo # specify image to build container from
     volumes:
       # - /home/node/app/node_modules
-      - ../mongo/db:/data/db
+      - ../../mongo/db:/data/db
       - /etc/localtime:/etc/localtime:ro
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
       # MONGO_INITDB_DATABASE: eshop
-    # ports:
-      # - "27017:27017"
+    ports:
+      - "27017:27017"
     deploy:
       labels:
         - traefik.enable=false
@@ -47,14 +47,16 @@ services:
     #   # dockerfile: Dockerfile.dev
     #   dockerfile: Dockerfile.prod
     image: eshop_frontend:latest
+    ports:
+      - "4200:4200"
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.frontend.rule=Host(`eshop.tsilingeridis.eu`)"
+        - "traefik.http.routers.frontend.rule=Host(`localhost`)"
         - "traefik.http.routers.frontend.entrypoints=web"
         - "traefik.http.routers.frontend.middlewares=test-redirectscheme"
 
-        - "traefik.http.routers.frontend-secure.rule=Host(`eshop.tsilingeridis.eu`)"
+        - "traefik.http.routers.frontend-secure.rule=Host(`localhost`)"
         - "traefik.http.routers.frontend-secure.entrypoints=websecure"
         - "traefik.http.routers.frontend-secure.tls.certresolver=myresolver"
         - "traefik.http.routers.frontend-secure.service=frontend-service"
@@ -62,7 +64,8 @@ services:
         - "traefik.http.routers.frontend-secure.middlewares=test-compress"
 
         # Services
-        - "traefik.http.services.frontend-service.loadbalancer.server.port=80"
+        # - "traefik.http.services.frontend-service.loadbalancer.server.port=80"
+        - "traefik.http.services.frontend-service.loadbalancer.server.port=4200"
         # Compress Middleware
         - "traefik.http.middlewares.test-compress.compress=true"
         # Rate Limit Middleware
@@ -71,29 +74,31 @@ services:
         - "traefik.http.middlewares.test-redirectscheme.redirectscheme.scheme=https"
         - "traefik.http.middlewares.test-redirectscheme.redirectscheme.permanent=true"
     volumes:
-      - ../frontend:/app
+      - ../../frontend:/app
       - /etc/localtime:/etc/localtime:ro
       # use the "backend" network
     # networks:
     #   - proxy
-      # - internal
+    # - internal
     # environment:
     #   - NODE_ENV=dev
 
   ###### BACKEND #######
   backend:
     image: eshop_backend:latest
+    ports:
+      - "3000:3000"
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.backend-router.rule=Host(`eshop.tsilingeridis.eu`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
-        # - "traefik.http.routers.backend-router.rule=Host(`eshop.tsilingeridis.eu`) && PathPrefix(`/api/`)"
+        - "traefik.http.routers.backend-router.rule=Host(`localhost`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
+        # - "traefik.http.routers.backend-router.rule=Host(`localhost`) && PathPrefix(`/api/`)"
 
         - "traefik.http.routers.backend-router.entrypoints=web"
         - "traefik.http.routers.backend-router.middlewares=test-redirectscheme"
 
-        - "traefik.http.routers.backend-secure.rule=Host(`eshop.tsilingeridis.eu`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
-        # - "traefik.http.routers.backend-secure.rule=Host(`eshop.tsilingeridis.eu`) && PathPrefix(`/images/`)"
+        - "traefik.http.routers.backend-secure.rule=Host(`localhost`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
+        # - "traefik.http.routers.backend-secure.rule=Host(`localhost`) && PathPrefix(`/images/`)"
         - "traefik.http.routers.backend-secure.entrypoints=websecure"
         - "traefik.http.routers.backend-secure.tls.certresolver=myresolver"
         - "traefik.http.routers.backend-secure.service=backend-service"
@@ -114,7 +119,7 @@ services:
     depends_on:
       - mongo # link this service to the mongo service
     volumes:
-      - ../backend:/app
+      - ../../backend:/app
       - /etc/localtime:/etc/localtime:ro
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
@@ -132,7 +137,7 @@ services:
   traefik:
     image: traefik:v2.3
     ports:
-      - "80:4200"
+      - "80:80"
       - "443:443"
       # - "3000:3000"
 
@@ -140,11 +145,11 @@ services:
       # - "8080:8080"
       # - "27017:27017"
     volumes:
-     # So that Traefik can listen to the Docker events
+      # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
       # Copies the Let's Encrypt certificate locally for ease of backing up
       - ./letsencrypt:/letsencrypt
-       # Mounts the Traefik static configuration inside the Traefik container
+        # Mounts the Traefik static configuration inside the Traefik container
       - ./traefik.http.yml:/etc/traefik/traefik.yml
       - "/etc/localtime:/etc/localtime:ro"
       # - "./traefik.toml:/traefik.toml"

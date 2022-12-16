@@ -27,7 +27,9 @@ export class CarouselComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.carouselService.getThumbnailListener().subscribe({
-      next: (response) => (this.imageSrc = response),
+      next: (response) => {
+        this.imageSrc = response;
+      },
     });
   }
 

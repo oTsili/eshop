@@ -1,0 +1,70 @@
+# Use root/example as user/password credentials
+version: "3.1"
+
+services:
+  mongo:
+    image: mongo # specify image to build container from
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017" # specify port forwarding
+    volumes:
+      # - /home/node/app/node_modules
+      - ../../mongo/db:/data/db
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      # MONGO_INITDB_DATABASE: eshop
+    # use the "backend" network
+    networks:
+      - backend
+
+  ###### BACKEND #######
+  backend:
+    container_name: backend
+    build: # specify the directory of the Dockerfile
+      context: ../../backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000" #specify ports mapping
+    depends_on:
+      - mongo # link this service to the mongo service
+    volumes:
+      - ../../backend:/app
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017
+      SALT: $$2b$$10$$ZDX7eyQ1Ornf62rKqjlwBO
+      # ME_ CONFIG_MONGODB_URL: mongodb://mongo:27017/eshop
+    # use the "backend" network
+    networks:
+      - backend
+    command: npm run start:dev
+
+  ###### FRONTEND #######
+  frontend:
+    container_name: frontend
+    # restart: always
+    build: # specify the directory of the Dockerfile
+      context: ../../frontend
+      dockerfile: Dockerfile.dev
+      # dockerfile: Dockerfile.prod
+    ports:
+      - "4200:4200" # specify port mapping
+      - "49153:49153"
+    volumes:
+      - ../../frontend:/app
+      - /etc/localtime:/etc/localtime:ro
+      # use the "backend" network
+    networks:
+      - backend
+    environment:
+      - NODE_ENV=dev
+    # command: sh -c "npm start"
+
+# create a custom network called "backend"
+networks:
+  backend:
