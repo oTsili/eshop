@@ -1,8 +1,0 @@
-// {
-//   "/api": {
-//     "target": "https://eshop.tsilingeridis.eu/api",
-//     "secure": false,
-//     "logLevel": "debug",
-//     "changeOrigin": true
-//   }
-// }

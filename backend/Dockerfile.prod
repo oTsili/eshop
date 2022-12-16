@@ -9,7 +9,7 @@ COPY package*.json ./
 
 # Install app dependencies
 RUN npm install
-# RUN npm i -g @nestjs/cli
+
 
 # Bundle app source
 COPY . .

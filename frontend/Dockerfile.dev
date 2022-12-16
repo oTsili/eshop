@@ -9,10 +9,11 @@ FROM node:18-alpine
 WORKDIR /app
 COPY --from=deps app/node_modules node_modules
 COPY . .
+# RUN npm i -g @angular/cli
 
 # EXPOSE 4200 49153
 
 # for Windows
-ENTRYPOINT ["npm", "run", "start", "--", "--disable-host-check", "--host", "0.0.0.0", "--poll", "1"]
+# ENTRYPOINT ["npm", "run", "start", "--", "--disable-host-check", "--host", "0.0.0.0", "--poll", "1"]
 # for Linux
-# ENTRYPOINT ["npm", "run", "start", "--", "--disable-host-check", "--host", "0.0.0.0"]
+ENTRYPOINT ["npm", "run", "start", "--", "--disable-host-check", "--host", "0.0.0.0"]
