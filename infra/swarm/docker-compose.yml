@@ -18,8 +18,8 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
       # MONGO_INITDB_DATABASE: eshop
-    ports:
-      - "27017:27017"
+    # ports:
+    #   - "27017:27017"
     deploy:
       labels:
         - traefik.enable=false
@@ -47,32 +47,43 @@ services:
     #   # dockerfile: Dockerfile.dev
     #   dockerfile: Dockerfile.prod
     image: eshop_frontend:latest
-    ports:
-      - "4200:4200"
+    # ports:
+    #   - "4200:4200"
     deploy:
       labels:
+        # - "traefik.enable=true"
+        # - "traefik.http.routers.frontend.rule=Host(`eshop.tsilingeridis.eu`)"
+        # - "traefik.http.routers.frontend.entrypoints=web"
+        # - "traefik.http.routers.frontend.middlewares=test-redirectscheme"
+
+        # - "traefik.http.routers.frontend-secure.rule=Host(`eshop.tsilingeridis.eu`)"
+        # - "traefik.http.routers.frontend-secure.entrypoints=websecure"
+        # - "traefik.http.routers.frontend-secure.tls.certresolver=myresolver"
+
         - "traefik.enable=true"
-        - "traefik.http.routers.frontend.rule=Host(`localhost`)"
-        - "traefik.http.routers.frontend.entrypoints=web"
-        - "traefik.http.routers.frontend.middlewares=test-redirectscheme"
+        - "traefik.http.routers.frontend.rule=Host(`eshop.tsilingeridis.eu`)"
+        - "traefik.http.routers.frontend.service=frontend"
+        - "traefik.http.routers.frontend.entrypoints=websecure"
+        - "traefik.http.routers.frontend.tls.certresolver=myresolver"
 
-        - "traefik.http.routers.frontend-secure.rule=Host(`localhost`)"
-        - "traefik.http.routers.frontend-secure.entrypoints=websecure"
-        - "traefik.http.routers.frontend-secure.tls.certresolver=myresolver"
-        - "traefik.http.routers.frontend-secure.service=frontend-service"
-        # - "traefik.http.routers.frontend-secure.middlewares=test-compress,test-ratelimit"
-        - "traefik.http.routers.frontend-secure.middlewares=test-compress"
+        - "traefik.http.routers.frontend-secure.service=frontend-secure"
+        - "traefik.http.services.frontend.loadbalancer.server.port=80"
 
-        # Services
+
+        # - "traefik.http.routers.frontend-secure.service=frontend-service"
+        # # - "traefik.http.routers.frontend-secure.middlewares=test-compress,test-ratelimit"
+        # - "traefik.http.routers.frontend-secure.middlewares=test-compress"
+
+        # # Services
         # - "traefik.http.services.frontend-service.loadbalancer.server.port=80"
-        - "traefik.http.services.frontend-service.loadbalancer.server.port=4200"
-        # Compress Middleware
-        - "traefik.http.middlewares.test-compress.compress=true"
-        # Rate Limit Middleware
-        # - "traefik.http.middlewares.test-ratelimit.ratelimit.average=2"
-        # Redirect Scheme HTTP -> HTTPS
-        - "traefik.http.middlewares.test-redirectscheme.redirectscheme.scheme=https"
-        - "traefik.http.middlewares.test-redirectscheme.redirectscheme.permanent=true"
+        # # - "traefik.http.services.frontend-service.loadbalancer.server.port=4200"
+        # # Compress Middleware
+        # - "traefik.http.middlewares.test-compress.compress=true"
+        # # Rate Limit Middleware
+        # # - "traefik.http.middlewares.test-ratelimit.ratelimit.average=2"
+        # # Redirect Scheme HTTP -> HTTPS
+        # - "traefik.http.middlewares.test-redirectscheme.redirectscheme.scheme=https"
+        # - "traefik.http.middlewares.test-redirectscheme.redirectscheme.permanent=true"
     volumes:
       - ../../frontend:/app
       - /etc/localtime:/etc/localtime:ro
@@ -86,26 +97,35 @@ services:
   ###### BACKEND #######
   backend:
     image: eshop_backend:latest
-    ports:
-      - "3000:3000"
+    # ports:
+    #   - "3000:3000"
     deploy:
       labels:
+
         - "traefik.enable=true"
-        - "traefik.http.routers.backend-router.rule=Host(`localhost`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
-        # - "traefik.http.routers.backend-router.rule=Host(`localhost`) && PathPrefix(`/api/`)"
+        - "traefik.http.routers.backend.rule=Host(`eshop.tsilingeridis.eu`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
+        - "traefik.http.routers.backend.service=backend"
+        - "traefik.http.routers.backend.entrypoints=websecure"
+        - "traefik.http.routers.backend.tls.certresolver=myresolver"
 
-        - "traefik.http.routers.backend-router.entrypoints=web"
-        - "traefik.http.routers.backend-router.middlewares=test-redirectscheme"
+        - "traefik.http.routers.backend-secure.service=backend-secure"
+        - "traefik.http.services.backend.loadbalancer.server.port=3000"
+        # - "traefik.enable=true"
+        # - "traefik.http.routers.backend-router.rule=Host(`eshop.tsilingeridis.eu`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
+        # # - "traefik.http.routers.backend-router.rule=Host(`eshop.tsilingeridis.eu`) && PathPrefix(`/api/`)"
 
-        - "traefik.http.routers.backend-secure.rule=Host(`localhost`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
-        # - "traefik.http.routers.backend-secure.rule=Host(`localhost`) && PathPrefix(`/images/`)"
-        - "traefik.http.routers.backend-secure.entrypoints=websecure"
-        - "traefik.http.routers.backend-secure.tls.certresolver=myresolver"
-        - "traefik.http.routers.backend-secure.service=backend-service"
-        - "traefik.http.routers.backend-secure.middlewares=test-compress"
-        - "traefik.http.services.backend-service.loadbalancer.server.port=3000"
+        # - "traefik.http.routers.backend-router.entrypoints=web"
+        # - "traefik.http.routers.backend-router.middlewares=test-redirectscheme"
 
-        - "traefik.http.routers.backend-router.middlewares=serviceheaders"
+        # - "traefik.http.routers.backend-secure.rule=Host(`eshop.tsilingeridis.eu`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
+        # # - "traefik.http.routers.backend-secure.rule=Host(`eshop.tsilingeridis.eu`) && PathPrefix(`/images/`)"
+        # - "traefik.http.routers.backend-secure.entrypoints=websecure"
+        # - "traefik.http.routers.backend-secure.tls.certresolver=myresolver"
+        # - "traefik.http.routers.backend-secure.service=backend-service"
+        # - "traefik.http.routers.backend-secure.middlewares=test-compress"
+        # - "traefik.http.services.backend-service.loadbalancer.server.port=3000"
+
+        - "traefik.http.routers.backend.middlewares=serviceheaders"
         - "traefik.http.middlewares.serviceheaders.headers.accesscontrolalloworiginlist=*"
         - "traefik.http.middlewares.serviceheaders.headers.accesscontrolallowmethods=GET,PUT,POST,DELETE,PATCH,OPTIONS"
         - "traefik.http.middlewares.serviceheaders.headers.addvaryheader=true"
@@ -142,7 +162,7 @@ services:
       # - "3000:3000"
 
       # The Web UI port http://0.0.0.0:8080 (enabled by --api.insecure=true)
-      # - "8080:8080"
+      - "8080:8080"
       # - "27017:27017"
     volumes:
       # So that Traefik can listen to the Docker events

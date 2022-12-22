@@ -95,7 +95,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
     routes.shift();
 
     this.route.queryParams.subscribe((params: Params) => {
-      // console.log(params);
+      console.log(params);
       this.productsService.toUpdateProducts(params);
     });
 

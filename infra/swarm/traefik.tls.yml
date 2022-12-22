@@ -11,10 +11,8 @@ api:
 # Docker configuration backend
 ################################################################
 providers:
-  docker: 
-    watch: true
+  docker:
     exposedByDefault: false
-    swarmMode: true
 ################################################################
 # Traefik Logging
 ################################################################
@@ -31,12 +29,13 @@ entryPoints:
     address: ":443"
 
 ################################################################
-# Challenge HTTP
+# Challenge TLS
 ################################################################
 certificatesResolvers:
   myresolver:
     acme:
-      email: o.tsilingeridis@gmail.com 
+      email: o.tsilingeridis@gmail.com
       storage: acme.json
-      httpChallenge:
+      tlsChallenge: true
+        # # used during the challenge
         entryPoint: web
