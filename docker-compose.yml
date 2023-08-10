@@ -1,0 +1,30 @@
+version: '3.8'
+
+networks:
+  eshop_net:
+    external: true
+
+services:
+  eshop-frontend:
+    image: eshop_frontend:latest
+    volumes:
+      - ./frontend:/app
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - eshop_net
+
+  eshop-backend:
+    image: eshop_backend:latest
+    depends_on:
+      - mongo 
+    volumes:
+      - ./backend:/app
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017
+      SALT: $$2b$$10$$ZDX7eyQ1Ornf62rKqjlwBO
+      # ME_ CONFIG_MONGODB_URL: mongodb://mongo:27017/eshop
+    networks:
+      - eshop_net

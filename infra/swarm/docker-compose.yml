@@ -41,7 +41,7 @@ services:
     #   - proxy
 
   ###### FRONTEND #######
-  frontend:
+  eshop-frontend:
     # build: # specify the directory of the Dockerfile
     #   context: ./frontend
     #   # dockerfile: Dockerfile.dev
@@ -61,13 +61,13 @@ services:
         # - "traefik.http.routers.frontend-secure.tls.certresolver=myresolver"
 
         - "traefik.enable=true"
-        - "traefik.http.routers.frontend.rule=Host(`eshop.tsilingeridis.eu`)"
-        - "traefik.http.routers.frontend.service=frontend"
-        - "traefik.http.routers.frontend.entrypoints=websecure"
-        - "traefik.http.routers.frontend.tls.certresolver=myresolver"
+        - "traefik.http.routers.eshop-frontend.rule=Host(`eshop.tsilingeridis.eu`)"
+        - "traefik.http.routers.eshop-frontend.service=eshop-frontend"
+        - "traefik.http.routers.eshop-frontend.entrypoints=websecure"
+        - "traefik.http.routers.eshop-frontend.tls.certresolver=myresolver"
 
-        - "traefik.http.routers.frontend-secure.service=frontend-secure"
-        - "traefik.http.services.frontend.loadbalancer.server.port=80"
+        - "traefik.http.routers.eshop-frontend-secure.service=eshop-frontend-secure"
+        - "traefik.http.services.eshop-frontend.loadbalancer.server.port=80"
 
 
         # - "traefik.http.routers.frontend-secure.service=frontend-service"
@@ -95,7 +95,7 @@ services:
     #   - NODE_ENV=dev
 
   ###### BACKEND #######
-  backend:
+  eshop-backend:
     image: eshop_backend:latest
     # ports:
     #   - "3000:3000"
@@ -103,13 +103,13 @@ services:
       labels:
 
         - "traefik.enable=true"
-        - "traefik.http.routers.backend.rule=Host(`eshop.tsilingeridis.eu`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
-        - "traefik.http.routers.backend.service=backend"
-        - "traefik.http.routers.backend.entrypoints=websecure"
-        - "traefik.http.routers.backend.tls.certresolver=myresolver"
+        - "traefik.http.routers.eshop-backend.rule=Host(`eshop.tsilingeridis.eu`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
+        - "traefik.http.routers.eshop-backend.service=eshop-backend"
+        - "traefik.http.routers.eshop-backend.entrypoints=websecure"
+        - "traefik.http.routers.eshop-backend.tls.certresolver=myresolver"
 
-        - "traefik.http.routers.backend-secure.service=backend-secure"
-        - "traefik.http.services.backend.loadbalancer.server.port=3000"
+        - "traefik.http.routers.eshop-backend-secure.service=eshop-backend-secure"
+        - "traefik.http.services.eshop-backend.loadbalancer.server.port=3000"
         # - "traefik.enable=true"
         # - "traefik.http.routers.backend-router.rule=Host(`eshop.tsilingeridis.eu`) && (PathPrefix(`/api/`) || PathPrefix(`/images/`))"
         # # - "traefik.http.routers.backend-router.rule=Host(`eshop.tsilingeridis.eu`) && PathPrefix(`/api/`)"
@@ -125,7 +125,7 @@ services:
         # - "traefik.http.routers.backend-secure.middlewares=test-compress"
         # - "traefik.http.services.backend-service.loadbalancer.server.port=3000"
 
-        - "traefik.http.routers.backend.middlewares=serviceheaders"
+        - "traefik.http.routers.eshop-backend.middlewares=serviceheaders"
         - "traefik.http.middlewares.serviceheaders.headers.accesscontrolalloworiginlist=*"
         - "traefik.http.middlewares.serviceheaders.headers.accesscontrolallowmethods=GET,PUT,POST,DELETE,PATCH,OPTIONS"
         - "traefik.http.middlewares.serviceheaders.headers.addvaryheader=true"

@@ -91,6 +91,7 @@ export class SearchComponent implements AfterViewInit, OnInit, OnDestroy {
   ngOnInit(): void {
     // get account and subscribe to any auth-status changes
     this.subscribeToAuthStatusAndGetAccount();
+    console.log(this.router.url)
     let routes = this.router.url.split('/');
     routes.shift();
 
